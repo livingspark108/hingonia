@@ -1,0 +1,216 @@
+{% extends "main.html" %}
+{% load static %}
+{% block body %}
+              <div class="content">
+              <div class="container-fluid">
+                <div class="row">
+                      <div class="col-md-12">
+                         {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} ">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="material-icons">close</i>
+                              </button>
+                            <span class='upper'>{{ message }}</span>
+                            </div>
+                          {% endfor %}
+                        {% endif %}
+                      </div>
+                    </div>
+                <div class="cntnt_bx">
+                  <div class="card">
+                    <div class="row">
+                      <div class="col-md-3 px-0 user_box">
+                        <div class="pt-4 text-center border border-light border-top-0 border-bottom-0 border-left-0 ">
+                            {% if user.image != '' %}
+                            <img class="rounded-circle m-auto" height="80" width="80" src="{{user.image.url}}">
+                            {% else %}
+                            <img class="rounded-circle m-auto" height="80" width="80" src="{% static 'assets/img/default-avatar.png' %}">
+                            {% endif %}
+                          <div class="card-body text-center">
+                            <h4 class="mb-1">{{user.first_name}} {{user.last_name}}</h4>
+                            <p>{{user.email}}</p>
+                            <p class="mt-3">Member since: </br> {{user.date_joined}}</p>
+
+                              <a class="col-md-10 m-auto btn btn-primary btn-block btn-lg px-4 py-3 mb-4" href = "mailto: {{ user.email }}" >Send Email</a>
+<!--                            <div class="pt-3 pb-3">-->
+<!--                              <ul class="d-block m-auto p-0">-->
+<!--                                <li class="d-inline-block p-2">-->
+<!--                                  <a class="text-dark" href="#"><i class="fa fa-facebook"></i></a>-->
+<!--                                </li>-->
+<!--                                <li class="d-inline-block p-2">-->
+<!--                                  <a class="text-dark" href="#"><i class="fa fa-twitter"></i></a>-->
+<!--                                </li>-->
+<!--                                <li class="d-inline-block p-2">-->
+<!--                                  <a class="text-dark" href="#"><i class="fa fa-google-plus"></i></a>-->
+<!--                                </li>-->
+<!--                              </ul>-->
+<!--                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-9 px-0">
+                        <div class="prsnol_information">
+                          <div class="card-body table-responsive p-0">
+                            <table class="table">
+                              <thead class="">
+                                <tr>
+                                  <th colspan="4"><strong>Official Information</strong></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="font-weight-bold">Username</td>
+                                  <td class="font-weight-bold">Email</td>
+                                  <td class="font-weight-bold">Status</td>
+
+                                </tr>
+                                <tr>
+                                  <td>{{ user }}</td>
+                                   <td> <a href="mailto: {{user.email  }}" >{{user.email  }}<a/></td>
+                                  <td>{% if request.user.is_staff %}
+                                            {% if user.is_active %}
+                                             <a href="{% url 'change_user_status' user.id 'False' %}" ><span class="badge badge-success">Active</span></a>
+                                            {% else %}
+                                            <a href="{% url 'change_user_status' user.id 'True' %}" ><span class="badge badge-danger">Inactive</span></a>
+                                            {% endif %}
+                                      {% else %}
+                                            {% if user.is_active %}
+                                            <span class="badge badge-success">Active</span>
+                                            {% else %}
+                                            <span class="badge badge-danger">Inactive</span>
+                                            {% endif %}
+                                     {% endif %}
+                                  </td>
+
+                                </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                          </div>
+                        </div>
+
+                        <div class=" offcl_detail border-right-0 border-left-0">
+                          <div class="card-body">
+                            {% comment %} <h4>Detail</h4> {% endcomment %}
+                            <span class="btn-box-span">
+                                <a class="btn btn-warning text-white" href="{% url 'update_user' user.id %}" >Edit</a>
+                                {% if request.user.is_staff %}
+                                <a class="btn btn-danger text-white delete-user" data-id="{% url 'delete_user' user.id %}" data-user="{{ user.first_name }}" >Delete</a>
+                                {% endif %}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div  class="modal fade">
+                     <form id="model-form-delete" action="" method="post" >
+                          {% csrf_token %}
+                            <button type="submit" class="btn btn-danger"></button>
+                          </form>
+          </div>
+
+
+<style>
+.white-text{
+  color: white;
+}
+
+
+</style>
+{% endblock %}
+{% block static %}
+<script>
+
+  $('.delete-user').click(function(){
+    var text = 'Do you really want to delete username? '.replace("username", $(this).data("user"));
+    Swal.fire({
+    title: text,
+    text: 'This process cannot be undone.',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '##999999',
+    confirmButtonText: 'Delete!',
+    cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.value) {
+        var url = $(this).data("id")
+        $("#model-form-delete").attr("action", url);
+        $('#model-form-delete').submit();
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          '',
+          'error'
+        )
+      }
+    })
+  });
+  $('.regenerate-auth').click(function(){
+    var text = 'Do you really want to Regenerate authentication key?'
+    Swal.fire({
+    title: text,
+    text: 'Previous authentication key will be unusable.',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#4caf50',
+    cancelButtonColor: '#999999',
+    confirmButtonText: 'Regenerate!',
+    cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.value) {
+        var url = $(this).data("id")
+        $("#model-form-delete").attr("action", url);
+        $('#model-form-delete').submit();
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          '',
+          'error'
+        )
+      }
+    })
+  });
+  $('button.auth_key').click(function(){
+    $(this).siblings('input.auth_key').select(); 
+    document.execCommand("copy");
+    Swal.fire(
+      'Copied',
+      '',
+      'success'
+    )
+  });
+
+  $('.add-on-btn').click(function(){
+     (async function getPassword () {
+        const {value: password} = await Swal.fire({
+          title: 'Enter Add on Code',
+          input: 'text',
+          inputPlaceholder: 'Add On Code',
+          inputAttributes: {
+            maxlength: 20,
+            autocapitalize: 'off',
+            autocorrect: 'off'
+          }
+        })
+
+        if (password) {
+            var url = '/' + {{subscription.id}} +'/' + password + '/apply_add_on';
+            console.log(url);
+            $("#model-form-delete").attr("action", url);
+            $('#model-form-delete').submit();
+        }
+        })()
+  });
+
+</script>
+{% endblock %}

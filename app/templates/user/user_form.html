@@ -1,0 +1,161 @@
+{% extends "main.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+           <div class="content">
+            <div class="content">
+              <div class="container-fluid">
+                <div class="row">  
+                  <div class="col-md-8" style="margin: 0 auto">
+                  {% if messages %}
+                      {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} ">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="material-icons">close</i>
+                          </button>
+                        <span class='upper'>{{ message }}</span>
+                        </div>
+                      {% endfor %}
+                  {% endif %}
+                    <div class="card ">
+                      <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                          <i class="material-icons">create</i>
+                        </div>
+                        <h4 class="card-title">
+                        {% if pk == request.user.id %} Edit Profile {% elif form.instance.id %} Update User {% else %}Add User {% endif %}</h4>
+                        
+                      </div>
+                      <div class="card-body ">
+                        <form method="post" enctype="multipart/form-data" >
+                          {% csrf_token %}
+                          {% for field in form.visible_fields %}
+
+                           {% if field.field.widget.input_type == 'select' %}
+                            <div class="dropdown bootstrap-select form-group bmd-form-group is-focused w-100">
+                              <label for="{{ field.id_for_label }}" class="bmd-label-floating" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                              {{ field|add_class:"selectpicker input-group-btn"  }}
+                              {% if field.errors %}
+                                <label id="{{ field.id_for_label }}-error" class="error" for="{{ field.id_for_label }}">{{ field.errors.0 }}</label>
+                              {% endif %}
+                            </div>
+                          {% elif field.field.widget.input_type == 'checkbox' %}
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              {{ field|add_class:'form-check-input' }} {{ field.label }}
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                             {% if field.errors %}
+                              <label id="{{ field.id_for_label }}-error" class="error" for="{{ field.id_for_label }}">{{ field.errors.0 }}</label>
+                            {% endif %}
+                          </div>
+                          {% elif field.field.widget.input_type == 'file' %}
+                          <h4 class="title"><label for="{{ field.id_for_label }}" class="bmd-label-floating" for="{{ field.id_for_label }}">{{ field.label }}</h4>
+                          <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail img-circle">
+                              {% if form.instance.id %}
+                                  {% if field.value != '' %}
+                                <img src="{% get_media_prefix %}{{ field.value }}" alt="...">
+                                {% else %}
+                                <img src="{% static 'assets/img/default-avatar.png' %}" alt="...">
+                                {% endif %}
+                              {% else %}
+                              <img src="{% static 'assets/img/default-avatar.png' %}" alt="...">
+                              {% endif %}
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+                            <div>
+                              <span class="btn btn-round btn-rose btn-file">
+                                <span class="fileinput-new">Choose Image</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input type="file" name="image" accept="image/*" id="id_image">
+                              </span>
+                              <br />
+                              <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                            </div>
+                          </div>
+                          {% else %}
+                          <div class="form-group bmd-form-group  {% if field.errors %} has-danger {% endif %}">
+                            <label for="{{ field.id_for_label }}" class="bmd-label-floating">{{ field.label }}</label>
+                            {% if form.instance.id %}
+                              {% if field == form.email%}
+                              {{ field|add_class:'form-control'|attr:'readonly:readonly' }}
+                              {% else %}
+                              {{ field|add_class:'form-control' }}
+                              {% endif %}
+                            {% else %}
+                            {{ field|add_class:'form-control' }}
+                            {% endif %}
+                            {% if field.errors %}
+                              <label id="{{ field.id_for_label }}-error" class="error" for="{{ field.id_for_label }}">{{ field.errors.0 }}</label>
+                            {% endif %}
+                          </div>  
+                          {% endif %}
+                          
+                          {% if field.help_text %}
+                          <p>{{ field.help_text }}</p>
+                          {% endif %}
+                          {% endfor %}
+
+                        <div class="card-footer d-flex justify-content-end m-0">
+                         <button class="btn btn-default mr-auto btn-reset-auto" id="{% if form.instance.id %}btn-reset{% endif %}" type="reset">Reset</button>
+                         <button type="submit" class="btn btn-fill btn-success m-1">Submit</button>
+
+                         {% if request.user.is_staff %}
+                                <a href="{% url 'list_users' %}" class='m-1 btn btn-danger' >Cancel</a>
+                          {% else %}
+                                <a href="{% url 'user_detail' request.user.id %}" class='m-1 btn btn-danger' >Cancel</a>
+                          {% endif %}
+
+
+                        </div>
+                      </div>
+                      
+                    </div>
+
+                        </form>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<div data-backdrop="static" data-keyboard="false" class="modal fade" id="shipping" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title delivery_title" id="exampleModalLongTitle">Add shipping </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+          <div class="modal-body">
+            <div id="shipping_form_data"></div>
+          </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+
+{% block static %}
+<script>
+
+$('#id_sms_gateway option[value=""]').text('System Default');
+
+$(".btn-reset-auto").click(function(){
+setTimeout(function(){
+   $('#id_sms_gateway').selectpicker('refresh');
+}, 10);
+
+});
+
+<!--End-->
+</script>
+{% endblock %}
