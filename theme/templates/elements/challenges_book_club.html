@@ -1,0 +1,28 @@
+<div class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
+    <label for="{{ field.name }}" class="col-sm-2 col-form-label">Book club</label>
+{{ book_club_form.management_form }}
+          {{ book_club_form.non_form_errors }}
+          <div id="empty_form" style="display:none">
+            <table class='no_error'>
+                {{ book_club_form.empty_form }}
+            </table>
+          </div>
+          <div class="col-sm-10">
+            <div class="card">
+                  <div class="card-header">
+                Book club
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      {% for form in book_club_form %}
+                        <div class="col-sm-12 inline {{ book_club_form.prefix }}">
+                          {% include "elements/form_formset.html" with form=form %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+            </div>
+
+
+           </div>
+</div>

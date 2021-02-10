@@ -1,0 +1,55 @@
+{% load themetags %}
+<div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+<!--                        <li class="menu-title">Menu</li>-->
+                        <li>
+                            <a href="{% url 'vendor-dashboard' %}"  class="waves-effect {% active 'vendor-dashboard' %}">
+                                <i class="icon-accelerator"></i><span> Dashboard </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'vendor-profile' %}"  class="waves-effect {% active 'vendor-profile' %}">
+                                <i class="icon-accelerator"></i><span> Profile </span>
+                            </a>
+                        </li>
+                       <li>
+                            <a href="{% url 'list-class' %}" class="waves-effect {% active 'list-class' %}"><i class="fa fa-book"></i><span> Courses </span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'list-teacher' %}" class="waves-effect {% active 'teacher' %}"><i class="fas fa-book-reader"></i><span> Teachers </span></a>
+                        </li>
+                      <li>
+                            <a href="{% url 'list-subject' %}" class="waves-effect {% active 'list-subject' %}"><i class="fa fa-sitemap"></i><span> Subjects </span></a>
+                        </li>
+                      <li>
+                            <a href="{% url 'list-subject-video' %}" class="waves-effect {% active 'list-subject-video' %}"><i class="fa fa-play"></i><span> Subject Videos </span></a>
+                        </li>
+                       <li>
+                            <a href="{% url 'list-student' %}" class="waves-effect {% active 'list-student' %}"><i class="fas fa-user-graduate"></i><span> Students </span></a>
+                        </li>
+
+
+                      <li>
+                            <a href="{% url 'list-notification' %}" class="waves-effect {% active 'list-notification' %}"><i class="icon-flag"></i><span> Publish Notifications </span></a>
+                        </li>
+<!--                      <li>-->
+<!--                            <a href="{% url 'list-queries' %}" class="waves-effect {% active 'list-queries' %}"><i class="icon-calendar"></i><span> Queries </span></a>-->
+<!--                        </li>-->
+                      <li>
+                            <a href="{% url 'list-activity-notification' %}" class="waves-effect {% active 'list-activity-notification' %}"><i class="icon-calendar"></i><span> Activity Notifications </span></a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>

@@ -1,0 +1,28 @@
+{% load widget_tweaks %}
+
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+{% endfor %}
+{% for field in form.visible_fields %}
+    <div class="form-group{% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
+      <div class="row">
+        <label for="{{ field.name }}" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
+        <div class="col-sm-10">
+
+              {% render_field field class="form-control" %}
+
+            {% if field.help_text %}
+              <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+              <div class="form-control-feedback">
+                  {{ error }}
+              </div>
+            {% endfor %}
+        </div>
+      </div>
+
+    </div>
+{% endfor %}
+
+

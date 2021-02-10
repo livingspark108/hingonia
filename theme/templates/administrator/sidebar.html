@@ -1,0 +1,38 @@
+{% load themetags %}
+{% load static %}
+
+<div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+                        <li>
+                            <a href="{% url 'admin-dashboard' %}"  class="waves-effect {% active 'admin-dashboard' %}">
+                                <i class="icon-accelerator"></i><span> Dashboard </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user"></i><span> Users <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                            <ul class="submenu">
+                              {% if request.user.is_staff and  request.user.is_superuser %}
+                              <li>
+                                  <a href="{% url 'user-list' %}" class="waves-effect {% active 'user-list' %}"><i class="fa fa-user"></i><span> Users </span></a>
+                              </li>
+                              {% endif %}
+                        </ul>
+                        </li>
+                        <li>
+                            <a href="{% url 'page-list' %}" class="waves-effect {% active 'page-list' %}"><i class="fa fa-file"></i><span> CMS Pages </span></a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>

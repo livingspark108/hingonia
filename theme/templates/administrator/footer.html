@@ -1,0 +1,97 @@
+{% load static %}
+<!-- jQuery  -->
+<script src="{% static 'admin-assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'admin-assets/js/moment.min.js' %}"></script>
+<script src="{% static 'admin-assets/js/jquery.datetimepicker.full.js' %}"></script>
+<script src="{% static 'admin-assets/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'admin-assets/js/metismenu.min.js' %}"></script>
+<script src="{% static 'admin-assets/js/jquery.slimscroll.js' %}"></script>
+<script src="{% static 'admin-assets/js/waves.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js' %}"></script>
+<!--Morris Chart-->
+
+<script src="{% static 'plugins/alertify/js/alertify.js' %}"></script>
+<script src="{% static 'admin-assets/pages/alertify-init.js' %}"></script>
+
+<script src="{% static 'plugins/sweet-alert2/sweetalert2.min.js' %}"></script>
+
+<!-- App js -->
+<script src="{% static 'admin-assets/js/app.js' %}"></script>
+
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+<!--<script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>-->
+<script src="{% static 'plugins/formset/dynamic-formset.js' %}"></script>
+<script src="{% static 'plugins/tinymce/tinymce.min.js' %}"></script>
+<script>
+  $(document).on('click','.remove_record', function(){
+     //$('.removeRecord').click(function(){
+         var text = 'Do you really want to delete this record';
+         Swal.fire({
+           title: text,
+           text: 'This process cannot be undone.',
+           type: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#d33',
+           cancelButtonColor: '#999999',
+           confirmButtonText: 'Delete!',
+           cancelButtonText: 'Cancel'
+         }).then((result) => {
+           if (result.value) {
+             var url = $(this).data("url")
+             $.ajax({        // initialize an AJAX request
+                        url: url,
+                        data: $('#model-form-delete').serialize(),
+                        method: 'POST',
+                        success: function (data) {
+                          oTable.ajax.reload( function(settings, json){
+                                        $('#id_count').html(settings.recordsTotal);
+                                    }, false );
+                          Swal.fire(
+                               'Deleted',
+                               '',
+                               'success'
+                             )
+                        }
+              });
+
+
+           } else if (result.dismiss === Swal.DismissReason.cancel) {
+             Swal.fire(
+               'Cancelled',
+               '',
+               'error'
+             )
+           }
+         })
+     });
+
+    var ajaxUrl = $('#list_page_url').val();
+    var oTable = $('#datatable').DataTable({
+          "pageLength":10,
+          "serverSide": true,
+
+          "ordering": true,
+              columnDefs: [{
+              "width": "20%",
+              orderable: false,
+              targets: "no-sort"
+              }],
+          "language": {
+          "emptyTable": "No data available"
+           },
+          "order": [[ 0, "desc" ]],
+          "ajax": { "url": ajaxUrl },
+          "scrollX": true,
+          "initComplete": function(settings, json){
+                $('#id_count').html(settings.json.recordsTotal);
+           },
+           "columnDefs": [{
+                "targets": [-1],
+                "orderable": false,
+                "className": 'text-right'
+            }],
+    });
+</script>

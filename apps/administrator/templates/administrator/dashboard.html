@@ -1,0 +1,72 @@
+{% extends "administrator/base.html" %}
+
+{% block body %}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <h4 class="page-title">Dashboard</h4>
+                </div>
+
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end page-title -->
+
+        <div class="row">
+
+            <div class="col-sm-6 col-xl-4">
+                <div class="card">
+                    <div class="card-heading p-4">
+                        <div class="mini-stat-icon float-right">
+                            <i class="mdi mdi-cube-outline bg-primary  text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-16">Total Users  </h5>
+                        </div>
+                        <h3 class="mt-4">{{UserCount}}</h3>
+                        <p class="text-muted mt-2 mb-0">Active Users <span class="float-right">{{userActiveCount}}</span></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card m-b-30" id="data-charge">
+
+                </div>
+            </div>
+
+        </div>
+        <!-- END ROW -->
+
+    </div>
+    <!-- container-fluid -->
+</div>
+{% endblock %}
+{% block script %}
+<!--<script>-->
+
+<!--        $.ajax({-->
+<!--          url: "",-->
+<!--          type: 'get',-->
+<!--          success: function(data) {-->
+<!--            console.log(data)-->
+<!--            $('#data-charge').html(data.data)-->
+<!--            }-->
+<!--         })-->
+<!--         $.ajax({-->
+<!--          url: "",-->
+<!--          type: 'get',-->
+<!--          success: function(data) {-->
+<!--            console.log(data)-->
+<!--            $('#monthly-earning').html('₹ '+data.data)-->
+<!--            }-->
+<!--         })-->
+<!--</script>-->
+{% endblock %}

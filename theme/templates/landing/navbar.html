@@ -1,0 +1,26 @@
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+  <div class="container container-s">
+    <a class="navbar-brand" href="{% url 'main-landing-page' %}"><img class="alternate-landing-logo" src="{% static 'assets/images/logo-main-filled.png' %}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto navbar-right">
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{protocol}}://{{domain}}#products">About Us</a></li>
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{protocol}}://{{domain}}#pricing">Pricing</a></li>
+        {% if request.user.is_authenticated and request.user.type == 'student'  %}
+          <li class="nav-item"><a class="alternates-btn-custom btn-cta nav-link js-scroll-trigger" href="{% url 'student-login' %}">Student Panel</a></li>
+        {% elif request.user.is_authenticated and request.user.type == 'vendor' %}
+          <li class="nav-item"><a class="alternates-btn-custom btn-cta nav-link js-scroll-trigger" href="{% url 'vendor-dashboard' %}">Institute Panel</a></li>
+        {% elif request.user.is_authenticated and request.user.type == 'teacher' %}
+          <li class="nav-item"><a class="alternates-btn-custom btn-cta nav-link js-scroll-trigger" href="{% url 'student-login' %}">Teacher Panel</a></li>
+        {% else %}
+          <li class="nav-item"><a class="alternates-btn-custom btn-cta nav-link js-scroll-trigger" href="{% url 'student-login' %}">Student/Teacher Sign In</a></li>
+         <li class="nav-item"><a class="alternates-btn-custom btn-cta nav-link js-scroll-trigger" href="{% url 'vendor-login' %}">Institute Sign In/Up</a></li>
+        {% endif %}
+<!--              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#pricing">Pricing</a></li>-->
+      </ul>
+    </div>
+  </div>
+</nav><!-- Navbar End -->

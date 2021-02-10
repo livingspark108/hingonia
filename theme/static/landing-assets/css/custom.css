@@ -1,0 +1,137 @@
+.alternate-success-newsletter{
+    color: green;
+    font-size: 15px;
+    font-weight: 700;
+    display:none;
+}
+.alternates-btn-custom{
+    background-color: #042698;
+    color:white;
+}
+.alternates-btn-round-custom{
+    background-color: #042698;
+    color:white;
+    border-radius:100px;
+}
+.alternate-landing-logo{
+    width: 135px;
+}
+.alternates-btn-custom:hover {
+    color: #f4cd00!important;
+}
+a.back-to-top.js-scroll-trigger:hover {
+    color: #f4cd00!important;
+}
+.form input {
+    border: 1px solid #042698;
+}
+.alternate-landing-logo-footer{
+    width: 85px;
+}
+.alternate-bg-color{
+    background-color: #042698;
+}
+.alternate-text{
+    color:#fffff7!important;
+}
+.alternates-btn-custom-subscribe{
+    background-color: #f4cd00!important;
+    color:white;
+    font-weight: 700!important;
+}
+a.btn-action {
+    background: #042698;
+}
+div#products {
+    background: #ffffff;
+}
+.features-intro > h2 {
+    color: #042698;
+}
+.card-text p{
+    color: black;
+}
+@media only screen and (min-width: 240px){
+    .card-icon {
+        background: #ece7fe00;
+    }
+}
+.card-text h3 {
+    color: #f4cd11;
+}
+.table-left .pricing-details h2 {
+    color: #042698;
+}
+.alternate-bg-color-newsletter {
+    background-color: #042698;
+    padding: 100px 0 100px 0;
+}
+.flex-split {
+    padding: 50px 0;
+    padding-bottom: 0px;
+}
+.pricing-section {
+    padding-top: 0px;
+}
+.table-left .pricing-details span{
+    color: #000000;
+    opacity:1;
+}
+.table-left .pricing-details li{
+    color: #000000;
+}
+.alternate-text-width{
+    max-width:unset!important;
+}
+.table-left .pricing-details .landing-plan-name{
+    color: #f4cd00;
+    font-size: 24px;
+}
+.table-left .pricing-details .landing-plan-price{
+    font-weight: 100;
+}
+.landing-plan-desc, .landing-plan-subject, .landing-plan-videos{
+    font-size:14px!important;
+}
+.landing-plan-course{
+    font-weight: bolder!important;
+}
+@media only screen and (min-width: 240px){
+    .pricing-section {
+        background: #042698;
+    }
+}
+@media only screen and (min-width: 240px){
+    .pricing-intro {
+        padding-bottom: 30px;
+        padding-top: 75px;
+    }
+}
+@media only screen and (min-width: 240px){
+    .pricing-intro h1 {
+        font-size: 32px;
+        color: #ffffff;
+        font-weight: 600;
+        line-height: 1.4;
+        margin-bottom: 20px;
+    }
+    .pricing-intro p {
+        font-size: 16px;
+        color: #ffffff;
+        font-weight: 500;
+        line-height: 1.6;
+        letter-spacing: 0;
+        margin-top: 10px;
+        margin-bottom: 50px;
+    }
+    .home .hero-img img {
+        max-width: 835px !important;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+img.tick-icon {
+    height: 13px;
+    margin-right: 3px;
+    margin-left: 15px;
+}

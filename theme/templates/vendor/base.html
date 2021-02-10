@@ -1,0 +1,43 @@
+{% load static %}
+{% include "vendor/header.html" %}
+{% block static%}
+{% endblock %}
+</head>
+<body>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Top Bar Start -->
+        {% include "vendor/topbar.html" %}
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        {% include "vendor/sidebar.html" %}
+        <!-- Left Sidebar End -->
+
+        <!-- Start right Content here -->
+        <div class="content-page">
+            <!-- Start content -->
+            {% block body %}
+            {% endblock %}
+            <!-- content -->
+
+            <footer class="footer">
+                © 2020 {{configs.APP_NAME}}
+            </footer>
+
+        </div>
+        <!-- End Right content here -->
+
+    </div>
+    <!-- END wrapper -->
+
+
+{% include "vendor/footer.html" %}
+{% block script%}
+{% endblock %}
+{% include "elements/message.html" %}
+</body>
+
+</html>

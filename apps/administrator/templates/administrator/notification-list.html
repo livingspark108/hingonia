@@ -1,0 +1,70 @@
+{% extends "administrator/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-sm-6">
+                                    <h4 class="page-title">Notifications List</h4>
+                                </div>
+
+                            </div> <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                        <table id="datatable" class="table table-hover dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th>Notification</th>
+                                                <th>Date</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                    </div>
+                    <!-- container-fluid -->
+                    <div  class="modal fade">
+                          <form id="model-form-delete" action="" method="post" >
+                          {% csrf_token %}
+                            <button type="submit" class="btn btn-danger"></button>
+                          </form>
+                    </div>
+                      <input type="hidden" name="list_page_url" id="list_page_url" value="{% url 'list-admin-notification-ajax' %}">
+
+
+                </div>
+{% endblock %}
+{% block script %}
+ <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+ <script src="{% static 'plugins/datatables/dataTables.bootstrap4.min.js' %}"></script>
+ <script src="{% static 'admin-assets/pages/datatables.init.js' %}"></script>
+<script>
+  $(document).on("click",".publish",function(e){
+        e.preventDefault();
+        var dataUrl = $(this).attr('href')
+        $.ajax({
+          url: dataUrl,
+          type: 'get',
+          cache: false,
+          success: function(data) {
+            if(data.success == true){
+              alert('success');
+            }else{
+              alert('failed');
+            }
+            }
+         })
+    });
+</script>
+{% endblock %}

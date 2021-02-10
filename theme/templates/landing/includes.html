@@ -1,0 +1,49 @@
+{% load static %}
+<!-- Jquery and Js Plugins -->
+<script type="text/javascript" src="{% static 'landing-assets/js/jquery-2.1.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'landing-assets/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'landing-assets/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'landing-assets/js/jquery.validate.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'landing-assets/js/plugins.js' %}"></script>
+<script type="text/javascript" src="{% static 'landing-assets/js/custom.js' %}"></script>
+<script type="text/javascript">
+  $(document).on("submit",".subscribe-form",function(e){
+      e.preventDefault();
+      $form = $(this)
+      var formData = new FormData(this);
+      $.ajax({
+        url: "{% url 'main-landing-page' %}",
+        type: 'post',
+        data:formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+          if(data.success == true){
+            $(".subscribe-form").trigger("reset");
+            $(".alternate-success-newsletter").html(data.message);
+            $(".alternate-success-newsletter").css({"color":"#00ff00", "display":"block"});
+          }else{
+            $(".subscribe-form").trigger("reset");
+            $(".alternate-success-newsletter").html(data.message);
+            $(".alternate-success-newsletter").css({"color":"red", "display":"block"});
+          }
+          }
+       })
+  });
+</script>
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us8.list-manage.com","uuid":"d7d742ddec96d260bdca62df6","lid":"1c0200072c","uniqueMethods":true}) })</script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5eb56675967ae56c5217fce2/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->

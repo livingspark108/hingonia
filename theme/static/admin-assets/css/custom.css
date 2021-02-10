@@ -1,0 +1,267 @@
+.wrapper-page-register  {
+    width: 650px;
+}
+.hidden-btn {
+ display: none;
+}
+
+
+#Vendor profile page
+.user_box {
+    border-right: 1px solid #ddd;
+}
+.prsnol_information, .offcl_information {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-right: 15px;
+}
+.prsnol_information .table>thead>tr>th, .prsnol_information .table>tbody>tr>th, .prsnol_information .table>tfoot>tr>th, .prsnol_information .table>thead>tr>td, .prsnol_information .table>tbody>tr>td, .prsnol_information .table>tfoot>tr>td, .offcl_information .table>thead>tr>th, .offcl_information .table>tbody>tr>th, .offcl_information .table>tfoot>tr>th, .offcl_information .table>thead>tr>td, .offcl_information .table>tbody>tr>td, .offcl_information .table>tfoot>tr>td {
+    border: none;
+}
+.font-weight-bolder {
+    font-weight: 500!important;
+}
+.prsnol_information .table>thead>tr>th>strong{
+    font-size: 16px !important;
+}
+.offcl_information .table>thead>tr>th>strong{
+    font-size: 16px !important;
+}
+.card {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+
+/* toggle checkbox css start */
+
+  .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/* toggle checkbox css end */
+.alternate-landing-logo{
+    width: 135px;
+}
+
+div#id_password {
+    overflow: auto;
+}
+
+
+
+
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.btn-file>input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: 23px;
+  cursor: pointer;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  direction: ltr;
+}
+
+.fileinput {
+  display: inline-block;
+  margin-bottom: 9px;
+}
+
+.fileinput .form-control {
+  display: inline-block;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  cursor: text;
+}
+
+.fileinput .thumbnail {
+  display: inline-block;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  max-width: 250px;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.fileinput .thumbnail.img-circle {
+  border-radius: 50%;
+  max-width: 100px;
+}
+
+.fileinput .thumbnail>img {
+  max-height: 100%;
+  width: 100%;
+}
+
+.fileinput .btn {
+  vertical-align: middle;
+}
+
+.fileinput-exists .fileinput-new,
+.fileinput-new .fileinput-exists {
+  display: none;
+}
+
+.fileinput-inline .fileinput-controls {
+  display: inline;
+}
+
+.fileinput-filename {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.form-control .fileinput-filename {
+  vertical-align: bottom;
+}
+
+.fileinput.input-group {
+  display: table;
+}
+
+.fileinput.input-group>* {
+  position: relative;
+  z-index: 2;
+}
+
+.fileinput.input-group>.btn-file {
+  z-index: 1;
+}
+
+.fileinput-new.input-group .btn-file,
+.fileinput-new .input-group .btn-file {
+  border-radius: 0 4px 4px 0;
+}
+
+.fileinput-new.input-group .btn-file.btn-xs,
+.fileinput-new .input-group .btn-file.btn-xs,
+.fileinput-new.input-group .btn-file.btn-sm,
+.fileinput-new.input-group .btn-group-sm>.btn-file.btn,
+.fileinput-new .input-group .btn-file.btn-sm,
+.fileinput-new .input-group .btn-group-sm>.btn-file.btn {
+  border-radius: 0 3px 3px 0;
+}
+
+.fileinput-new.input-group .btn-file.btn-lg,
+.fileinput-new.input-group .btn-group-lg>.btn-file.btn,
+.fileinput-new .input-group .btn-file.btn-lg,
+.fileinput-new .input-group .btn-group-lg>.btn-file.btn {
+  border-radius: 0 6px 6px 0;
+}
+
+.form-group.has-warning .fileinput .fileinput-preview {
+  color: #ff9800;
+}
+
+.form-group.has-warning .fileinput .thumbnail {
+  border-color: #ff9800;
+}
+
+.form-group.has-error .fileinput .fileinput-preview {
+  color: #f44336;
+}
+
+.form-group.has-error .fileinput .thumbnail {
+  border-color: #f44336;
+}
+
+.form-group.has-success .fileinput .fileinput-preview {
+  color: #4caf50;
+}
+
+.form-group.has-success .fileinput .thumbnail {
+  border-color: #4caf50;
+}
+
+.input-group-addon:not(:first-child) {
+  border-left: 0;
+}
+
+.thumbnail {
+  border: 0 none;
+  border-radius: 4px;
+  padding: 0;
+}
+.btn.btn-round {
+    border-radius: 30px;
+}
+.btn.btn-rose {
+    color: #fff;
+    background-color: #e91e63;
+    border-color: #e91e63;
+    box-shadow: 0 2px 2px 0 rgba(233, 30, 99, 0.14), 0 3px 1px -2px rgba(233, 30, 99, 0.2), 0 1px 5px 0 rgba(233, 30, 99, 0.12);
+}
+
+.btn-delete-button{
+    margin-top:-18px;
+}

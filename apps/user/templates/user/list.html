@@ -1,0 +1,74 @@
+{% extends "administrator/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-sm-6">
+                                    <h4 class="page-title">User List</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-right">
+                                      <li>
+                                       <button class="btn btn-primary"><a class="text-white" href="{% url 'user-add' %}">Add User</a></button>
+
+                                      </li>
+                                    </ol>
+                                </div>
+<!--                              <div class="btn-group col-sm-6">-->
+<!--                                 <ol class="breadcrumb float-right">-->
+<!--                                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>-->
+<!--                                  <div class="dropdown-menu">-->
+<!--                                      <a class="dropdown-item" href="#">Action</a>-->
+<!--                                      <a class="dropdown-item" href="#">Another action</a>-->
+<!--                                      <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                                      <div class="dropdown-divider"></div>-->
+<!--                                      <a class="dropdown-item" href="#">Separated link</a>-->
+<!--                                  </div>-->
+<!--                                 </ol>-->
+<!--                              </div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+                            </div> <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                        <table id="datatable" class="table table-hover dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Username</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                                <th class="no-sort"></th>
+                                            </tr>
+                                            </thead>
+
+
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                    </div>
+                    <div  class="modal fade">
+                          <form id="model-form-delete" action="" method="post" >
+                          {% csrf_token %}
+                            <button type="submit" class="btn btn-danger"></button>
+                          </form>
+                    </div>
+                    <!-- container-fluid -->
+                    <input type="hidden" name="list_page_url" id="list_page_url" value="{% url 'user-list-ajax' %}">
+
+                </div>
+{% endblock %}

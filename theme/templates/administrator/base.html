@@ -1,0 +1,44 @@
+{% load static %}
+{% include "administrator/header.html" %}
+{% block static%}
+{% endblock %}
+<body>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Top Bar Start -->
+        {% include "administrator/topbar.html" %}
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+          {% if request.user.is_superuser or request.user.is_staff %}
+          {% include "administrator/sidebar.html" %}
+           {% endif %}
+        <!-- Left Sidebar End -->
+
+        <!-- Start right Content here -->
+        <div class="content-page">
+            <!-- Start content -->
+            {% block body %}
+            {% endblock %}
+            <!-- content -->
+
+            <footer class="footer">
+                © 2020 {{configs.APP_NAME}}
+            </footer>
+
+        </div>
+        <!-- End Right content here -->
+
+    </div>
+    <!-- END wrapper -->
+
+
+{% include "administrator/footer.html" %}
+{% block script%}
+{% endblock %}
+{% include "elements/message.html" %}
+</body>
+
+</html>

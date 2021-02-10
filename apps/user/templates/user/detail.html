@@ -1,0 +1,187 @@
+{% extends "administrator/base.html" %}
+{% load widget_tweaks %}
+{% load static%}
+{% block body %}
+<div class="content">
+                    <div class="container-fluid">
+
+                        <!-- end page-title -->
+
+                       <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                            </div>
+                        </div>
+                    </div>
+
+<!--                     </div>-->
+                <div class="cntnt_bx mt-5">
+                  <div class="card">
+                    <div class="row">
+                      <div class="col-md-3 px-0 user_box">
+                        <div class="pt-4 text-center border border-light border-top-0 border-bottom-0 border-left-0 ">
+                          {% if vendor.vendor_logo %}
+                            <img src="{{ vendor.vendor_logo.url }}" class="rounded-circle m-auto" height="80" width="80">
+                          {% else %}
+                            <img src="{% static 'admin-assets/images/users/user-4.jpg' %}" class="rounded-circle m-auto" height="80" width="80">
+                          {% endif %}
+                          <div class="card-body text-center">
+                            <h4 class="mb-1">{{vendor}}</h4>
+                            <p>{{vendor.user.email}}</p>
+                            <p class="mt-3">Member since: <br> {{vendor.user.date_joined}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-9 px-0">
+                        <div class="prsnol_information">
+                          <div class="card-body table-responsive p-0">
+                            <table class="table">
+                              <thead class="">
+                                <tr>
+                                  <th colspan="4"><strong>Vendor's Account Information</strong></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="font-weight-bolder">Username</td>
+                                  <td class="font-weight-bolder">Email</td>
+                                </tr>
+                                <tr>
+                                  <td>{{vendor.user.username}}</td>
+                                  <td>{{vendor.user.email}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="offcl_information">
+                          <div class="card-body table-responsive p-0">
+                            <table class="table">
+                              <thead class="">
+                                <tr>
+                                  <th colspan="4"><strong>Vendor's Information</strong></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="font-weight-bolder">Students</td>
+                                  <td class="font-weight-bolder">Teachers</td>
+                                  <td class="font-weight-bolder">Classes</td>
+                                  <td class="font-weight-bolder">Subjects</td>
+                                  <td class="font-weight-bolder">Videos</td>
+                                </tr>
+                                <tr>
+                                  <td>{{vendor.user.students.count}}</td>
+                                  <td>{{vendor.user.teachers.count}}</td>
+                                  <td>{{vendor.user.classes.count}}</td>
+                                  <td>{{vendor.user.subjects.count}}</td>
+                                  <td>{{vendor.user.videos.count}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="offcl_information">
+                          <div class="card-body table-responsive p-0">
+                            <table class="table">
+                              <thead class="">
+                                <tr>
+                                  <th colspan="4"><strong>Vendor's Official Information</strong></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="font-weight-bolder">Organisation Name</td>
+                                  <td class="font-weight-bolder">Full Name</td>
+                                  <td class="font-weight-bolder">Registration no/GST no:</td>
+                                </tr>
+                                <tr>
+                                  <td>{{vendor.name}}</td>
+                                  <td>{{vendor.full_name}}</td>
+                                  <td>{{vendor.registration_number}}</td>
+                                </tr>
+                              </tbody>
+                              <tbody>
+                                <tr>
+                                  <td class="font-weight-bolder">Primary Number</td>
+                                  <td class="font-weight-bolder">Secondary Number</td>
+                                  <td class="font-weight-bolder">Address</td>
+                                </tr>
+                                <tr>
+                                  <td>{{vendor.primary_number}}</td>
+                                  <td>{{vendor.secondary_number}}</td>
+                                  <td>{{vendor.address}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="offcl_information">
+                          <div class="card-body table-responsive p-0">
+                            <table class="table">
+                              <thead class="">
+                                <tr>
+                                  <th colspan="4"><strong>Vendor's Subscription Information</strong></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                             {% if subscription %}
+                                <tr>
+                                  <td class="font-weight-bolder">Subscription Status</td>
+                                  <td class="font-weight-bolder">Current Period Start</td>
+                                  <td class="font-weight-bolder">Renew On</td>
+                                </tr>
+                                <tr>
+                                  {% if subscription.is_valid %}
+                                  <td><span class="badge badge-success">Active</span></td>
+                                  {% else %}
+                                  <td><span class="badge badge-danger">Inactive</span></td>
+                                  {% endif %}
+                                  <td>{{subscription.current_period_start}}</td>
+                                  <td>{{subscription.current_period_end}}</td>
+                                </tr>
+                                {% else %}
+                                  <tr>
+                                     <td class="font-weight-bolder">Vendor haven't subscribed to a plan</td>
+                                  </tr>
+                                {% endif %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        {% if subscription %}
+                         <div class="offcl_information">
+                          <div class="card-body table-responsive p-0">
+                            <table class="table">
+                              <tbody>
+                                 <tr>
+                                 <td class="font-weight-bolder">Plan Name</td>
+                                  <td class="font-weight-bolder">Price</td>
+                                  <td class="font-weight-bolder">Billing Cycle</td>
+                                  <td class="font-weight-bolder">Billing Cycle Number</td>
+                                </tr>
+                                <tr>
+                                  <td>{{subscription.plan.product}}</td>
+                                  <td>{{subscription.plan.amount}}</td>
+                                  <td>Monthly</td>
+                                  <td>{{subscription.plan.interval_count}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        {% endif %}
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+{% endblock %}

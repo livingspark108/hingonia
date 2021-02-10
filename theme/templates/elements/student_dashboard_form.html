@@ -1,0 +1,67 @@
+{% load widget_tweaks %}
+{% load static %}
+{% csrf_token %}
+
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+    <div id="div_id_{{field.name}}" class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
+    <label for="{{ field.name }}" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
+    <div class="col-sm-10">
+        {% if field.field.widget.input_type == 'checkbox' %}
+          <label class="switch">
+            <input type="checkbox" name="{{field.name}}" {% if field.value %} checked {%endif%}>
+            <span class="slider round"></span>
+          </label>
+        {% elif field == form.background_color %}
+       <div data-color-format="rgb" data-color="{{field.value}}" class="colorpicker-default input-group">
+            <input type="text" name="background_color" readonly="readonly" class="form-control">
+            <div class="input-group-append add-on">
+                <button class="btn btn-light" type="button">
+                    <i style="background-color: rgb(124, 66, 84);margin-top: 2px;"></i>
+                </button>
+            </div>
+        </div>
+        {% elif field.field.widget.input_type == 'file' %}
+        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+        <div class="fileinput-new thumbnail img-circle">
+        {% if form.instance.id %}
+        {% if field.value %}
+        <img src="{% get_media_prefix %}{{ field.value }}" alt="...">
+        {% else %}
+        <img src="{% static 'admin-assets/images/default_image_upload_icon.png' %}" alt="...">
+        {% endif %}
+        {% else %}
+        <img src="{% static 'admin-assets/images/default_image_upload_icon.png' %}" alt="...">
+        {% endif %}
+        </div>
+        <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+        <div>
+        <span class="btn btn-round btn-rose btn-file">
+        <span class="fileinput-new">Choose file </span>
+        <span class="fileinput-exists">Change</span>
+        <input type="file" name="{{field.name}}" id="id_image">
+        </span>
+        <br />
+        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+        </div>
+        </div>
+        {% else %}
+
+          {% render_field field class="form-control" %}
+        {% endif %}
+
+        {% if field.help_text %}
+          <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <div class="form-control-feedback text-danger">
+              {{ error }}
+          </div>
+        {% endfor %}
+    </div>
+
+    </div>
+{% endfor %}

@@ -1,0 +1,33 @@
+{% load widget_tweaks %}
+{% load static %}
+{% csrf_token %}
+
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+    <h4 class="slct-hd">{{ field.label_tag }}</h4>
+    <div class="ch-pswd">
+      {% if field.field.widget.input_type == 'file'%}
+        {% if form.instance.id and field.value %}
+          <img src="{% get_media_prefix %}{{field.value}}" class="profile-image-preview">
+        {% endif%}
+        <br>
+        <label class="fileContainer">
+        Click to upload
+        <input type="file" name="{{field.name}}" id="{{field.id}}" accept="image/*">
+        </label>
+      {% else %}
+      {% render_field field %}
+      {% endif %}
+      {% if field.help_text %}
+          <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+        <div class="form-control-feedback text-danger">
+            {{ error }}
+        </div>
+        {% endfor %}
+    </div>
+{% endfor %}

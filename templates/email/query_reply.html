@@ -1,0 +1,98 @@
+{% autoescape off %}
+{% load static %}
+{% include 'email/email_header.html'%}
+<body class="body" style="padding:0 !important; margin:0 auto !important; display:block !important; min-width:100% !important; width:100% !important; background:#f4ecfa; -webkit-text-size-adjust:none;">
+	<center>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 0; padding: 0; width: 100%; height: 100%;" bgcolor="#f4ecfa" class="gwfw">
+			<tr>
+				<td style="margin: 0; padding: 0; width: 100%; height: 100%;" align="center" valign="top">
+					<table width="600" border="0" cellspacing="0" cellpadding="0" class="m-shell">
+						<tr>
+							<td class="td" style="width:600px; min-width:600px; font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td class="mpx-10">
+											<!-- Container -->
+											<table width="100%" border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td class="gradient pt-10" style="border-radius: 10px 10px 0 0; padding-top: 10px;" bgcolor="#f3189e">
+														<table width="100%" border="0" cellspacing="0" cellpadding="0">
+															<tr>
+																<td style="border-radius: 10px 10px 0 0;" bgcolor="#ffffff">
+																	<!-- Logo -->
+																	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																		<tr>
+																			<td class="img-center p-30 px-15" style="font-size:0pt; line-height:0pt; text-align:center; padding: 30px; padding-left: 15px; padding-right: 15px;">
+																				<a href="#" target="_blank"><img src="https://www.psd2newsletters.com/templates/purple/images/logo.png" width="112" height="43" border="0" alt="" /></a>
+																			</td>
+																		</tr>
+																	</table>
+																	<!-- Logo -->
+
+																	<!-- Main -->
+																	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																		<tr>
+																			<td class="px-50 mpx-15" style="padding-left: 50px; padding-right: 50px;">
+																				<!-- Section - Intro -->
+																				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																					<tr>
+																						<td class="pb-50" style="padding-bottom: 50px;">
+																							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+																								<tr>
+																									<td class="fluid-img img-center pb-50" style="font-size:0pt; line-height:0pt; text-align:center; padding-bottom: 50px;">
+																										<img src="https://www.psd2newsletters.com/templates/purple/images/img_intro_8.png" width="268" height="300" border="0" alt="" />
+																									</td>
+																								</tr>
+																								<tr>
+																									<td class="title-36 a-center pb-15" style="font-size:36px; line-height:40px; color:#282828; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; text-align:center; padding-bottom: 15px;">
+																										<strong>Query Reply</strong>
+																									</td>
+																								</tr>
+                                                <tr>
+                                                  <td class="text-16 lh-26" style="font-size:16px; color:#6e6e6e; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; line-height: 26px; text-align:center;">
+																										Your Query Was:
+                                                    <hr>
+                                                    {{query|safe}}
+                                                    <hr>
+																									</td>
+																								</tr>
+																								<tr>
+																									<td class="text-16 lh-26" style="font-size:16px; color:#6e6e6e; font-family:'PT Sans', Arial, sans-serif; min-width:auto !important; line-height: 26px; text-align:center;">
+																										{{text|safe}}
+																									</td>
+																								</tr>
+																							</table>
+																						</td>
+																					</tr>
+																				</table>
+																				<!-- END Section - Intro -->
+
+																			</td>
+																		</tr>
+																	</table>
+																	<!-- END Main -->
+																</td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+											<!-- END Container -->
+
+											<!-- Footer -->
+                      {% include 'email/email_footer.html'%}
+                      <!-- END Footer -->
+
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</center>
+</body>
+</html>
+{% endautoescape %}

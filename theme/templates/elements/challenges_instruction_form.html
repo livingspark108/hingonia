@@ -1,0 +1,151 @@
+{% load widget_tweaks %}
+{% load static %}
+{% csrf_token %}
+
+{% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+    <div id="div_id_{{field.name}}" class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
+    <label for="{{ field.name }}" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
+    <div class="col-sm-10">
+        {% if field.field.widget.input_type == 'checkbox' %}
+          <label class="switch">
+            <input type="checkbox" name="{{field.name}}" {% if field.value %} checked {%endif%}>
+            <span class="slider round"></span>
+          </label>
+        {% elif field.field.widget.input_type == 'file' %}
+        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+        <div class="fileinput-new thumbnail img-circle">
+        {% if form.instance.id %}
+        {% if field.value %}
+        <img src="{% get_media_prefix %}{{ field.value }}" alt="...">
+        {% else %}
+        <img src="{% static 'admin-assets/images/default_image_upload_icon.png' %}" alt="...">
+        {% endif %}
+        {% else %}
+        <img src="{% static 'admin-assets/images/default_image_upload_icon.png' %}" alt="...">
+        {% endif %}
+        </div>
+        <div class="fileinput-preview fileinput-exists thumbnail img-circle"></div>
+        <div>
+        <span class="btn btn-round btn-rose btn-file">
+        <span class="fileinput-new">Choose file </span>
+        <span class="fileinput-exists">Change</span>
+        <input type="file" name="{{field.name}}" id="id_image">
+        </span>
+        <br />
+        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+        </div>
+        </div>
+        {% else %}
+
+          {% render_field field class="form-control" %}
+        {% endif %}
+
+        {% if field.help_text %}
+          <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <div class="form-control-feedback text-danger">
+              {{ error }}
+          </div>
+        {% endfor %}
+    </div>
+
+    </div>
+{% endfor %}
+
+<div class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
+    <label for="{{ field.name }}" class="col-sm-2 col-form-label">Book club</label>
+{{ book_club_form.management_form }}
+          {{ book_club_form.non_form_errors }}
+          <div id="empty_form" style="display:none">
+            <table class='no_error'>
+                {{ book_club_form.empty_form }}
+            </table>
+          </div>
+          <div class="col-sm-10 border border-default p-4">
+                    <div class="row">
+                      {% for form in book_club_form %}
+                        <div class="col-sm-12 inline {{ book_club_form.prefix }}">
+                          <div class="card">
+                              <div class="card-header">
+                                  Book club
+                              </div>
+                              <div class="card-body">
+                          {% include "elements/form_formset.html" with form=form %}
+                                </div>
+                           </div>
+                        </div>
+                      {% endfor %}
+
+            </div>
+
+
+           </div>
+</div>
+
+<div class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
+    <label for="{{ field.name }}" class="col-sm-2 col-form-label">Hint</label>
+{{ hint_form.management_form }}
+          {{ hint_form.non_form_errors }}
+          <div id="empty_form" style="display:none">
+            <table class='no_error'>
+                {{ hint_form.empty_form }}
+            </table>
+          </div>
+          <div class="col-sm-10 border border-default p-4">
+
+                    <div class="row">
+                      {% for form in hint_form %}
+
+                        <div class="col-sm-12 inline {{ hint_form.prefix }}">
+                           <div class="card">
+                              <div class="card-header">
+                                Hint
+                              </div>
+                            <div class="card-body">
+                                {% include "elements/form_formset.html" with form=form %}
+                            </div>
+                             </div>
+                        </div>
+                      {% endfor %}
+
+                    </div>
+
+
+           </div>
+</div>
+
+<div class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
+    <label for="{{ field.name }}" class="col-sm-2 col-form-label">Answers</label>
+{{ answer_form.management_form }}
+          {{ answer_form.non_form_errors }}
+          <div id="empty_form" style="display:none">
+            <table class='no_error'>
+                {{ answer_form.empty_form }}
+            </table>
+          </div>
+          <div class="col-sm-10 border border-default p-4">
+
+                    <div class="row">
+                      {% for form in answer_form %}
+                        <div class="col-sm-12 inline {{ answer_form.prefix }}">
+                          <div class="card">
+                            <div class="card-header">
+                              Answers
+                            </div>
+                            <div class="card-body">
+                          {% include "elements/form_formset.html" with form=form %}
+                               </div>
+                          </div>
+                        </div>
+                      {% endfor %}
+
+            </div>
+
+
+           </div>
+</div>

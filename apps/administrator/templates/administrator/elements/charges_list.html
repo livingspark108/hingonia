@@ -1,0 +1,35 @@
+<div class="card-body">
+                        <h4 class="mt-0 header-title mb-4">Recent Payments</h4>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Vendor</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Status</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for charge in charge_data %}
+                                    <tr>
+                                        <td>{{charge.created|date}}</td>
+                                        <td>{{charge.customer}}</td>
+                                        <td>{{charge.amount}}</td>
+                                        <td>
+                                          {% if charge.status == 'succeeded' %}
+                                          <span class="badge badge-success">{{charge.status}}</span>
+                                          {% elif charge.status == 'pending' %}
+                                          <span class="badge badge-warning">{{charge.status}}</span>
+                                          {% else %}
+                                          <span class="badge badge-danger">{{charge.status}}</span>
+                                          {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
