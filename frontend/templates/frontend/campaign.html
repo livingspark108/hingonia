@@ -1,0 +1,52 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+{% for i in campaign_obj %}
+{% if forloop.counter|divisibleby:2 %}
+<section class="py-5 campaign-section">
+        <div class="container">
+            <div class="row align-items-center justify-content-center g-4">
+                <div class="col-md-3 text-center">
+                    <img src="{% get_media_prefix %}{{i.campaign_image}}" width="270" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-7">
+<!--                    <h2 class="banner-title">Contribute to <span>Adopt a Mataji</span> in Vrindavan</h2>-->
+                    <h2 class="banner-title">{{i.title| convert_spaces_to_span|safe}}</h2>
+                    <p class="page-desc color-2">{{i.description}}
+                    </p>
+                    <div class="pt-3 pb-5 pb-md-3">
+                        <a href="#" class="btn bg-1 text-white banner-btn campaign-btn-1"><img src="assets/images/foot.png" width="20"
+                                alt="">&nbsp;&nbsp; Adopt a Mataji</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% else %}
+
+    <section class="py-5 my-md-5 my-3 bg-1 campaign-section">
+        <div class="container">
+            <div class="row align-items-center justify-content-center g-4">
+                <div class="col-md-3 text-center">
+                    <img src="{% get_media_prefix %}{{i.campaign_image}}" width="270" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-7">
+                    <h2 class="banner-title-lite text-white">{{i.title}}</h2>
+                    <p class="page-desc  text-white">{{i.description}}
+                    </p>
+                    <div class="pt-3 pb-5">
+                        <a href="#" class="btn bg-white color-2 bg-white banner-btn campaign-btn-2"><img src="assets/images/foot-dark.png" width="20"
+                                alt="">&nbsp;&nbsp; Donate Grocery Kit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+{% endfor %}
+{% endblock %}
+{% block script%}
+
+{% endblock %}

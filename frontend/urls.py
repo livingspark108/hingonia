@@ -17,5 +17,13 @@ from django.urls import path, include
 from frontend.views import *
 urlpatterns = [
     path('', FrontendHomeView.as_view(), name='home'),
+    path('about-us', FrontendAboutUsView.as_view(), name='about-us'),
+    path('our-mothers', FrontendOurMotherView.as_view(), name='our-mothers'),
+    path('campaign', FrontendCampaignView.as_view(), name='campaign'),
+    path('distribution', FrontendDistributionView.as_view(), name='distribution'),
+    path('privacy-policy', FrontendPrivacyPolicyView.as_view(), name='privacy-policy'),
+    path('term-and-condition', FrontendTermConditionView.as_view(), name='term-and-condition'),
+    path('refund-policy', FrontendRefundPolicyView.as_view(), name='refund-policy'),
+
 ]
 

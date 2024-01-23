@@ -18,9 +18,10 @@ urlpatterns = [
     #fontend urls
     path('', include('frontend.urls')),
     # auth urls
-    path('', include('apps.authentication.urls')),
+    path('admin/', include('apps.authentication.urls')),
     # admin urls
     path('admin/', include('apps.administrator.urls')),
+    path('front_app/', include('apps.front_app.urls')),
     # enable the admin interface
     url(r'^administration', admin.site.urls),
     # auth urls
@@ -35,7 +36,6 @@ urlpatterns = [
     #user urls
     path('user/', include('apps.user.urls')),
 
-    path('dashboards/',include('apps.dashboard.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

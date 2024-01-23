@@ -51,7 +51,7 @@ DEFAULT_APPS = [
     'apps.administrator',
     'apps.cms',
     'apps.user',
-    'apps.dashboard',
+    'apps.front_app',
     'frontend',
     'widget_tweaks',
     'ckeditor',
@@ -126,7 +126,7 @@ MEDIA_URL = '/media/'
 DEBUG = False
 
 #### Project name confix
-APP_NAME = 'Math Challenge';
+APP_NAME = 'Mata ji Admin';
 
 SETTINGS_EXPORT = [
     'APP_NAME',
@@ -219,10 +219,10 @@ DJSTRIPE_WEBHOOK_SECRET = "whsec_11ov9HJBLwcI7AmXPWU5DcjljMgE6Df0"  # Get it fro
 
 
 #Email Server
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'deepaktestacc@gmail.com'
-EMAIL_HOST_PASSWORD = 'deepak@123'
+EMAIL_HOST = 'imap.secureserver.net'
+EMAIL_PORT = 993
+EMAIL_HOST_USER = 'bhavanshu@livingspark.in'
+EMAIL_HOST_PASSWORD = '08019@Hkc'
 EMAIL_USE_TLS = True
 
 

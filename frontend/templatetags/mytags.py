@@ -13,3 +13,6 @@ from datetime import datetime
 
 register = template.Library()
 
+@register.filter(name='convert_spaces_to_span')
+def convert_spaces_to_span(value):
+    return re.sub(r"'(.*?)'", r'<span>\1</span>', value)
