@@ -12,6 +12,8 @@ class Mother(DateTimeModel):
 
 class Campaign(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
+    short_title = models.CharField(max_length=300, blank=False,null=True)
+    price = models.FloatField(max_length=300, blank=True,null=True)
     short_description = models.TextField(max_length=2500, null=True, blank=True)
     description = RichTextUploadingField(blank=True, null=True)
     campaign_image = models.ImageField(upload_to='campaign_images', max_length=1000,null=True,blank=True)

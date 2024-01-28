@@ -1,4 +1,4 @@
-django==2.2.7
+django==3.0.0
 django-settings-export==1.2.1
 django-widget-tweaks==1.4.5
 django-datatables-view==1.19.1
@@ -13,3 +13,4 @@ django-braces
 django-resized
 django-cleanup
 psycopg2==2.8.6
+djangorestframework==3.14.0

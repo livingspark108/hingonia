@@ -1,4 +1,5 @@
 {% load static %}
+{% load mytags %}
 <footer class="footer">
     <div class="container">
         <div class="row">
@@ -64,6 +65,123 @@
     <div class="scroll-to-top">
         <i class="bi bi-arrow-up"></i>
     </div>
+<div class="modal fade" id="helpMatajiModal" tabindex="-1" aria-labelledby="helpMatajiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content bg-1">
+            <div class="modal-header">
+                <nav class="nav nav-pills flex-column flex-sm-row " role="tablist">
+	                {% get_campain_data as all_campain %}
+	                {% for single in all_campain %}
+                    <a
+		                    data-amount="{{single.price}}"
+                       data-img="{% get_media_prefix %}{{single.campaign_image}}"
+                       class="pop-up-donate flex-sm-fill text-sm-center nav-link {% if forloop.first %}active{% endif %}" aria-current="page"
+                       href="#"
+                       id="{{single.id}}" data-bs-toggle="tab" data-bs-target="#nav-adoptmataji" type="button"
+                       role="tab" aria-controls="nav-adoptmataji" aria-selected="true">{{single.short_title}}</a>
+                    {% endfor %}
+                </nav>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+	        <form action="{% url 'pay' %}" method="post">
+		        {% csrf_token %}
+		        <input type="hidden" value="{{all_campain.first.short_title}}" name="title">
+            <div class="modal-body">
+
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div class="tab-content d-none d-md-block" id="nav-tabContent">
+						
+                            <div class="tab-pane fade active show" id="nav-adoptmataji" role="tabpanel" aria-labelledby="nav-adoptmataji-tab" tabindex="0">
+                                <img src="{% get_media_prefix %}{{all_campain.first.campaign_image}}" class="img-fluid w-100 cm-mataji-img" alt="">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-6 pb-3">
+                                <label class="form-label text-white">Full Name <span class="text-error">*</span></label>
+                                <input type="text" name="first_name" class="form-control" placeholder="Full name"
+                                       aria-describedby="mobile-addon" required="">
+                            </div>
+                            <div class="col-6 pb-3">
+                                <label class="form-label text-white">Email <span class="text-error">*</span></label>
+                                <input type="email" name="email" class="form-control" placeholder="Email"
+                                       aria-describedby="mobile-addon" required="">
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            <div class="col-12 ">
+                                <label class="form-label text-white">Contribute to adopt a Mataji In Vrindavan <span class="text-error">*</span></label>
+                                <div class="input-group mb-1">
+                                    <span class="input-group-text" id="mobile-addon">IN</span>
+                                    <input type="number" name="mobile_no" class="form-control"
+                                           placeholder="+91 00000-00000"
+                                           aria-describedby="mobile-addon" required="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            <div class="col-md-12">
+                                <label class="form-label text-white">How many Mothers you want to adopt: <span class="text-error">*</span>
+                                </label>
+                                <div class="row align-items-center">
+                                    <div class="col-5">
+                                        <div class="input-group">
+                                            <button class="btn bg-white" type="button" id="minusBtn">-</button>
+                                            <input type="text" class="form-control text-center" value="1" id="quantityInput" aria-label="Quantity">
+                                            <button class="btn bg-white" type="button" id="plusBtn">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <h6 class="text-white mb-0">Mother</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            <div class="col-md-12">
+                                <div class="form-check pb-2">
+                                    <input class="form-check-input" name="custom_check" type="checkbox" value="custom_check"
+                                           id="customAmountCheckbox">
+                                    <label class="form-check-label text-white" for="customAmountCheckbox">
+                                        Choose Custom Amount:
+                                    </label>
+                                </div>
+                                <div class="input-group w-50 custom-amount-box" style="display: none;">
+                                    <span class="input-group-text" id="amount-addon"><i class="bi bi-currency-rupee"></i></span>
+                                    <input type="number" name="ctm_amount" class="form-control ctm_amount" placeholder="----"
+                                           aria-describedby="amount-addon" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+	                        <input type="hidden" value="{{all_campain.first.price}}" name="amount" class="amt_vl">
+	                        <input type="submit" class="btn bg-white color-2 w-100 fw-bold" value="Donate Now">
+	                        
+                        </div>
+                        <div class="col-md-6 col-6 text-end">
+                            <h6 class="text-white mb-0"><i class="bi bi-currency-rupee text-white"></i><span
+		                            class="amt text-white">{{all_campain.first.price}}</span></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			</form>
+        </div>
+    </div>
+</div>
 </footer>
 
 
@@ -79,7 +197,22 @@
 
 
 <script type="text/javascript" src="{% static 'frontend/assets/js/custom.js' %}"></script>
-
+<script>
+	$(document).on("click",".help_mataji",function() {
+		var amt = $('.active').attr('data-amount');
+		$('.amt').html(amt)
+		
+	})
+	$(document).on("click",".pop-up-donate",function() {
+		var img = $(this).attr('data-img')
+		var amt = $(this).attr('data-amount')
+		$('.amt').html(amt)
+		$('.amt_vl').val(amt)
+		$('.cm-mataji-img').attr('src',img)
+	})
+	
+	
+</script>
 </body>
 
 </html>

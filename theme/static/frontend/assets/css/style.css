@@ -27,6 +27,7 @@ body {
   --color-5: #960606;
   --color-6: #966606;
   --color-7: #A24141;
+  --error: #F04438;
   --black: #000;
   --gray-900: #101828;
   --gray-500: #667085;
@@ -60,6 +61,18 @@ body {
   color: var(--color-7);
 }
 
+.text-error {
+  color: var(--error);
+}
+
+.f-14 {
+  font-size: 14px;
+}
+
+.bg-outline {
+  border: 1px solid var(--color-2);
+}
+
 .bg-1 {
   background-color: var(--color-2);
 }
@@ -74,6 +87,10 @@ body {
 
 .bg-4 {
   background-color: var(--color-6);
+}
+
+.bg-5 {
+  background-color: rgba(164, 19, 60, 0.10);
 }
 
 .f-16 {
@@ -132,7 +149,7 @@ a {
 
 .sticky-header.sticky {
   top: 0;
-  background-color: #f8f9fa;
+  background-color: #fff8f1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -172,6 +189,21 @@ a {
   -ms-transform: translateY(100%);
   -o-transform: translateY(100%);
   transform: translateY(100%);
+}
+
+.dropdown-menu {
+  border-color: var(--color-2);
+}
+
+.dropdown-item {
+  color: var(--color-2);
+}
+
+.dropdown-item.active,
+.dropdown-item:active,
+.btn.show {
+  background-color: var(--color-2);
+  color: #fff;
 }
 
 /*========== Header CSS End =============*/
@@ -388,7 +420,6 @@ a {
 .section-collage img {
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
-  transition: 0.5s;
 }
 
 .collageImgHover {
@@ -671,8 +702,289 @@ a {
   line-height: 24px;
 }
 
-.contact-form .form-control{
+.contact-form .form-control {
   background-color: transparent;
+}
+
+/************** Login **************/
+.login-img-box img {
+  width: 10%;
+  height: 500px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+
+.login-img-box img:hover {
+  filter: none;
+  -webkit-filter: none;
+}
+
+.text-error {
+  font-family: var(--inter);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.login-form .form-control {
+  background-color: transparent !important;
+}
+
+.btn-box {
+  display: inline-flex;
+  height: 220px;
+  padding: 32px 117px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  flex-shrink: 0;
+  border-radius: 171px;
+  border: 1px solid var(--color-2);
+  align-items: center;
+  justify-content: center;
+}
+
+.login-text {
+  display: block;
+  color: var(--color-2);
+  font-family: var(--dmsans);
+  font-size: 80px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.forgot-text {
+  display: block;
+  font-family: var(--inter);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration-line: underline;
+}
+
+.login-title {
+  color: var(--color-7);
+  font-family: var(--times);
+  font-size: 38px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.login-subtitle {
+  color: var(--color-7);
+  font-family: var(--times);
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.login-info h2 {
+  font-size: 60px;
+}
+
+.login-info .about-title img {
+  top: 0;
+}
+
+.register-btn {
+  height: 175px;
+  padding: 32px 50px;
+}
+
+.bg-outline:hover,
+.btn-lgt:hover {
+  color: #fff;
+}
+
+/*********profile********/
+.profile-info {
+  font-family: var(--times);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.profile-form .form-control {
+  color: var(--color-7);
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--color-7);
+  background: #FFF9F1;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.profile-form .form-control::placeholder {
+  color: var(--color-7);
+
+}
+
+.dropdown-menu-start[data-bs-popper] {
+  left: -55px;
+}
+
+.profile-distribution-btn {
+  position: absolute;
+  right: 0px;
+  left: 0px;
+  margin: auto;
+  top: 47%;
+  width: fit-content;
+  border-radius: 4px;
+  background-color: #FFF9F1;
+  color: var(--color-2);
+  font-family: var(--dmsans);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  padding: 12px 20px;
+}
+
+.img-dist {
+  width: 100%;
+  height: 266px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/******* My donation ********/
+.my-donation-table th {
+  color: var(--color-2);
+  font-family: var(--inter);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.my-donation-table {
+  border: 1px solid var(--color-2);
+}
+
+.my-donation-table .bg-light {
+  border-radius: 16px;
+  background: var(--gray-500, #F2F4F7);
+}
+
+.my-donation-table .cm-bg-success {
+  border-radius: 16px;
+  background: #ECFDF3;
+}
+
+.my-donation-table .cm-bg-cancel {
+  border-radius: 16px;
+  background: #FEF3F2;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.my-donation-table .table {
+  min-width: 100%;
+}
+
+#helpMatajiModal img {
+  border: 10px solid #fff;
+  border-radius: 8px;
+  height: 300px;
+  object-fit: cover;
+}
+
+#helpMatajiModal .nav-link {
+  color: #fff;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link,
+.nav-pills .nav-link:hover {
+  background-color: #fff;
+  color: var(--color-2) !important;
+}
+
+.modal-header .btn-close {
+  filter: brightness(9);
+}
+
+
+/********** Distribution Swiper slider ***********/
+.swiper {
+  width: 100%;
+  height: 100%;
+  max-height: 570px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+.gallery-box {
+  position: relative;
+}
+.gallery-img{
+  border-radius: 12px;
+  height: 270px;
+  object-fit: cover;
+}
+.gallery-box:hover .gallery-img {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+.gallery-box:hover .gallery-content{
+  display: block;
+}
+
+.gallery-content {
+  display: none;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(0deg, #00000099, #00000000);
+  padding: 15px 25px;
+}
+
+.gallery-content h3 {
+  color: #FFF;
+  font-family: var(--dmsans);
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.gallery-content h4 {
+  color: #FFF;
+  font-family: var(--dmsans);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.gallery-content p {
+  color: #FFF;
+  font-family: var(--times);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
 }
 
 /*======== Footer CSS =========*/
@@ -761,6 +1073,7 @@ a {
 
 @media only screen and (max-width: 990px) {
 
+  .gallery-img{height: 200px;}
   .banner-component,
   .banner-component img {
     width: 100%;
@@ -786,7 +1099,8 @@ a {
   }
 
   .banner-title,
-  .banner-title-lite, .about-section h2 {
+  .banner-title-lite,
+  .about-section h2 {
     font-size: 32px;
   }
 
@@ -807,19 +1121,81 @@ a {
     bottom: -50px;
   }
 
-  .about-title h2{
+  .about-title h2 {
     font-size: 52px;
   }
-  .about-title h3{
+
+  .about-title h3 {
     font-size: 22px;
   }
 
-  .about-section p{
+  .about-section p {
     font-size: 20px;
   }
 
-  .about-title img{
+  .about-title img {
     top: 0;
+  }
+
+  .login-info h2 {
+    font-size: 34px;
+  }
+
+  .login-info h3 {
+    font-size: 18px;
+  }
+
+  .login-info .about-title img {
+    top: -10px;
+    width: 95px;
+  }
+
+  .btn-box {
+    height: 130px;
+    padding: 10px 40px;
+  }
+
+  .login-text {
+    font-size: 50px;
+  }
+
+  .forgot-text {
+    font-size: 20px;
+  }
+
+  .login-title {
+    font-size: 32px;
+  }
+
+  .login-subtitle {
+    font-size: 20px;
+    padding-bottom: 30px;
+  }
+
+  .login-img-box {
+    text-align: center;
+  }
+
+  .login-img-box img {
+    height: 280px;
+  }
+  .gallery-content h3{
+    font-size: 18px;
+  }
+  .gallery-content .con-img{
+    width: 50px;
+  }
+  .gallery-content h4 {
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
+  }
+  .gallery-content p {
+    font-size: 10px;
+    text-align: center;
+  }
+  .gallery-content {
+    padding: 10px;
   }
 }
 
@@ -839,6 +1215,23 @@ a {
   .subtitle-box span {
     display: block;
     line-height: 26px;
+  }
+
+  .profile-form .form-control {
+    font-size: 18px;
+  }
+
+  .img-dist {
+    height: 150px;
+  }
+
+  .profile-distribution-btn {
+    top: 44%;
+    left: 30px;
+  }
+  .swiper{
+    height: 100vh;
+    max-height: 100vh;
   }
 }
 

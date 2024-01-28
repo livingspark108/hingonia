@@ -47,6 +47,7 @@ DEFAULT_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'theme',
+    'rest_framework',
     'apps.authentication',
     'apps.administrator',
     'apps.cms',
@@ -54,6 +55,7 @@ DEFAULT_APPS = [
     'apps.front_app',
     'frontend',
     'widget_tweaks',
+    'payu',
     'ckeditor',
     'ckeditor_uploader',
     #keep below app in last only
@@ -227,6 +229,17 @@ EMAIL_USE_TLS = True
 
 
 FILE_UPLOAD_PERMISSIONS = 0o644
+
+PAYU_CONFIG = {
+
+    "merchant_key":"tM5HOf",
+    "merchant_salt":"WMMC7MXGhU9p1cbn8PGgB5msXUA8I7E2",
+    "mode": "Live",
+    "RESPONSE_URL_SUCCESS" : "http://127.0.0.1:8010/payment_response_handler/",
+    "RESPONSE_URL_FAILURE" : "http://127.0.0.1:8010/payment_response_handler/"
+   }
+# Change the PAYU_MODE to 'LIVE' for production.
+PAYU_MODE = "TEST"
 
 
 GOOGLE_ANALYTICS = {

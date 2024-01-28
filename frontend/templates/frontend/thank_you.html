@@ -1,0 +1,92 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 ps-0">
+                <div class="login-img-box">
+                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
+                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
+                    <img src="{% static 'frontend/assets/images/login/3.png' %}" class="img-fluid" alt="">
+                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
+                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
+                    <img src="{% static 'frontend/assets/images/login/3.png' %}" class="img-fluid" alt="">
+                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
+                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-lg-11 col-md-12 text-center pt-5">
+                        <h2 class="login-title">Thank you for your generosity to Pure Devotion Foundation.</h2>
+                        <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
+                        <h3 class="login-subtitle pt-3">Each donation is an essential help which<br> improves life of
+                            widows in Vrindavan.</h3>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-10 col-md-12">
+                        <form action="" class="login-form pt-md-5 pt-4">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Name <span class="text-error">*</span></label>
+                                    <input type="text" class="form-control" value="" placeholder="Enter your name" required="">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Phone number <span class="text-error">*</span></label>
+                                    <div class="input-group mb-1">
+                                        <span class="input-group-text" id="basic-addon1">IN</span>
+                                        <input type="number" class="form-control" placeholder="+91 00000-00000" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Password <span class="text-error">*</span></label>
+                                    <input type="password" class="form-control" value="" placeholder="*******" required="">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Confirm Password <span class="text-error">*</span></label>
+                                    <input type="password" class="form-control" value="" placeholder="*******" required="">
+                                </div>
+                                <div class="col-md-12 pt-4 pb-5 text-center">
+                                    <a href="#" class="btn bg-1 text-white">Register</a>
+                                    <a href="#" class="btn ms-2 bg-outline color-2">Login</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row login-info ">
+                    <div class="col-md-4 py-4">
+                        <div class="about-title position-relative text-center">
+                            <img src="assets/images/about-us/foot.png" alt="">
+                            <h2>10000+</h2>
+                            <h3>Grocery Kits</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4 py-4">
+                        <div class="about-title position-relative text-center">
+                            <img src="assets/images/about-us/foot.png" alt="">
+                            <h2>30000+</h2>
+                            <h3>Blankets</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4 py-4">
+                        <div class="about-title position-relative text-center">
+                            <img src="assets/images/about-us/foot.png" alt="">
+                            <h2>10000+</h2>
+                            <h3>Widows Impacted</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script%}
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<section xmlns="http://www.w3.org/1999/html">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 ps-0">
+                    <div class="login-img-box">
+	                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
+	                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
+	                    <img src="{% static 'frontend/assets/images/login/3.png' %}" class="img-fluid" alt="">
+	                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
+	                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
+	                    <img src="{% static 'frontend/assets/images/login/3.png' %}" class="img-fluid" alt="">
+	                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
+	                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
+	                </div>
+                </div>
+                <div class="col-md-8">
+	                 <form action="{% url 'user-login' %}" method="post">
+		                 {% csrf_token %}
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-12 pt-lg-5">
+                           <div class="login-form pt-md-5 pt-4">
+                                <div class="mb-2">
+                                    <label class="form-label">Phone number <span class="text-error">*</span></label>
+                                    <div class="input-group mb-1">
+                                        <span class="input-group-text" id="basic-addon1">IN</span>
+                                        <input type="number" name="username" class="form-control"
+                                               placeholder="+91 00000-00000"
+                                               aria-describedby="basic-addon1">
+                                    </div>
+                                    <p class="text-error mb-0">Number doesn’t exist. Redirecting to Registration in 2
+                                        seconds.</p>
+                                </div>
+                                <div class="">
+                                    <label class="form-label">Password <span class="text-error">*</span></label>
+                                    <input type="password" name="password" class="form-control" value=""
+                                           placeholder="*******"
+                                           required="">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-6 col-md-12 pt-4 pt-md-5 text-center">
+                            <div class="btn-box">
+                                <input type="submit" value="Login" href="#" class="login-text">Login</input>
+                                <a href="#" class="forgot-text">Forgot Password</a>
+                            </div>
+                        </div>
+	                    </form>
+                        <div class="col-lg-7 col-md-12 text-center pt-5">
+                            <h2 class="login-title">A Help to those who need it.</h2>
+                            <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
+                            <h3 class="login-subtitle pt-3">Each donation is an essential help which improves everyone's
+                                life</h3>
+                        </div>
+                    </div>
+                    <div class="row login-info ">
+                        <div class="col-md-4 py-4">
+		                    <div class="about-title position-relative text-center">
+		                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+		                        <h2>10000+</h2>
+		                        <h3>Grocery Kits</h3>
+		                    </div>
+		                </div>
+		                <div class="col-md-4 py-4">
+		                    <div class="about-title position-relative text-center">
+		                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+		                        <h2>30000+</h2>
+		                        <h3>Blankets</h3>
+		                    </div>
+		                </div>
+		                <div class="col-md-4 py-4">
+		                    <div class="about-title position-relative text-center">
+		                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+		                        <h2>10000+</h2>
+		                        <h3>Widows Impacted</h3>
+		                    </div>
+		                </div>
+                    </div>
+	                </form>
+	                
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block script%}
+
+{% endblock %}

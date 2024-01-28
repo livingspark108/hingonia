@@ -1,0 +1,115 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<section class="profile">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-md-12 text-center pt-4">
+                    <h2 class="login-title">My Profile</h2>
+                    <img src="{% static 'frontend/assets/images/our-mothers/flower.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-3 col-md-12">
+                    <div>
+                        <p class="color-7 profile-info mb-1">Donor - {{request.user.first_name}}</p>
+                        <p class="color-7 profile-info mb-0">Phone Number - +91 {{request.user.username}}</p>
+                    </div>
+                    <form action="" method="post" class="profile-form pt-md-5 pt-4">
+	                    {% csrf_token %}
+                        <div class="row align-items-center">
+                            <div class="col-md-8 mb-3">
+                                <input type="email" class="form-control" value="{{request.user.email}}"
+                                       placeholder="Email" required="">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input name="address" type="text" class="form-control"
+                                       value="{{request.user.address|handle_none}}"
+                                       placeholder="Add Residential Address">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <input name="pincode" type="text" class="form-control"
+                                       value="{{request.user.pincode|handle_none}}"
+                                       placeholder="Pincode">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <input name="city" type="text" class="form-control"
+                                       value="{{request.user.city|handle_none}}"
+                                       placeholder="City">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <input type="submit" class="btn bg-1 text-white" value="Save">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row pt-md-4 align-items-center">
+                        <div class="col-md-6 pt-md-3">
+                            <a href="{% url 'user-logout' %}" class="btn bg-5 color-2 fw-bold btn-lgt">Logout</a>
+                        </div>
+                        <div class="col-md-6 text-end d-flex pt-3">
+                            <div class="d-inline-block text-center pe-3">
+                                <a href="#">
+                                    <u class="color-2 fw-bold">Request 80G</u>
+                                </a><br>
+                                <span class="color-2 fw-bold">(save tax)</span>
+                            </div>
+                            <a href="#" class="btn bg-1 text-white lh-lg fw-bold">Donate Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-3 col-md-12 pe-0 text-center position-relative">
+                    <div class="row g-4">
+                        <a href="#" class="profile-distribution-btn">Explore Distribution &gt;</a>
+                        <div class="col-md-6 col-6">
+                            <img src="{% static 'frontend/assets/images/profile/mataji.jpg' %}" class="img-fluid img-dist" alt="">
+                        </div>
+                        <div class="col-md-6 col-6">
+                            <img src="{% static 'frontend/assets/images/profile/mataji-2.jpg' %}" class="img-fluid img-dist" alt="">
+                        </div>
+                        <div class="col-md-6 col-6">
+                            <img src="{% static 'frontend/assets/images/profile/mataji-4.jpg' %}" class="img-fluid img-dist" alt="">
+                        </div>
+                        <div class="col-md-6 col-6">
+                            <img src="{% static 'frontend/assets/images/profile/mataji-3.jpg' %}" class="img-fluid1 img-dist" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container pt-4 pt-md-5 pb-3 pb-md-5">
+            <div class="row login-info justify-content-center">
+                <div class="col-md-10 col-lg-6 text-center">
+                    <h3 class="login-subtitle pt-3">Each donation is an essential help which improves life of widows in
+                        Vrindavan.</h3>
+                </div>
+            </div>
+            <div class="row login-info ">
+                <div class="col-md-4 py-4">
+                    <div class="about-title position-relative text-center">
+                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+                        <h2>10000+</h2>
+                        <h3>Grocery Kits</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 py-4">
+                    <div class="about-title position-relative text-center">
+                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+                        <h2>30000+</h2>
+                        <h3>Blankets</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 py-4">
+                    <div class="about-title position-relative text-center">
+                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+                        <h2>10000+</h2>
+                        <h3>Widows Impacted</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block script%}
+
+{% endblock %}

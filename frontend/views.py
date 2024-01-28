@@ -1,16 +1,24 @@
+import random
+
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.csrf import csrf_exempt
+from paywix.payu import Payu
+from rest_framework.generics import *
+from rest_framework.generics import GenericAPIView
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, DeleteView, UpdateView, TemplateView
 from application.custom_classes import AjayDatatableView, StudentRequiredMixin
 from application.helper import send_contact_us
+from application.settings.common import PAYU_CONFIG
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs
+from apps.user.models import TransactionDetails
+from frontend.serializer import TransactionDetailsSerializer
 
 User = get_user_model()
 
@@ -103,3 +111,184 @@ class FrontendRefundPolicyView(View):
         #if request.user.is_authenticated:
         context = {}
         return render(request, 'frontend/refund_policy.html', context)
+
+#Logout page
+class UserLogoutView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        logout(request)
+        #return render(request, 'auth/login.html')
+        return redirect('home')
+
+
+# Login page
+class FrontendLoginView(View):
+    login_url = 'user-login'
+    success_message = 'You have successfully logged in.'
+    failure_message = 'Sorry, unrecognized username or password. Have you forgotten your password?.'
+
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/login.html', context)
+
+    def post(self, request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print("Password", password)
+        kwargs = {'username__iexact': username}
+        try:
+            user = get_user_model().objects.get(**kwargs)
+            print(user)
+            if not user.check_password(password):
+                print("Not auth")
+                messages.error(request, self.failure_message)
+                return HttpResponseRedirect(reverse(self.login_url))
+        except User.DoesNotExist:
+            messages.error(request, self.failure_message)
+            return HttpResponseRedirect(reverse(self.login_url))
+
+        user = authenticate(request, username=username,
+                            password=password)
+        login(request, user)
+        if user:
+            return HttpResponseRedirect(reverse('home', kwargs={}))
+# My profile page
+
+class FrontendProfileView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/profile.html', context)
+
+    def post(self,request):
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        pincode = request.POST.get('pincode')
+        user = User.objects.get(id=request.user.id)
+        user.address = address
+        user.city = city
+        user.pincode = pincode
+        user.save()
+
+        return HttpResponseRedirect(reverse('profile', kwargs={}))
+# My donation page
+
+class FrontendDonationView(View):
+    def get(self, request):
+        transaction_obj = TransactionDetails.objects.filter(phone=request.user.username)
+        context = {'transaction_obj':transaction_obj}
+        return render(request, 'frontend/donation.html', context)
+#Thank you page
+class FrontendThankYouView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/thank_you.html', context)
+
+# Payment gateway
+class FrontendPayView(View):
+    def post(self, request):
+        # Create payu instance
+        if request.POST.get('custom_check') == 'custom_check':
+            amount = request.POST.get('ctm_amount')
+        else:
+            amount = request.POST.get('amount')
+
+        merchant_key = PAYU_CONFIG['merchant_key']
+        merchant_salt = PAYU_CONFIG['merchant_salt']
+        payu = Payu(merchant_key, merchant_salt, "live")
+        payload = {
+            "amount": amount,
+            "firstname": request.POST.get('first_name'),
+            "email": request.POST.get('email'),
+            "phone": request.POST.get('mobile_no'),
+            "productinfo": request.POST.get('title'),
+            "txnid": "OR_"+str(random.random()),
+            "furl": PAYU_CONFIG['RESPONSE_URL_FAILURE'],
+            "surl": PAYU_CONFIG['RESPONSE_URL_SUCCESS']
+        }
+
+        response = payu.transaction(**payload)
+        html = payu.make_html(response)
+        print(html)
+        #if request.user.is_authenticated:
+        context = {
+            'html':html
+        }
+        return render(request, 'frontend/pay_page.html', context)
+
+
+class PayuSuccessAPiView(GenericAPIView):
+
+    """
+
+       Class for creating API view for Payment Success.
+
+       """
+
+    serializer_class = TransactionDetailsSerializer
+
+
+    def post(self, request):
+
+        """
+
+        Function for Payment Success.
+
+        """
+
+        serializer = self.get_serializer(data=request.data)
+
+        data = {k: v[0] for k, v in dict(request.data).items()}
+
+        if serializer.is_valid():
+            instance = serializer.save()
+            user_obj = User.objects.filter(username=instance.phone).first()
+            if not user_obj:
+                user_obj = User.objects.create_user(first_name=instance.firstname,type='devotee',username=instance.phone, email='bhavanshu@icloud.com',
+                                               password=instance.phone)
+                user_obj.save()
+
+
+            print(f"Saved instance: {instance}")
+        else:
+            errors = serializer.errors
+
+            return HttpResponseRedirect(reverse('home', kwargs={}))
+
+
+        merchant_key = PAYU_CONFIG['merchant_key']
+        merchant_salt = PAYU_CONFIG['merchant_salt']
+        payu = Payu(merchant_key, merchant_salt, "live")
+        if data['status'] == 'success':
+            response = payu.check_transaction(**data)
+            login(request,user_obj)
+            return HttpResponseRedirect(reverse('thank-you', kwargs={}))
+        else:
+            return HttpResponseRedirect(reverse('home', kwargs={}))
+
+
+class PayuFailureAPiView(GenericAPIView):
+
+    """
+
+       Class for creating API view for Payment Failure.
+
+       """
+
+
+    @csrf_exempt
+
+    def post(self, request):
+
+        """
+
+        Function for Payment Failure.
+
+        """
+
+        data = {k: v[0] for k, v in dict(request.data).items()}
+        merchant_key = PAYU_CONFIG['merchant_key']
+        merchant_salt = PAYU_CONFIG['merchant_salt']
+        payu = Payu(merchant_key, merchant_salt, "live")
+        response = payu.verify_transaction(data)
+
+        return JsonResponse(response)

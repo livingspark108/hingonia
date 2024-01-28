@@ -1,0 +1,125 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<section class="profile">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-12 text-center pt-4">
+                    <h2 class="login-title">My Donation</h2>
+                    <img src="{% static 'frontend/assets/images/our-mothers/flower.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-12 pt-3 col-md-12 pt-4">
+                    <div class="table-responsive">
+                        <table class="table align-middle my-donation-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Contribution</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Order amount</th>
+                                    <th scope="col">Contribution date</th>
+                                    <th scope="col">Payment Method</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+	                            {% for i in transaction_obj %}
+                                <tr>
+                                    <td>
+                                        <p class="mb-0 fw-semibold f-14">{{i.productinfo}}</p>
+                                    </td>
+                                    <td><span class="badge bg-light text-black f-14"><i
+		                                    class="bi bi-circle-fill f-14 pe-1"></i> {{i.status}}</span></td>
+                                    <td>
+                                        <p class="mb-0 text-muted f-14"><i class="bi bi-currency-rupee"></i>{{i.amount}}/-</p>
+                                    </td>
+                                    <td>
+                                        <p class="mb-0 text-muted f-14">{{i.created_at}}</p>
+                                    </td>
+                                    <td><a href="#"><u class="color-2 fw-semibold f-14">{{i.mode}}</u></a></td>
+                                    <td>
+                                        <a href="#" class="btn bg-1 text-white fw-bold w-100">
+                                            <img src="{% static 'frontend/assets/images/icon/download.png' %}"
+                                                 class="img-fluid"><br>Download
+                                            80G</a>
+                                    </td>
+                                </tr>
+	                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row pt-md-4 align-items-center">
+                        <div class="col-lg-8 col-md-5">
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-5 text-end">
+                            <div class="d-inline-block text-center pe-3">
+                                <a href="#">
+                                    <u class="color-2 fw-bold">Request 80G</u>
+                                </a><br>
+                                <span class="color-2 fw-bold">(save tax)</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-7 text-end">
+
+                            <a href="#" class="btn bg-1 text-white lh-lg fw-bold"><img src="{% static 'frontend/assets/images/icon/activism.png' %}" class="img-fluid"> Donate Again</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 pt-5 col-md-12 pe-md-0 text-center position-relative">
+                    <div class="row g-4">
+                        <!-- <a href="#" class="profile-distribution-btn">Explore Distribution ></a> -->
+                        <div class="col-md-3 col-6">
+                            <img src="{% static 'frontend/assets/images/profile/mataji.jpg' %}" class="img-fluid img-dist" alt="">
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <img src="{% static 'frontend/assets/images/profile/mataji-2.jpg' %}" class="img-fluid img-dist" alt="">
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <img src="{% static 'frontend/assets/images/profile/mataji-4.jpg' %}" class="img-fluid img-dist" alt="">
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <img src="{% static 'frontend/assets/images/profile/mataji-3.jpg' %}" class="img-fluid1 img-dist" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container pt-4 pt-md-5 pb-3 pb-md-5">
+            <div class="row login-info justify-content-center">
+                <div class="col-md-10 col-lg-6 text-center">
+                    <h3 class="login-subtitle pt-3">Each donation is an essential help which improves life of widows in
+                        Vrindavan.</h3>
+                </div>
+            </div>
+            <div class="row login-info ">
+                <div class="col-md-4 py-4">
+                    <div class="about-title position-relative text-center">
+                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+                        <h2>10000+</h2>
+                        <h3>Grocery Kits</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 py-4">
+                    <div class="about-title position-relative text-center">
+                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+                        <h2>30000+</h2>
+                        <h3>Blankets</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 py-4">
+                    <div class="about-title position-relative text-center">
+                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
+                        <h2>10000+</h2>
+                        <h3>Widows Impacted</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block script%}
+
+{% endblock %}
