@@ -41,8 +41,8 @@ class DateTimeModel(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_deleted = models.BooleanField(null=False, default=False)
-    is_active = models.BooleanField(null=True, default=True)
+    is_deleted = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     objects = SoftDeleteManager()
     objects_with_deleted = SoftDeleteManager(deleted=True)

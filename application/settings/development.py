@@ -24,9 +24,21 @@ ALLOWED_HOSTS = ['*']
 ##### DATABASE CONFIGURATION ############################
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(PROJECT_ROOT, 'run', 'dev.sqlite3'),
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'mataji-1',
+
+        'USER': 'postgres',
+
+        'PASSWORD': '123456',
+
+        'HOST': 'localhost',
+
+        'PORT': '5432',
+
     }
+
 }
 
 # ##### APPLICATION CONFIGURATION #########################

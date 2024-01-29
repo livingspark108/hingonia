@@ -3,305 +3,702 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
+<section class="pb-5 bg-black">
+        <div class="container">
 
-<!-- Section Banner -->
-  <section class="banner pt-5 pb-4 position-relative overflow-hidden">
-
-    <div class="banner-component banner-left">
-      <img src="{% static 'frontend/assets/images/circle.png' %}" class="">
-      <h3 class="">Tax <br>Benefits</h3>
-    </div>
-    <div class="container ">
-      <div class="row justify-content-center ">
-        <div class="col-md-8">
-          <h2 class="banner-title text-center">We are the largest NGO that serves <span>more than 10,000 WIDOWS</span> in Vrindavan
-            <span>every year.</span>
-          </h2>
-          <div class="text-center pt-3">
-            <a href="#" class="btn bg-1 text-white banner-btn"><img src="{% static 'frontend/assets/images/foot.png' %}" width="20"
-                alt="">&nbsp;&nbsp; Help a Mataji</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="banner-component banner-right">
-      <img src="{% static 'frontend/assets/images/circle.png' %}" class="">
-      <h3 class="">100% <br>Transparency</h3>
-    </div>
-
-    <div class="pt-5 mt-5 z-3 position-relative">
-      <img src="{% static 'frontend/assets/images/banner-img.png' %}" class="img-fluid" alt="">
-    </div>
-  </section>
-
-  <section class="py-2 py-md-5 section-collage">
-    <div class="container-fluid">
-      <div class="row">
-
-        <!--Left Div Start-->
-        <div class="col-md-9 pt-3">
-          <div class="row g-3">
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-1.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-2.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-3.png' %}" class="img-fluid" alt="">
-              <div class="collage-desc-box-1">
-                <p class="clg-desc pt-2">Contribute to <span>adopt a Mataji</span> In Vrindavan</p>
-                <a href="#" class="clg-btn">Adopt a Mataji</a>
-              </div>
-            </div>
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-4.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-          <div class="row g-3 pt-3">
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-5.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-6.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-2 col-6 collage-2">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-7.png' %}" class="img-fluid" alt="">
-              <div class="collage-desc-box-2">
-                <p class="clg-desc pt-2">Help Widows with <span>Monthly Medical Care</span></p>
-                <a href="#" class="clg-btn">Donate in<br> Medical Care</a>
-              </div>
-            </div>
-            <div class="col-md-2 col-6 collage-2">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-8.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-2">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-9.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-          <div class="row g-3 pt-3">
-            <div class="col-md-2 col-6 collage-3">
-              <div class="collage-desc-box-3">
-                <p class="clg-desc pt-2"><span>Grocery Kits For Widows</span> In Vrindavan</p>
-                <a href="#" class="clg-btn">Donate Grocerykit</a>
-              </div>
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-10.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-11.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-12.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-13.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-14.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-        </div>
-        <!--Left Div End-->
-
-        <!--Right Div-->
-        <div class="col-md-3 pt-3">
-          <div class="row g-3">
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-15.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-16.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-17.png' %}" class="img-fluid" alt="">
-              <div class="collage-desc-box-4">
-                <p class="clg-desc pt-2"><span>Gift Blanket To Widows</span> In Vrindavan</p>
-                <a href="#" class="clg-btn">Donate Blankets</a>
-              </div>
-            </div>
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-18.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-6">
-
-            </div>
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-19.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-        </div>
-        <!--Right Div End-->
-
-      </div>
-    </div>
-  </section>
-
-
-  <section class="section-number py-4 py-md-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="number-img-box">
-            <img src="{% static 'frontend/assets/images/number.png' %}" class="img-fluid" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="mb-4">
-    <div class="container ">
-      <div class="py-5 section-box section-grocery text-center position-relative">
-        <div class="box-overlay grocery-overlay"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="box-info ">
-              <h2 class="text-white">1,00,000+</h2>
-              <h3 class="text-white">Grocery Kits</h3>
-              <div>
-                <a href="#" class="box-btn grocery-btn bg-2">Contribute & Impact a Life of Mataji</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="mb-4">
-    <div class="container ">
-      <div class="py-5 section-box section-blankets text-center position-relative">
-        <div class="box-overlay blankets-overlay"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="box-info ">
-              <h2 class="text-white">30,000+</h2>
-              <h3 class="text-white">Blankets</h3>
-              <div>
-                <a href="#" class="box-btn blankets-btn bg-3">Contribute & Impact a Life of Mataji</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="mb-4">
-    <div class="container ">
-      <div class="py-5 section-box section-widows text-center position-relative">
-        <div class="box-overlay widows-overlay"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="box-info ">
-              <h2 class="text-white">10,000+</h2>
-              <h3 class="text-white">Widows Impacted</h3>
-              <div>
-                <a href="#" class="box-btn widows-btn bg-4">Contribute & Impact a Life of Mataji</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="py-3 py-md-5 faq">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-10 ">
-          <div class="text-center">
-            <h3 class="section-title">Frequently asked questions</h3>
-            <p class="desc">Everything you need to know about the product and billing.</p>
-          </div>
-
-          <div class="accordion pt-3" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                  aria-expanded="true" aria-controls="collapseOne">
-                  How will my donation be used and distributed?
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>Within a week, we will send you the updates with your name printed on the kits, which are
-                    distributed to matajis.</p>
+            <div class="row g-4">
+                <div class="col-md-6 col-6 pb-5 pb-md-2">
+                    <div class="d-inline-block distribution-dropdown  p-md-4">
+                        <div class="dropdown-center ">
+                            <button class="btn bg-outline dropdown-toggle text-white border-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Month
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-start">
+                                <li><a class="dropdown-item" href="javascript:void(0)">January</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">February</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">March</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <hr class="divider">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Do we get a tax benefit?
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>Yes, all your donations are eligible for tax benefits under 80G. If someone wants a slip, they can
-                    mail it to us.</p>
+                <div class="col-md-6 col-6 pb-5 pb-md-2 text-end">
+                    <div class="d-inline-block distribution-dropdown  p-md-4">
+                        <div class="dropdown-center ">
+                            <button class="btn bg-outline dropdown-toggle text-white border-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Year
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-start">
+                                <li><a class="dropdown-item" href="javascript:void(0)">2022</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">2021</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0)">2020</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <hr class="divider">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  How many widows' lives have been impacted?
-                </button>
-              </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>We have adopted 1,000 widows, to whom monthly grocery kits, milk, and basic medical facilities are
-                    provided. Apart from it, we distribute groceries in janmashtami and blankets in winter to 10000+
-                    widows.</p>
-                </div>
-              </div>
-            </div>
-            <hr class="divider">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                  What is there in grocery kits?
-                </button>
-              </h2>
-              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>5 kg basmati rice, 1 liter mustard oil, 1 kg rock salt, 1 kg pulse, 1 haldi packet, and 1 cup
-                    washing powder.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+            <div class="row ">
+                <div class="col-md-12">
 
-        </div>
-      </div>
-    </div>
-  </section>
+                    <!----- Web view Start ------->
+                    <div class="swiper mySwiper p-md-4 d-none d-md-block swiper-initialized swiper-vertical swiper-backface-hidden">
+                        <div class="swiper-wrapper" id="swiper-wrapper-15be8d3ae9594103e" aria-live="polite">
 
-  <section class="py-3 py-md-5 get-in-touch">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <img src="{% static 'frontend/assets/images/avatar.png' %}" class="img-fluid" alt="avatar">
-          <h4 class="pt-3">Still have questions?</h4>
-          <p class="desc">Can’t find the answer you’re looking for? Please chat to our friendly team.</p>
-          <a href="#" class="btn bg-1 text-white ms-2 rounded">Get in touch</a>
+                            <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 2" style="height: 602px;">
+                                <div class="row g-5">
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/1.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Mataji Adoption</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>13/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/2.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Grocery Kit Donation</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>14/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/3.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Medical Care</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>15/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/4.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Blanket Donation</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>16/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/1.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Mataji Adoption</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>13/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/2.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Grocery Kit Donation</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>14/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/3.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Medical Care</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>15/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/4.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Blanket Donation</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>16/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 2" style="height: 602px;">
+                                <div class="row g-5">
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/1.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Mataji Adoption</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>13/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/2.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Grocery Kit Donation</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>14/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/3.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Medical Care</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>15/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/4.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Blanket Donation</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>16/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/1.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Mataji Adoption</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>13/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/2.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Grocery Kit Donation</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>14/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/3.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Medical Care</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>15/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="event-details.php">
+                                            <div class="gallery-box">
+                                                <img src="assets/images/distribution/4.jpg" class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12">
+                                                            <h3>Blanket Donation</h3>
+                                                            <p>13:43 p.m.</p>
+                                                            <div class="row align-items-center">
+                                                                <div class="col-md-3">
+                                                                    <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                                </div>
+                                                                <div class="col-md-9 text-start">
+                                                                    <h4>16/01/2023</h4>
+                                                                    <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                        Vrindavan
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-vertical"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span></div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div><!--- Swiper slider end--->
+                    <!----- Web view End ---->
+
+
+                    <!---- Mobile view start ----->
+                    <div class="d-block d-md-none">
+                        <div class="row g-5">
+                            <div class="col-md-3 col-6">
+                                <a href="event-details.php">
+                                    <div class="gallery-box">
+                                        <img src="assets/images/distribution/1.jpg" class="img-fluid gallery-img" alt="">
+                                        <div class="gallery-content">
+                                            <div class="row align-items-end h-100">
+                                                <div class="col-12">
+                                                    <h3>Mataji Adoption</h3>
+                                                    <p>13:43 p.m.</p>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                        </div>
+                                                        <div class="col-md-9 text-start">
+                                                            <h4>13/01/2023</h4>
+                                                            <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                Vrindavan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="event-details.php">
+                                    <div class="gallery-box">
+                                        <img src="assets/images/distribution/2.jpg" class="img-fluid gallery-img" alt="">
+                                        <div class="gallery-content">
+                                            <div class="row align-items-end h-100">
+                                                <div class="col-12">
+                                                    <h3>Grocery Kit Donation</h3>
+                                                    <p>13:43 p.m.</p>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                        </div>
+                                                        <div class="col-md-9 text-start">
+                                                            <h4>14/01/2023</h4>
+                                                            <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                Vrindavan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="event-details.php">
+                                    <div class="gallery-box">
+                                        <img src="assets/images/distribution/3.jpg" class="img-fluid gallery-img" alt="">
+                                        <div class="gallery-content">
+                                            <div class="row align-items-end h-100">
+                                                <div class="col-12">
+                                                    <h3>Medical Care</h3>
+                                                    <p>13:43 p.m.</p>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                        </div>
+                                                        <div class="col-md-9 text-start">
+                                                            <h4>15/01/2023</h4>
+                                                            <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                Vrindavan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="event-details.php">
+                                    <div class="gallery-box">
+                                        <img src="assets/images/distribution/4.jpg" class="img-fluid gallery-img" alt="">
+                                        <div class="gallery-content">
+                                            <div class="row align-items-end h-100">
+                                                <div class="col-12">
+                                                    <h3>Blanket Donation</h3>
+                                                    <p>13:43 p.m.</p>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                        </div>
+                                                        <div class="col-md-9 text-start">
+                                                            <h4>16/01/2023</h4>
+                                                            <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                Vrindavan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="event-details.php">
+                                    <div class="gallery-box">
+                                        <img src="assets/images/distribution/1.jpg" class="img-fluid gallery-img" alt="">
+                                        <div class="gallery-content">
+                                            <div class="row align-items-end h-100">
+                                                <div class="col-12">
+                                                    <h3>Mataji Adoption</h3>
+                                                    <p>13:43 p.m.</p>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                        </div>
+                                                        <div class="col-md-9 text-start">
+                                                            <h4>13/01/2023</h4>
+                                                            <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                Vrindavan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="event-details.php">
+                                    <div class="gallery-box">
+                                        <img src="assets/images/distribution/2.jpg" class="img-fluid gallery-img" alt="">
+                                        <div class="gallery-content">
+                                            <div class="row align-items-end h-100">
+                                                <div class="col-12">
+                                                    <h3>Grocery Kit Donation</h3>
+                                                    <p>13:43 p.m.</p>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                        </div>
+                                                        <div class="col-md-9 text-start">
+                                                            <h4>14/01/2023</h4>
+                                                            <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                Vrindavan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="event-details.php">
+                                    <div class="gallery-box">
+                                        <img src="assets/images/distribution/3.jpg" class="img-fluid gallery-img" alt="">
+                                        <div class="gallery-content">
+                                            <div class="row align-items-end h-100">
+                                                <div class="col-12">
+                                                    <h3>Medical Care</h3>
+                                                    <p>13:43 p.m.</p>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                        </div>
+                                                        <div class="col-md-9 text-start">
+                                                            <h4>15/01/2023</h4>
+                                                            <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                Vrindavan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <a href="event-details.php">
+                                    <div class="gallery-box">
+                                        <img src="assets/images/distribution/4.jpg" class="img-fluid gallery-img" alt="">
+                                        <div class="gallery-content">
+                                            <div class="row align-items-end h-100">
+                                                <div class="col-12">
+                                                    <h3>Blanket Donation</h3>
+                                                    <p>13:43 p.m.</p>
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-3">
+                                                            <img src="assets/images/distribution/contribute.png" class="img-fluid con-img" alt="">
+                                                        </div>
+                                                        <div class="col-md-9 text-start">
+                                                            <h4>16/01/2023</h4>
+                                                            <p class="mb-0"><img src="assets/images/distribution/location.png" class="img-fluid" alt=""> Nidhivan,
+                                                                Vrindavan
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!---- Mobile view end ----->
+
+                </div><!--- col-md-12 end--->
+                <div class="col-12 text-center pt-3">
+                    <a href="./" class="fs-3"><i class="text-white">Home</i></a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 {% endblock %}
 {% block script%}
 
