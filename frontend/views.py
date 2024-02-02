@@ -16,7 +16,7 @@ from django.views.generic import CreateView, DeleteView, UpdateView, TemplateVie
 from application.custom_classes import AjayDatatableView, StudentRequiredMixin
 from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG
-from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs
+from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage
 from apps.user.models import TransactionDetails
 from frontend.serializer import TransactionDetailsSerializer
 
@@ -83,10 +83,20 @@ class FrontendCampaignView(View):
 
 class FrontendDistributionView(View):
     def get(self, request):
-
+        distribution_obj = Distribution.objects.all()
         #if request.user.is_authenticated:
-        context = {}
+        context = {'distribution_obj':distribution_obj}
         return render(request, 'frontend/distribution.html', context)
+
+class FrontendDistributionDetailView(View):
+    def get(self, request,pk):
+        distribution_obj = Distribution.objects.get(id=pk)
+
+        distribution_detail_obj = DistributionImage.objects.filter(distribution=pk)
+        #if request.user.is_authenticated:
+        context = {'distribution_detail_obj':distribution_detail_obj,'distribution_obj':distribution_obj}
+        return render(request, 'frontend/distribution_detail.html', context)
+
 
 class FrontendPrivacyPolicyView(View):
     def get(self, request):

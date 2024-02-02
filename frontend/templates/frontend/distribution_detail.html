@@ -1,0 +1,88 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<style>
+	.sticky-header{
+		display:none;
+	}
+</style>
+<section class="bg-black">
+		<section class="pt-5">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-12 text-center">
+	                    <a
+			                    href="/"><img src="{% static 'frontend/assets/images/distribution/logo-light.png' %}"
+	                                           class="img-fluid"
+	                                           alt=""></a>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 py-3 text-center text-md-start">
+                    <h2 class="text-white">{{distribution_obj.title}}</h2>
+                    <p class="mb-0 text-white"><img src="frontend/assets/images/distribution/location.png"
+                                                    class="img-fluid" alt="">
+                        {{distribution_obj.location}}
+                    </p>
+                </div>
+                <div class="col-md-4 py-3 text-center">
+                    <img src="{% static 'frontend/assets/images/campaign/contribute.png' %}" width="80"
+                         class="img-fluid"
+                         alt="">
+                </div>
+                <div class="col-md-4 py-3 text-center text-md-end">
+                    <h4 class="text-white">{{distribution_obj.date}}</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="photo-gallery pt-3 bg-black">
+        <div class="container">
+            <div class="row pb-4 g-4 gallery-grid">
+	            {% for single in distribution_detail_obj %}
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="{{single.image.url}}">
+                        <img src="{{single.image.url}}" class="img-fluid" alt="Mataji Adoption">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="row pb-3">
+                <div class="col-12 text-center pt-3">
+                    <a href="./" class="fs-3"><i class="text-white">Home</i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+<div class="modal fade lightbox-modal" id="lightbox-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+            <div class="modal-content">
+                <button type="button" class="btn-fullscreen-enlarge" aria-label="Enlarge fullscreen">
+                    <svg class="bi">
+                        <use href="#enlarge"></use>
+                    </svg>
+                </button>
+                <button type="button" class="btn-fullscreen-exit d-none" aria-label="Exit fullscreen">
+                    <svg class="bi">
+                        <use href="#exit"></use>
+                    </svg>
+                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <div class="lightbox-content">
+                        <!-- JS content here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script%}
+
+{% endblock %}

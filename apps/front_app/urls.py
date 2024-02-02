@@ -39,6 +39,15 @@ urlpatterns = [
     path('ourteam/edit/<str:pk>', UpdateOurTeamView.as_view(), name='ourteam-edit'),
     path('ourteam/delete/<str:pk>', DeleteOurTeamView.as_view(), name='ourteam-delete'),
 
+    #Distribution
+
+    path('distribution/add', CreateDistributionView.as_view(), name='distribution-add'),
+    path('distribution/', ListDistributionView.as_view(), name='distribution-list'),
+    path('distribution/list/ajax', ListDistributionViewJson.as_view(), name='distribution-list-ajax'),
+    path('distribution/edit/<str:pk>', UpdateDistributionView.as_view(), name='distribution-edit'),
+    path('distribution/delete/<str:pk>', DeleteDistributionView.as_view(), name='distribution-delete'),
+
+
     #""" Update About us """
 
     path('update-about-us/', UpdateAboutUsView.as_view(), name='update-about-us'),

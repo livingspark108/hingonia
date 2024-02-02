@@ -32,3 +32,17 @@ class AboutUs(DateTimeModel):
 
 
 
+
+
+class Distribution(DateTimeModel):
+    title = models.CharField(max_length=300, blank=False)
+    date = models.DateField(max_length=2500, null=True, blank=True)
+    location = models.CharField(max_length=300, blank=False)
+
+    def __str__(self):
+        return self.title
+
+class DistributionImage(DateTimeModel):
+    image = models.ImageField(upload_to='distribution_images/')
+    distribution = models.ForeignKey(Distribution, blank=True, null=True, on_delete=models.CASCADE,
+                                 related_name='distribution_image')

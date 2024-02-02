@@ -1,0 +1,59 @@
+{% extends "administrator/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-sm-6">
+                                    <h4 class="page-title">Distribution List</h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-right">
+                                      <li> <button class="btn btn-primary"><a class="text-white"
+                                                                              href="{% url 'distribution-add' %}">Add
+                                                                                                          Distribution</a></button></li>
+
+                                    </ol>
+                                </div>
+                            </div> <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                        <table id="datatable" class="table table-hover dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th class="no-sort"></th>
+                                            </tr>
+                                            </thead>
+
+
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                    </div>
+                    <div  class="modal fade">
+                          <form id="model-form-delete" action="" method="post" >
+                          {% csrf_token %}
+                            <button type="submit" class="btn btn-danger"></button>
+                          </form>
+                    </div>
+                    <!-- container-fluid -->
+                    <input type="hidden" name="list_page_url" id="list_page_url"
+                           value="{% url 'distribution-list-ajax' %}">
+
+                </div>
+{% endblock %}

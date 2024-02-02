@@ -21,6 +21,7 @@ urlpatterns = [
     path('our-mothers', FrontendOurMotherView.as_view(), name='our-mothers'),
     path('campaign', FrontendCampaignView.as_view(), name='campaign'),
     path('distribution', FrontendDistributionView.as_view(), name='distribution'),
+    path('distribution/<str:pk>', FrontendDistributionDetailView.as_view(), name='distribution_detail'),
     path('my-donation', FrontendDonationView.as_view(), name='my-donation'),
     path('profile', FrontendProfileView.as_view(), name='profile'),
     path('user-login', FrontendLoginView.as_view(), name='user-login'),
