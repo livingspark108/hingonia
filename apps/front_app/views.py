@@ -13,6 +13,8 @@ from apps.front_app.forms import CreateDistributionForm, DistributionImageFormse
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution
 from django.contrib import messages
 
+from apps.user.models import TransactionDetails
+
 
 class CreateCampaignView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
 
@@ -136,6 +138,21 @@ class ListOurTeamView(AdminRequiredMixin, TemplateView):
     model = OurTeam
     template_name = 'ourteam/list.html'
 
+class ListDonationView(AdminRequiredMixin, TemplateView):
+    model = TransactionDetails
+    template_name = 'donation/list.html'
+
+class ListDonationViewJson(AjayDatatableView):
+    model = TransactionDetails
+    columns = ['phone','amount','mode','status','created_at', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def render_column(self, row, column):
+        if column == 'actions':
+
+            return ''
+        else:
+            return super(ListDonationViewJson, self).render_column(row, column)
 
 class ListOurTeamViewJson(AjayDatatableView):
     model = OurTeam

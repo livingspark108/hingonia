@@ -52,5 +52,8 @@ urlpatterns = [
 
     path('update-about-us/', UpdateAboutUsView.as_view(), name='update-about-us'),
 
+    path('donation-list/', ListDonationView.as_view(), name='donation_list'),
+    path('donation-list/ajax', ListDonationViewJson.as_view(), name='donation-list-ajax'),
+
 ]
 
