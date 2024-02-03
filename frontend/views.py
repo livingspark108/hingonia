@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from paywix.payu import Payu
 from rest_framework.generics import *
@@ -84,9 +85,29 @@ class FrontendCampaignView(View):
 class FrontendDistributionView(View):
     def get(self, request):
         distribution_obj = Distribution.objects.all()
+        unique_years_queryset = Distribution.objects.values('date__year').distinct()
+
+        # Extract the years from the queryset
+        unique_years_list = [entry['date__year'] for entry in unique_years_queryset]
+
         #if request.user.is_authenticated:
-        context = {'distribution_obj':distribution_obj}
+        context = {'distribution_obj':distribution_obj,'unique_years_list':unique_years_list}
         return render(request, 'frontend/distribution.html', context)
+
+    def post(self,request):
+        month = request.POST.get('month')
+        year = request.POST.get('year')
+        print(month)
+        print(year)
+        distribution_obj = Distribution.objects.filter(date__month=month, date__year=year)
+        distribution_html = render_to_string('frontend/distribution_html.html',
+                                         {'distribution_obj': distribution_obj})
+        payload = {
+            'distribution_html': distribution_html,
+            'success': 'ok',
+        }
+        return JsonResponse(payload)
+
 
 class FrontendDistributionDetailView(View):
     def get(self, request,pk):
