@@ -87,26 +87,26 @@ class FrontendCampaignView(View):
 class FrontendDistributionView(View):
     def get(self, request):
         distribution_obj = Distribution.objects.all()
-        unique_years_queryset = Distribution.objects.values('date__year').distinct()
+        unique_years_queryset = Distribution.objects.dates('date', 'year', order='DESC')
 
         # Extract the years from the queryset
-        unique_years_list = [entry['date__year'] for entry in unique_years_queryset]
+        unique_years_list = [entry.year for entry in unique_years_queryset]
 
-        #if request.user.is_authenticated:
-        context = {'distribution_obj':distribution_obj,'unique_years_list':unique_years_list}
+        context = {'distribution_obj': distribution_obj, 'unique_years_list': unique_years_list}
         return render(request, 'frontend/distribution.html', context)
 
-    def post(self,request):
+    def post(self, request):
         month = request.POST.get('month')
         year = request.POST.get('year')
         distribution_obj = Distribution.objects.filter(date__month=month, date__year=year)
         distribution_html = render_to_string('frontend/distribution_html.html',
-                                         {'distribution_obj': distribution_obj})
+                                             {'distribution_obj': distribution_obj})
         payload = {
             'distribution_html': distribution_html,
             'success': 'ok',
         }
         return JsonResponse(payload, safe=False)
+
 
 
 class FrontendDistributionDetailView(View):
