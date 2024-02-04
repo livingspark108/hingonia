@@ -2,19 +2,18 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from .models import *
-from apps.student.models import *
 from django.forms.models import inlineformset_factory
 
 
-class StudentUploadContent1(forms.ModelForm):
 
-    class Meta:
-        model = StudentUploadContent1
-        fields = ['student', 'week', 'challenge', 'challenge_instruction', 'file_1']
+class SetPasswordForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
 
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
 
-class StudentUploadContent2(forms.ModelForm):
-
-    class Meta:
-        model = StudentUploadContent1
-        fields = ['student', 'week', 'challenge', 'challenge_instruction', 'file_2']
+        if password != confirm_password:
+            raise forms.ValidationError("Passwords do not match.")

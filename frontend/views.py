@@ -2,6 +2,7 @@ import random
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse, HttpResponseRedirect
@@ -19,6 +20,7 @@ from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage
 from apps.user.models import TransactionDetails
+from frontend.forms import SetPasswordForm
 from frontend.serializer import TransactionDetailsSerializer
 
 User = get_user_model()
@@ -97,8 +99,6 @@ class FrontendDistributionView(View):
     def post(self,request):
         month = request.POST.get('month')
         year = request.POST.get('year')
-        print(month)
-        print(year)
         distribution_obj = Distribution.objects.filter(date__month=month, date__year=year)
         distribution_html = render_to_string('frontend/distribution_html.html',
                                          {'distribution_obj': distribution_obj})
@@ -106,7 +106,7 @@ class FrontendDistributionView(View):
             'distribution_html': distribution_html,
             'success': 'ok',
         }
-        return JsonResponse(payload)
+        return JsonResponse(payload, safe=False)
 
 
 class FrontendDistributionDetailView(View):
@@ -211,7 +211,8 @@ class FrontendDonationView(View):
 #Thank you page
 class FrontendThankYouView(View):
     def get(self, request):
-        context = {}
+        form = SetPasswordForm()
+        context = {'form':form}
         return render(request, 'frontend/thank_you.html', context)
 
 # Payment gateway
@@ -323,3 +324,20 @@ class PayuFailureAPiView(GenericAPIView):
         response = payu.verify_transaction(data)
 
         return JsonResponse(response)
+
+@login_required
+def set_password(request):
+    if request.method == 'POST':
+        form = SetPasswordForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.is_password_save = True
+            user.save()
+            messages.success(request, 'Password set successfully.')
+            return redirect('thank-you')  # Redirect to the user's profile page or wherever you want
+    else:
+        form = SetPasswordForm()
+
+    return render(request, 'frontend/thank_you.html', {'form': form})

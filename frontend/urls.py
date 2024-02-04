@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.urls import path, include
 from frontend.views import *
+
 urlpatterns = [
     path('', FrontendHomeView.as_view(), name='home'),
     path('about-us', FrontendAboutUsView.as_view(), name='about-us'),
@@ -35,6 +36,7 @@ urlpatterns = [
     path('thank-you', FrontendThankYouView.as_view(), name='thank-you'),
     path('payment_response_handler/', PayuSuccessAPiView.as_view(), name='payu-success-api'),
     path('payment_response_handler/', PayuFailureAPiView.as_view(), name='payu-failed-api'),
+    path('set_password/', set_password, name='set_password'),
 
 ]
 
