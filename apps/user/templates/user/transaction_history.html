@@ -8,7 +8,7 @@
                         <div class="page-title-box">
                             <div class="row align-items-center">
                                 <div class="col-sm-6">
-                                    <h4 class="page-title">User List</h4>
+                                    <h4 class="page-title">Transaction Detail</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-right">
@@ -38,12 +38,11 @@
                                         <table id="datatable" class="table table-hover dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Username</th>
-                                                <th>Email</th>
+                                                <th>Transaction ID</th>
+                                                <th>Mode</th>
                                                 <th>Status</th>
-                                                <th class="no-sort"></th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
                                             </tr>
                                             </thead>
 
@@ -65,7 +64,8 @@
                           </form>
                     </div>
                     <!-- container-fluid -->
-                    <input type="hidden" name="list_page_url" id="list_page_url" value="{% url 'user-list-ajax' %}">
+                    <input type="hidden" name="list_page_url" id="list_page_url"
+                           value="{% url 'transaction-detail-ajax' %}">
 
                 </div>
 {% endblock %}

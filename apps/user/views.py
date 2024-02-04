@@ -11,6 +11,7 @@ from django.views import View
 from django.views.generic import CreateView, DeleteView, UpdateView, TemplateView
 from application.custom_classes import AjayDatatableView
 from apps.user.forms import CreateUserForm, EditUserForm
+from apps.user.models import TransactionDetails
 
 User = get_user_model()
 
@@ -42,7 +43,7 @@ class ListUserViewJson(AjayDatatableView):
     # extra_search_columns = ['']
 
     def get_initial_queryset(self):
-        return self.model.objects.filter(is_superuser=False).filter(type='admin')
+        return self.model.objects.filter(is_superuser=False).filter(type='devotee')
 
     def render_column(self, row, column):
         if column == 'is_active':
@@ -54,11 +55,37 @@ class ListUserViewJson(AjayDatatableView):
         if column == 'actions':
             edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
                 reverse('user-edit', kwargs={'pk': row.pk}))
-            delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
-                reverse('user-delete', kwargs={'pk': row.pk}))
-            return edit_action + delete_action
+            view_detail = '<a href={} role="button" class="btn btn-primary btn-sm mr-1">View Transaction</a>'.format(
+                reverse('transaction-detail-list', kwargs={'pk': row.pk}))
+            return edit_action + view_detail
         else:
             return super(ListUserViewJson, self).render_column(row, column)
+
+
+class ListTransactionDetailView(LoginRequiredMixin, TemplateView):
+    template_name = 'user/transaction_history.html'
+
+
+class ListTransactionDetailViewJson(AjayDatatableView):
+    model = TransactionDetails
+    columns = ['mihpayid', 'mode', 'status', 'amount', 'created_at']
+    exclude_from_search_cloumn = ['actions']
+    # extra_search_columns = ['']
+
+    def get_initial_queryset(self):
+        return self.model.objects.all()
+
+    def render_column(self, row, column):
+        if column == 'is_active':
+            if row.is_active:
+                return '<span class="badge badge-success">Active</span>'
+            else:
+                return '<span class="badge badge-danger">Inactive</span>'
+
+        if column == 'actions':
+            return ""
+        else:
+            return super(ListTransactionDetailViewJson, self).render_column(row, column)
 
 
 class DeleteUserView(LoginRequiredMixin, DeleteView):

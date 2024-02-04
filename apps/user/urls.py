@@ -20,8 +20,10 @@ from apps.user.views import *
 urlpatterns = [
     path('add', CreateUserView.as_view(), name='user-add'),
     path('', ListUserView.as_view(), name='user-list'),
+    path('transaction/<str:pk>', ListTransactionDetailView.as_view(), name='transaction-detail-list'),
     path('list/ajax', ListUserViewJson.as_view(), name='user-list-ajax'),
+    path('transaction_list/ajax', ListTransactionDetailViewJson.as_view(), name='transaction-detail-ajax'),
     path('edit/<int:pk>', UpdateUserView.as_view(), name='user-edit'),
-    path('delete/<int:pk>', DeleteUserView.as_view(), name='user-delete'),
+    path('delete/<str:pk>', DeleteUserView.as_view(), name='user-delete'),
 ]
 

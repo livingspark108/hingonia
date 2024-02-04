@@ -273,6 +273,7 @@ class PayuSuccessAPiView(GenericAPIView):
 
         if serializer.is_valid():
             instance = serializer.save()
+            print(instance)
             user_obj = User.objects.filter(username=instance.phone).first()
             if not user_obj:
                 user_obj = User.objects.create_user(first_name=instance.firstname,type='devotee',username=instance.phone, email='bhavanshu@icloud.com',
