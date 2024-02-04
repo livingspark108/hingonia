@@ -51,6 +51,8 @@ urlpatterns = [
     #""" Update About us """
 
     path('update-about-us/', UpdateAboutUsView.as_view(), name='update-about-us'),
+    path('setting/', UpdateSettingView.as_view(), name='setting'),
+    path('whatsapp/', WhatsAppDashboardView.as_view(), name='whatsapp'),
 
     path('donation-list/', ListDonationView.as_view(), name='donation_list'),
     path('donation-list/ajax', ListDonationViewJson.as_view(), name='donation-list-ajax'),

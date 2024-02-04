@@ -5,12 +5,14 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 
+from application.email_helper import WhatsAppThread
 from apps.cms.models import Page
 from application.custom_classes import AdminRequiredMixin, AjayDatatableView
 from apps.front_app.forms import CreateDistributionForm, DistributionImageFormset
-from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution
+from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, Setting
 from django.contrib import messages
 
 from apps.user.models import TransactionDetails
@@ -192,8 +194,18 @@ class DeleteOurTeamView(AdminRequiredMixin, DeleteView):
         payload = {'delete': 'ok'}
         return JsonResponse(payload)
 
+#Update Setting
 
 # Update About us view
+class UpdateSettingView(CreateView, UpdateView):
+    model = Setting
+    fields = ['whatsapp_key']
+    template_name = 'setting/form.html'  # Provide the path to your template
+    success_url = reverse_lazy('setting')  # Specify the URL to redirect after successful creation or update
+
+    def get_object(self, queryset=None):
+        # If an object already exists, it's an update; otherwise, it's a create
+        return Setting.objects.first()
 
 class UpdateAboutUsView(CreateView, UpdateView):
     model = AboutUs
@@ -320,3 +332,36 @@ class DeleteDistributionView(AdminRequiredMixin, DeleteView):
         self.get_object().delete()
         payload = {'delete': 'ok'}
         return JsonResponse(payload)
+
+
+#Send whatsapp
+class WhatsAppDashboardView(AdminRequiredMixin, View):
+    def get(self, request):
+        customer_number = TransactionDetails.objects.values_list('phone',flat=True).distinct()
+
+        customer_number = [string for string in customer_number if len(string) >= 10 and string.isdigit()]
+
+        all_number = set(customer_number)
+        context = {
+            'all_number':all_number
+        }
+        return render(request, 'setting/whatsapp_dashboard.html', context)
+
+    def post(self, request):
+        all_contact = request.POST.getlist('contact_number')
+        message = request.POST.get('message')
+        setting_obj = Setting.objects.first()
+
+        if setting_obj.whatsapp_key:
+            key = setting_obj.whatsapp_key
+            for single in all_contact:
+                msg = message
+                sssss_url = "https://web.cloudwhatsapp.com/wapp/api/send?apikey=" + str(key) + "&mobile=" + str(
+                    single) + "&msg=" + msg
+                try:
+                    WhatsAppThread(sssss_url).start()
+                except:
+                    pass
+
+
+        return HttpResponseRedirect(reverse('whatsapp'))

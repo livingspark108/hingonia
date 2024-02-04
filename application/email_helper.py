@@ -1,4 +1,5 @@
 from django.conf import settings
+import requests
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -48,3 +49,12 @@ class EmailThread(threading.Thread):
         msg = EmailMultiAlternatives(self.subject, text_content, from_email, [self.to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
+
+
+class WhatsAppThread(threading.Thread):
+    def __init__(self, sssss_url):
+        self.sssss_url = sssss_url
+        threading.Thread.__init__(self)
+
+    def run(self):
+        response = requests.request("GET", self.sssss_url)

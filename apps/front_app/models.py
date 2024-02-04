@@ -46,3 +46,7 @@ class DistributionImage(DateTimeModel):
     image = models.ImageField(upload_to='distribution_images/')
     distribution = models.ForeignKey(Distribution, blank=True, null=True, on_delete=models.CASCADE,
                                  related_name='distribution_image')
+
+
+class Setting(DateTimeModel):
+    whatsapp_key = models.CharField(max_length=1000, blank=True,null=True)

@@ -1,0 +1,76 @@
+{% extends "administrator/base.html" %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-sm-6">
+                                    <h4 class="page-title">WhatsApp Dashboard</h4>
+                                </div>
+
+                            </div> <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+	                                    
+                                      <form class="form-horizontal m-t-30" method="POST">
+	                                      {% csrf_token %}
+										  <div id="div_id_first_name" class="form-group row  ">
+												<label for="customer_list" class="col-sm-2 col-form-label"><label
+														for="id_customer_list">Customer List:</label></label>
+												<div class="col-sm-10">
+													<select name="contact_number" class="customer_list form-control"
+													        multiple>
+														{% for single in all_number %}
+														<option value="{{single}}" selected>{{single}}</option>
+														{% endfor %}
+													</select>
+												</div>
+										  </div>
+	                                      <div id="div_id_first_name" class="form-group row  ">
+												<label for="first_name" class="col-sm-2 col-form-label"><label
+														for="id_first_name">Message:</label></label>
+												<div class="col-sm-10">
+													<textarea name="message" class="form-control"></textarea>
+												</div>
+										  </div>
+	                                      
+
+                                          <button type="submit" class="btn btn-primary">Submit</button>
+                                          <button type="reset" class="btn btn-secondary">Reset</button>
+                                          <button type="cancel" class="btn btn-danger"><a id="cancel"
+                                                                                          class="text-white"
+                                                                                          href="{% url 'whatsapp' %}">
+	                                          Cancel</a></button>
+                                      </form>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+{% endblock %}
+
+{% block script%}
+<script>
+$(function() {
+        var params = new window.URLSearchParams(window.location.search);
+        if (params.get('redirect')){
+              $("#cancel").attr("href", params.get('redirect'));
+          }
+});
+  $(".customer_list").select2({
+  tags: true
+});
+</script>
+{% endblock %}
