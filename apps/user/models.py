@@ -13,7 +13,7 @@ class User(AbstractUser):
     city = models.CharField(null=True,blank=True,max_length=200)
     pincode = models.CharField(null=True,blank=True,max_length=200)
     email = models.EmailField(_('email address'), blank=False)
-    is_password_save = models.BooleanField(default=False,null=True)
+    is_password_save = models.BooleanField(default=False)
 
 
 
