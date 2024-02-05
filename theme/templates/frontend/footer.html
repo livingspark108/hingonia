@@ -73,7 +73,7 @@
 	                {% get_campain_data as all_campain %}
 	                {% for single in all_campain %}
                     <a
-		                    data-amount="{{single.price}}"
+		                    data-name="{{single.short_title}}" data-amount="{{single.price}}"
                        data-img="{% get_media_prefix %}{{single.campaign_image}}"
                        class="pop-up-donate flex-sm-fill text-sm-center nav-link {% if forloop.first %}active{% endif %}" aria-current="page"
                        href="#"
@@ -86,7 +86,7 @@
             </div>
 	        <form action="{% url 'pay' %}" method="post">
 		        {% csrf_token %}
-		        <input type="hidden" value="{{all_campain.first.short_title}}" name="title">
+		        <input type="hidden" class="title" value="{{all_campain.first.short_title}}" name="title">
             <div class="modal-body">
 
                 <div class="row ">
@@ -207,8 +207,10 @@
 	$(document).on("click",".pop-up-donate",function() {
 		var img = $(this).attr('data-img')
 		var amt = $(this).attr('data-amount')
+		var title = $(this).attr('data-name')
 		$('.amt').html(amt)
 		$('.amt_vl').val(amt)
+		$('.title').val(title)
 		$('.cm-mataji-img').attr('src',img)
 	})
 	
