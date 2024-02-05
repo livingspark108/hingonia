@@ -258,6 +258,8 @@ class PayuSuccessAPiView(GenericAPIView):
 
     serializer_class = TransactionDetailsSerializer
 
+    def get(self,request):
+        return redirect('home')
 
     def post(self, request):
 
@@ -307,6 +309,8 @@ class PayuFailureAPiView(GenericAPIView):
 
        """
 
+    def get(self,request):
+        return redirect('home')
 
     @csrf_exempt
 
