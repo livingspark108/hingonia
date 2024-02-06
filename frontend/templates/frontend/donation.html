@@ -40,7 +40,8 @@
                                     </td>
                                     <td><a href="#"><u class="color-2 fw-semibold f-14">{{i.mode}}</u></a></td>
                                     <td>
-                                        <a href="#" class="btn bg-1 text-white fw-bold w-100">
+                                        <a href="{% url 'request-80g' i.id %}"
+                                           class="btn bg-1 text-white fw-bold w-100">
                                             <img src="{% static 'frontend/assets/images/icon/download.png' %}"
                                                  class="img-fluid"><br>Download
                                             80G</a>

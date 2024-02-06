@@ -65,6 +65,16 @@ class ListUserViewJson(AjayDatatableView):
 class ListTransactionDetailView(LoginRequiredMixin, TemplateView):
     template_name = 'user/transaction_history.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get the ID from the URL parameters or request data
+        transaction_id = self.kwargs.get('pk')  # Assuming 'id' is passed as a URL parameter
+
+        # Add the transaction_id to the context
+        context['transaction_id'] = transaction_id
+
+        return context
 
 class ListTransactionDetailViewJson(AjayDatatableView):
     model = TransactionDetails
@@ -73,7 +83,9 @@ class ListTransactionDetailViewJson(AjayDatatableView):
     # extra_search_columns = ['']
 
     def get_initial_queryset(self):
-        return self.model.objects.all()
+        id = self.kwargs['pk']
+        user_obj = User.objects.get(id=id)
+        return self.model.objects.filter(phone=user_obj.username)
 
     def render_column(self, row, column):
         if column == 'is_active':
@@ -95,4 +107,8 @@ class DeleteUserView(LoginRequiredMixin, DeleteView):
         self.get_object().delete()
         payload = {'delete': 'ok'}
         return JsonResponse(payload)
+
+
+
+
 

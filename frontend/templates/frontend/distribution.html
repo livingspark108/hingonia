@@ -14,9 +14,11 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <a
-		                    href="./"><img src="{% static 'frontend/assets/images/distribution/logo-light.png' %}"
+		                    href="./">
+	                    <img src="{% static 'frontend/assets/images/distribution/logo-light.png' %}"
                                            class="img-fluid"
-                                           alt=""></a>
+                                           alt="">
+                    </a>
                 </div>
             </div>
         </div>
@@ -84,7 +86,13 @@
                                                             <p>{{single.date}}.</p>
                                                             <div class="row align-items-center">
                                                                 <div class="col-md-3">
+	                                                                {% if single.icon %}
+                                                                    <img
+		                                                                    src="{% get_media_prefix %}{{single.icon}}"
+		                                                                    class="img-fluid con-img" alt="">
+                                                                    {% else %}
                                                                     <img src="{% static 'frontend/assets/images/distribution/contribute.png' %}" class="img-fluid con-img" alt="">
+	                                                                {% endif %}
                                                                 </div>
                                                                 <div class="col-md-9 text-start">
                                                                     <h4>{{single.date}}</h4>
@@ -124,9 +132,13 @@
                                                     <h3>{{single.title}}</h3>
                                                     <p>{{single.date}}.</p>
                                                     <div class="row align-items-center">
-                                                        <div class="col-md-3">
-                                                            <img src="{% static 'frontend/assets/images/distribution/contribute.png' %}" class="img-fluid con-img" alt="">
-                                                        </div>
+                                                        {% if single.icon %}
+                                                        <img
+                                                                src="{% get_media_prefix %}{{single.icon}}"
+                                                                class="img-fluid con-img" alt="">
+                                                        {% else %}
+                                                        <img src="{% static 'frontend/assets/images/distribution/contribute.png' %}" class="img-fluid con-img" alt="">
+                                                        {% endif %}
                                                         <div class="col-md-9 text-start">
                                                             <h4>{{single.date}}</h4>
                                                             <p class="mb-0"><img src="{% static 'frontend/assets/images/distribution/location.png' %}" class="img-fluid" alt="">

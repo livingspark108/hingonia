@@ -13,7 +13,7 @@ class CreateDistributionForm(forms.ModelForm):
 
     class Meta:
         model = Distribution
-        fields = ['title','date','location']
+        fields = ['title','date','location','icon']
 
 
 

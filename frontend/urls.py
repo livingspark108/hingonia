@@ -37,6 +37,7 @@ urlpatterns = [
     path('payment_response_handler/', PayuSuccessAPiView.as_view(), name='payu-success-api'),
     path('payment_response_handler/', PayuFailureAPiView.as_view(), name='payu-failed-api'),
     path('set_password/', set_password, name='set_password'),
+    path('request-80g/<str:id>', Request80gView.as_view(), name='request-80g'),
 
 ]
 

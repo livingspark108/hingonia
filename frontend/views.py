@@ -1,13 +1,13 @@
 import random
-
+from datetime import time
 from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string, get_template
 from django.views.decorators.csrf import csrf_exempt
 from paywix.payu import Payu
 from rest_framework.generics import *
@@ -346,3 +346,10 @@ def set_password(request):
         form = SetPasswordForm()
 
     return render(request, 'frontend/thank_you.html', {'form': form})
+
+
+class Request80gView(View):
+    def get(self, request,id):
+        # Get the HTML template
+        transaction_obj = TransactionDetails.objects.get(id=id)
+        return render(request, 'frontend/invoice_80g.html', {'transaction_obj':transaction_obj})

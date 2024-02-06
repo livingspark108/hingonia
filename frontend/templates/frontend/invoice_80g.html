@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+
+    <style type="text/css">
+        /* @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700); */
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
+
+        body,
+        * {
+            color: #3d3d47;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .main-div {
+            width: 700px;
+            border: 2px solid #3d3d47;
+            padding: 20px;
+            margin: auto;
+        }
+
+        h2,
+        h3,
+        h4 {
+            margin: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .title {
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .account-table {
+            border: 2px solid #3d3d47;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .details {
+            font-size: 20px;
+        }
+
+        p {
+            font-weight: 600;
+        }
+
+        .price-box {
+            border: 2px solid;
+            padding: 10px 0;
+            font-size: 30px;
+            font-weight: bold;
+            width: 250px;
+        }
+
+        .price-box span {
+            
+            background-color: #3d3d47;
+            color: #fff;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-div">
+        <h3><u>Donation Receipt</u></h3>
+        <h2 class="title">Pure Devotion Foundation (Regd.)</h2>
+        <table>
+            <tr>
+                <td>116, kastruba Nagar, Gautam Marg, Nirman Nagar Jaipur</td>
+                <td class="text-right">M. 8923598431</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>Regn. No. U85300RJ2021NPL074165</td>
+                <td class="text-right">PAN Number: AALCP8818K</td>
+            </tr>
+        </table>
+        <table class="account-table">
+            <tr>
+                <td><strong>A/c Name : </strong>Pure Devotion Foundation</td>
+                <td class="text-right"><strong>A/c No. : </strong>50200058123055</td>
+            </tr>
+            <tr>
+                <td><strong>Bank Name : </strong>HDFC</td>
+                <td class="text-right"><strong>IFSC : </strong>HDFC0001437</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>Receipt No. <strong>{{transaction_obj.mihpayid}}</strong></td>
+                <td class="text-right">Date: <strong>{{transaction_obj.created_at}}</strong></td>
+            </tr>
+        </table>
+        <p>RECEIVED with thanks from Shri/M/s. : <strong class="details">{{transaction_obj.firstname}}</strong></p>
+        <p>the sum of Rupees : <strong class="details">{{transaction_obj.amount}}</strong> </p>
+        <p>on Account of : <strong class="details">Widows Service</strong></p>
+        <p>Vide Cash/Cheque No. : <strong class="details">{{transaction_obj.mode}}</strong></p>
+        <p>UTR No. : <strong class="details">{{transaction_obj.txnid}}</strong></p>
+        <table>
+            <tr>
+                <td>
+                    <div class="price-box">
+                        <span>Rs.</span> {{transaction_obj.amount}} /-
+                    </div>
+                </td>
+                <td class="text-right">Signature</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

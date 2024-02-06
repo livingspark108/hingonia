@@ -4,7 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md col-12 my-2">
-                <img src="assets/images/pure-devotion-logo.png" width="200" class="img-fluid" alt="">
+                <img src="{% static 'frontend/assets/images/pure-devotion-logo.png' %}" width="200" class="img-fluid"
+                     alt="">
                 <p class="color-2 mt-3 fw-bold">Largest NGO serving more than 10,000 widows in Vrindavan every year.</p>
             </div>
             <div class="col-md col-12 my-2">
@@ -12,14 +13,17 @@
                 <ul class="list-unstyled footer-link">
                     <li class="pb-3">
                         <a href="mailto:contact@thepuredevotion.in" class="fw-semibold"><img
-                                src="assets/images/mail.png" width="20" alt=""> contact@thepuredevotion.in</a>
+                                src="{% static 'frontend/assets/images/mail.png' %}" width="20" alt="">
+	                        contact@thepuredevotion.in</a>
                     </li>
                     <li class="pb-3">
-                        <a href="tel:8923598431" class="fw-semibold"><img src="assets/images/call.png" width="20"
+                        <a href="tel:8923598431" class="fw-semibold"><img
+		                        src="{% static 'frontend/assets/images/call.png' %}" width="20"
                                 alt=""> 89235 98431 &</a> <a href="tel:7221863811" class="fw-semibold">7221863811</a>
                     </li>
                     <li>
-                        <p class="color-2 fw-semibold"><img src="assets/images/home.png" width="20" alt=""> 1st office
+                        <p class="color-2 fw-semibold"><img src="{% static 'frontend/assets/images/home.png' %}"
+                                                            width="20" alt=""> 1st office
                             -116, Gautam Marg, Nirman Nagar, Jaipur-302019</p>
                     </li>
                 </ul>
@@ -72,8 +76,7 @@
                 <nav class="nav nav-pills flex-column flex-sm-row " role="tablist">
 	                {% get_campain_data as all_campain %}
 	                {% for single in all_campain %}
-                    <a
-		                    data-name="{{single.short_title}}" data-amount="{{single.price}}"
+                    <a data-name="{{single.short_title}}" data-amount="{{single.price}}"
                        data-img="{% get_media_prefix %}{{single.campaign_image}}"
                        class="pop-up-donate flex-sm-fill text-sm-center nav-link {% if forloop.first %}active{% endif %}" aria-current="page"
                        href="#"

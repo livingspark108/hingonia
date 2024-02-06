@@ -98,11 +98,11 @@ $(document).ready(function () {
   $('.section-number').hover(
     function () {
       // Mouseenter event handler
-      $(this).find('img').attr('src', 'assets/images/number-hover.png'); // Change the 'src' attribute of the 'img' tag inside the hovered '.collage-1' element to 'new-image-src.jpg'
+      $(this).find('img').attr('src', '/static/frontend/assets/images/number-hover.png'); // Change the 'src' attribute of the 'img' tag inside the hovered '.collage-1' element to 'new-image-src.jpg'
     },
     function () {
       // Mouseleave event handler (optional)
-      $(this).find('img').attr('src', 'assets/images/number.png'); // Change the 'src' attribute of the 'img' tag inside the hovered '.collage-1' element back to its original value ('original-image-src.jpg')
+      $(this).find('img').attr('src', '/static/frontend/assets/images/number.png'); // Change the 'src' attribute of the 'img' tag inside the hovered '.collage-1' element back to its original value ('original-image-src.jpg')
     }
   );
 });

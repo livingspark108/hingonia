@@ -38,6 +38,8 @@ class Distribution(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
     date = models.DateField(max_length=2500, null=True, blank=True)
     location = models.CharField(max_length=300, blank=False)
+    icon = models.ImageField(upload_to='distribution_icon/',null=True,blank=True)
+
 
     def __str__(self):
         return self.title
