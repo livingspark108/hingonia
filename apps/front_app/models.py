@@ -10,6 +10,9 @@ class Mother(DateTimeModel):
     description = models.TextField(max_length=2500, null=True, blank=True)
     mother_image = models.ImageField(upload_to='mother_images', max_length=1000,null=True,blank=True)
 
+    title_hindi = models.CharField(max_length=300, blank=False, null=True)
+    description_hindi = models.TextField(max_length=2500, null=True, blank=True)
+
 class Campaign(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
     short_title = models.CharField(max_length=300, blank=False,null=True)

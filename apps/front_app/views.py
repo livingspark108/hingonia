@@ -75,7 +75,7 @@ class DeleteCampaignView(AdminRequiredMixin, DeleteView):
 class CreateMotherView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
 
     model = Mother
-    fields = ['title', 'description','mother_image']
+    fields = ['title','title_hindi', 'description', 'description_hindi','mother_image']
     template_name = 'mother/form.html'
     success_message = "%(title)s has been created successfully"
     success_url = reverse_lazy('mother-list')
