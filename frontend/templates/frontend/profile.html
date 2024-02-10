@@ -34,10 +34,10 @@
                             </div>
                             <div class="col-md-3 mb-3">
 	                            <select placeholder="City" name="city" type="text" class="form-control" >
-		                            {% for single in cities %}
 		                            {% if request.user.city == '' or request.user.city == 'None' %}
 		                            <option value="">Select City</option>
 		                            {% endif %}
+		                            {% for single in cities %}
 		                            <option value="{{single}}" {% if request.user.city == single %}selected{% endif %}>{{single}}</option>
 		                            {% endfor %}
 	                            </select>

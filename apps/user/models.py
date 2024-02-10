@@ -71,3 +71,5 @@ class TransactionDetails(DateTimeModel):
     cardhash = models.CharField(max_length=255, null=True, blank=True)
     issuing_bank = models.CharField(max_length=255, null=True, blank=True)
     card_type = models.CharField(max_length=255, null=True, blank=True)
+    is_80g_request = models.BooleanField(default=False)
+    is_80g_request_approve = models.BooleanField(default=False)

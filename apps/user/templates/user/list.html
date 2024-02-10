@@ -15,18 +15,17 @@
                                     
                                     </ol>
                                 </div>
-<!--                              <div class="btn-group col-sm-6">-->
-<!--                                 <ol class="breadcrumb float-right">-->
-<!--                                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Primary</button>-->
-<!--                                  <div class="dropdown-menu">-->
-<!--                                      <a class="dropdown-item" href="#">Action</a>-->
-<!--                                      <a class="dropdown-item" href="#">Another action</a>-->
-<!--                                      <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                                      <div class="dropdown-divider"></div>-->
-<!--                                      <a class="dropdown-item" href="#">Separated link</a>-->
-<!--                                  </div>-->
-<!--                                 </ol>-->
-<!--                              </div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+                              <div class="btn-group col-sm-6">
+	                              <div class="form-group">
+                                    <select placeholder="City" name="city" type="text" class="city form-control" >
+			                            <option value="">Select City</option>
+	                                    {% for single in cities %}
+			                            <option value="{{single}}">{{single}}</option>
+			                            {% endfor %}
+		                            </select>
+                                    </div>
+                                 
+                              </div><!-- /btn-group -->
                             </div> <!-- end row -->
                         </div>
                         <!-- end page-title -->
@@ -35,13 +34,15 @@
                             <div class="col-12">
                                 <div class="card m-b-30">
                                     <div class="card-body">
-                                        <table id="datatable" class="table table-hover dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <table id="user_datatable" class="table table-hover dt-responsive nowrap"
+                                               style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
-                                                <th>Username</th>
+                                                <th>Phone</th>
                                                 <th>Email</th>
+                                                <th>City</th>
                                                 <th>Status</th>
                                                 <th class="no-sort"></th>
                                             </tr>
@@ -68,4 +69,49 @@
                     <input type="hidden" name="list_page_url" id="list_page_url" value="{% url 'user-list-ajax' %}">
 
                 </div>
+{% endblock %}
+{% block script %}
+<script>
+var ajaxUrl = $('#list_page_url').val();
+  console.log(ajaxUrl);
+    var oTable = $('#user_datatable').DataTable({
+          "pageLength":50,
+          "serverSide": true,
+
+          "ordering": false,
+              columnDefs: [{
+              "width": "20%",
+              orderable: false,
+              targets: "no-sort"
+              }],
+          "language": {
+          "emptyTable": "No data available"
+           },
+          "ajax": { "url": ajaxUrl ,"data": function(data){
+          var city =  $('.city').val();
+          data.city = city;}
+          },
+          "scrollX": true,
+          'select': {
+               'style': 'multi'
+            },
+          "initComplete": function(settings, json){
+                $('#id_count').html(settings.json.recordsTotal);
+           },
+           "columnDefs": [{
+                "targets": [-1],
+                "orderable": false,
+                "className": 'text-right'
+            },{
+                  'targets': 0,
+                  'checkboxes': {
+                     'selectRow': true
+                  }
+               }],
+    });
+
+$(document).on('change', '.city', function() {
+    oTable.draw();
+  });
+</script>
 {% endblock %}

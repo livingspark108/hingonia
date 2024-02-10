@@ -151,6 +151,15 @@ class UserLogoutView(LoginRequiredMixin, View):
         logout(request)
         #return render(request, 'auth/login.html')
         return redirect('home')
+# Request 80G
+class Request80GView(LoginRequiredMixin, View):
+
+    def get(self, request,id):
+        transaction_obj = TransactionDetails.objects.get(id=id)
+        transaction_obj.is_80g_request = True
+        transaction_obj.save()
+        #return render(request, 'auth/login.html')
+        return redirect('my-donation')
 
 
 # Login page
@@ -354,7 +363,7 @@ def set_password(request):
     return render(request, 'frontend/thank_you.html', {'form': form})
 
 
-class Request80gView(View):
+class Download80gView(View):
     def get(self, request,id):
         # Get the HTML template
         transaction_obj = TransactionDetails.objects.get(id=id)

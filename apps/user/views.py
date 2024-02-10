@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
@@ -35,15 +37,31 @@ class UpdateUserView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 class ListUserView(LoginRequiredMixin, TemplateView):
     template_name = 'user/list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        json_file_path = './cities_list.json'
+        with open(json_file_path, 'r') as json_file:
+            cities = json.load(json_file)
+
+        # Add the transaction_id to the context
+        context['cities'] = cities
+        return context
+
 
 class ListUserViewJson(AjayDatatableView):
     model = User
-    columns = ['first_name', 'last_name', 'username', 'email', 'is_active', 'actions']
+    columns = ['first_name', 'last_name', 'username', 'email','city', 'is_active', 'actions']
     exclude_from_search_cloumn = ['actions']
     # extra_search_columns = ['']
 
     def get_initial_queryset(self):
-        return self.model.objects.filter(is_superuser=False).filter(type='devotee')
+        print(self.request.GET.get('city', None))
+        if self.request.GET.get('city', None):
+            city = self.request.GET.get('city', None)
+            return User.objects.filter(city__icontains=city).filter(is_superuser=False).filter(type='devotee').order_by('-id')
+        else:
+            return User.objects.filter(is_superuser=False).filter(type='devotee').order_by('-id')
+
 
     def render_column(self, row, column):
         if column == 'is_active':

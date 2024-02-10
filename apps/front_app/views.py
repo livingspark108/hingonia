@@ -365,3 +365,36 @@ class WhatsAppDashboardView(AdminRequiredMixin, View):
 
 
         return HttpResponseRedirect(reverse('whatsapp'))
+
+
+# 80G request list
+class List80GRequestView(AdminRequiredMixin, TemplateView):
+    model = TransactionDetails
+    template_name = '80gRequest/list.html'
+
+
+# 80G request list ajax
+class List80GRequestViewJson(AjayDatatableView):
+    model = TransactionDetails
+    columns = ['phone','amount','mode','status','created_at', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def get_initial_queryset(self):
+        return TransactionDetails.objects.filter(is_80g_request=True,is_80g_request_approve=False).order_by(
+            '-created_at')
+
+    def render_column(self, row, column):
+        if column == 'actions':
+            approve_action = '<a href={} role="button" class="btn btn-success btn-sm mr-1">Approve</a>'.format(
+                reverse('80g-request-approve', kwargs={'id': row.pk}))
+            return approve_action
+        else:
+            return super(List80GRequestViewJson, self).render_column(row, column)
+
+
+class Apporve80GView(View):
+    def get(self, request,id):
+        transaction_obj = TransactionDetails.objects.get(id=id)
+        transaction_obj.is_80g_request_approve = True
+        transaction_obj.save()
+        return HttpResponseRedirect(reverse_lazy('80g-request-list'))

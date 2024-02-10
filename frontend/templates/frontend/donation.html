@@ -40,11 +40,19 @@
                                     </td>
                                     <td><a href="#"><u class="color-2 fw-semibold f-14">{{i.mode}}</u></a></td>
                                     <td>
-                                        <a href="{% url 'request-80g' i.id %}"
+	                                    {% if not i.is_80g_request %}
+	                                    <a href="{% url 'request-80g' i.id %}" class="btn bg-1 text-white fw-bold w-100">Request 80G</a>
+	                                    {% elif i.is_80g_request_approve %}
+                                        <a href="{% url 'download-80g' i.id %}"
                                            class="btn bg-1 text-white fw-bold w-100">
                                             <img src="{% static 'frontend/assets/images/icon/download.png' %}"
                                                  class="img-fluid"><br>Download
                                             80G</a>
+	                                    {% elif not i.is_80g_request_approve %}
+	                                        <a href="#" class="btn bg-1 text-white fw-bold w-100">
+                                            <img src="{% static 'frontend/assets/images/icon/pending.png' %}" class="img-fluid"><br>Pending
+                                            80G</a>
+	                                    {% endif %}
                                     </td>
                                 </tr>
 	                            {% endfor %}

@@ -57,5 +57,9 @@ urlpatterns = [
     path('donation-list/', ListDonationView.as_view(), name='donation_list'),
     path('donation-list/ajax', ListDonationViewJson.as_view(), name='donation-list-ajax'),
 
+    path('80g-request-list/', List80GRequestView.as_view(), name='80g-request-list'),
+    path('80g-request-approve/<str:id>', Apporve80GView.as_view(), name='80g-request-approve'),
+    path('80g-request-list/ajax', List80GRequestViewJson.as_view(), name='80g-request-list-ajax'),
+
 ]
 
