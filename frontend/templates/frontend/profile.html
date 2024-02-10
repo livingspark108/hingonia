@@ -33,9 +33,14 @@
                                        placeholder="Pincode">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input name="city" type="text" class="form-control"
-                                       value="{{request.user.city|handle_none}}"
-                                       placeholder="City">
+	                            <select placeholder="City" name="city" type="text" class="form-control" >
+		                            {% for single in cities %}
+		                            {% if request.user.city == '' or request.user.city == 'None' %}
+		                            <option value="">Select City</option>
+		                            {% endif %}
+		                            <option value="{{single}}" {% if request.user.city == single %}selected{% endif %}>{{single}}</option>
+		                            {% endfor %}
+	                            </select>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <input type="submit" class="btn bg-1 text-white" value="Save">

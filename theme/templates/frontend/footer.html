@@ -107,12 +107,14 @@
                         <div class="row">
                             <div class="col-6 pb-3">
                                 <label class="form-label text-white">Full Name <span class="text-error">*</span></label>
-                                <input type="text" name="first_name" class="form-control" placeholder="Full name"
+                                <input type="text" value="{{request.user.first_name|handle_none}}" name="first_name"
+                                       class="form-control" placeholder="Full name"
                                        aria-describedby="mobile-addon" required="">
                             </div>
                             <div class="col-6 pb-3">
                                 <label class="form-label text-white">Email <span class="text-error">*</span></label>
-                                <input type="email" name="email" class="form-control" placeholder="Email"
+                                <input type="email" value="{{request.user.email|handle_none}}" name="email"
+                                       class="form-control" placeholder="Email"
                                        aria-describedby="mobile-addon" required="">
                             </div>
                         </div>
@@ -121,7 +123,8 @@
                                 <label class="form-label text-white">Contribute to adopt a Mataji In Vrindavan <span class="text-error">*</span></label>
                                 <div class="input-group mb-1">
                                     <span class="input-group-text" id="mobile-addon">IN</span>
-                                    <input type="number" name="mobile_no" class="form-control"
+                                    <input value="{{request.user.username|handle_none}}" type="number"
+                                           name="mobile_no" class="form-control"
                                            placeholder="+91 00000-00000"
                                            aria-describedby="mobile-addon" required="">
                                 </div>

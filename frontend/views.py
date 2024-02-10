@@ -1,3 +1,4 @@
+import json
 import random
 from datetime import time
 from django.contrib import messages
@@ -187,7 +188,12 @@ class FrontendLoginView(View):
 
 class FrontendProfileView(View):
     def get(self, request):
-        context = {}
+        json_file_path = './cities_list.json'
+
+        with open(json_file_path, 'r') as json_file:
+            cities = json.load(json_file)
+
+        context = {'cities':cities}
         return render(request, 'frontend/profile.html', context)
 
     def post(self,request):
