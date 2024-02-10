@@ -19,7 +19,8 @@ from django.views.generic import CreateView, DeleteView, UpdateView, TemplateVie
 from application.custom_classes import AjayDatatableView, StudentRequiredMixin
 from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG
-from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage
+from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
+    AbandonCart
 from apps.user.models import TransactionDetails
 from frontend.forms import SetPasswordForm
 from frontend.serializer import TransactionDetailsSerializer
@@ -59,7 +60,8 @@ class FrontendAboutUsView(View):
             'mobile_no': mobile_no,
             'message': message
         }
-        send_contact_us(request,['bhavanshu@icloud.com'],context)
+        setting_obj = Setting.objects.first()
+        send_contact_us(request,setting_obj.admin_email,context)
         url = reverse('about-us', kwargs={})
 
         return HttpResponseRedirect(url)
@@ -151,6 +153,26 @@ class UserLogoutView(LoginRequiredMixin, View):
         logout(request)
         #return render(request, 'auth/login.html')
         return redirect('home')
+
+# Save Abandon Cart
+class AbandonView(View):
+
+    def post(self, request):
+        full_name = request.POST.get('full_name')
+        mobile_no = request.POST.get('mobile_no')
+        email = request.POST.get('email')
+        abandon_obj = AbandonCart.objects.filter(mobile_no=mobile_no).first()
+        if not abandon_obj:
+            abandon_obj = AbandonCart()
+            abandon_obj.full_name = full_name
+            abandon_obj.mobile_no = mobile_no
+            abandon_obj.email = email
+            abandon_obj.save()
+
+        response = {}
+        return JsonResponse(response)
+
+
 # Request 80G
 class Request80GView(LoginRequiredMixin, View):
 

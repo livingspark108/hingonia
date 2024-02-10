@@ -106,15 +106,17 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-6 pb-3">
-                                <label class="form-label text-white">Full Name <span class="text-error">*</span></label>
+                                <label class="form-label text-white">Full Name
+	                                <span class="text-error">*</span></label>
                                 <input type="text" value="{{request.user.first_name|handle_none}}" name="first_name"
-                                       class="form-control" placeholder="Full name"
+                                       class="form-control full_name" placeholder="Full name"
                                        aria-describedby="mobile-addon" required="">
                             </div>
                             <div class="col-6 pb-3">
-                                <label class="form-label text-white">Email <span class="text-error">*</span></label>
+                                <label class="form-label text-white">Email
+	                                <span class="text-error">*</span></label>
                                 <input type="email" value="{{request.user.email|handle_none}}" name="email"
-                                       class="form-control" placeholder="Email"
+                                       class="form-control email" placeholder="Email"
                                        aria-describedby="mobile-addon" required="">
                             </div>
                         </div>
@@ -124,7 +126,7 @@
                                 <div class="input-group mb-1">
                                     <span class="input-group-text" id="mobile-addon">IN</span>
                                     <input value="{{request.user.username|handle_none}}" type="number"
-                                           name="mobile_no" class="form-control"
+                                           name="mobile_no" class="mobile_no form-control"
                                            placeholder="+91 00000-00000"
                                            aria-describedby="mobile-addon" required="">
                                 </div>
@@ -219,6 +221,33 @@
 		$('.title').val(title)
 		$('.cm-mataji-img').attr('src',img)
 	})
+	
+	$(document).on("keyup",".mobile_no",function() {
+		console.log("Test test test")
+		var mobile_no = $(this).val()
+		var full_name = $('.full_name').val()
+		var email = $('.email').val()
+		console.log(full_name)
+		console.log(email)
+		console.log(mobile_no.length)
+		if (mobile_no.length == 10) {
+				$.ajax({
+                    url: "{% url 'save-abandon' %}",
+                    type: 'post',
+                    data: {
+                        'mobile_no': mobile_no,
+                        'full_name':full_name,
+                        'email':email,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function(data) {
+                        console.log(data)
+                    }
+                })
+		}
+	})
+	
+	
 	
 	
 </script>

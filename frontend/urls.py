@@ -27,6 +27,7 @@ urlpatterns = [
     path('profile', FrontendProfileView.as_view(), name='profile'),
     path('user-login', FrontendLoginView.as_view(), name='user-login'),
     path('user-logout/', UserLogoutView.as_view(), name="user-logout"),
+    path('save-abandon/', AbandonView.as_view(), name="save-abandon"),
 
     path('privacy-policy', FrontendPrivacyPolicyView.as_view(), name='privacy-policy'),
     path('term-and-condition', FrontendTermConditionView.as_view(), name='term-and-condition'),

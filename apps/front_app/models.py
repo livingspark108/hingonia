@@ -34,6 +34,12 @@ class AboutUs(DateTimeModel):
     banner = models.ImageField(upload_to='banner', max_length=1000,null=True,blank=True)
 
 
+class AbandonCart(DateTimeModel):
+    mobile_no = models.CharField(max_length=1000, blank=False,null=True)
+    email = models.CharField(max_length=1000, blank=False,null=True)
+    full_name = models.CharField(max_length=1000, blank=False,null=True)
+
+
 
 
 
@@ -55,3 +61,5 @@ class DistributionImage(DateTimeModel):
 
 class Setting(DateTimeModel):
     whatsapp_key = models.CharField(max_length=1000, blank=True,null=True)
+    admin_email = models.CharField(max_length=1000, blank=True,null=True)
+

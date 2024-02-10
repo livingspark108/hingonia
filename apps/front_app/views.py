@@ -12,7 +12,7 @@ from application.email_helper import WhatsAppThread
 from apps.cms.models import Page
 from application.custom_classes import AdminRequiredMixin, AjayDatatableView
 from apps.front_app.forms import CreateDistributionForm, DistributionImageFormset
-from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, Setting
+from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, Setting, AbandonCart
 from django.contrib import messages
 
 from apps.user.models import TransactionDetails
@@ -199,7 +199,7 @@ class DeleteOurTeamView(AdminRequiredMixin, DeleteView):
 # Update About us view
 class UpdateSettingView(CreateView, UpdateView):
     model = Setting
-    fields = ['whatsapp_key']
+    fields = ['whatsapp_key','admin_email']
     template_name = 'setting/form.html'  # Provide the path to your template
     success_url = reverse_lazy('setting')  # Specify the URL to redirect after successful creation or update
 
@@ -398,3 +398,25 @@ class Apporve80GView(View):
         transaction_obj.is_80g_request_approve = True
         transaction_obj.save()
         return HttpResponseRedirect(reverse_lazy('80g-request-list'))
+
+
+#
+class ListAbandonView(AdminRequiredMixin, TemplateView):
+    model = AbandonCart
+    template_name = 'abandon/list.html'
+
+class ListAbandonViewJson(AjayDatatableView):
+    model = AbandonCart
+    columns = ['full_name','email','mobile_no','created_at', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def get_initial_queryset(self):
+        transaction_obj = TransactionDetails.objects.values_list('phone', flat=True)
+        return AbandonCart.objects.exclude(mobile_no__in=transaction_obj)
+
+    def render_column(self, row, column):
+        if column == 'actions':
+
+            return ''
+        else:
+            return super(ListAbandonViewJson, self).render_column(row, column)
