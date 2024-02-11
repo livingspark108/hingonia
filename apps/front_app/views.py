@@ -150,6 +150,7 @@ class ListDonationViewJson(AjayDatatableView):
     exclude_from_search_cloumn = ['actions']
 
     def render_column(self, row, column):
+        print(row.email)
         if column == 'actions':
 
             return ''

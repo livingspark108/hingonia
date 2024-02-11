@@ -69,7 +69,6 @@ class ListUserViewJson(AjayDatatableView):
                 return '<span class="badge badge-success">Active</span>'
             else:
                 return '<span class="badge badge-danger">Inactive</span>'
-
         if column == 'actions':
             edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
                 reverse('user-edit', kwargs={'pk': row.pk}))
