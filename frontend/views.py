@@ -217,7 +217,7 @@ class FrontendLoginView(View):
             return HttpResponseRedirect(reverse('home', kwargs={}))
 # My profile page
 
-class FrontendProfileView(View):
+class FrontendProfileView(LoginRequiredMixin,View):
     def get(self, request):
         json_file_path = './cities_list.json'
 
@@ -240,13 +240,13 @@ class FrontendProfileView(View):
         return HttpResponseRedirect(reverse('profile', kwargs={}))
 # My donation page
 
-class FrontendDonationView(View):
+class FrontendDonationView(LoginRequiredMixin,View):
     def get(self, request):
         transaction_obj = TransactionDetails.objects.filter(phone=request.user.username)
         context = {'transaction_obj':transaction_obj}
         return render(request, 'frontend/donation.html', context)
 #Thank you page
-class FrontendThankYouView(View):
+class FrontendThankYouView(LoginRequiredMixin,View):
     def get(self, request):
         form = SetPasswordForm()
         context = {'form':form}
@@ -389,7 +389,7 @@ def set_password(request):
     return render(request, 'frontend/thank_you.html', {'form': form})
 
 
-class Download80gView(View):
+class Download80gView(LoginRequiredMixin,View):
     def get(self, request,id):
         # Get the HTML template
         transaction_obj = TransactionDetails.objects.get(id=id)
