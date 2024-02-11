@@ -16,7 +16,7 @@ from rest_framework.generics import GenericAPIView
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, DeleteView, UpdateView, TemplateView
-from application.custom_classes import AjayDatatableView, StudentRequiredMixin
+from application.custom_classes import DevoteeRequiredMixin
 from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
@@ -147,7 +147,7 @@ class FrontendRefundPolicyView(View):
         return render(request, 'frontend/refund_policy.html', context)
 
 #Logout page
-class UserLogoutView(LoginRequiredMixin, View):
+class UserLogoutView(DevoteeRequiredMixin, View):
 
     def get(self, request):
         logout(request)
@@ -174,7 +174,7 @@ class AbandonView(View):
 
 
 # Request 80G
-class Request80GView(LoginRequiredMixin, View):
+class Request80GView(DevoteeRequiredMixin, View):
 
     def get(self, request,id):
         transaction_obj = TransactionDetails.objects.get(id=id)
@@ -217,7 +217,7 @@ class FrontendLoginView(View):
             return HttpResponseRedirect(reverse('home', kwargs={}))
 # My profile page
 
-class FrontendProfileView(LoginRequiredMixin,View):
+class FrontendProfileView(DevoteeRequiredMixin,View):
     def get(self, request):
         json_file_path = './cities_list.json'
 
@@ -240,13 +240,13 @@ class FrontendProfileView(LoginRequiredMixin,View):
         return HttpResponseRedirect(reverse('profile', kwargs={}))
 # My donation page
 
-class FrontendDonationView(LoginRequiredMixin,View):
+class FrontendDonationView(DevoteeRequiredMixin,View):
     def get(self, request):
         transaction_obj = TransactionDetails.objects.filter(phone=request.user.username)
         context = {'transaction_obj':transaction_obj}
         return render(request, 'frontend/donation.html', context)
 #Thank you page
-class FrontendThankYouView(LoginRequiredMixin,View):
+class FrontendThankYouView(DevoteeRequiredMixin,View):
     def get(self, request):
         form = SetPasswordForm()
         context = {'form':form}
@@ -385,11 +385,10 @@ def set_password(request):
             return redirect('thank-you')  # Redirect to the user's profile page or wherever you want
     else:
         form = SetPasswordForm()
-
     return render(request, 'frontend/thank_you.html', {'form': form})
 
 
-class Download80gView(LoginRequiredMixin,View):
+class Download80gView(DevoteeRequiredMixin,View):
     def get(self, request,id):
         # Get the HTML template
         transaction_obj = TransactionDetails.objects.get(id=id)

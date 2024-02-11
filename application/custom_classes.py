@@ -65,15 +65,15 @@ class AjayDatatableView(BaseDatatableView):
 
 
 
-class StudentRequiredMixin(AccessMixin):
+class DevoteeRequiredMixin(AccessMixin):
     """Verify that the current user is authenticated."""
-    login_url = 'student-login'
+    login_url = 'user-login'
 
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return redirect_to_login(self.request.get_full_path(), self.get_login_url(), self.get_redirect_field_name())
-        elif request.user.type == 'student' or request.user.type == 'teacher':
+            return HttpResponseRedirect(reverse_lazy('user-login'))
+        elif request.user.type == 'devotee':
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404
