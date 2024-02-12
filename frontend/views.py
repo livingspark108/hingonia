@@ -5,10 +5,14 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string, get_template
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from django.views.decorators.csrf import csrf_exempt
 from paywix.payu import Payu
 from rest_framework.generics import *
@@ -393,3 +397,20 @@ class Download80gView(DevoteeRequiredMixin,View):
         # Get the HTML template
         transaction_obj = TransactionDetails.objects.get(id=id)
         return render(request, 'frontend/invoice_80g.html', {'transaction_obj':transaction_obj})
+
+
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = User.objects.filter(email=email).first()
+        if user:
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_link = request.build_absolute_uri('/reset-password/{}/'.format(token))
+            send_mail('Password Reset', 'Click the link to reset your password: {}'.format(reset_link), 'from@example.com', [email])
+        return redirect('password_reset_done')
+    return render(request, 'frontend/forgot_password.html')
+
+def reset_password(request, token):
+    # Handle password reset logic here
+    pass
