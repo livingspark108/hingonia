@@ -15,6 +15,8 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 # Copy the current directory contents into the container at /code
 COPY . /code/
 
+#Create Static directory
+RUN mkdir static
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
