@@ -12,5 +12,6 @@ django-model-utils
 django-braces
 django-resized
 django-cleanup
-psycopg2==2.8.6
 djangorestframework==3.14.0
+psycopg2-binary
+payu
