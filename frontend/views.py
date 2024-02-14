@@ -180,12 +180,23 @@ class AbandonView(View):
 # Request 80G
 class Request80GView(DevoteeRequiredMixin, View):
 
-    def get(self, request,id):
+    def post(self, request):
+        id = request.POST.get('transaction_id')
+        pan_number = request.POST.get('pan_number')
+        address = request.POST.get('address')
         transaction_obj = TransactionDetails.objects.get(id=id)
+        transaction_obj.address1 = address
+        transaction_obj.pan_number = pan_number
         transaction_obj.is_80g_request = True
         transaction_obj.save()
         #return render(request, 'auth/login.html')
         return redirect('my-donation')
+
+class OngoingDevotionView(View):
+    def get(self, request):
+        transaction_obj = TransactionDetails.objects.order_by('-created_at')[:5]
+        context = {'transaction_obj':transaction_obj}
+        return render(request, 'frontend/ongoing_devotion.html',context)
 
 
 # Login page
@@ -399,15 +410,17 @@ class Download80gView(DevoteeRequiredMixin,View):
         return render(request, 'frontend/invoice_80g.html', {'transaction_obj':transaction_obj})
 
 
-def forgot_password(request):
+def forgot_password(request,token=''):
     if request.method == 'POST':
         email = request.POST.get('email')
         user = User.objects.filter(email=email).first()
+
         if user:
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             reset_link = request.build_absolute_uri('/reset-password/{}/'.format(token))
-            send_mail('Password Reset', 'Click the link to reset your password: {}'.format(reset_link), 'from@example.com', [email])
+            s = send_mail('Password Reset', 'Click the link to reset your password: {}'.format(reset_link), 'contact@thepuredevotion.in', [email])
+            print("Test", s)
         return redirect('password_reset_done')
     return render(request, 'frontend/forgot_password.html')
 

@@ -34,6 +34,7 @@ class TransactionDetails(DateTimeModel):
     firstname = models.CharField(max_length=255, null=True, blank=True)
     lastname = models.CharField(max_length=255, null=True, blank=True)
     address1 = models.CharField(max_length=255, null=True, blank=True)
+    pan_number = models.CharField(max_length=255, null=True, blank=True)
     address2 = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
     state = models.CharField(max_length=255, null=True, blank=True)

@@ -753,12 +753,6 @@ a {
 }
 
 /**********about us page**********/
-.about-team .card-body img{
-    height: 80px;
-    width: 80px;
-    object-fit: cover;
-    border-radius: 50px;
-}
 .about-title h2 {
   color: var(--color-2);
   text-align: center;
@@ -1036,18 +1030,22 @@ a {
   border: none;
 }
 
-.qtyCard .btn, .qtyCard .btn:focus {
+.qtyCard .btn,
+.qtyCard .btn:focus {
   border-left: 1px solid #fff !important;
   border-right: 1px solid #fff !important;
 }
 
 .modal {
-  z-index: 1050; /* Adjust the z-index of the modal */
+  z-index: 1050;
+  /* Adjust the z-index of the modal */
 }
 
 .modal-backdrop {
-  z-index: 1040; /* Adjust the z-index of the modal backdrop */
+  z-index: 1040;
+  /* Adjust the z-index of the modal backdrop */
 }
+
 .cm-btn-close {
   position: absolute;
   right: 0px;
@@ -1321,6 +1319,335 @@ a {
   fill: currentcolor;
 }
 
+
+/******** ongoing campaingn ********/
+.bg-img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.py-60 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.campaign-overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #0000005c;
+  z-index: 1;
+}
+
+.og-box-title {
+  padding: 5px 20px 10px 20px;
+  display: inline-block;
+  border-radius: 8px;
+}
+
+.ogSwiper{
+  max-height: 450px;
+}
+.ogSwiper .og-img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 10px 10px #0000002b;
+}
+
+.autoplay-progress {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff !important;
+}
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 4px;
+  stroke: #fff !important;
+  fill: none;
+  stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
+}
+
+.og-notification-box{
+  height: 100px;
+}
+@keyframes ogFadeUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+#ogNotification {
+  animation: ogFadeUp 0.5s ease-out;
+}
+
+/*********** circle animation start*************/
+.circle_A img {
+  left: 25px;
+  position: relative;
+  top: 20px;
+  height: 48px;
+  width: 48px;
+  object-fit: cover;
+}
+
+.circle_all {
+  position: relative;
+  /* height: 100vh; */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.circle_all .circle_A {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--animi);
+  z-index: 999;
+}
+
+.circle_all .circle_B {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: var(--animi);
+  opacity: 0.7;
+  z-index: 998;
+  -webkit-animation-name: fadeOut_B;
+  animation-name: fadeOut_B;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes fadeOut_B {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@keyframes fadeOut_B {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 0;
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.circle_all .circle_C {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: var(--animi);
+  opacity: 0.5;
+  z-index: 997;
+  -webkit-animation-name: fadeOut_C;
+  animation-name: fadeOut_C;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes fadeOut_C {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@keyframes fadeOut_C {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.circle_all .circle_D {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: #b5b5b5;
+  opacity: 0.3;
+  z-index: 996;
+  -webkit-animation-name: fadeOut_D;
+  animation-name: fadeOut_D;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes fadeOut_D {
+  0% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0;
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@keyframes fadeOut_D {
+  0% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0;
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.circle_all .circle_E {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: var(--animi);
+  opacity: 0.1;
+  z-index: 996;
+  -webkit-animation-name: fadeOut_E;
+  animation-name: fadeOut_E;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes fadeOut_E {
+  0% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@keyframes fadeOut_E {
+  0% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 350px;
+    height: 350px;
+  }
+}
+
+/*********** circle animation end*************/
+
+
 /*======== Footer CSS =========*/
 .footer {
   padding: 50px 0 20px;
@@ -1406,7 +1733,9 @@ a {
 }
 
 @media only screen and (max-width: 990px) {
-
+  .og-slider-desc{
+    font-size: 14px;
+  }
   .gallery-img {
     height: 200px;
   }
@@ -1611,10 +1940,4 @@ a {
   .navbar-collapse .nav-link {
     color: #fff;
   }
-}
-.about-team .card-body img {
-    height: 80px;
-    width: 80px;
-    object-fit: cover;
-    border-radius: 50px;
 }

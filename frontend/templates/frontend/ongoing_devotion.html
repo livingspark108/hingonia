@@ -1,0 +1,173 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<section class="bg-img py-60 position-relative og-box"
+        style="background-image: url('{% static 'frontend/assets/images/campaign/food-drive.jpg' %}');">
+        <div class="campaign-overlay"></div>
+        <div class="container z-3 position-relative">
+            <div class="row">
+                <div class="col-md-12 pb-5">
+                    <div class="text-center">
+                        <span class="og-box-title display-5 bg-white color-2 fw-bold">The Mango campaign</span>
+                    </div>
+                </div>
+                <div class="col-md-12 py-5">
+                    <div class="circle_all pt-5">
+                        <div class="circle_A">
+                            <img src="{% static 'frontend/assets/images/campaign/mango-icon.png' %}" class="img-fluid"
+                                 alt="">
+                        </div>
+                        <div class="circle_B"></div>
+                        <div class="circle_C"></div>
+                        <!-- <div class="circle_D"></div>
+                        <div class="circle_E"></div> -->
+                    </div>
+                </div>
+                <div class="col-md-12 pt-5">
+                    <!-- Flexbox container for aligning the toasts -->
+                    <div aria-live="polite" aria-atomic="true"
+                        class="og-notification-box d-flex justify-content-center align-items-center w-100">
+                        <!-- Then put toasts within -->
+                        <div class="toast show" id="ogNotification" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <strong class="me-auto">New Donation</strong>
+                                <!-- <small>11 mins ago</small> -->
+                                <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body" id="ogToastBody">
+                                Nishant Just donated <strong><i
+                                    class="bi bi-currency-rupee"></i>5000</strong> for Bricks
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-1 og-slider-section py-md-5 py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Swiper -->
+                    <div class="swiper ogSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4">
+                                        <img src="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}"
+                                             class="img-fluid og-img" alt="">
+                                    </div>
+                                    <div class="col-md-8 text-start pt-3 pt-md-0">
+                                        <div class="pe-md-5 pe-3 og-slider-desc">
+                                            <p class="text-white">Women, after their spouse’s demise, come down to
+                                                Vrindavan in their quest to seek spiritual salvation. They spend their
+                                                life with other widows in the Ashrams. Many widows here depend on the
+                                                Ashrams for food, and survival. There are around 30000 widows living in
+                                                Vrindavan and each of them have their own story of hardship and
+                                                heartbreak.</p>
+                                            <p class="text-white">We urge you to come forward and help them. You might
+                                                not be able to make the journey to the Vrindavan, but you can definitely
+                                                help feed hundred of widows by donating them.</p>
+                                            <div class="pt-3">
+                                                <a data-bs-toggle="modal" data-bs-target="#helpMatajiModal" href="#"
+                                                   class="btn bg-white color-2 fw-semibold"><img
+                                                        src="{% static 'frontend/assets/images/campaign/mango-icon-red.png' %}" width="20"
+                                                        alt="">&nbsp;&nbsp;
+                                                    Donate Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4">
+                                        <img src="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}"
+                                             class="img-fluid og-img" alt="">
+                                    </div>
+                                    <div class="col-md-8 text-start pt-3 pt-md-0">
+                                        <div class="pe-md-5 pe-3 og-slider-desc">
+                                            <p class="text-white">Women, after their spouse’s demise, come down to
+                                                Vrindavan in their quest to seek spiritual salvation. They spend their
+                                                life with other widows in the Ashrams. Many widows here depend on the
+                                                Ashrams for food, and survival. There are around 30000 widows living in
+                                                Vrindavan and each of them have their own story of hardship and
+                                                heartbreak.</p>
+                                            <div class="pt-3">
+                                                <a href="#" class="btn bg-white color-2 fw-semibold"><img
+                                                        src="{% static 'frontend/assets/images/campaign/mango-icon-red.png' %}" width="20"
+                                                        alt="">&nbsp;&nbsp;
+                                                    Donate Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4">
+                                        <img src="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}"
+                                             class="img-fluid og-img" alt="">
+                                    </div>
+                                    <div class="col-md-8 text-start pt-3 pt-md-0">
+                                        <div class="pe-md-5 pe-3 og-slider-desc">
+                                            <p class="text-white">We urge you to come forward and help them. You might
+                                                not be able to make the journey to the Vrindavan, but you can definitely
+                                                help feed hundred of widows by donating them.</p>
+                                            <div class="pt-3">
+                                                <a href="#" class="btn bg-white color-2 fw-semibold"><img
+                                                        src="{% static 'frontend/assets/images/campaign/mango-icon-red.png' %}" width="20"
+                                                        alt="">&nbsp;&nbsp;
+                                                    Donate Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="autoplay-progress">
+                            <svg viewBox="0 0 48 48">
+                                <circle cx="24" cy="24" r="20"></circle>
+                            </svg>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block script%}
+<script>
+	//======= Ongoing campaign ========
+$(document).ready(function () {
+  // Show the toast
+  $('#ogNotification').toast('show');
+
+  // Function to generate random content
+  function generateRandomContent() {
+    var randomContent = [
+      {% for i in transaction_obj %}
+      "{{i.firstname}} Just donated <strong><i class='bi bi-currency-rupee'></i>{{i.amount}}</strong> for Medical",
+      {% endfor %}
+    ];
+    var randomIndex = Math.floor(Math.random() * randomContent.length);
+    return randomContent[randomIndex];
+  }
+
+  // Hide and show the toast every 5 seconds
+  setInterval(function () {
+    $('#ogToastBody').html(generateRandomContent());
+    $('#ogNotification').toast('hide');
+    setTimeout(function () {
+      $('#ogNotification').toast('show');
+    }, 500); // Delay to ensure the toast is fully hidden before showing again
+  }, 3000); // 5 seconds
+});
+</script>
+{% endblock %}

@@ -3,6 +3,11 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
+<div class="row">
+    <div class="col-md-12 text-center">
+        <a href="{% url 'ongoing-devotion' %}" class="btn bg-1 text-white fs-3">Explore ongoing Campaigns &gt;</a>
+    </div>
+</div>
 {% for i in campaign_obj %}
 {% if forloop.counter|divisibleby:2 %}
 <section class="py-5 my-md-5 my-3 bg-1 campaign-section">

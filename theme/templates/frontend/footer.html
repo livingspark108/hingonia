@@ -152,18 +152,13 @@
                         </div>
                         <div class="row pb-3">
                             <div class="col-md-12">
-                                <div class="form-check pb-2">
-                                    <input class="form-check-input" name="custom_check" type="checkbox" value="custom_check"
-                                           id="customAmountCheckbox">
-                                    <label class="form-check-label text-white" for="customAmountCheckbox">
-                                        Choose Custom Amount:
-                                    </label>
-                                </div>
-                                <div class="input-group w-50 custom-amount-box" style="display: none;">
-                                    <span class="input-group-text" id="amount-addon"><i class="bi bi-currency-rupee"></i></span>
-                                    <input type="number" name="ctm_amount" class="form-control ctm_amount" placeholder="----"
-                                           aria-describedby="amount-addon" >
-                                </div>
+	                            <button class="btn btn-primary ctm_amount" data-price="600" type="button">600</button>
+                                <button class="btn btn-primary ctm_amount" data-price="1200" type="button">1200</button>
+                                <button class="btn btn-primary ctm_amount" data-price="2000" type="button">2000</button>
+                                <button class="btn btn-primary ctm_amount_bt" data-price="2000" type="button">Custom
+                                </button>
+                                <input style="display:none;" type="number" class="form-control mt-1 ctm_amount_bt_field"
+                                       placeholder="Custom Amount">
                             </div>
                         </div>
                     </div>
@@ -221,6 +216,24 @@
 		$('.title').val(title)
 		$('.cm-mataji-img').attr('src',img)
 	})
+	$(document).on("click",".ctm_amount",function() {
+		$('.ctm_amount_bt_field').hide()
+		var amt = $(this).attr('data-price')
+		$('.amt').html(amt)
+		$('.amt_vl').val(amt)
+	})
+	$(document).on("click",".ctm_amount_bt",function() {
+		$('.ctm_amount_bt_field').show()
+		
+	})
+	$(document).on("keyup",".ctm_amount_bt_field",function() {
+		var amt = $(this).val()
+		$('.amt').html(amt)
+		$('.amt_vl').val(amt)
+	})
+	
+	
+	
 	
 	$(document).on("keyup",".mobile_no",function() {
 		console.log("Test test test")

@@ -58,9 +58,10 @@
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <!-- item-->
 <!--                                <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle"></i>Edit Profile</a>-->
-
+	                            {% if request.user %}
                                 <a class="dropdown-item d-block" href="{% url 'auth-change-self-password' request.user.id  %}"><i class="mdi mdi-settings"></i> Change password</a>
-                                <div class="dropdown-divider"></div>
+                                {% endif %}
+	                            <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="{% url 'auth-logout' %}"><i class="mdi mdi-power text-danger"></i> Logout</a>
                             </div>
                         </div>
