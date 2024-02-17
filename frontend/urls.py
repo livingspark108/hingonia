@@ -45,7 +45,7 @@ urlpatterns = [
     path('request-80g', Request80GView.as_view(), name="request-80g"),
     path('forgot-password/', forgot_password, name='forgot_password'),
     path('reset-password/<str:token>/', reset_password, name='reset_password'),
-    path('ongoing-devotion/', OngoingDevotionView.as_view(), name='ongoing-devotion'),
+    path('ongoing-devotion/<str:id>', OngoingDevotionView.as_view(), name='ongoing-devotion'),
 
 ]
 

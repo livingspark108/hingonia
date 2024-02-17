@@ -48,96 +48,77 @@
         </div>
     </section>
 
-    <section class="bg-1 og-slider-section py-md-5 py-3">
+<section class="photo-gallery pt-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Swiper -->
-                    <div class="swiper ogSwiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4">
-                                        <img src="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}"
-                                             class="img-fluid og-img" alt="">
-                                    </div>
-                                    <div class="col-md-8 text-start pt-3 pt-md-0">
-                                        <div class="pe-md-5 pe-3 og-slider-desc">
-                                            <p class="text-white">Women, after their spouse’s demise, come down to
-                                                Vrindavan in their quest to seek spiritual salvation. They spend their
-                                                life with other widows in the Ashrams. Many widows here depend on the
-                                                Ashrams for food, and survival. There are around 30000 widows living in
-                                                Vrindavan and each of them have their own story of hardship and
-                                                heartbreak.</p>
-                                            <p class="text-white">We urge you to come forward and help them. You might
-                                                not be able to make the journey to the Vrindavan, but you can definitely
-                                                help feed hundred of widows by donating them.</p>
-                                            <div class="pt-3">
-                                                <a data-bs-toggle="modal" data-bs-target="#helpMatajiModal" href="#"
-                                                   class="btn bg-white color-2 fw-semibold"><img
-                                                        src="{% static 'frontend/assets/images/campaign/mango-icon-red.png' %}" width="20"
-                                                        alt="">&nbsp;&nbsp;
-                                                    Donate Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4">
-                                        <img src="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}"
-                                             class="img-fluid og-img" alt="">
-                                    </div>
-                                    <div class="col-md-8 text-start pt-3 pt-md-0">
-                                        <div class="pe-md-5 pe-3 og-slider-desc">
-                                            <p class="text-white">Women, after their spouse’s demise, come down to
-                                                Vrindavan in their quest to seek spiritual salvation. They spend their
-                                                life with other widows in the Ashrams. Many widows here depend on the
-                                                Ashrams for food, and survival. There are around 30000 widows living in
-                                                Vrindavan and each of them have their own story of hardship and
-                                                heartbreak.</p>
-                                            <div class="pt-3">
-                                                <a data-bs-toggle="modal" data-bs-target="#helpMatajiModal" href="#" class="btn bg-white color-2 fw-semibold"><img
-                                                        src="{% static 'frontend/assets/images/campaign/mango-icon-red.png' %}" width="20"
-                                                        alt="">&nbsp;&nbsp;
-                                                    Donate Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4">
-                                        <img src="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}"
-                                             class="img-fluid og-img" alt="">
-                                    </div>
-                                    <div class="col-md-8 text-start pt-3 pt-md-0">
-                                        <div class="pe-md-5 pe-3 og-slider-desc">
-                                            <p class="text-white">We urge you to come forward and help them. You might
-                                                not be able to make the journey to the Vrindavan, but you can definitely
-                                                help feed hundred of widows by donating them.</p>
-                                            <div class="pt-3">
-                                                <a href="#" class="btn bg-white color-2 fw-semibold"><img
-                                                        src="{% static 'frontend/assets/images/campaign/mango-icon-red.png' %}" width="20"
-                                                        alt="">&nbsp;&nbsp;
-                                                    Donate Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-pagination"></div>
-                        <div class="autoplay-progress">
-                            <svg viewBox="0 0 48 48">
-                                <circle cx="24" cy="24" r="20"></circle>
-                            </svg>
-                            <span></span>
+            <div class="row pb-3">
+                <div class="col-md-12 text-center">
+                    <h2 class="banner-title">Campaign <span>Gallery</span></h2>
+                </div>
+            </div>
+            <div class="row pb-4 g-4 gallery-grid">
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-1.jpg' %}">
+                        <img src="{% static 'frontend/assets/images/gallery/mataji-1.jpg' %}" class="img-fluid"
+                             alt="Mataji Adoption">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="assets/images/gallery/mataji-2.jpg' %}">
+                        <img src="{% static 'frontend/assets/images/gallery/mataji-2.jpg' %}" class="img-fluid" alt="Blanket Donation">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}">
+                        <img src="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}" class="img-fluid" alt="Medical care">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-4.jpg' %}">
+                        <img src="{% static 'frontend/assets/images/gallery/mataji-4.jpg' %}" class="img-fluid" alt="Mataji Adoption">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-5.jpg' %}">
+                        <img src="{% static 'frontend/assets/images/gallery/mataji-5.jpg' %}" class="img-fluid" alt="Mataji Adoption">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}">
+                        <img src="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}" class="img-fluid" alt="Mataji Adoption">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-7.jpg' %}">
+                        <img src="{% static 'frontend/assets/images/gallery/mataji-7.jpg' %}" class="img-fluid" alt="Mataji Adoption">
+                    </a>
+                </div>
+                <div class="col-md-3 col-6 gallery-col">
+                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}">
+                        <img src="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}" class="img-fluid"
+                             alt="Mataji Adoption">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="py-5 donor-list-section" id="donor-list">
+        <div class="container">
+            <div class="row g-md-3 g-3">
+                <div class="col-md-12 text-center">
+                    <h2 class="banner-title">Donor <span>List</span></h2>
+                </div>
+	            {% for single in transaction_obj_20 %}
+                <div class="col-md-3">
+                    <div class="card bg-white border-dark">
+                        <div class="card-body">
+                            <h5 class="text-dark">Donor Name :
+	                            <span class="color-2 fw-bold">{{single.firstname}}</span></h5>
+                            <h6 class="text-dark">Donated <span class="color-2 fw-bold fs-5"><i
+		                            class="bi bi-currency-rupee color-2"></i>{{single.amount}}</span> for {{single.productinfo}}</h6>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </section>
