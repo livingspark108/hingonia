@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const lightboxCarousel = document.getElementById("lightboxCarousel");
 
             if (lightboxCarousel) {
-                const parentCol = link.closest('.col');
+                const parentCol = link.closest('.gallery-col');
                 const index = [...parentCol.parentElement.children].indexOf(parentCol);
 
                 const bsCarousel = new bootstrap.Carousel(lightboxCarousel);

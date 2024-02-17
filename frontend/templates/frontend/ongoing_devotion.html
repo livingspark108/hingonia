@@ -4,13 +4,13 @@
 {% load mytags %}
 {% block body %}
 <section class="bg-img py-60 position-relative og-box"
-        style="background-image: url('{% static 'frontend/assets/images/campaign/food-drive.jpg' %}');">
+        style="background-image: url('{% get_media_prefix %}{{compaign.campaign_image}}');">
         <div class="campaign-overlay"></div>
         <div class="container z-3 position-relative">
             <div class="row">
                 <div class="col-md-12 pb-5">
                     <div class="text-center">
-                        <span class="og-box-title display-5 bg-white color-2 fw-bold">The Mango campaign</span>
+                        <span class="og-box-title display-5 bg-white color-2 fw-bold">{{compaign.title}} campaign</span>
                     </div>
                 </div>
                 <div class="col-md-12 py-5">
@@ -122,6 +122,28 @@
             </div>
         </div>
     </section>
+<div class="modal fade lightbox-modal" id="lightbox-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+            <div class="modal-content">
+                <button type="button" class="btn-fullscreen-enlarge" aria-label="Enlarge fullscreen">
+                    <svg class="bi">
+                        <use href="#enlarge"></use>
+                    </svg>
+                </button>
+                <button type="button" class="btn-fullscreen-exit d-none" aria-label="Exit fullscreen">
+                    <svg class="bi">
+                        <use href="#exit"></use>
+                    </svg>
+                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <div class="lightbox-content">
+                        <!-- JS content here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block script%}
 <script>
