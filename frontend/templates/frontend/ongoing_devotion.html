@@ -38,8 +38,9 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="toast-body" id="ogToastBody">
-                                Nishant Just donated <strong><i
-                                    class="bi bi-currency-rupee"></i>5000</strong> for Bricks
+                                {{transaction_obj.first.firstname}} Just donated <strong><i
+                                    class="bi bi-currency-rupee"></i>{{transaction_obj.first.amount}}</strong> for
+                                Bricks
                             </div>
                         </div>
                     </div>
