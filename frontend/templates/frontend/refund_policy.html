@@ -3,63 +3,25 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-<section>
+<section class="bg-1 py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2 class="banner-title-lite color-7 fst-italic ff-times fw-bold">Our Mothers</h2>
-                    <div class="subtitle-box py-2">
-                        <span>1000+ Matajis Adopted</span>
-                        <span>100000+ Grocery Kits Distributed</span>
-                        <span>30000+ Blankets</span>
-                    </div>
-                    <div>
-                        <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
-                    </div>
+                    <h2 class="text-white">Refund Policy</h2>
                 </div>
             </div>
         </div>
     </section>
+    
 
-
-    <section class="mothers-list py-md-5 py-4">
+    <section class="py-md-5 py-4">
         <div class="container">
-            <div class="row g-3">
-	            {% for single in mother_obj %}
-                <div class="col-md-6 ml-box">
-                    <div class="row">
-                        <div class="col-md-3 pe-md-0">
-                            <div class="mata-img">
-                                <img src="{% get_media_prefix %}{{single.mother_image}}" class="img-fluid " alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-9 ">
-                            <div class="mataji">
-                                <h3 class="ml-title">{{single.title}}</h3>
-                                <p class="ml-desc">{{single.description}}</p>
-                                <div class="ml-btn-div">
-                                    <a href="#" class="btn bg-1 text-white">Support Tulsi Mata</a>
-                                </div>
-                            </div>
-<!--                            <div class="mataji-hn cm-d-none">-->
-<!--                                <h3 class="ml-title">तुलसी शर्मा</h3>-->
-<!--                                <p class="ml-desc">महिलाएं, अपने जीवनसाथी के निधन के बाद, आध्यात्मिक मोक्ष की तलाश में-->
-<!--                                    वृन्दावन आती हैं। वे आश्रम में अन्य विधवाओं के साथ अपना जीवन व्यतीत करते हैं।</p>-->
-<!--                                <div class="ml-btn-div">-->
-<!--                                    <a href="#" class="btn bg-1 text-white">सेवा करे</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Refund Policy</h3>
+                    <p>Once donated for a particular campaign, it cant be cancelled or refunded. But you can change the campaign or cause for which you have donated within 12 hours of donation.</p>
+                    <p>After 12 hours cause for which donation is made cant be changed.</p>
                 </div>
-				{% endfor %}
-                
-
-                <div class="col-md-12 pt-4 text-center">
-                    <a href="#" class="scroll-down">Scroll Down</a>
-                </div>
-
             </div>
         </div>
     </section>

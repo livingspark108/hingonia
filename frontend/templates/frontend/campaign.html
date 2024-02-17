@@ -3,11 +3,6 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-<div class="row">
-    <div class="col-md-12 text-center">
-        <a href="{% url 'ongoing-devotion' %}" class="btn bg-1 text-white fs-3">Explore ongoing Campaigns &gt;</a>
-    </div>
-</div>
 {% for i in campaign_obj %}
 {% if forloop.counter|divisibleby:2 %}
 <section class="py-5 my-md-5 my-3 bg-1 campaign-section">
@@ -21,10 +16,10 @@
                     <p class="page-desc  text-white">{{i.description}}
                     </p>
                     <div class="pt-3 pb-5">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
+                        <a href="#" data-title="{{i.short_title}}" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
                            class="help_mataji btn bg-white color-2 bg-white banner-btn campaign-btn-2"><img
 		                        src="assets/images/foot-dark.png" width="20"
-                                alt="">&nbsp;&nbsp; Donate Grocery Kit</a>
+                                alt="">{{i.short_title}}</a>
                     </div>
                 </div>
             </div>
@@ -44,8 +39,11 @@
                     <p class="page-desc color-2">{{i.description}}
                     </p>
                     <div class="pt-3 pb-5 pb-md-3">
-                        <a href="#" class="btn bg-1 text-white banner-btn campaign-btn-1"><img src="assets/images/foot.png" width="20"
-                                alt="">&nbsp;&nbsp; Adopt a Mataji</a>
+                        <a data-title="{{i.short_title}}" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
+                           href="#"
+                           class="help_mataji btn bg-1 text-white banner-btn campaign-btn-1"><img
+		                        src="assets/images/foot.png" width="20"
+                                alt="">{{i.short_title}}</a>
                     </div>
                 </div>
             </div>

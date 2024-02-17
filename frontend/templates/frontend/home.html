@@ -18,7 +18,7 @@
             <span>every year.</span>
           </h2>
           <div class="text-center pt-3">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
+            <a data-title="Adopt a Mataji" href="#" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
                class="help_mataji btn bg-1 text-white banner-btn"><img
 		            src="{% static 'frontend/assets/images/foot.png' %}" width="20"
                 alt="">&nbsp;&nbsp; Help a Mataji</a>
@@ -35,7 +35,32 @@
       <img src="{% static 'frontend/assets/images/banner-img.png' %}" class="img-fluid" alt="">
     </div>
   </section>
-
+<section class="section-campaign">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="card bg-light shadow">
+          <div class="card-body">
+            <div class="row g-3">
+	          {% for i in campaign_obj %}
+              <div class="col-md-3 text-center sc-box">
+                <div class="mb-3"><img src="{% get_media_prefix %}{{i.campaign_image}}" width="150"
+                                       class="img-fluid" alt="">
+                </div>
+                <h2 class="banner-title-lite fs-4 mb-3">{{i.short_title| add_spam_tag|safe}}</h2>
+                <div>
+                  <a data-title="{{i.short_title}}" href="#"
+                     class="btn bg-1 text-white my-1 help_mataji" data-bs-toggle="modal"
+                     data-bs-target="#helpMatajiModal">{{i.short_title}}</a>
+<!--                  <a href="ongoing-campaign.php" class="btn bg-outline color-2 my-1">Learn More</a>-->
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="py-2 py-md-5 section-collage">
     <div class="container-fluid">
       <div class="row">

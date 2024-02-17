@@ -3,63 +3,54 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-<section>
+<section class="bg-1 py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2 class="banner-title-lite color-7 fst-italic ff-times fw-bold">Our Mothers</h2>
-                    <div class="subtitle-box py-2">
-                        <span>1000+ Matajis Adopted</span>
-                        <span>100000+ Grocery Kits Distributed</span>
-                        <span>30000+ Blankets</span>
-                    </div>
-                    <div>
-                        <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
-                    </div>
+                    <h2 class="text-white">Terms & Conditions</h2>
                 </div>
             </div>
         </div>
     </section>
 
 
-    <section class="mothers-list py-md-5 py-4">
+    <section class="py-md-5 py-4">
         <div class="container">
-            <div class="row g-3">
-	            {% for single in mother_obj %}
-                <div class="col-md-6 ml-box">
-                    <div class="row">
-                        <div class="col-md-3 pe-md-0">
-                            <div class="mata-img">
-                                <img src="{% get_media_prefix %}{{single.mother_image}}" class="img-fluid " alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-9 ">
-                            <div class="mataji">
-                                <h3 class="ml-title">{{single.title}}</h3>
-                                <p class="ml-desc">{{single.description}}</p>
-                                <div class="ml-btn-div">
-                                    <a href="#" class="btn bg-1 text-white">Support Tulsi Mata</a>
-                                </div>
-                            </div>
-<!--                            <div class="mataji-hn cm-d-none">-->
-<!--                                <h3 class="ml-title">तुलसी शर्मा</h3>-->
-<!--                                <p class="ml-desc">महिलाएं, अपने जीवनसाथी के निधन के बाद, आध्यात्मिक मोक्ष की तलाश में-->
-<!--                                    वृन्दावन आती हैं। वे आश्रम में अन्य विधवाओं के साथ अपना जीवन व्यतीत करते हैं।</p>-->
-<!--                                <div class="ml-btn-div">-->
-<!--                                    <a href="#" class="btn bg-1 text-white">सेवा करे</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Introduction</h3>
+                    <p><a href="http://www.thepuredevotion.in"><strong>www.thepuredevotion.in</strong></a> is owned by
+                        Pure Devotion Foundation a section 8 company incorporated under the laws of India. The usage is
+                        strictly governed by the terms and conditions contained herein below. If you (You) continue to
+                        browse and use <a
+                            href="http://www.thepuredevotion.in"><strong>www.thepuredevotion.in</strong></a> for any
+                        donations, You are agreeing to comply with and be bound by these terms and conditions (Terms of
+                        Use), which together with our privacy policy (Privacy Policy) govern our relationship with You.
+                        If You disagree with any part of these Terms of Use, You may not use this website entirely.</p>
+                    <h3>Definitions</h3>
 
-                        </div>
-                    </div>
+                    <p>Campaigns shall mean and refer to various campaigns that run on <a
+                            href="http://www.thepuredevotion.in"><strong>www.thepuredevotion.in</strong></a> for raising
+                        adequate support in kind for the Beneficiaries.</p>
+                    <p>Materials shall mean and refer to the specific material required by different Beneficiaries under
+                        their Campaigns and which shall be purchased by pure devotion foundation through the funds
+                        provided by You.</p>
+                    <p><a href="http://www.thepuredevotion.in"><strong>www.thepuredevotion.in</strong></a> or us or we
+                        or our shall mean Pure Devotion Foundation , a section 8 Company, incorporated under the Indian
+                        laws. Services shall mean services provided by Pure Devotion Foundation to You and the
+                        Beneficiary by facilitating connection between Beneficiaries and You so that You can donate in
+                        kind to the Beneficiary to meet the necessary objectives of charity . You or Your or Yourself
+                        shall mean to the users or viewers of this <a
+                            href="http://www.thepuredevotion.in"><strong>thepuredevotion.in</strong></a>.</p>
+                    <h3>Terms and conditions</h3>
+                    <p>Pure devotion foundation is grateful to all of its supporters including those who contribute time, material and/or money to help us continue doing our work. We maintains strict donor privacy policies to protect the integrity and privacy of personal information gathered from our supporters and visitors through all of our communication channels, as well as from visitors to our Websites who donate through them.</p>
+                    <p>Pure Devotion Foundation does not sell exchange or rent your personal information to any organization or individual. We will not divulge personal information to any other organization or individual other than that necessary to transact, fulfill and or account for online donations that you have authorized.</p>
+                    <p>Pure devotion foundation will only use your phone number and email address if we need to verify information or to thank you for your contribution, ask for your opinion, request your assistance, or invite you to a special event.</p>
+                    <h3>What information do we collect?</h3>
+                    <p>When you make a donation, attend an event or volunteer with Pure Devotion Foundation , we may ask for information such as your name, address, email address, phone number and other relevant information.</p>
+                    <h3>Modification of Terms of Use</h3>
+                    <p>The Company reserves the right, at its sole discretion, to modify or replace these Terms of Use, or change, suspend, or discontinue the Site and its services (including, but not limited to, the availability of any feature, database, or Content) at any time for any reason. The Company may also impose limits on certain features and services or restrict your access to parts or all of the website without notice or liability. It is your responsibility to check the Terms of Use periodically for changes. Your continued use of the website following the posting of any changes to the Terms of Use constitutes acceptance of those changes.</p>
                 </div>
-				{% endfor %}
-                
-
-                <div class="col-md-12 pt-4 text-center">
-                    <a href="#" class="scroll-down">Scroll Down</a>
-                </div>
-
             </div>
         </div>
     </section>

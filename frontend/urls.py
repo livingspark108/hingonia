@@ -19,6 +19,7 @@ from frontend import views
 from frontend.views import *
 
 urlpatterns = [
+
     path('', FrontendHomeView.as_view(), name='home'),
     path('about-us', FrontendAboutUsView.as_view(), name='about-us'),
     path('our-mothers', FrontendOurMotherView.as_view(), name='our-mothers'),

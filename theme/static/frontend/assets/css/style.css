@@ -191,7 +191,7 @@ body {
 }
 
 .bg-1 {
-  background-color: var(--color-2);
+  background-color: var(--color-2) !important;
 }
 
 .bg-2 {
@@ -421,7 +421,7 @@ a {
   position: absolute;
   top: -20px;
   left: -30px;
-  right: -65px;
+  right: -80px;
   bottom: -70px;
   background-image: url(../images/btn.png);
   background-size: 240px auto;
@@ -509,9 +509,20 @@ a {
   background-image: url('../images/minus.svg');
 }
 
+.section-campaign{
+  margin-top: -18%;
+  position: relative;
+  z-index: 999;
+}
+.section-campaign .sc-box img{
+  transition: 0.5s;
+}
+.section-campaign .sc-box:hover img{
+  transform: scale(1.1);
+}
 
 .section-collage {
-  margin-top: -18%;
+  /* margin-top: -18%; */
   position: relative;
   z-index: 999;
 }
@@ -1643,6 +1654,14 @@ a {
     width: 350px;
     height: 350px;
   }
+}
+
+#ogNotification .toast-header{
+  background-color: #fff;
+  border-color: #667085;
+}
+#ogNotification .toast-body{
+  background-color: #fff;
 }
 
 /*********** circle animation end*************/

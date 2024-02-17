@@ -3,63 +3,34 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-<section>
+<section class="bg-1 py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2 class="banner-title-lite color-7 fst-italic ff-times fw-bold">Our Mothers</h2>
-                    <div class="subtitle-box py-2">
-                        <span>1000+ Matajis Adopted</span>
-                        <span>100000+ Grocery Kits Distributed</span>
-                        <span>30000+ Blankets</span>
-                    </div>
-                    <div>
-                        <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
-                    </div>
+                    <h2 class="text-white">Privacy Policy</h2>
                 </div>
             </div>
         </div>
     </section>
+    
 
-
-    <section class="mothers-list py-md-5 py-4">
+    <section class="py-md-5 py-4">
         <div class="container">
-            <div class="row g-3">
-	            {% for single in mother_obj %}
-                <div class="col-md-6 ml-box">
-                    <div class="row">
-                        <div class="col-md-3 pe-md-0">
-                            <div class="mata-img">
-                                <img src="{% get_media_prefix %}{{single.mother_image}}" class="img-fluid " alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-9 ">
-                            <div class="mataji">
-                                <h3 class="ml-title">{{single.title}}</h3>
-                                <p class="ml-desc">{{single.description}}</p>
-                                <div class="ml-btn-div">
-                                    <a href="#" class="btn bg-1 text-white">Support Tulsi Mata</a>
-                                </div>
-                            </div>
-<!--                            <div class="mataji-hn cm-d-none">-->
-<!--                                <h3 class="ml-title">तुलसी शर्मा</h3>-->
-<!--                                <p class="ml-desc">महिलाएं, अपने जीवनसाथी के निधन के बाद, आध्यात्मिक मोक्ष की तलाश में-->
-<!--                                    वृन्दावन आती हैं। वे आश्रम में अन्य विधवाओं के साथ अपना जीवन व्यतीत करते हैं।</p>-->
-<!--                                <div class="ml-btn-div">-->
-<!--                                    <a href="#" class="btn bg-1 text-white">सेवा करे</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Privacy Policy</h3>
+                    <p>For us privacy for our valued customer is very important. We strongly believe that the personal information of our customers should not be shared with the third party without the prior consent or request from the customer. Privacy is the right of an individual and at our website information of the customer such as contact no., email, addresses etc is used only for the internal purpose and not for sale. Your contact information is stored in our database and is only used by us to contact you with regards to the updates of the campaign, upcoming campaigns, announcements & news . We condemn the unauthorized reach and misuse and/or disclosure of the personal information of the customer and we have strict guidelines and high security features to prevent the same. Any changes in our ‘Privacy Policy’ will be posted here on the website.</p>
+                    <h3>Secure Online Payments</h3>
+                    <p>The visitor on our website please take a note that your name, email address and other personal information submitted on our website may be stored with us and may also appear on the website. Like other platforms our server log files also receives general information such as IP address of the visitor , cookie etc. For the financial transactions by credit card we use a 3rd party secure payment gateway provided by “Razor pay” and the credit card details are ‘not stored’ with us, instead the information is securely stored and encrypted with Visa/MasterCard</p>
+                    <h3>Smart Cookies</h3>
+                    <p>We use ‘Cookies’ to keep track of your current donation session to personalize your experience and so that you may retrieve your donation cart at any time. ‘Cookies’ are tiny text files which our Website places on your computer’s hard drive to store information about your donation session and to identify your computer</p>
+                    <h3>Shipping and delivery</h3>
+                    <p>It takes one to two weeks for us to ship products to Ngo, it varies from campaign to campaign.</p>
+                    <p>After donation we send a mail where time is mentioned on it.</p>
+                    <h3>Cancellation and refund</h3>
+                    <p>Once donated for a particular campaign, it cant be cancelled or refunded. But you can change the campaign or cause for which you have donated within 12 hours of donation.</p>
+                    <p>After 12 hours cause for which donation is made cant be changed.</p>
                 </div>
-				{% endfor %}
-                
-
-                <div class="col-md-12 pt-4 text-center">
-                    <a href="#" class="scroll-down">Scroll Down</a>
-                </div>
-
             </div>
         </div>
     </section>

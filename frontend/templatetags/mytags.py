@@ -30,3 +30,10 @@ def handle_none(num):
         return ""
     else:
         return num
+
+@register.filter(name='add_spam_tag')
+def add_spam_tag(value):
+    words = value.split()
+    last_word = words[-1]
+    modified_string = ' '.join(words[:-1]) + f' <span class="color-2">{last_word}</span>'
+    return modified_string

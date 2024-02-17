@@ -34,9 +34,11 @@ User = get_user_model()
 
 class FrontendHomeView(View):
     def get(self, request):
-
-        #if request.user.is_authenticated:
-        context = {}
+        campaign_obj = Campaign.objects.all()
+        # if request.user.is_authenticated:
+        context = {
+            'campaign_obj': campaign_obj
+        }
         return render(request, 'frontend/home.html', context)
 
 class FrontendAboutUsView(View):
