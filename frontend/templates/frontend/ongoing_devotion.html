@@ -4,7 +4,7 @@
 {% load mytags %}
 {% block body %}
 <section class="bg-img py-60 position-relative og-box"
-        style="background-image: url('{% get_media_prefix %}{{compaign.campaign_image}}');">
+        style="background-size: contain;background-image: url('{% get_media_prefix %}{{compaign.campaign_image}}');">
         <div class="campaign-overlay"></div>
         <div class="container z-3 position-relative">
             <div class="row">
