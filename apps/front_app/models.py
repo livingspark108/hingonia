@@ -19,6 +19,9 @@ class Campaign(DateTimeModel):
     price = models.FloatField(max_length=300, blank=True,null=True)
     short_description = models.TextField(max_length=2500, null=True, blank=True)
     description = RichTextUploadingField(blank=True, null=True)
+    amt_1 = models.IntegerField(max_length=300, blank=True,null=True)
+    amt_2 = models.IntegerField(max_length=300, blank=True,null=True)
+    amt_3 = models.IntegerField(max_length=300, blank=True,null=True)
     campaign_image = models.ImageField(upload_to='campaign_images', max_length=1000,null=True,blank=True)
 
 
