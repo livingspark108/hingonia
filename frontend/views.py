@@ -86,7 +86,7 @@ class FrontendOurMotherView(View):
 
 class FrontendCampaignView(View):
     def get(self, request):
-        campaign_obj = Campaign.objects.all()
+        campaign_obj = Campaign.objects.all().order_by('-created_at')
         #if request.user.is_authenticated:
         context = {
             'campaign_obj':campaign_obj

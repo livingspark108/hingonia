@@ -683,13 +683,13 @@ a {
 .campaign-section .campaign-btn-1:after {
   top: -10px;
   left: 0px;
-  background-size: 225px auto;
+  background-size: 198px auto;
 }
 
 .campaign-section .campaign-btn-2:after {
   top: -20px;
   left: 0px;
-  background-size: 260px auto;
+  background-size: 220px auto;
 }
 
 .campaign-section .campaign-btn-3:after {
@@ -1964,4 +1964,8 @@ a {
 
 .navbar-toggler{
         background: #a4143c;
+}
+.collageBtnHover {
+  background-color: var(--color-2);
+  color: #fff;
 }

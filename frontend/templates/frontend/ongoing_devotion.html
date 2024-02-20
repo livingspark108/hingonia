@@ -4,7 +4,7 @@
 {% load mytags %}
 {% block body %}
 <section class="bg-img py-60 position-relative og-box"
-        style="background-size: contain;background-image: url('{% get_media_prefix %}{{compaign.campaign_image}}');">
+        style="background-image: url('{% get_media_prefix %}{{compaign.campaign_backgroud}}');">
         <div class="campaign-overlay"></div>
         <div class="container z-3 position-relative">
             <div class="row">
@@ -61,59 +61,68 @@
             </div>
         </div>
     </section>
-<section class="photo-gallery pt-5">
+<section class="pt-5">
         <div class="container">
-            <div class="row pb-3">
+            <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2 class="banner-title">Campaign <span>Gallery</span></h2>
-                </div>
-            </div>
-            <div class="row pb-4 g-4 gallery-grid">
-                <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-1.jpg' %}">
-                        <img src="{% static 'frontend/assets/images/gallery/mataji-1.jpg' %}" class="img-fluid"
-                             alt="Mataji Adoption">
-                    </a>
-                </div>
-                <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="assets/images/gallery/mataji-2.jpg' %}">
-                        <img src="{% static 'frontend/assets/images/gallery/mataji-2.jpg' %}" class="img-fluid" alt="Blanket Donation">
-                    </a>
-                </div>
-                <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}">
-                        <img src="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}" class="img-fluid" alt="Medical care">
-                    </a>
-                </div>
-                <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-4.jpg' %}">
-                        <img src="{% static 'frontend/assets/images/gallery/mataji-4.jpg' %}" class="img-fluid" alt="Mataji Adoption">
-                    </a>
-                </div>
-                <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-5.jpg' %}">
-                        <img src="{% static 'frontend/assets/images/gallery/mataji-5.jpg' %}" class="img-fluid" alt="Mataji Adoption">
-                    </a>
-                </div>
-                <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}">
-                        <img src="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}" class="img-fluid" alt="Mataji Adoption">
-                    </a>
-                </div>
-                <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-7.jpg' %}">
-                        <img src="{% static 'frontend/assets/images/gallery/mataji-7.jpg' %}" class="img-fluid" alt="Mataji Adoption">
-                    </a>
-                </div>
-                <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}">
-                        <img src="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}" class="img-fluid"
-                             alt="Mataji Adoption">
-                    </a>
+                    <a href="{% url 'distribution' %}" class="btn bg-1 text-white fs-3">Our Recent Distribution ></a>
                 </div>
             </div>
         </div>
     </section>
+<!--<section class="photo-gallery pt-5">-->
+<!--        <div class="container">-->
+<!--            <div class="row pb-3">-->
+<!--                <div class="col-md-12 text-center">-->
+<!--                    <h2 class="banner-title">Campaign <span>Gallery</span></h2>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row pb-4 g-4 gallery-grid">-->
+<!--                <div class="col-md-3 col-6 gallery-col">-->
+<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-1.jpg' %}">-->
+<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-1.jpg' %}" class="img-fluid"-->
+<!--                             alt="Mataji Adoption">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-3 col-6 gallery-col">-->
+<!--                    <a class="gallery-item" href="assets/images/gallery/mataji-2.jpg' %}">-->
+<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-2.jpg' %}" class="img-fluid" alt="Blanket Donation">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-3 col-6 gallery-col">-->
+<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}">-->
+<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}" class="img-fluid" alt="Medical care">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-3 col-6 gallery-col">-->
+<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-4.jpg' %}">-->
+<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-4.jpg' %}" class="img-fluid" alt="Mataji Adoption">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-3 col-6 gallery-col">-->
+<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-5.jpg' %}">-->
+<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-5.jpg' %}" class="img-fluid" alt="Mataji Adoption">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-3 col-6 gallery-col">-->
+<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}">-->
+<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}" class="img-fluid" alt="Mataji Adoption">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-3 col-6 gallery-col">-->
+<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-7.jpg' %}">-->
+<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-7.jpg' %}" class="img-fluid" alt="Mataji Adoption">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-3 col-6 gallery-col">-->
+<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}">-->
+<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}" class="img-fluid"-->
+<!--                             alt="Mataji Adoption">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
 <section class="py-5 donor-list-section" id="donor-list">
         <div class="container">
             <div class="row g-md-3 g-3">

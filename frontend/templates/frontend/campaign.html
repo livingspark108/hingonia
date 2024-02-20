@@ -4,7 +4,7 @@
 {% load mytags %}
 {% block body %}
 {% for i in campaign_obj %}
-{% if forloop.counter|divisibleby:2 %}
+{% if i.backgroud_type == 'red' %}
 <section class="py-5 my-md-5 my-3 bg-1 campaign-section">
         <div class="container">
             <div class="row align-items-center justify-content-center g-4">
@@ -12,7 +12,10 @@
                     <img src="{% get_media_prefix %}{{i.campaign_image}}" width="270" class="img-fluid" alt="">
                 </div>
                 <div class="col-md-7">
-                    <h2 class="banner-title-lite text-white">{{i.title}}</h2>
+                    <h2 class="banner-title-lite text-white"><a style="
+    color: #fff;
+" href="{% url 'ongoing-devotion' i.id %}">
+	                    {{i.title}}</a></h2>
                     <p class="page-desc  text-white">{{i.description}}
                     </p>
                     <div class="pt-3 pb-5">
@@ -26,7 +29,7 @@
         </div>
     </section>
 
-{% else %}
+{% elif i.backgroud_type == 'white' %}
 <section class="py-5 campaign-section">
         <div class="container">
             <div class="row align-items-center justify-content-center g-4">
@@ -35,7 +38,7 @@
                 </div>
                 <div class="col-md-7">
 <!--                    <h2 class="banner-title">Contribute to <span>Adopt a Mataji</span> in Vrindavan</h2>-->
-                    <h2 class="banner-title">{{i.title| convert_spaces_to_span|safe}}</h2>
+                    <h2 class="banner-title"><a href="{% url 'ongoing-devotion' i.id %}">{{i.title|convert_spaces_to_span|safe}}</a></h2>
                     <p class="page-desc color-2">{{i.description}}
                     </p>
                     <div class="pt-3 pb-5 pb-md-3">

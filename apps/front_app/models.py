@@ -3,6 +3,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 from application.custom_model import DateTimeModel
+from apps.front_app.constants import BG_TYPE_CHOICES
 
 
 class Mother(DateTimeModel):
@@ -22,7 +23,9 @@ class Campaign(DateTimeModel):
     amt_1 = models.IntegerField(max_length=300, blank=True,null=True)
     amt_2 = models.IntegerField(max_length=300, blank=True,null=True)
     amt_3 = models.IntegerField(max_length=300, blank=True,null=True)
+    backgroud_type = models.CharField(choices=BG_TYPE_CHOICES,max_length=300, blank=False,null=True,default='red')
     campaign_image = models.ImageField(upload_to='campaign_images', max_length=1000,null=True,blank=True)
+    campaign_backgroud = models.ImageField(upload_to='campaign_backgroud', max_length=1000,null=True,blank=True)
 
 
 class OurTeam(DateTimeModel):

@@ -21,7 +21,7 @@ from apps.user.models import TransactionDetails
 class CreateCampaignView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
 
     model = Campaign
-    fields = ['title','short_title','price','amt_1','amt_2','amt_3','short_description', 'description','campaign_image']
+    fields = ['title','short_title','price','amt_1','amt_2','amt_3','short_description', 'description','backgroud_type','campaign_backgroud','campaign_image']
     template_name = 'campaign/form.html'
     success_message = "%(title)s has been created successfully"
     success_url = reverse_lazy('campaign-list')
@@ -51,7 +51,7 @@ class ListCampaignViewJson(AjayDatatableView):
 class UpdateCampaignView(AdminRequiredMixin, SuccessMessageMixin, UpdateView):
 
     model = Campaign
-    fields = ['title','short_title','price','amt_1','amt_2','amt_3','short_description', 'description','campaign_image']
+    fields = ['title','short_title','price','amt_1','amt_2','amt_3','short_description', 'description','backgroud_type','campaign_backgroud','campaign_image']
     template_name = 'campaign/form.html'
     success_message = "%(title)s has been updated successfully"
     success_url = reverse_lazy('campaign-list')
