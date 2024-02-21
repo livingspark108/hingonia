@@ -3,34 +3,22 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-<section class="bg-img py-60 position-relative og-box"
-        style="background-image: url('{% get_media_prefix %}{{compaign.campaign_backgroud}}');">
-        <div class="campaign-overlay"></div>
-        <div class="container z-3 position-relative">
-            <div class="row">
-                <div class="col-md-12 pb-5">
-                    <div class="text-center">
-                        <span class="og-box-title display-5 bg-white color-2 fw-bold">{{compaign.title}} campaign</span>
-                    </div>
-                </div>
-                <div class="col-md-12 py-5">
-                    <div class="circle_all pt-5">
-                        <div class="circle_A">
-                            <img src="{% static 'frontend/assets/images/campaign/mango-icon.png' %}" class="img-fluid"
-                                 alt="">
-                        </div>
-                        <div class="circle_B"></div>
-                        <div class="circle_C"></div>
-                        <!-- <div class="circle_D"></div>
-                        <div class="circle_E"></div> -->
-                    </div>
-                </div>
-                <div class="col-md-12 pt-5">
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="py-3 color-2 display-5 fw-bold">{{compaign.title}} campaign</h2>
+            </div>
+            <div class="col-md-12 p-md-0 text-center">
+                <img src="{% get_media_prefix %}{{compaign.campaign_backgroud}}" width="800" class="img-fluid rounded" alt="">
+            </div>
+	        <div class="col-md-12 pt-5">
                     <!-- Flexbox container for aligning the toasts -->
                     <div aria-live="polite" aria-atomic="true"
                         class="og-notification-box d-flex justify-content-center align-items-center w-100">
                         <!-- Then put toasts within -->
-                        <div class="toast show" id="ogNotification" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast show" id="ogNotification" role="alert" aria-live="assertive"
+                            aria-atomic="true">
                             <div class="toast-header">
                                 <strong class="me-auto">New Donation</strong>
                                 <!-- <small>11 mins ago</small> -->
@@ -38,16 +26,61 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="toast-body" id="ogToastBody">
-                                {{transaction_obj.first.firstname}} Just donated <strong><i
-                                    class="bi bi-currency-rupee"></i>{{transaction_obj.first.amount}}</strong> for
-                                Bricks
+	                            
+                                {{transaction_obj.first.firstname}} Just donated <strong><i class="bi bi-currency-rupee"></i>{{transaction_obj.first.amount}}</strong> for
+                                Medical
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+	        </div>
         </div>
-    </section>
+    </div>
+</section>
+<!--<section class="bg-img py-60 position-relative og-box"-->
+<!--        style="background-image: url('{% get_media_prefix %}{{compaign.campaign_backgroud}}');">-->
+<!--        <div class="campaign-overlay"></div>-->
+<!--        <div class="container z-3 position-relative">-->
+<!--            <div class="row">-->
+<!--                <div class="col-md-12 pb-5">-->
+<!--                    <div class="text-center">-->
+<!--                        <span class="og-box-title display-5 bg-white color-2 fw-bold">{{compaign.title}} campaign</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-12 py-5">-->
+<!--                    <div class="circle_all pt-5">-->
+<!--                        <div class="circle_A">-->
+<!--                            <img src="{% static 'frontend/assets/images/campaign/mango-icon.png' %}" class="img-fluid"-->
+<!--                                 alt="">-->
+<!--                        </div>-->
+<!--                        <div class="circle_B"></div>-->
+<!--                        <div class="circle_C"></div>-->
+<!--                        &lt;!&ndash; <div class="circle_D"></div>-->
+<!--                        <div class="circle_E"></div> &ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-12 pt-5">-->
+<!--                    &lt;!&ndash; Flexbox container for aligning the toasts &ndash;&gt;-->
+<!--                    <div aria-live="polite" aria-atomic="true"-->
+<!--                        class="og-notification-box d-flex justify-content-center align-items-center w-100">-->
+<!--                        &lt;!&ndash; Then put toasts within &ndash;&gt;-->
+<!--                        <div class="toast show" id="ogNotification" role="alert" aria-live="assertive" aria-atomic="true">-->
+<!--                            <div class="toast-header">-->
+<!--                                <strong class="me-auto">New Donation</strong>-->
+<!--                                &lt;!&ndash; <small>11 mins ago</small> &ndash;&gt;-->
+<!--                                <button type="button" class="btn-close" data-bs-dismiss="toast"-->
+<!--                                    aria-label="Close"></button>-->
+<!--                            </div>-->
+<!--                            <div class="toast-body" id="ogToastBody">-->
+<!--                                {{transaction_obj.first.firstname}} Just donated <strong><i-->
+<!--                                    class="bi bi-currency-rupee"></i>{{transaction_obj.first.amount}}</strong> for-->
+<!--                                Bricks-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--</section>-->
 	<section class="pt-5 section-campaign-details">
         <div class="container">
             <div class="row align-items-center g-4">

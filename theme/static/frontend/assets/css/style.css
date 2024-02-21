@@ -1657,12 +1657,17 @@ a {
   }
 }
 
-#ogNotification .toast-header{
-  background-color: #fff;
+#ogNotification .toast-header {
+  background-color: var(--color-2);
   border-color: #667085;
 }
-#ogNotification .toast-body{
-  background-color: #fff;
+
+#ogNotification .toast-body {
+  background-color: var(--color-2);
+  color: #fff;
+}
+#ogNotification strong, #ogNotification i{
+  color: #fff;
 }
 
 /*********** circle animation end*************/
