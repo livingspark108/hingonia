@@ -76,7 +76,6 @@
                 <nav class="nav nav-pills flex-column flex-sm-row " role="tablist">
 	                {% get_campain_data as all_campain %}
 	                        {% with first_object=all_campain.first %}
-
 	                {% for single in all_campain %}
 	                
                     <a data-amt1="{{single.amt_1}}" data-amt2="{{single.amt_2}}" data-amt3="{{single.amt_3}}"
@@ -127,7 +126,7 @@
                         </div>
                         <div class="row pb-3">
                             <div class="col-12 ">
-                                <label class="form-label text-white">Contribute to adopt a Mataji In Vrindavan <span class="text-error">*</span></label>
+                                <label class="form-label text-white">Contribute to support a Mataji In Vrindavan <span class="text-error">*</span></label>
                                 <div class="input-group mb-1">
                                     <span class="input-group-text" id="mobile-addon">IN</span>
                                     <input value="{{request.user.username|handle_none}}" type="number"
@@ -139,7 +138,8 @@
                         </div>
                         <div class="row pb-3">
                             <div class="col-md-12">
-                                <label class="form-label text-white">How many Mothers you want to adopt: <span class="text-error">*</span>
+                                <label class="form-label text-white">How many mataji’s you want to support: <span
+		                                class="text-error">*</span>
                                 </label>
                                 <div class="row align-items-center">
                                     <div class="col-5">

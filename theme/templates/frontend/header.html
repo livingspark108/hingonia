@@ -25,6 +25,23 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-WJPZWJQ');</script>
 	<!-- End Google Tag Manager -->
+	<!-- Meta Pixel Code -->
+	<script>
+	!function(f,b,e,v,n,t,s)
+	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];
+	s.parentNode.insertBefore(t,s)}(window, document,'script',
+	'https://connect.facebook.net/en_US/fbevents.js');
+	fbq('init', '1033966767593889');
+	fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none"
+	src="https://www.facebook.com/tr?id=1033966767593889&ev=PageView&noscript=1"
+	/></noscript>
+	<!-- End Meta Pixel Code -->
 </head>
 <body>
 	<!-- Google Tag Manager (noscript) -->
@@ -70,7 +87,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a data-title="Adopt a Mataji" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
              class="btn bg-1 text-white help_mataji"><img
 		          src="{% static 'frontend/assets/images/foot.png' %}" width="20"
-                                                       alt="">&nbsp;&nbsp; Help a Mataji</a>
+                                                       alt="">&nbsp;&nbsp; Donate Now</a>
 	        {% if request.user.is_authenticated %}
 	        <div class="d-inline-block">
             <div class="dropdown-center ">
