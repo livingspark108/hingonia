@@ -1,0 +1,138 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="about-title position-relative">
+                        <img src="assets/images/about-us/foot.png" alt="">
+                        <h2>10000+</h2>
+                        <h3>Widows Impacted</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{about_obj.title}}</h2>
+                    <p>{{about_obj.description}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="{% get_media_prefix %}{{about_obj.banner}}" class="img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-5 about-team">
+        <div class="container">
+            <div class="row justify-content-center pb-md-4 pb-2">
+                <div class="col-md-8">
+                    <div class="text-center">
+                        <h3 class="section-title">Meet our team</h3>
+                        <p class="desc">Our philosophy is simple — hire a team of diverse, passionate people and foster
+                            a culture that empowers you to do you best work.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row team-section g-4">
+	            {% for single in ourteam_obj %}
+                <div class="col-md-3 text-center">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <img src="{% get_media_prefix %}{{single.profile}}" class="img-fluid" alt="">
+                            <h3 class="team-title">{{single.title}}</h3>
+                            <h4 class="team-subtitle">{{single.designation}}</h4>
+                            <p class="team-desc">{{single.short_description}}</p>
+                        </div>
+                    </div>
+                </div>
+	            {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-md-5 py-3 about-team">
+        <div class="container">
+            <div class="row justify-content-center pb-4">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <h4 class="team-subtitle">Contact us</h4>
+                        <h3 class="section-title">Get in touch</h3>
+                        <p class="team-desc">We’d love to hear from you. Please fill out this form.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center ">
+                <div class="col-lg-5 col-md-7">
+                    <form action="" method="post" class="contact-form">
+	                    {% csrf_token %}
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label">First name <span class="color-2">*</span></label>
+                                <input type="text" name="first_name" class="form-control" placeholder="First name"
+                                       required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last name <span class="color-2">*</span></label>
+                                <input type="text" name="last_name" class="form-control" placeholder="Last name"
+                                       required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Email <span class="color-2">*</span></label>
+                                <input type="email" name="email" class="form-control"
+                                       placeholder="you@company.com" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Phone number</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">IN</span>
+                                    <input type="number" name="mobile_no" class="form-control"
+                                           placeholder="+91 00000-00000"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Message</label>
+                                <textarea name="message" class="form-control" cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">You agree to our friendly <a
+                                            href="#">privacy policy</a>.</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn bg-1 text-white w-100" value="Send message">
+                                <!-- <a href="#" class="btn bg-1 text-white w-100">Send message</a> -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+{% block script%}
+
+{% endblock %}
