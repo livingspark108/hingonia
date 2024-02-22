@@ -14,8 +14,7 @@
                 <div class="col-md-7">
                     <h2 class="banner-title-lite text-white"><a style="
     color: #fff;
-" href="{% url 'ongoing-devotion' i.id %}">
-	                    {{i.title}}</a></h2>
+" href="{% url 'ongoing-devotion' i.slug %}">{{i.title}}</a></h2>
                     <p class="page-desc  text-white">{{i.description}}
                     </p>
                     <div class="pt-3 pb-5">
@@ -38,7 +37,7 @@
                 </div>
                 <div class="col-md-7">
 <!--                    <h2 class="banner-title">Contribute to <span>Adopt a Mataji</span> in Vrindavan</h2>-->
-                    <h2 class="banner-title"><a href="{% url 'ongoing-devotion' i.id %}">{{i.title|convert_spaces_to_span|safe}}</a></h2>
+                    <h2 class="banner-title"><a href="{% url 'ongoing-devotion' i.slug %}">{{i.title|convert_spaces_to_span|safe}}</a></h2>
                     <p class="page-desc color-2">{{i.description}}
                     </p>
                     <div class="pt-3 pb-5 pb-md-3">

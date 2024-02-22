@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.text import slugify
 
 # Create your models here.
 from application.custom_model import DateTimeModel
@@ -16,6 +17,7 @@ class Mother(DateTimeModel):
 
 class Campaign(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
+    slug = models.SlugField(unique=True,max_length=300, blank=False,null=True)
     short_title = models.CharField(max_length=300, blank=False,null=True)
     price = models.FloatField(max_length=300, blank=True,null=True)
     short_description = models.TextField(max_length=2500, null=True, blank=True)
@@ -27,7 +29,19 @@ class Campaign(DateTimeModel):
     campaign_image = models.ImageField(upload_to='campaign_images', max_length=1000,null=True,blank=True)
     campaign_backgroud = models.ImageField(upload_to='campaign_backgroud', max_length=1000,null=True,blank=True)
 
+    def save(self, *args, **kwargs):
+        # Generate slug from title without spaces
+        if not self.slug:
+            self.slug = slugify(self.title)
 
+        super().save(*args, **kwargs)
+
+    def save_base(self, *args, **kwargs):
+        # Generate slug from title without spaces if the title has changed
+
+        self.slug = slugify(self.title)
+
+        super().save_base(*args, **kwargs)
 class OurTeam(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
     designation = models.TextField(max_length=200, null=True, blank=True)

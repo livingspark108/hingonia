@@ -3,6 +3,9 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
+<meta property="og:title" content="{{compaign.title}}" />
+<meta property="og:url" content="{% url 'ongoing-devotion' compaign.slug %}" />
+<meta property="og:image" content="{% get_media_prefix %}{{compaign.campaign_backgroud}}" />
 <section>
     <div class="container-fluid">
         <div class="row">
