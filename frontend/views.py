@@ -198,7 +198,7 @@ class OngoingDevotionView(View):
     def get(self, request,id):
         compaign = Campaign.objects.get(slug=id)
         transaction_obj = TransactionDetails.objects.order_by('-created_at')[:5]
-        transaction_obj_20 = TransactionDetails.objects.order_by('-created_at')[:20]
+        transaction_obj_20 = TransactionDetails.objects.filter(status='success').order_by('-created_at')[:20]
         context = {'compaign':compaign,'transaction_obj':transaction_obj,'transaction_obj_20':transaction_obj_20}
         return render(request, 'frontend/ongoing_devotion.html',context)
 
