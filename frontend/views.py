@@ -317,6 +317,7 @@ class PayuSuccessAPiView(View):
     def get(self,request):
         return redirect('home')
 
+    @csrf_exempt
     def post(self, request):
 
         """
