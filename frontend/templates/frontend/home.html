@@ -18,7 +18,8 @@
             <span>every year.</span>
           </h2>
           <div class="text-center pt-3">
-            <a data-title="Adopt a Mataji" href="#" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
+            <a style="z-index: 9;" data-title="Adopt a Mataji" href="#" data-bs-toggle="modal"
+               data-bs-target="#helpMatajiModal"
                class="help_mataji btn bg-1 text-white banner-btn"><img
 		            src="{% static 'frontend/assets/images/foot.png' %}" width="20"
                 alt="">&nbsp;&nbsp; Donate Now</a>
@@ -48,7 +49,7 @@
                 </div>
                 <h2 class="banner-title-lite fs-4 mb-3">{{i.short_title| add_spam_tag|safe}}</h2>
                 <div>
-                  <a data-title="{{i.short_title}}" href="#"
+                  <a style="z-index: 9;" data-title="{{i.short_title}}" href="#"
                      class="btn bg-1 text-white my-1 help_mataji" data-bs-toggle="modal"
                      data-bs-target="#helpMatajiModal">Donate Now</a>
                   <a href="{% url 'ongoing-devotion' i.slug %}" class="btn bg-outline color-2 my-1">Learn More</a>
