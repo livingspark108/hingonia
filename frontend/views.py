@@ -304,7 +304,7 @@ class FrontendPayView(View):
         return render(request, 'frontend/pay_page.html', context)
 
 
-class PayuSuccessAPiView(GenericAPIView):
+class PayuSuccessAPiView(View):
 
     """
 
@@ -361,7 +361,7 @@ class PayuSuccessAPiView(GenericAPIView):
             return HttpResponseRedirect(reverse('home', kwargs={}))
 
 
-class PayuFailureAPiView(GenericAPIView):
+class PayuFailureAPiView(View):
 
     """
 

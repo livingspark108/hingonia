@@ -236,8 +236,8 @@ PAYU_CONFIG = {
     "merchant_key":"tM5HOf",
     "merchant_salt":"WMMC7MXGhU9p1cbn8PGgB5msXUA8I7E2",
     "mode": "Live",
-    "RESPONSE_URL_SUCCESS" : "http://167.71.230.81:8011/payment_response_handler/",
-    "RESPONSE_URL_FAILURE" : "http://167.71.230.81:8011/payment_response_handler/"
+    "RESPONSE_URL_SUCCESS" : "https://thepuredevotion.in/payment_response_handler/",
+    "RESPONSE_URL_FAILURE" : "https://thepuredevotion.in/payment_failed_handler/"
    }
 # Change the PAYU_MODE to 'LIVE' for production.
 PAYU_MODE = "TEST"
