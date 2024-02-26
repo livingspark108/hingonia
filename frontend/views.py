@@ -305,28 +305,22 @@ class FrontendPayView(View):
         }
         return render(request, 'frontend/pay_page.html', context)
 
-class PayuSuccessAPiView(View):
-    """
-    Class for creating API view for Payment Success.
-    """
+class PayuSuccessAPIView(View):
+
     permission_classes = [AllowAny]
 
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
-    def get_serializer(self):
-        return TransactionDetailsSerializer()
-
     def get(self, request):
         return HttpResponseRedirect(reverse('home'))
 
     def post(self, request):
-        """
-        Function for Payment Success.
-        """
-        serializer = self.get_serializer(data=request.POST)
-        data = {k: v[0] for k, v in dict(request.POST).items()}
+        data = {k: v[0] for k, v in request.POST.lists()}
+
+        # Instantiate your serializer manually
+        serializer = TransactionDetailsSerializer(data=data)
 
         if serializer.is_valid():
             instance = serializer.save()
@@ -334,10 +328,12 @@ class PayuSuccessAPiView(View):
             if not user_obj:
                 email = instance.email if instance.email else ""
                 user_obj = User.objects.create_user(first_name=instance.firstname, type='devotee',
-                                                     username=instance.phone, email=email,
-                                                     password=instance.phone)
-
+                                                    username=instance.phone, email=email,
+                                                    password=instance.phone)
+                user_obj.save()
         else:
+            # Handle serializer validation errors
+            errors = serializer.errors
             return HttpResponseRedirect(reverse('home'))
 
         merchant_key = PAYU_CONFIG['merchant_key']
