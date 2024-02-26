@@ -322,7 +322,7 @@ class PayuSuccessAPiView(GenericAPIView):
     serializer_class = TransactionDetailsSerializer
 
     def get(self,request):
-        return redirect('home')
+        return HttpResponseRedirect(reverse('home', kwargs={}))
 
     def post(self, request):
 
@@ -348,9 +348,6 @@ class PayuSuccessAPiView(GenericAPIView):
                 user_obj = User.objects.create_user(first_name=instance.firstname,type='devotee',username=instance.phone, email=email,
                                                password=instance.phone)
                 user_obj.save()
-
-
-            print(f"Saved instance: {instance}")
         else:
             errors = serializer.errors
 
