@@ -305,64 +305,51 @@ class FrontendPayView(View):
         }
         return render(request, 'frontend/pay_page.html', context)
 
-@method_decorator(csrf_exempt, name='dispatch')
-class PayuSuccessAPiView(GenericAPIView):
-
+class PayuSuccessAPiView(View):
     """
-
-       Class for creating API view for Payment Success.
-
-       """
+    Class for creating API view for Payment Success.
+    """
     permission_classes = [AllowAny]
 
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
-    serializer_class = TransactionDetailsSerializer
+    def get_serializer(self):
+        return TransactionDetailsSerializer()
 
-    def get(self,request):
-        return HttpResponseRedirect(reverse('home', kwargs={}))
+    def get(self, request):
+        return HttpResponseRedirect(reverse('home'))
 
     def post(self, request):
-
         """
-
         Function for Payment Success.
-
         """
-
-        serializer = self.get_serializer(data=request.data)
-
-        data = {k: v[0] for k, v in dict(request.data).items()}
+        serializer = self.get_serializer(data=request.POST)
+        data = {k: v[0] for k, v in dict(request.POST).items()}
 
         if serializer.is_valid():
             instance = serializer.save()
-            print(instance)
             user_obj = User.objects.filter(username=instance.phone).first()
             if not user_obj:
-                if instance.email:
-                    email = instance.email
-                else:
-                    email = ""
-                user_obj = User.objects.create_user(first_name=instance.firstname,type='devotee',username=instance.phone, email=email,
-                                               password=instance.phone)
-                user_obj.save()
+                email = instance.email if instance.email else ""
+                user_obj = User.objects.create_user(first_name=instance.firstname, type='devotee',
+                                                     username=instance.phone, email=email,
+                                                     password=instance.phone)
+
         else:
-            errors = serializer.errors
-
-            return HttpResponseRedirect(reverse('home', kwargs={}))
-
+            return HttpResponseRedirect(reverse('home'))
 
         merchant_key = PAYU_CONFIG['merchant_key']
         merchant_salt = PAYU_CONFIG['merchant_salt']
         payu = Payu(merchant_key, merchant_salt, "live")
+
         if data['status'] == 'success':
             response = payu.check_transaction(**data)
-            login(request,user_obj)
-            return HttpResponseRedirect(reverse('thank-you', kwargs={}))
+            login(request, user_obj)
+            return HttpResponseRedirect(reverse('thank-you'))
         else:
-            return HttpResponseRedirect(reverse('home', kwargs={}))
+            return HttpResponseRedirect(reverse('home'))
 
 class PayuFailureAPiView(GenericAPIView):
 
