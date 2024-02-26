@@ -315,12 +315,15 @@ class PayuSuccessAPiView(GenericAPIView):
        """
     permission_classes = [AllowAny]
 
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     serializer_class = TransactionDetailsSerializer
 
     def get(self,request):
         return redirect('home')
 
-    @csrf_exempt
     def post(self, request):
 
         """
@@ -364,7 +367,6 @@ class PayuSuccessAPiView(GenericAPIView):
         else:
             return HttpResponseRedirect(reverse('home', kwargs={}))
 
-@method_decorator(csrf_exempt, name='dispatch')
 class PayuFailureAPiView(GenericAPIView):
 
     """
@@ -373,6 +375,11 @@ class PayuFailureAPiView(GenericAPIView):
 
        """
     permission_classes = [AllowAny]
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def get(self,request):
         return HttpResponseRedirect(reverse('home', kwargs={}))
 
