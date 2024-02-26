@@ -305,7 +305,7 @@ class FrontendPayView(View):
         return render(request, 'frontend/pay_page.html', context)
 
 @method_decorator(csrf_exempt, name='dispatch')
-class PayuSuccessAPiView(View):
+class PayuSuccessAPiView(GenericAPIView):
 
     """
 
@@ -363,7 +363,7 @@ class PayuSuccessAPiView(View):
             return HttpResponseRedirect(reverse('home', kwargs={}))
 
 @method_decorator(csrf_exempt, name='dispatch')
-class PayuFailureAPiView(View):
+class PayuFailureAPiView(GenericAPIView):
 
     """
 
