@@ -242,7 +242,7 @@ PAYU_CONFIG = {
 # Change the PAYU_MODE to 'LIVE' for production.
 PAYU_MODE = "TEST"
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://secure.payu.in']
 
 GOOGLE_ANALYTICS = {
     'google_analytics_id': 'UA-165462357-1',
