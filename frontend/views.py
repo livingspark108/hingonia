@@ -370,7 +370,7 @@ class PayuFailureAPiView(GenericAPIView):
        """
 
     def get(self,request):
-        return redirect('home')
+        return HttpResponseRedirect(reverse('home', kwargs={}))
 
     @csrf_exempt
 
@@ -388,7 +388,7 @@ class PayuFailureAPiView(GenericAPIView):
         payu = Payu(merchant_key, merchant_salt, "live")
         response = payu.verify_transaction(data)
 
-        return JsonResponse(response)
+        return HttpResponseRedirect(reverse('home', kwargs={}))
 
 @login_required
 def set_password(request):

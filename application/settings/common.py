@@ -208,6 +208,7 @@ CLASS_ALLOWED = 1
 SUBJECT_ALLOWED = 1
 VIDEO_ALLOWED = 5
 
+CSRF_COOKIE_AGE = 36000  # 1 hour in seconds
 
 
 # Stripe configuration
@@ -221,10 +222,10 @@ DJSTRIPE_WEBHOOK_SECRET = "whsec_11ov9HJBLwcI7AmXPWU5DcjljMgE6Df0"  # Get it fro
 
 
 #Email Server
-EMAIL_HOST = 'imap.secureserver.net'
-EMAIL_PORT = 993
-EMAIL_HOST_USER = 'bhavanshu@livingspark.in'
-EMAIL_HOST_PASSWORD = '08019@Hkc'
+EMAIL_HOST = 'smtp.zoho.in'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'contact@thepuredevotion.in'
+EMAIL_HOST_PASSWORD = 'Shriradha#5'
 EMAIL_USE_TLS = True
 
 
