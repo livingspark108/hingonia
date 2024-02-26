@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string, get_template
+from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.views.decorators.csrf import csrf_exempt
@@ -303,7 +304,7 @@ class FrontendPayView(View):
         }
         return render(request, 'frontend/pay_page.html', context)
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class PayuSuccessAPiView(View):
 
     """
@@ -361,7 +362,7 @@ class PayuSuccessAPiView(View):
         else:
             return HttpResponseRedirect(reverse('home', kwargs={}))
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class PayuFailureAPiView(View):
 
     """
@@ -374,7 +375,6 @@ class PayuFailureAPiView(View):
         return HttpResponseRedirect(reverse('home', kwargs={}))
 
     @csrf_exempt
-
     def post(self, request):
 
         """
