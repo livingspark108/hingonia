@@ -29,6 +29,7 @@ from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distributi
 from apps.user.models import TransactionDetails
 from frontend.forms import SetPasswordForm
 from frontend.serializer import TransactionDetailsSerializer
+from rest_framework.permissions import AllowAny
 
 User = get_user_model()
 
@@ -312,6 +313,7 @@ class PayuSuccessAPiView(GenericAPIView):
        Class for creating API view for Payment Success.
 
        """
+    permission_classes = [AllowAny]
 
     serializer_class = TransactionDetailsSerializer
 
@@ -370,7 +372,7 @@ class PayuFailureAPiView(GenericAPIView):
        Class for creating API view for Payment Failure.
 
        """
-
+    permission_classes = [AllowAny]
     def get(self,request):
         return HttpResponseRedirect(reverse('home', kwargs={}))
 
