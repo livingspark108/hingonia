@@ -175,7 +175,12 @@
                     <div class="card bg-white border-dark">
                         <div class="card-body">
                             <h5 class="text-dark">Donor Name :
-	                            <span class="color-2 fw-bold">{{single.firstname}}</span></h5>
+	                            {% if single.firstname %}
+	                            <span class="color-2 fw-bold">{{single.firstname}}</span>
+	                            {% else %}
+                                <span class="color-2 fw-bold">Anonymous</span>
+	                            {% endif %}
+                            </h5>
                             <h6 class="text-dark">Donated <span class="color-2 fw-bold fs-5"><i
 		                            class="bi bi-currency-rupee color-2"></i>{{single.amount}}</span> for {{single.productinfo}}</h6>
                         </div>
