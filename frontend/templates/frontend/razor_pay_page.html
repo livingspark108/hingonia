@@ -1,0 +1,64 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="banner-title-lite color-7 fst-italic ff-times fw-bold">Our Mothers</h2>
+                    <div class="subtitle-box py-2">
+                        <span>1000+ Matajis Adopted</span>
+                        <span>100000+ Grocery Kits Distributed</span>
+                        <span>30000+ Blankets</span>
+                    </div>
+                    <div>
+                        <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="mothers-list py-md-5 py-4">
+        <div class="container">
+            <div class="row g-3">
+	            <form action="{% url 'razor-pay-success' %}" method="POST">
+					   <input type="hidden" name="order_id" value="{{ order_id }}">
+					   <script>
+					       var options = {
+					           "key": "{{ key }}",
+					           "amount": "{{ amount }}",
+					           "currency": "INR",
+					           "name": "Pure Devotion",
+					           "description": "{{productinfo}}",
+					           "order_id": "{{ order_id }}",
+					           "handler": function(response) {
+					               // Handle the payment success response
+					               // You can submit the form or redirect to a success page
+					               document.forms[0].submit();
+					           },
+					           "prefill": {
+					               "name": "{{firstname}}",
+					               "email": "{{email}}",
+					               "contact": "{{phone}}"
+					           }
+					       };
+					       var rzp = new Razorpay(options);
+					       rzp.open();
+					   </script>
+					</form>
+                <div class="col-md-12 pt-4 text-center">
+                    <a href="#" class="scroll-down">Scroll Down</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block script%}
+
+{% endblock %}

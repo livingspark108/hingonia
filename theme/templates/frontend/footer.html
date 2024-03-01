@@ -91,7 +91,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
             </div>
-	        <form action="{% url 'pay' %}" method="post">
+<!--	        <form action="{% url 'pay' %}" method="post">-->
+	        <form action="{% url 'razor-pay' %}" method="post">
 		        {% csrf_token %}
 		        <input type="hidden" class="title" value="{{all_campain.first.short_title}}" name="title">
             <div class="modal-body">

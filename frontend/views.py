@@ -1,6 +1,11 @@
+import base64
+import hashlib
+import hmac
 import json
 import random
 from datetime import time
+
+import razorpay as razorpay
 from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -23,7 +28,7 @@ from django.views import View
 from django.views.generic import CreateView, DeleteView, UpdateView, TemplateView
 from application.custom_classes import DevoteeRequiredMixin
 from application.helper import send_contact_us
-from application.settings.common import PAYU_CONFIG
+from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
     AbandonCart
 from apps.user.models import TransactionDetails
@@ -199,7 +204,7 @@ class Request80GView(DevoteeRequiredMixin, View):
 class OngoingDevotionView(View):
     def get(self, request,id):
         compaign = Campaign.objects.get(slug=id)
-        transaction_obj = TransactionDetails.objects.order_by('-created_at')[:5]
+        transaction_obj = TransactionDetails.objects.filter(status='success').order_by('-created_at')[:5]
         transaction_obj_20 = TransactionDetails.objects.filter(status='success').order_by('-created_at')[:20]
         context = {'compaign':compaign,'transaction_obj':transaction_obj,'transaction_obj_20':transaction_obj_20}
         return render(request, 'frontend/ongoing_devotion.html',context)
@@ -273,6 +278,12 @@ class FrontendThankYouView(DevoteeRequiredMixin,View):
         context = {'form':form}
         return render(request, 'frontend/thank_you.html', context)
 
+class FrontendRazorThankYouView(DevoteeRequiredMixin,View):
+    def get(self, request):
+        form = SetPasswordForm()
+        context = {'form':form}
+        return render(request, 'frontend/thank_you.html', context)
+
 # Payment gateway
 class FrontendPayView(View):
     def post(self, request):
@@ -298,12 +309,37 @@ class FrontendPayView(View):
 
         response = payu.transaction(**payload)
         html = payu.make_html(response)
-        print(html)
         #if request.user.is_authenticated:
         context = {
             'html':html
         }
         return render(request, 'frontend/pay_page.html', context)
+
+
+class FrontendRazorPayView(View):
+    def post(self, request):
+        # Create payu instance
+        if request.POST.get('custom_check') == 'custom_check':
+            amount = request.POST.get('ctm_amount')
+        else:
+            amount = request.POST.get('amount')
+
+
+        order_id = initiate_payment(amount)
+        payload = {
+            'key': RAZOR_PAY_ID,
+            'order_id': order_id,
+            "amount": amount,
+            "firstname": request.POST.get('first_name'),
+            "email": request.POST.get('email'),
+            "phone": request.POST.get('mobile_no'),
+            "productinfo": request.POST.get('title'),
+            "txnid": "OR_"+str(random.random()),
+            "furl": PAYU_CONFIG['RESPONSE_URL_FAILURE'],
+            "surl": PAYU_CONFIG['RESPONSE_URL_SUCCESS']
+        }
+
+        return render(request, 'frontend/razor_pay_page.html', payload)
 
 class PayuSuccessAPIView(View):
 
@@ -379,6 +415,106 @@ class PayuFailureAPiView(GenericAPIView):
         response = payu.verify_transaction(data)
 
         return HttpResponseRedirect(reverse('home', kwargs={}))
+
+def initiate_payment(amt):
+    client = razorpay.Client(auth=(RAZOR_PAY_ID, RAZOR_PAY_SECRET))
+    print(client)
+    float_number = float(amt)
+
+    # Convert float to integer
+    amt = int(float_number)
+    data = {
+        'amount': amt * 100,  # Razorpay expects amount in paise (e.g., 100 INR = 10000 paise)
+        'currency': 'INR',
+        'payment_capture': '1'  # Auto capture the payment after successful authorization
+    }
+    response = client.order.create(data=data)
+    return response['id']
+
+@csrf_exempt
+def payment_success_view(request):
+   order_id = request.POST.get('order_id')
+   payment_id = request.POST.get('razorpay_payment_id')
+   headers = request.headers
+   cookie_header = headers.get('Cookie', '')
+   cookies = cookie_header.split('; ')
+   sessionid = None
+
+   for cookie in cookies:
+       name, value = cookie.split('=')
+       if name.strip() == 'sessionid':
+           sessionid = value.strip()
+           break
+   if request.COOKIES.get('sessionid') != sessionid:
+       return HttpResponseRedirect(reverse('home'))
+
+   client = razorpay.Client(auth=(RAZOR_PAY_ID, RAZOR_PAY_SECRET))
+   try:
+       res_data=client.order.payments(order_id)
+       dic_data = res_data['items'][0]
+       first_name = dic_data['email']
+       email = dic_data['email']
+       phone = dic_data['contact']
+       phone = phone.replace("+91", "")
+
+       user_obj = User.objects.filter(username=phone).first()
+       if not user_obj:
+           user_obj = User.objects.create_user(first_name=first_name, type='devotee',
+                                               username=phone, email=email,
+                                               password=phone)
+           user_obj.save()
+       pay_id = dic_data['id']
+       amt = dic_data['amount']/100
+       method = dic_data['method']
+       status = dic_data['status']
+       description = dic_data['description']
+       tran_detail_obj = TransactionDetails()
+       tran_detail_obj.mihpayid = pay_id
+       tran_detail_obj.mode = method
+       tran_detail_obj.productinfo = description
+       tran_detail_obj.payment_source = method
+       tran_detail_obj.amount = amt
+       tran_detail_obj.status = status
+       tran_detail_obj.email = email
+       tran_detail_obj.phone = phone
+       tran_detail_obj.save()
+       print(dic_data)
+       login(request, user_obj)
+       return HttpResponseRedirect(reverse('thank-you-rj'))
+
+   except razorpay.errors.SignatureVerificationError as e:
+       return HttpResponseRedirect(reverse('home'))
+
+
+def validate_signature(body, signature):
+    # Get your Razorpay secret key
+    razorpay_secret_key = 'YOUR_RAZORPAY_SECRET_KEY'
+
+    # Calculate HMAC SHA256 hash of the request body
+    expected_signature = hmac.new(razorpay_secret_key.encode(), body, hashlib.sha256).hexdigest()
+
+    # Encode the expected signature in base64
+    expected_signature = base64.b64encode(expected_signature.encode()).decode()
+    print(expected_signature)
+
+    # Compare the calculated signature with the signature received in the request
+    return hmac.compare_digest(expected_signature, signature)
+
+
+def handle_payment_webhook(request):
+    # Verify webhook signature (optional but recommended)
+    # ...
+
+    # Parse webhook event
+    payload = request.POST
+
+    # Handle payment success event
+    if payload['event'] == 'payment.captured':
+        payment_id = payload['payload']['payment']['entity']['id']
+        # Update your database with payment success status
+        # ...
+
+    return JsonResponse({'status': 'success'})
 
 @login_required
 def set_password(request):

@@ -36,8 +36,11 @@ urlpatterns = [
     path('term-and-condition', FrontendTermConditionView.as_view(), name='term-and-condition'),
     path('refund-policy', FrontendRefundPolicyView.as_view(), name='refund-policy'),
     path('pay', FrontendPayView.as_view(), name='pay'),
+    path('razor-pay', FrontendRazorPayView.as_view(), name='razor-pay'),
+    path('success-pay', payment_success_view, name='razor-pay-success'),
     path('pay_now', FrontendPayView.as_view(), name='pay'),
-    path('thank-you', FrontendThankYouView.as_view(), name='thank-you'),
+    path('thank-you-hf', FrontendThankYouView.as_view(), name='thank-you'),
+    path('thank-you', FrontendRazorThankYouView.as_view(), name='thank-you-rj'),
     path('payment_response_handler/', PayuSuccessAPIView.as_view(), name='payu-success-api'),
     path('payment_failed_handler/', PayuFailureAPiView.as_view(), name='payu-failed-api'),
     path('set_password/', set_password, name='set_password'),
@@ -46,6 +49,8 @@ urlpatterns = [
     path('forgot-password/', forgot_password, name='forgot_password'),
     path('reset-password/<str:token>/', reset_password, name='reset_password'),
     path('ongoing-devotion/<str:id>', OngoingDevotionView.as_view(), name='ongoing-devotion'),
+    path('pay-razor-pay/', initiate_payment, name='pay-razor-pay'),
+    path('handle-payment-webhook/', handle_payment_webhook, name='handle-payment-webhook'),
 
 ]
 

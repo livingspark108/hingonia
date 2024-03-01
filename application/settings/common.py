@@ -247,3 +247,6 @@ CSRF_TRUSTED_ORIGINS = ['https://secure.payu.in']
 GOOGLE_ANALYTICS = {
     'google_analytics_id': 'UA-165462357-1',
 }
+
+RAZOR_PAY_ID = "rzp_live_9GSRd1cdxiYGSX"
+RAZOR_PAY_SECRET = "gVmzuY523vNuqdhqWFwbAWwc"
