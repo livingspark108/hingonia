@@ -546,14 +546,17 @@ a {
   padding: 0.375rem 0.75rem;
 }
 
+
 .section-collage img {
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
+  /* filter: grayscale(100%);
+  -webkit-filter: grayscale(100%); */
 }
 
 .collageImgHover {
-  filter: unset !important;
-  -webkit-filter: unset !important;
+  /* filter: unset !important;
+  -webkit-filter: unset !important; */
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
 }
 
 .collageSpanHover {
