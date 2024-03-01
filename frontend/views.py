@@ -15,6 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
+from django.db.models import Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string, get_template
@@ -206,8 +207,8 @@ class Request80GView(DevoteeRequiredMixin, View):
 class OngoingDevotionView(View):
     def get(self, request,id):
         compaign = Campaign.objects.get(slug=id)
-        transaction_obj = TransactionDetails.objects.filter(status='success').order_by('-created_at')[:5]
-        transaction_obj_20 = TransactionDetails.objects.filter(status='success').order_by('-created_at')[:20]
+        transaction_obj = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).order_by('-created_at')[:5]
+        transaction_obj_20 = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).order_by('-created_at')[:20]
         context = {'compaign':compaign,'transaction_obj':transaction_obj,'transaction_obj_20':transaction_obj_20}
         return render(request, 'frontend/ongoing_devotion.html',context)
 
@@ -327,7 +328,7 @@ class FrontendRazorPayView(View):
             amount = request.POST.get('amount')
 
 
-        order_id = initiate_payment(amount)
+        order_id = initiate_payment(amount,request.POST.get('first_name'))
         payload = {
             'key': RAZOR_PAY_ID,
             'order_id': order_id,
@@ -418,7 +419,7 @@ class PayuFailureAPiView(GenericAPIView):
 
         return HttpResponseRedirect(reverse('home', kwargs={}))
 
-def initiate_payment(amt):
+def initiate_payment(amt,name):
     client = razorpay.Client(auth=(RAZOR_PAY_ID, RAZOR_PAY_SECRET))
     print(client)
     float_number = float(amt)
@@ -428,6 +429,9 @@ def initiate_payment(amt):
     data = {
         'amount': amt * 100,  # Razorpay expects amount in paise (e.g., 100 INR = 10000 paise)
         'currency': 'INR',
+        'notes': {
+            'firstname': name
+        },
         'payment_capture': '1'  # Auto capture the payment after successful authorization
     }
     response = client.order.create(data=data)
@@ -454,7 +458,7 @@ def payment_success_view(request):
    try:
        res_data=client.order.payments(order_id)
        dic_data = res_data['items'][0]
-       first_name = dic_data['email']
+       first_name = dic_data['notes']['firstname']
        email = dic_data['email']
        phone = dic_data['contact']
        phone = phone.replace("+91", "")
@@ -465,6 +469,10 @@ def payment_success_view(request):
                                                username=phone, email=email,
                                                password=phone)
            user_obj.save()
+       elif not user_obj.first_name:
+           user_obj.first_name = first_name
+           user_obj.save()
+
        pay_id = dic_data['id']
        amt = dic_data['amount']/100
        method = dic_data['method']
@@ -473,6 +481,7 @@ def payment_success_view(request):
        tran_detail_obj = TransactionDetails()
        tran_detail_obj.mihpayid = pay_id
        tran_detail_obj.mode = method
+       tran_detail_obj.firstname = first_name
        tran_detail_obj.productinfo = description
        tran_detail_obj.payment_source = method
        tran_detail_obj.amount = amt

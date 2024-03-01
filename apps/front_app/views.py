@@ -146,8 +146,11 @@ class ListDonationView(AdminRequiredMixin, TemplateView):
 
 class ListDonationViewJson(AjayDatatableView):
     model = TransactionDetails
-    columns = ['phone','amount','mode','status','created_at', 'actions']
+    columns = ['firstname','phone','amount','mode','status','created_at', 'actions']
     exclude_from_search_cloumn = ['actions']
+
+    def get_initial_queryset(self):
+        return self.model.objects.filter().order_by('-created_at')
 
     def render_column(self, row, column):
         print(row.email)

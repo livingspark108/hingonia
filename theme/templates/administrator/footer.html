@@ -72,28 +72,27 @@
 
     var ajaxUrl = $('#list_page_url').val();
     var oTable = $('#datatable').DataTable({
-          "pageLength":10,
-          "serverSide": true,
-
-          "ordering": true,
-              columnDefs: [{
-              "width": "20%",
-              orderable: false,
-              targets: "no-sort"
-              }],
-          "language": {
-          "emptyTable": "No data available"
-           },
-          "order": [[ 0, "desc" ]],
-          "ajax": { "url": ajaxUrl },
-          "scrollX": true,
-          "initComplete": function(settings, json){
-                $('#id_count').html(settings.json.recordsTotal);
-           },
-           "columnDefs": [{
-                "targets": [-1],
-                "orderable": false,
-                "className": 'text-right'
-            }],
-    });
+    "pageLength": 10,
+    "serverSide": true,
+    "ordering": false, // Disable ordering
+    "columnDefs": [{
+        "width": "20%",
+        "orderable": false,
+        "targets": "no-sort"
+    }],
+    "language": {
+        "emptyTable": "No data available"
+    },
+    "order": [[0, "desc"]],
+    "ajax": { "url": ajaxUrl },
+    "scrollX": true,
+    "initComplete": function(settings, json) {
+        $('#id_count').html(settings.json.recordsTotal);
+    },
+    "columnDefs": [{
+        "targets": [-1],
+        "orderable": false,
+        "className": 'text-right'
+    }],
+});
 </script>
