@@ -445,8 +445,8 @@ def payment_success_view(request):
    #     if name.strip() == 'sessionid':
    #         sessionid = value.strip()
    #         break
-   if request.COOKIES.get('sessionid') != sessionid:
-       return HttpResponseRedirect(reverse('home'))
+   # if request.COOKIES.get('sessionid') != sessionid:
+   #     return HttpResponseRedirect(reverse('home'))
 
    client = razorpay.Client(auth=(RAZOR_PAY_ID, RAZOR_PAY_SECRET))
    try:
