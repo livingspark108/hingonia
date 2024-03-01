@@ -36,7 +36,10 @@
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1066869621064572'); // Replace with your Pixel ID
-        fbq('track', 'Purchase'); // Example: Track a Purchase event
+        fbq('track', 'Purchase', {
+		value: 0.00,
+		currency: 'INR'
+		}); // Example: Track a Purchase event
     </script>
 	<noscript><img height="1" width="1" style="display:none"
 	src="https://www.facebook.com/tr?id=1066869621064572&ev=PageView&noscript=1"
