@@ -435,16 +435,16 @@ def initiate_payment(amt):
 def payment_success_view(request):
    order_id = request.POST.get('order_id')
    payment_id = request.POST.get('razorpay_payment_id')
-   headers = request.headers
-   cookie_header = headers.get('Cookie', '')
-   cookies = cookie_header.split('; ')
+   # headers = request.headers
+   # cookie_header = headers.get('Cookie', '')
+   # cookies = cookie_header.split('; ')
    sessionid = None
 
-   for cookie in cookies:
-       name, value = cookie.split('=')
-       if name.strip() == 'sessionid':
-           sessionid = value.strip()
-           break
+   # for cookie in cookies:
+   #     name, value = cookie.split('=')
+   #     if name.strip() == 'sessionid':
+   #         sessionid = value.strip()
+   #         break
    if request.COOKIES.get('sessionid') != sessionid:
        return HttpResponseRedirect(reverse('home'))
 
@@ -483,6 +483,7 @@ def payment_success_view(request):
        return HttpResponseRedirect(reverse('thank-you-rj'))
 
    except razorpay.errors.SignatureVerificationError as e:
+
        return HttpResponseRedirect(reverse('home'))
 
 
