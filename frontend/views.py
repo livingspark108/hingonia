@@ -3,7 +3,8 @@ import hashlib
 import hmac
 import json
 import random
-from datetime import time
+import datetime
+import time
 
 import razorpay as razorpay
 import requests
@@ -484,21 +485,31 @@ def payment_success_view(request):
        try:
            url = "https://graph.facebook.com/v12.0/1066869621064572/events"
            access_token = "EAANYXoAl26YBO62vZBBZB42ylahHTzFY0ymuQO86bso3fWZBLuGugy5iToJprfLsZBmqCZBCbqhnt1OvUz5UkqWP3ZC2SCeZBuCVawjfLPKhddhr3Uq4SwBcZCely43k3ynDjMqa2TOtHUP6ZC2PaMjVXLviOBxZBr5waa1ziuxduHfEWZCMDARQdnu4igZAfOzgpKaZC8gZDZD"
+           current_timestamp = int(time.time())
+
 
            # Define your payload
            payload = {
-               "event_name": "Donate",
-               "event_time": 1709280874,
-               "action_source": "website",
-               "user_data": {
-                   "em": ["7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"],
-                   "ph": [None]
-               },
-               "custom_data": {
-                   "currency": "USD",
-                   "value": "142.52"
-               }
-           }
+                        "data": [
+                            {
+                                "event_name": "Donate",
+                                "event_time": current_timestamp,
+                                "action_source": "website",
+                                "user_data": {
+                                    "em": [
+                       "7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"
+                                    ],
+                                    "ph": [
+                                        None
+                                    ]
+                                },
+                                "custom_data": {
+                                    "currency": "INR",
+                                    "value": "0"
+                                }
+                            }
+                        ]
+                    }
 
            # Define headers
            headers = {
@@ -508,7 +519,10 @@ def payment_success_view(request):
 
            # Make the request
            response = requests.post(url, json=payload, headers=headers)
-       except:
+           print(response.status_code)
+           print(response.text)
+       except Exception as e:
+           print(e)
            pass
        return HttpResponseRedirect(reverse('thank-you-rj'))
 
