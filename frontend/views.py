@@ -6,6 +6,7 @@ import random
 from datetime import time
 
 import razorpay as razorpay
+import requests
 from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -480,6 +481,35 @@ def payment_success_view(request):
        tran_detail_obj.save()
        print(dic_data)
        login(request, user_obj)
+       try:
+           url = "https://graph.facebook.com/v12.0/1066869621064572/events"
+           access_token = "EAANYXoAl26YBO62vZBBZB42ylahHTzFY0ymuQO86bso3fWZBLuGugy5iToJprfLsZBmqCZBCbqhnt1OvUz5UkqWP3ZC2SCeZBuCVawjfLPKhddhr3Uq4SwBcZCely43k3ynDjMqa2TOtHUP6ZC2PaMjVXLviOBxZBr5waa1ziuxduHfEWZCMDARQdnu4igZAfOzgpKaZC8gZDZD"
+
+           # Define your payload
+           payload = {
+               "event_name": "Donate",
+               "event_time": 1709280874,
+               "action_source": "website",
+               "user_data": {
+                   "em": ["7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"],
+                   "ph": [None]
+               },
+               "custom_data": {
+                   "currency": "USD",
+                   "value": "142.52"
+               }
+           }
+
+           # Define headers
+           headers = {
+               "Authorization": f"Bearer {access_token}",
+               "Content-Type": "application/json"
+           }
+
+           # Make the request
+           response = requests.post(url, json=payload, headers=headers)
+       except:
+           pass
        return HttpResponseRedirect(reverse('thank-you-rj'))
 
    except razorpay.errors.SignatureVerificationError as e:
