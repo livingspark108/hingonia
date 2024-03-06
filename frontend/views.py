@@ -492,7 +492,7 @@ def payment_success_view(request):
        print(dic_data)
        login(request, user_obj)
        try:
-           url = "https://graph.facebook.com/v12.0/1066869621064572/events"
+           url = "https://graph.facebook.com/v12.0/1033966767593889/events"
            access_token = "EAANYXoAl26YBO62vZBBZB42ylahHTzFY0ymuQO86bso3fWZBLuGugy5iToJprfLsZBmqCZBCbqhnt1OvUz5UkqWP3ZC2SCeZBuCVawjfLPKhddhr3Uq4SwBcZCely43k3ynDjMqa2TOtHUP6ZC2PaMjVXLviOBxZBr5waa1ziuxduHfEWZCMDARQdnu4igZAfOzgpKaZC8gZDZD"
            current_timestamp = int(time.time())
 
