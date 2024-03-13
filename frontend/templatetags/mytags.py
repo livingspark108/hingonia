@@ -8,7 +8,7 @@ from datetime import date
 from django.utils import timezone
 import dateutil.parser
 
-from apps.front_app.models import Campaign
+from apps.front_app.models import Campaign, Setting
 
 utc=pytz.UTC
 from datetime import datetime
@@ -20,9 +20,14 @@ def convert_spaces_to_span(value):
     return re.sub(r"'(.*?)'", r'<span>\1</span>', value)
 
 
+
 @register.simple_tag()
 def get_campain_data():
     return Campaign.objects.all()
+
+@register.simple_tag()
+def get_setting_data():
+    return Setting.objects.first()
 
 @register.filter(name='handle_none')
 def handle_none(num):

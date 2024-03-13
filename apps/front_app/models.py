@@ -82,4 +82,5 @@ class DistributionImage(DateTimeModel):
 class Setting(DateTimeModel):
     whatsapp_key = models.CharField(max_length=1000, blank=True,null=True)
     admin_email = models.CharField(max_length=1000, blank=True,null=True)
+    min_order_value = models.IntegerField(blank=False,null=True)
 
