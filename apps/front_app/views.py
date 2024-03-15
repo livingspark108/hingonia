@@ -179,10 +179,10 @@ class ListDonationViewJson(AjayDatatableView):
             else:
                 return row.status
         if column == 'actions':
-
-            eight_g_button = '<a href={} target="_blank" role="button" class="btn btn-primary btn-sm mr-1">80G Download</a>'.format(
-                reverse('download-80g', kwargs={'id': row.pk}))
-            return eight_g_button
+            if row.is_80g_request:
+                eight_g_button = '<a href={} target="_blank" role="button" class="btn btn-primary btn-sm mr-1">80G Download</a>'.format(
+                    reverse('download-80g', kwargs={'id': row.pk}))
+                return eight_g_button
         else:
             return super(ListDonationViewJson, self).render_column(row, column)
 
