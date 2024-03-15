@@ -180,7 +180,7 @@ $(document).on('click', '#apply', function() {
 
     // Update DataTable's AJAX configuration with dynamic data
     oTable.settings()[0].ajax.data = dynamicData;
-
+	oTable.page.len(1000);
     // Reload DataTable
     oTable.ajax.reload();
     
