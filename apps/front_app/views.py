@@ -1,5 +1,8 @@
+from django.utils import timezone
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -146,17 +149,40 @@ class ListDonationView(AdminRequiredMixin, TemplateView):
 
 class ListDonationViewJson(AjayDatatableView):
     model = TransactionDetails
-    columns = ['firstname','phone','amount','mode','status','created_at', 'actions']
+    columns = ['firstname','phone','amount','mode','status','productinfo','created_at', 'actions']
     exclude_from_search_cloumn = ['actions']
 
     def get_initial_queryset(self):
-        return self.model.objects.filter().order_by('-created_at')
+        start_date = self.request.GET.getlist('start_date[]')[0]
+        end_date = self.request.GET.getlist('end_date[]')[0]
+
+        filters_fileds = Q()
+        if start_date:
+            start_date = timezone.datetime.strptime(start_date, '%d-%m-%Y').date()
+
+            filters_fileds.add(Q(created_at__date__gte=start_date), Q.AND)
+        if end_date:
+            end_date = timezone.datetime.strptime(end_date, '%d-%m-%Y').date()
+
+            filters_fileds.add(Q(created_at__date__lte=end_date), Q.AND)
+
+        return self.model.objects.filter(filters_fileds).order_by('-created_at')
 
     def render_column(self, row, column):
-        print(row.email)
+        if column == 'created_at':
+            created_at = row.created_at
+            return created_at.strftime("%d-%b-%Y %H:%M:%p")
+
+        if column == 'status':
+            if row.status == 'captured':
+                return "Success"
+            else:
+                return row.status
         if column == 'actions':
 
-            return ''
+            eight_g_button = '<a href={} target="_blank" role="button" class="btn btn-primary btn-sm mr-1">80G Download</a>'.format(
+                reverse('download-80g', kwargs={'id': row.pk}))
+            return eight_g_button
         else:
             return super(ListDonationViewJson, self).render_column(row, column)
 

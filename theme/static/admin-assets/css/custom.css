@@ -265,3 +265,22 @@ div#id_password {
 .btn-delete-button{
     margin-top:-18px;
 }
+
+ul.let-us-form{
+	      margin: 0;
+	      padding: 0;
+	      list-style: none;
+	      display: flex;
+	      justify-content: flex-start;
+	      align-items: flex-end;
+	      flex-wrap: wrap;
+	      width: 100%;
+	}
+
+ul.let-us-form li{
+  margin:0 8px;
+}
+
+ul.let-us-form li .form-control{
+  width:200px;
+}

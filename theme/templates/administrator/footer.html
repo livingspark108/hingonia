@@ -31,12 +31,57 @@
 <script src="{% static 'plugins/datatables/buttons.print.min.js' %}"></script>
 <script src="{% static 'plugins/datatables/buttons.colVis.min.js' %}"></script>
 
-
 <!--<script src="{% static 'plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>-->
 <script src="{% static 'plugins/formset/dynamic-formset.js' %}"></script>
 <script src="{% static 'plugins/tinymce/tinymce.min.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
 <script>
+$(document).on('click','.download-pdf', function(){
+
+        var url = $(this).attr('data-url'); // URL to fetch HTML content
+          
+            // Fetch HTML content from URL
+            $.get(url, function(data) {
+                // Create jsPDF instance
+                var doc = new jsPDF();
+
+                // Add HTML content to PDF
+                doc.html(data, {
+                    callback: function(pdf) {
+                        // Save PDF as a file
+                        pdf.save('downloaded-pdf.pdf');
+                    }
+                });
+            });
+});
+
+function getAllInputValuesInForm(formId) {
+    var form = document.getElementById(formId);
+    var inputs = form.elements;
+    var inputValues = {};
+
+    for (var i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        var name = input.name;
+
+        if (!inputValues[name]) {
+            inputValues[name] = [];
+        }
+
+        var type = input.type;
+        if (type === 'checkbox' || type === 'radio') {
+            if (input.checked) {
+                inputValues[name].push(input.value);
+            }
+        } else {
+            inputValues[name].push(input.value);
+        }
+    }
+
+    return inputValues;
+}
 
   $(document).on('click','.remove_record', function(){
      //$('.removeRecord').click(function(){
@@ -80,33 +125,67 @@
          })
      });
 
-    var ajaxUrl = $('#list_page_url').val();
-    var oTable = $('#datatable').DataTable({
-    "pageLength": 10,
-    "serverSide": true,
-    "ordering": false, // Disable ordering
-    dom: 'Blfrtip',
-            buttons: [
-                'csv', 'print', 'pdf'
-            ],
-    "columnDefs": [{
-        "width": "20%",
-        "orderable": false,
-        "targets": "no-sort"
-    }],
-    "language": {
-        "emptyTable": "No data available"
-    },
-    "order": [[0, "desc"]],
-    "ajax": { "url": ajaxUrl },
-    "scrollX": true,
-    "initComplete": function(settings, json) {
-        $('#id_count').html(settings.json.recordsTotal);
-    },
-    "columnDefs": [{
-        "targets": [-1],
-        "orderable": false,
-        "className": 'text-right'
-    }],
+var ajaxUrl = $('#list_page_url').val();
+var oTable = $('#datatable').DataTable({
+					"pageLength": 10,
+					"serverSide": true,
+					"ordering": false, // Disable ordering
+					dom: 'Blfrtip',
+					        buttons: [
+					            'csv', 'print', 'pdf'
+					        ],
+					"columnDefs": [{
+					    "width": "20%",
+					    "orderable": false,
+					    "targets": "no-sort"
+					}],
+					"language": {
+					    "emptyTable": "No data available"
+					},
+					"order": [[0, "desc"]],
+					"ajax": { "url": ajaxUrl ,"data": getAllInputValuesInForm('search_form')
+					},
+					"scrollX": true,
+					"initComplete": function(settings, json) {
+					    $('#id_count').html(settings.json.recordsTotal);
+					},
+					
+					"columnDefs": [{
+					    "targets": [-1],
+					    "orderable": false,
+					    "className": 'text-right'
+					}],
 });
+$('.start_date').datetimepicker({
+    timepicker:false,
+    format:'d-m-Y',
+        }).on('change', function() {
+            $('.xdsoft_datetimepicker').hide();
+            var str = $(this).val();
+            str = str.split(".");
+            $('#alt_date_field').val(str[2]+'-'+str[1]+'-'+str[0]);
+});
+$('.end_date').datetimepicker({
+    timepicker:false,
+            format:'d-m-Y',
+    }).on('change', function() {
+        $('.xdsoft_datetimepicker').hide();
+        var str = $(this).val();
+        str = str.split(".");
+        $('#alt_date_field').val(str[2]+'-'+str[1]+'-'+str[0]);
+});
+
+$(document).on('click', '#apply', function() {
+	var dynamicData = getAllInputValuesInForm('search_form')
+
+    // Update DataTable's AJAX configuration with dynamic data
+    oTable.settings()[0].ajax.data = dynamicData;
+
+    // Reload DataTable
+    oTable.ajax.reload();
+    
+  
+
+});
+
 </script>
