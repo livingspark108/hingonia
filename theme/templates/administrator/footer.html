@@ -59,24 +59,26 @@ $(document).on('click','.download-pdf', function(){
 
 function getAllInputValuesInForm(formId) {
     var form = document.getElementById(formId);
-    var inputs = form.elements;
+    var inputs = form ? form.elements : null; // Check if form exists
     var inputValues = {};
 
-    for (var i = 0; i < inputs.length; i++) {
-        var input = inputs[i];
-        var name = input.name;
+    if (inputs) {
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            var name = input.name;
 
-        if (!inputValues[name]) {
-            inputValues[name] = [];
-        }
+            if (!inputValues[name]) {
+                inputValues[name] = [];
+            }
 
-        var type = input.type;
-        if (type === 'checkbox' || type === 'radio') {
-            if (input.checked) {
+            var type = input.type;
+            if (type === 'checkbox' || type === 'radio') {
+                if (input.checked) {
+                    inputValues[name].push(input.value);
+                }
+            } else {
                 inputValues[name].push(input.value);
             }
-        } else {
-            inputValues[name].push(input.value);
         }
     }
 
