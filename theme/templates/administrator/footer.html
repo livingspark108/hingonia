@@ -130,6 +130,10 @@ function getAllInputValuesInForm(formId) {
 var ajaxUrl = $('#list_page_url').val();
 var oTable = $('#datatable').DataTable({
 					"pageLength": 10,
+					"lengthMenu": [
+				        [10, 25, 50, -1],
+				        [10, 25, 50, 'All']
+				    ],
 					"serverSide": true,
 					"ordering": false, // Disable ordering
 					dom: 'Blfrtip',
