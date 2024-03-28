@@ -229,7 +229,7 @@ class DeleteOurTeamView(AdminRequiredMixin, DeleteView):
 # Update About us view
 class UpdateSettingView(CreateView, UpdateView):
     model = Setting
-    fields = ['whatsapp_key','admin_email','min_order_value']
+    fields = ['whatsapp_key','admin_email','min_order_value','header_script','thankyou_page_script']
     template_name = 'setting/form.html'  # Provide the path to your template
     success_url = reverse_lazy('setting')  # Specify the URL to redirect after successful creation or update
 
