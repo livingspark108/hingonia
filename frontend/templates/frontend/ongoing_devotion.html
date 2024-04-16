@@ -170,7 +170,7 @@
                 <div class="col-md-12 text-center">
                     <h2 class="banner-title">Donor <span>List</span></h2>
                 </div>
-	            {% for single in transaction_obj_20 %}
+	            {% for single in transaction_obj_paginated %}
                 <div class="col-md-3">
                     <div class="card bg-white border-dark">
                         <div class="card-body">
@@ -188,6 +188,24 @@
                 </div>
                 {% endfor %}
             </div>
+	        <!-- Display pagination controls -->
+<div class="" style="text-align: center;margin-top: 10px;">
+    <span class="step-links">
+        {% if transaction_obj_paginated.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ transaction_obj_paginated.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ transaction_obj_paginated.number }} of {{ transaction_obj_paginated.paginator.num_pages }}.
+        </span>
+
+        {% if transaction_obj_paginated.has_next %}
+            <a href="?page={{ transaction_obj_paginated.next_page_number }}">next</a>
+            <a href="?page={{ transaction_obj_paginated.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
         </div>
     </section>
 <div class="modal fade lightbox-modal" id="lightbox-modal" tabindex="-1">

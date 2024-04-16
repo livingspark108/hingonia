@@ -35,6 +35,9 @@ from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
     AbandonCart
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from apps.user.models import TransactionDetails, OTP
 from frontend.forms import SetPasswordForm, VerifyOTPForm
 from frontend.serializer import TransactionDetailsSerializer
@@ -206,13 +209,26 @@ class Request80GView(DevoteeRequiredMixin, View):
         #return render(request, 'auth/login.html')
         return redirect('my-donation')
 
-class OngoingDevotionView(View):
-    def get(self, request,id):
+class OngoingDevotionView(ListView):
+    def get(self, request, id):
         compaign = Campaign.objects.get(slug=id)
-        transaction_obj = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).order_by('-created_at')[:5]
-        transaction_obj_20 = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).order_by('-created_at')[:20]
-        context = {'compaign':compaign,'transaction_obj':transaction_obj,'transaction_obj_20':transaction_obj_20}
-        return render(request, 'frontend/ongoing_devotion.html',context)
+        transaction_obj = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).order_by('-created_at')
+
+        # Pagination
+        paginator = Paginator(transaction_obj, 20)  # 5 items per page
+        page = request.GET.get('page')
+
+        try:
+            transaction_obj_paginated = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            transaction_obj_paginated = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            transaction_obj_paginated = paginator.page(paginator.num_pages)
+
+        context = {'compaign': compaign, 'transaction_obj_paginated': transaction_obj_paginated}
+        return render(request, 'frontend/ongoing_devotion.html', context)
 
 
 # Login page
@@ -656,7 +672,8 @@ class ForgotPasswordView(View):
             print(response_otp)
             return redirect(reverse('verify_otp', kwargs={'user_id': user.id}))
         else:
-            return render(request, 'frontend/forgot_password.html')
+
+            return render(request, 'frontend/forgot_password.html',{'error': 'User not exists'})
 
 def reset_password(request, token):
     # Handle password reset logic here
