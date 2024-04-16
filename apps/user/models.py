@@ -74,3 +74,9 @@ class TransactionDetails(DateTimeModel):
     card_type = models.CharField(max_length=255, null=True, blank=True)
     is_80g_request = models.BooleanField(default=False)
     is_80g_request_approve = models.BooleanField(default=False)
+
+
+class OTP(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    otp = models.CharField(max_length=6)
+    expiration = models.DateTimeField()

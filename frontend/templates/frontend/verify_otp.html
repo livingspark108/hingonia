@@ -19,26 +19,35 @@
 	                </div>
                 </div>
                 <div class="col-md-8">
+	                
 	                 <form action="#" method="post">
-		                 {% csrf_token %}
                         <div class="row justify-content-center">
-                        <div class="col-lg-6 col-md-12 pt-lg-5">
-                           <div class="login-form pt-md-5 pt-4">
-                                <div class="mb-2">
-                                    <label class="form-label">Phone no: <span class="text-error">*</span></label>
-                                    <div class="input-group mb-1">
-                                        <input class="form-control" type="number" id="phone_no" name="phone_no" required>
-                                    </div>
-                                    <p class="text-error mb-0"></p>
-                                </div>
-                                <div class="btn-box">
-	                                <input style="background: none;border: none;" type="submit" value="Submit" href="#"
-	                                       class="login-text">
-	                            </div>
-                           </div>
-                        </div>
-                        
-                        </div>
+						    <div class="col-lg-6 col-md-12 pt-lg-5">
+						        <div class="login-form pt-md-5 pt-4">
+						            <form method="post">
+						                {% csrf_token %}
+						                {% for field in form %}
+							                {% if field.name != 'user_id' %}
+						                    <div class="mb-2">
+						                        <label class="form-label">{{ field.label }}{% if field.field.required %}<span class="text-error">*</span>{% endif %}</label>
+						                        <div class="input-group mb-1">
+                                                    {% render_field field class="form-control" %}
+						                        </div>
+						                        {% for error in field.errors %}
+						                            <p class="text-error mb-0">{{ error }}</p>
+						                        {% endfor %}
+						                    </div>
+							                {% else %}
+						                        {{ field }}
+						                    {% endif %}
+						                {% endfor %}
+						                <div class="btn-box">
+						                    <input style="background: none; border: none;" type="submit" value="Submit" class="login-text">
+						                </div>
+						            </form>
+						        </div>
+						    </div>
+						</div>
 	                    </form>
                         <div class="col-lg-7 col-md-12 text-center pt-5">
                             <h2 class="login-title">A Help to those who need it.</h2>

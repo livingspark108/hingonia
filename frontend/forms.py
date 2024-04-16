@@ -17,3 +17,9 @@ class SetPasswordForm(forms.Form):
 
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match.")
+
+class VerifyOTPForm(forms.Form):
+    otp = forms.CharField(max_length=6)
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+    user_id = forms.CharField(widget=forms.HiddenInput)

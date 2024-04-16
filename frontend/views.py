@@ -19,6 +19,7 @@ from django.db.models import Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string, get_template
+from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -34,11 +35,12 @@ from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
     AbandonCart
-from apps.user.models import TransactionDetails
-from frontend.forms import SetPasswordForm
+from apps.user.models import TransactionDetails, OTP
+from frontend.forms import SetPasswordForm, VerifyOTPForm
 from frontend.serializer import TransactionDetailsSerializer
 from rest_framework.permissions import AllowAny
-
+from django.utils import timezone
+from django.conf import settings
 User = get_user_model()
 
 
@@ -593,20 +595,68 @@ class Download80gView(DevoteeRequiredMixin,View):
         transaction_obj = TransactionDetails.objects.get(id=id)
         return render(request, 'frontend/invoice_80g.html', {'transaction_obj':transaction_obj})
 
+class VerifyOTPView(View):
+    template_name = 'frontend/verify_otp.html'
+    form_class = VerifyOTPForm
 
-def forgot_password(request,token=''):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        user = User.objects.filter(email=email).first()
+    def get(self, request, *args, **kwargs):
+        user_id = kwargs.get('user_id')
+        form = self.form_class(initial={'user_id': user_id})  # Pass user_id to the form
+
+        return render(request, self.template_name, {'form': form,'user_id':user_id})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            otp = form.cleaned_data['otp']
+            new_password = form.cleaned_data['password']
+            confirm_password = form.cleaned_data['confirm_password']
+            user_id = form.cleaned_data['user_id']
+
+            user = User.objects.get(id=user_id)
+            if user:
+                otp_obj = OTP.objects.filter(user=user, otp=otp, expiration__gte=timezone.now()).first()
+                if otp_obj:
+                    if new_password == confirm_password:
+                        if otp_obj.expiration >= timezone.now():
+                            user.set_password(new_password)
+                            user.save()
+                            otp_obj.delete()
+                            messages.success(request, 'Password reset successful. You can now login with your new password.')
+                            return redirect('user-login')
+                        else:
+                            messages.error(request, 'OTP has expired. Please request a new OTP.')
+                    else:
+                        messages.error(request, 'New password and confirm password do not match.')
+                else:
+                    messages.error(request, 'Invalid OTP or OTP has expired. Please request a new OTP.')
+            else:
+                messages.error(request, 'No user found with this email address.')
+        return render(request, self.template_name, {'form': form})
+
+
+class ForgotPasswordView(View):
+    def get(self, request, token=''):
+        return render(request, 'frontend/forgot_password.html')
+
+    def post(self, request, token=''):
+
+        phone = request.POST.get('phone_no')
+        user = User.objects.filter(username=phone).first()
 
         if user:
-            token = default_token_generator.make_token(user)
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            reset_link = request.build_absolute_uri('/reset-password/{}/'.format(token))
-            s = send_mail('Password Reset', 'Click the link to reset your password: {}'.format(reset_link), 'contact@thepuredevotion.in', [email])
-            print("Test", s)
-        return redirect('password_reset_done')
-    return render(request, 'frontend/forgot_password.html')
+            otp_code = get_random_string(length=6, allowed_chars='1234567890')
+            OTP.objects.create(user=user, otp=otp_code, expiration=timezone.now() + timezone.timedelta(minutes=5))
+
+            url_ii = "http://sms.bulksmsind.in/v2/sendSMS?username=bhavanshusms&message=Hello " + str(
+                phone) + ", OTP for accessing your admin panel is Underline" + str(
+                otp_code) + ". DO NOT share OTP with anyone Powered by LivingMenu Not You? Report https://livingmenu.in&sendername=LVGMNU&smstype=TRANS&numbers=" + str(
+                phone) + "&apikey=7860f2e1-aec5-47c4-b302-690141476033&peid=1501667600000043918&templateid=1507165987197165117"
+            response_otp = requests.request("GET", url_ii)
+            print(response_otp)
+            return redirect(reverse('verify_otp', kwargs={'user_id': user.id}))
+        else:
+            return render(request, 'frontend/forgot_password.html')
 
 def reset_password(request, token):
     # Handle password reset logic here

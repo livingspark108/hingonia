@@ -248,5 +248,12 @@ GOOGLE_ANALYTICS = {
     'google_analytics_id': 'UA-165462357-1',
 }
 
+#RAZOR_PAY_ID = "rzp_test_AhOuknmPQlm0es"
+#RAZOR_PAY_SECRET = "94cAr5eXW4pJ9f0ZEjkmo2gG"
 RAZOR_PAY_ID = "rzp_live_9GSRd1cdxiYGSX"
 RAZOR_PAY_SECRET = "gVmzuY523vNuqdhqWFwbAWwc"
+
+#Live
+SMS_AUTH_KEY = '4b358371ef203b2a4c3c7c0e1f56197'
+SMS_URL = "http://msg.msgclub.net/rest/services/sendSMS/sendGroupSms"
+SENDER_ID = "LVGMNU"
