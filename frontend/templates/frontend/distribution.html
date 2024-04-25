@@ -167,6 +167,8 @@
     </section>
 {% endblock %}
 {% block script%}
+<script type="text/javascript" src="{% static 'frontend/assets/js/gallery.js' %}"></script>
+
 <script>
 	$(document).on("change","#selectMonth,#selectyear",function(e) {
 		var month = $('#selectMonth').val()

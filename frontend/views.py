@@ -507,50 +507,49 @@ def payment_success_view(request):
        tran_detail_obj.email = email
        tran_detail_obj.phone = phone
        tran_detail_obj.save()
-       print(dic_data)
        login(request, user_obj)
-       try:
-           url = "https://graph.facebook.com/v12.0/1033966767593889/events"
-           access_token = "EAANYXoAl26YBO62vZBBZB42ylahHTzFY0ymuQO86bso3fWZBLuGugy5iToJprfLsZBmqCZBCbqhnt1OvUz5UkqWP3ZC2SCeZBuCVawjfLPKhddhr3Uq4SwBcZCely43k3ynDjMqa2TOtHUP6ZC2PaMjVXLviOBxZBr5waa1ziuxduHfEWZCMDARQdnu4igZAfOzgpKaZC8gZDZD"
-           current_timestamp = int(time.time())
-
-
-           # Define your payload
-           payload = {
-                        "data": [
-                            {
-                                "event_name": "Donate",
-                                "event_time": current_timestamp,
-                                "action_source": "website",
-                                "user_data": {
-                                    "em": [
-                       "7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"
-                                    ],
-                                    "ph": [
-                                        None
-                                    ]
-                                },
-                                "custom_data": {
-                                    "currency": "INR",
-                                    "value": "0"
-                                }
-                            }
-                        ]
-                    }
-
-           # Define headers
-           headers = {
-               "Authorization": f"Bearer {access_token}",
-               "Content-Type": "application/json"
-           }
-
-           # Make the request
-           response = requests.post(url, json=payload, headers=headers)
-           print(response.status_code)
-           print(response.text)
-       except Exception as e:
-           print(e)
-           pass
+       # try:
+       #     url = "https://graph.facebook.com/v12.0/1033966767593889/events"
+       #     access_token = "EAANYXoAl26YBO62vZBBZB42ylahHTzFY0ymuQO86bso3fWZBLuGugy5iToJprfLsZBmqCZBCbqhnt1OvUz5UkqWP3ZC2SCeZBuCVawjfLPKhddhr3Uq4SwBcZCely43k3ynDjMqa2TOtHUP6ZC2PaMjVXLviOBxZBr5waa1ziuxduHfEWZCMDARQdnu4igZAfOzgpKaZC8gZDZD"
+       #     current_timestamp = int(time.time())
+       #
+       #
+       #     # Define your payload
+       #     payload = {
+       #                  "data": [
+       #                      {
+       #                          "event_name": "Donate",
+       #                          "event_time": current_timestamp,
+       #                          "action_source": "website",
+       #                          "user_data": {
+       #                              "em": [
+       #                 "7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"
+       #                              ],
+       #                              "ph": [
+       #                                  None
+       #                              ]
+       #                          },
+       #                          "custom_data": {
+       #                              "currency": "INR",
+       #                              "value": "0"
+       #                          }
+       #                      }
+       #                  ]
+       #              }
+       #
+       #     # Define headers
+       #     headers = {
+       #         "Authorization": f"Bearer {access_token}",
+       #         "Content-Type": "application/json"
+       #     }
+       #
+       #     # Make the request
+       #     response = requests.post(url, json=payload, headers=headers)
+       #     print(response.status_code)
+       #     print(response.text)
+       # except Exception as e:
+       #     print(e)
+       #     pass
        return HttpResponseRedirect(reverse('thank-you-rj'))
 
    except razorpay.errors.SignatureVerificationError as e:

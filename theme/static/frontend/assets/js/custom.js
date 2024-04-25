@@ -145,6 +145,7 @@ $(document).ready(function () {
 //======== Mataji Popup custom amount =====
 const checkbox = document.getElementById('customAmountCheckbox');
 const customAmountBox = document.querySelector('.custom-amount-box');
+if(checkbox){
 checkbox.addEventListener('change', function () {
   if (this.checked) {
     $(customAmountBox).show(500);
@@ -158,7 +159,7 @@ checkbox.addEventListener('change', function () {
     //customAmountBox.style.display = 'none';
   }
 });
-
+}
 $(document).on("change",".ctm_amount",function() {
     var vv = $(this).val()
     $('.amt').html(vv)
