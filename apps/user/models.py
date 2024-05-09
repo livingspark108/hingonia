@@ -27,7 +27,7 @@ class TransactionDetails(DateTimeModel):
     campaign_id = models.CharField(max_length=255, null=True, blank=True)
     key = models.CharField(max_length=255)
     txnid = models.CharField(max_length=255)
-    amount = models.CharField(max_length=255)
+    amount = models.FloatField(max_length=255)
     cardCategory = models.CharField(max_length=255, null=True, blank=True)
     discount = models.CharField(max_length=255, null=True, blank=True)
     net_amount_debit = models.CharField(max_length=255, null=True, blank=True)

@@ -1,4 +1,5 @@
 import re
+from django.db.models import Q
 
 from django import template
 from django.urls import reverse, NoReverseMatch
@@ -7,6 +8,7 @@ import pytz
 from datetime import date
 from django.utils import timezone
 import dateutil.parser
+from django.db.models import Sum
 
 from apps.front_app.models import Campaign, Setting
 from apps.promoter.models import Promoter
@@ -53,9 +55,11 @@ def get_promo_detail(campaign_id,promo_no):
     print("Promo")
     print(promo_no)
     print("End")
-    cam_ob = TransactionDetails.objects.filter(campaign_id=campaign_id,promoter_no=promo_no).count()
-    # words = value.split()
-    # last_word = words[-1]
-    # modified_string = ' '.join(words[:-1]) + f' <span class="color-2">{last_word}</span>'
-    # return modified_string
-    return cam_ob
+    cam_ob = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).filter(campaign_id=campaign_id,promoter_no=promo_no)
+    tr_amt = cam_ob.aggregate(amount=Sum('amount'))['amount'] or 0
+
+    context = {
+                'count': cam_ob.count(),
+                'amt': tr_amt,
+                }
+    return context
