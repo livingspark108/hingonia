@@ -49,6 +49,10 @@ def add_spam_tag(value):
 @register.simple_tag()
 def get_promo_detail(campaign_id,promo_no):
     # promo_obj = Promoter.
+    print(campaign_id)
+    print("Promo")
+    print(promo_no)
+    print("End")
     cam_ob = TransactionDetails.objects.filter(campaign_id=campaign_id,promoter_no=promo_no).count()
     # words = value.split()
     # last_word = words[-1]

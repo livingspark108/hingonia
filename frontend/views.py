@@ -374,7 +374,8 @@ class FrontendRazorPayView(View):
         promoter_id = request.POST.get('promoter_id')
         campaign_id = request.POST.get('campaign_id')
 
-
+        print(promoter_id)
+        print(campaign_id)
 
         order_id = initiate_payment(amount,request.POST.get('first_name'))
         payload = {
@@ -507,7 +508,9 @@ def payment_success_view(request):
    client = razorpay.Client(auth=(RAZOR_PAY_ID, RAZOR_PAY_SECRET))
    try:
        res_data=client.order.payments(order_id)
+       print(res_data)
        dic_data = res_data['items'][0]
+       print(dic_data)
        first_name = dic_data['notes']['firstname']
        email = dic_data['email']
        phone = dic_data['contact']
@@ -527,8 +530,11 @@ def payment_success_view(request):
        amt = dic_data['amount']/100
        method = dic_data['method']
        status = dic_data['status']
-       custom_promoter_id = dic_data['custom_promoter_id']
-       custom_campaign_id = dic_data['custom_campaign_id']
+       custom_promoter_id = dic_data['notes']['custom_promoter_id']
+       custom_campaign_id = dic_data['notes']['custom_campaign_id']
+       print("New New")
+       print(custom_promoter_id)
+       print(custom_campaign_id)
        description = dic_data['description']
        tran_detail_obj = TransactionDetails()
        tran_detail_obj.mihpayid = pay_id
