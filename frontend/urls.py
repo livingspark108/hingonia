@@ -49,7 +49,9 @@ urlpatterns = [
     path('forgot-password/', ForgotPasswordView.as_view(), name='forgot_password'),
     path('verify-otp/<str:user_id>', VerifyOTPView.as_view(), name='verify_otp'),
     path('reset-password/<str:token>/', reset_password, name='reset_password'),
+
     path('ongoing-devotion/<str:id>', OngoingDevotionView.as_view(), name='ongoing-devotion'),
+    path('ongoing-devotion/<str:id>/<str:promo_no>', OngoingDevotionPromoView.as_view(), name='ongoing-devotion-promo'),
     path('pay-razor-pay/', initiate_payment, name='pay-razor-pay'),
     path('handle-payment-webhook/', handle_payment_webhook, name='handle-payment-webhook'),
 

@@ -52,6 +52,7 @@ DEFAULT_APPS = [
     'apps.administrator',
     'apps.cms',
     'apps.user',
+    'apps.promoter',
     'apps.front_app',
     'frontend',
     'widget_tweaks',

@@ -23,6 +23,8 @@ class TransactionDetails(DateTimeModel):
     mode = models.CharField(max_length=255, null=True, blank=True)
     status = models.CharField(max_length=255)
     unmappedstatus = models.CharField(max_length=255)
+    promoter_no = models.CharField(max_length=255, null=True, blank=True)
+    campaign_id = models.CharField(max_length=255, null=True, blank=True)
     key = models.CharField(max_length=255)
     txnid = models.CharField(max_length=255)
     amount = models.CharField(max_length=255)

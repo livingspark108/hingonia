@@ -9,6 +9,8 @@ from django.utils import timezone
 import dateutil.parser
 
 from apps.front_app.models import Campaign, Setting
+from apps.promoter.models import Promoter
+from apps.user.models import TransactionDetails
 
 utc=pytz.UTC
 from datetime import datetime
@@ -42,3 +44,14 @@ def add_spam_tag(value):
     last_word = words[-1]
     modified_string = ' '.join(words[:-1]) + f' <span class="color-2">{last_word}</span>'
     return modified_string
+
+
+@register.simple_tag()
+def get_promo_detail(campaign_id,promo_no):
+    # promo_obj = Promoter.
+    cam_ob = TransactionDetails.objects.filter(campaign_id=campaign_id,promoter_no=promo_no).count()
+    # words = value.split()
+    # last_word = words[-1]
+    # modified_string = ' '.join(words[:-1]) + f' <span class="color-2">{last_word}</span>'
+    # return modified_string
+    return cam_ob

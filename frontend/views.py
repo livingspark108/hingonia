@@ -38,6 +38,7 @@ from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distributi
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from apps.promoter.models import Promoter
 from apps.user.models import TransactionDetails, OTP
 from frontend.forms import SetPasswordForm, VerifyOTPForm
 from frontend.serializer import TransactionDetailsSerializer
@@ -209,6 +210,31 @@ class Request80GView(DevoteeRequiredMixin, View):
         #return render(request, 'auth/login.html')
         return redirect('my-donation')
 
+class OngoingDevotionPromoView(ListView):
+    def get(self, request, id, promo_no):
+        promo_obj = Promoter.objects.filter(promoter_no=promo_no).first()
+        if not promo_obj:
+            return redirect('home')
+        compaign = Campaign.objects.get(slug=id)
+        transaction_obj = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).order_by('-created_at')
+
+        # Pagination
+        paginator = Paginator(transaction_obj, 20)  # 5 items per page
+        page = request.GET.get('page')
+
+        try:
+            transaction_obj_paginated = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            transaction_obj_paginated = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            transaction_obj_paginated = paginator.page(paginator.num_pages)
+
+        context = {'promo_no':promo_no,'compaign': compaign, 'transaction_obj_paginated': transaction_obj_paginated}
+        return render(request, 'frontend/ongoing_devotion.html', context)
+
+
 class OngoingDevotionView(ListView):
     def get(self, request, id):
         compaign = Campaign.objects.get(slug=id)
@@ -345,6 +371,10 @@ class FrontendRazorPayView(View):
         else:
             amount = request.POST.get('amount')
 
+        promoter_id = request.POST.get('promoter_id')
+        campaign_id = request.POST.get('campaign_id')
+
+
 
         order_id = initiate_payment(amount,request.POST.get('first_name'))
         payload = {
@@ -356,6 +386,8 @@ class FrontendRazorPayView(View):
             "phone": request.POST.get('mobile_no'),
             "productinfo": request.POST.get('title'),
             "txnid": "OR_"+str(random.random()),
+            'custom_promoter_id': promoter_id,
+            'custom_campaign_id': campaign_id,
             "furl": PAYU_CONFIG['RESPONSE_URL_FAILURE'],
             "surl": PAYU_CONFIG['RESPONSE_URL_SUCCESS']
         }
@@ -495,10 +527,18 @@ def payment_success_view(request):
        amt = dic_data['amount']/100
        method = dic_data['method']
        status = dic_data['status']
+       custom_promoter_id = dic_data['custom_promoter_id']
+       custom_campaign_id = dic_data['custom_campaign_id']
        description = dic_data['description']
        tran_detail_obj = TransactionDetails()
        tran_detail_obj.mihpayid = pay_id
        tran_detail_obj.mode = method
+       if custom_promoter_id:
+           tran_detail_obj.promoter_no = custom_promoter_id
+
+       if custom_campaign_id:
+           tran_detail_obj.campaign_id = custom_campaign_id
+
        tran_detail_obj.firstname = first_name
        tran_detail_obj.productinfo = description
        tran_detail_obj.payment_source = method

@@ -14,18 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 
-from apps.user.views import *
+from .views import *
 
 urlpatterns = [
-    path('add', CreateUserView.as_view(), name='user-add'),
-    path('', ListUserView.as_view(), name='user-list'),
-    path('transaction/<str:pk>', ListTransactionDetailView.as_view(), name='transaction-detail-list'),
-    path('list/ajax', ListUserViewJson.as_view(), name='user-list-ajax'),
-    path('transaction_list/ajax/<str:pk>', ListTransactionDetailViewJson.as_view(), name='transaction-detail-ajax'),
-    path('edit/<int:pk>', UpdateUserView.as_view(), name='user-edit'),
-    path('delete/<str:pk>', DeleteUserView.as_view(), name='user-delete'),
-
+    path('add', CreatePromoterView.as_view(), name='promoter-add'),
+    path('', ListPromoterView.as_view(), name='promoter-list'),
+    path('list/ajax', ListPromoterViewJson.as_view(), name='promoter-list-ajax'),
+    path('edit/<str:pk>', UpdatePromoterView.as_view(), name='promoter-edit'),
+    path('delete/<str:pk>', DeletePromoterView.as_view(), name='promoter-delete'),
+    path('view-campaign/<str:id>', ListCompaignPromoView.as_view(), name='view-campaign'),
 
 ]
+
 

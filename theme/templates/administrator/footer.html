@@ -128,6 +128,7 @@ function getAllInputValuesInForm(formId) {
      });
 
 var ajaxUrl = $('#list_page_url').val();
+if(ajaxUrl){
 var oTable = $('#datatable').DataTable({
 					"pageLength": 10,
 					"lengthMenu": [
@@ -162,6 +163,7 @@ var oTable = $('#datatable').DataTable({
 					    "className": 'text-right'
 					}],
 });
+}
 $('.start_date').datetimepicker({
     timepicker:false,
     format:'d-m-Y',

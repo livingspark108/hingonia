@@ -33,6 +33,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     #cms urls
     path('cms/', include('apps.cms.urls')),
+    path('promoter/', include('apps.promoter.urls')),
     #user urls
     path('user/', include('apps.user.urls')),
 
