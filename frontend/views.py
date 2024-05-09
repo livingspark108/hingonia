@@ -548,7 +548,7 @@ def payment_success_view(request):
        tran_detail_obj.firstname = first_name
        tran_detail_obj.productinfo = description
        tran_detail_obj.payment_source = method
-       tran_detail_obj.amount = amt
+       tran_detail_obj.amount = float(amt)
        tran_detail_obj.status = status
        tran_detail_obj.email = email
        tran_detail_obj.phone = phone
