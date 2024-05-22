@@ -9,6 +9,7 @@ from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetDon
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
+from django.db.models import Q
 from django.forms import model_to_dict
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -17,7 +18,7 @@ import json
 import time
 from django.db import IntegrityError
 from django.template.defaultfilters import lower
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes
@@ -108,7 +109,7 @@ class ListPromoterView(LoginRequiredMixin, TemplateView):
 
 class ListPromoterViewJson(AjayDatatableView):
     model = Promoter
-    columns = ['id', 'user.first_name', 'user.email', 'actions']
+    columns = ['user.first_name', 'user.email', 'actions']
     exclude_from_search_cloumn = ['actions']
 
     # extra_search_columns = ['']
@@ -123,6 +124,7 @@ class ListPromoterViewJson(AjayDatatableView):
                     return '<span class="badge badge-danger">Inactive</span>'
             else:
                 return ''
+
 
         if column == 'actions':
             link_action = '<a href={} role="button" class="btn btn-primary btn-sm mr-1">View Campaign</a>'.format(
@@ -151,7 +153,16 @@ class DeletePromoterView(LoginRequiredMixin, DeleteView):
 
 class ListCompaignPromoView(LoginRequiredMixin,View):
     def get(self,request,id):
-        campaign_obj = Campaign.objects.all()
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+        print(start_date)
+        print(end_date)
+        if start_date and end_date:
+            start_date = datetime.strptime(start_date, '%d-%m-%Y').date()
+            end_date = datetime.strptime(end_date, '%d-%m-%Y').date()
+            campaign_obj = Campaign.objects.filter(Q(created_at__date__gte=start_date) & Q(created_at__date__lte=end_date))
+        else:
+            campaign_obj = Campaign.objects.all()
         promoter_obj = Promoter.objects.get(id=id)
         context = {
             'campaign_obj':campaign_obj,
