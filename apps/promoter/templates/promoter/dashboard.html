@@ -58,8 +58,8 @@
 
 
                                 <tbody>
-	                            {% for single in campaign_obj %}
-	                            {% get_promo_detail single.id promoter_obj.promoter_no as get_promo_detail %}
+                        {% for single in campaign_obj %}
+{% get_promo_detail single.id promoter_obj.promoter_no start_date end_date as get_promo_detail %}
                                 <tr>
                                     <td>{{single.title}}</td>
                                     <td>{{get_promo_detail.count}}</td>

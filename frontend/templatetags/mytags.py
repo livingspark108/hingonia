@@ -49,13 +49,17 @@ def add_spam_tag(value):
 
 
 @register.simple_tag()
-def get_promo_detail(campaign_id,promo_no):
+def get_promo_detail(campaign_id,promo_no,start_date,end_date):
     # promo_obj = Promoter.
     print(campaign_id)
     print("Promo")
     print(promo_no)
     print("End")
-    cam_ob = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).filter(campaign_id=campaign_id,promoter_no=promo_no)
+    if start_date:
+        cam_ob = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).filter(
+            campaign_id=campaign_id, promoter_no=promo_no).filter(Q(created_at__date__gte=start_date) & Q(created_at__date__lte=end_date))
+    else:
+        cam_ob = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).filter(campaign_id=campaign_id,promoter_no=promo_no)
     tr_amt = cam_ob.aggregate(amount=Sum('amount'))['amount'] or 0
 
     context = {

@@ -160,11 +160,16 @@ class ListCompaignPromoView(LoginRequiredMixin,View):
         if start_date and end_date:
             start_date = datetime.strptime(start_date, '%d-%m-%Y').date()
             end_date = datetime.strptime(end_date, '%d-%m-%Y').date()
-            campaign_obj = Campaign.objects.filter(Q(created_at__date__gte=start_date) & Q(created_at__date__lte=end_date))
         else:
-            campaign_obj = Campaign.objects.all()
+            start_date = ""
+            end_date = ""
+        #     campaign_obj = Campaign.objects.filter(Q(created_at__date__gte=start_date) & Q(created_at__date__lte=end_date))
+        # else:
+        campaign_obj = Campaign.objects.all()
         promoter_obj = Promoter.objects.get(id=id)
         context = {
+            'start_date':start_date,
+            'end_date': end_date,
             'campaign_obj':campaign_obj,
             'promoter_obj':promoter_obj
         }
