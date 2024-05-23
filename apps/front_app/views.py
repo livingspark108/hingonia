@@ -5,6 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.db.models import Case, When, BooleanField, Value
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
@@ -410,13 +411,27 @@ class List80GRequestViewJson(AjayDatatableView):
     exclude_from_search_cloumn = ['actions']
 
     def get_initial_queryset(self):
-        return TransactionDetails.objects.filter(is_80g_request=True,is_80g_request_approve=False).order_by(
-            '-created_at')
+        return TransactionDetails.objects.filter(is_80g_request=True).annotate(
+                is_80g_request_approve_priority=Case(
+                    When(is_80g_request_approve=False, then=Value(True)),
+                    When(is_80g_request_approve=True, then=Value(False)),
+                    output_field=BooleanField(),
+                )
+            ).order_by(
+                '-is_80g_request_approve_priority',
+                '-created_at'
+            )
 
     def render_column(self, row, column):
         if column == 'actions':
-            approve_action = '<a href={} role="button" class="btn btn-success btn-sm mr-1">Approve</a>'.format(
-                reverse('80g-request-approve', kwargs={'id': row.pk}))
+            if not row.is_80g_request_approve:
+                approve_action = '<a href={} role="button" class="btn btn-success btn-sm mr-1">Approve</a>'.format(
+                    reverse('80g-request-approve', kwargs={'id': row.pk}))
+            else:
+
+                approve_action = '<a href={} target="blank" role="button" class="btn btn-primary btn-sm mr-1">Download 80G</a>'.format(
+                    reverse('download-80g', kwargs={'id': row.pk}))
+
             return approve_action
         else:
             return super(List80GRequestViewJson, self).render_column(row, column)
