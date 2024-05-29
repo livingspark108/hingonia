@@ -323,6 +323,7 @@ class FrontendThankYouView(DevoteeRequiredMixin,View):
     def get(self, request):
         form = SetPasswordForm()
         context = {'form':form}
+
         return render(request, 'frontend/thank_you.html', context)
 
 class FrontendRazorThankYouView(DevoteeRequiredMixin,View):
@@ -554,6 +555,22 @@ def payment_success_view(request):
        tran_detail_obj.phone = phone
        tran_detail_obj.save()
        login(request, user_obj)
+       url = "https://backend.aisensy.com/campaign/t1/api/v2"
+
+       payload = {
+           "apiKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZmQzY2E5YzU1MTY4MGJjMjEyY2NiOCIsIm5hbWUiOiJQdXJlIERldm90aW9uIEZvdW5kYXRpb24iLCJhcHBOYW1lIjoiQWlTZW5zeSIsImNsaWVudElkIjoiNjRmZDNjYTljNTUxNjgwYmMyMTJjY2IzIiwiYWN0aXZlUGxhbiI6IkJBU0lDX01PTlRITFkiLCJpYXQiOjE2OTQzMTc3Mzd9.bY0Zke-FA15z3TQy6L8H_kdjLhRsOQdOE1rvFrCH9W8",
+           "campaignName": "thanksmsg",
+           "destination": "+91"+phone,
+           "userName": "puredevotionmedia@gmail.com"
+       }
+
+       headers = {
+           "Content-Type": "application/json"
+       }
+       try:
+            response = requests.post(url, json=payload, headers=headers)
+       except Exception as e:
+           pass
        # try:
        #     url = "https://graph.facebook.com/v12.0/1033966767593889/events"
        #     access_token = "EAANYXoAl26YBO62vZBBZB42ylahHTzFY0ymuQO86bso3fWZBLuGugy5iToJprfLsZBmqCZBCbqhnt1OvUz5UkqWP3ZC2SCeZBuCVawjfLPKhddhr3Uq4SwBcZCely43k3ynDjMqa2TOtHUP6ZC2PaMjVXLviOBxZBr5waa1ziuxduHfEWZCMDARQdnu4igZAfOzgpKaZC8gZDZD"
