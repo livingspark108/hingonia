@@ -3,11 +3,16 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from application.custom_model import DateTimeModel
+from apps.front_app.models import CampaignProduct
 # Create your models here.
 from apps.user.constants import USER_TYPE_CHOICES
 
 
 class User(AbstractUser):
+    class Meta:
+        app_label = 'user'  # Replace 'user' with the name of your app
+
+
     type = models.CharField(choices=USER_TYPE_CHOICES, max_length=20)
     address = models.CharField(null=True,blank=True,max_length=250)
     city = models.CharField(null=True,blank=True,max_length=200)
@@ -17,14 +22,16 @@ class User(AbstractUser):
 
 
 
+
 class TransactionDetails(DateTimeModel):
 
     mihpayid = models.CharField(max_length=255)
+    order_id = models.CharField(max_length=255, null=True, blank=True)
     mode = models.CharField(max_length=255, null=True, blank=True)
     status = models.CharField(max_length=255)
     unmappedstatus = models.CharField(max_length=255)
-    promoter_no = models.CharField(max_length=255, null=True, blank=True)
     campaign_id = models.CharField(max_length=255, null=True, blank=True)
+
     key = models.CharField(max_length=255)
     txnid = models.CharField(max_length=255)
     amount = models.FloatField(max_length=255)
@@ -77,8 +84,32 @@ class TransactionDetails(DateTimeModel):
     is_80g_request = models.BooleanField(default=False)
     is_80g_request_approve = models.BooleanField(default=False)
 
+class ProductItemTrans(DateTimeModel):
+    product = models.ForeignKey(CampaignProduct, on_delete=models.CASCADE)
+    order_id = models.CharField(max_length=3000, blank=True,null=True)
+    tran = models.ForeignKey(TransactionDetails, on_delete=models.CASCADE,null=True,blank=True)
+    quantity = models.PositiveIntegerField(null=True,blank=True)
 
 class OTP(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     otp = models.CharField(max_length=6)
     expiration = models.DateTimeField()
+
+
+
+
+class SubscriptionPlan(models.Model):
+    name = models.CharField(max_length=100)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    interval = models.CharField(max_length=20)  # e.g., 'monthly'
+    razorpay_plan_id = models.CharField(max_length=100)
+
+
+class Subscriber(models.Model):
+    email = models.EmailField()
+    subscription_id = models.CharField(max_length=100, blank=True, null=True)
+    plan = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE)
+    status = models.CharField(max_length=50)
+
+    class Meta:
+        unique_together = ('email', 'plan')

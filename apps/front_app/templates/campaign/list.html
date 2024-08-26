@@ -3,6 +3,11 @@
 {% load widget_tweaks %}
 
 {% block body %}
+<style>
+	.active_fav{
+		color: #30419c;
+	}
+</style>
 <div class="content">
                     <div class="container-fluid">
                         <div class="page-title-box">
@@ -30,6 +35,9 @@
                                             <thead>
                                             <tr>
                                                 <th>Title</th>
+                                                <th>Type</th>
+                                                <th>Is Home</th>
+                                                <th>Price</th>
                                                 <th class="no-sort"></th>
                                             </tr>
                                             </thead>
@@ -55,4 +63,12 @@
                     <input type="hidden" name="list_page_url" id="list_page_url" value="{% url 'campaign-list-ajax' %}">
 
                 </div>
+{% endblock %}
+{% block script%}
+<script>
+	$(document).on("click",".mark_fav",function(e) {
+		var data_id = $(this).data('id')
+		console.log(data_id)
+	})
+</script>
 {% endblock %}

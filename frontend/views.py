@@ -30,16 +30,19 @@ from rest_framework.generics import GenericAPIView
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, DeleteView, UpdateView, TemplateView
-from application.custom_classes import DevoteeRequiredMixin
+from application.custom_classes import DevoteeRequiredMixin, AdminRequiredMixin, AjayDatatableView
 from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET
+from apps.front_app.forms import CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
-    AbandonCart
+    AbandonCart, Testimonial
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from django.core import serializers
+
 from apps.promoter.models import Promoter
-from apps.user.models import TransactionDetails, OTP
+from apps.user.models import TransactionDetails, OTP, SubscriptionPlan
 from frontend.forms import SetPasswordForm, VerifyOTPForm
 from frontend.serializer import TransactionDetailsSerializer
 from rest_framework.permissions import AllowAny
@@ -51,9 +54,16 @@ User = get_user_model()
 class FrontendHomeView(View):
     def get(self, request):
         campaign_obj = Campaign.objects.all()
+        monthly_campaign_obj = Campaign.objects.filter(mode='Monthly')
+        home_campaign_obj = Campaign.objects.filter(is_home=True)
+        testimonial_obj = Testimonial.objects.all()
+
         # if request.user.is_authenticated:
         context = {
-            'campaign_obj': campaign_obj
+            'campaign_obj': campaign_obj,
+            'testimonial_obj':testimonial_obj,
+            'home_campaign_obj':home_campaign_obj,
+            'monthly_campaign_obj':monthly_campaign_obj,
         }
         return render(request, 'frontend/home.html', context)
 
@@ -87,6 +97,17 @@ class FrontendAboutUsView(View):
         url = reverse('about-us', kwargs={})
 
         return HttpResponseRedirect(url)
+
+
+class FrontendTrusteeView(View):
+    def get(self, request):
+
+        # if request.user.is_authenticated:
+        context = {
+
+        }
+
+        return render(request, 'frontend/trustee.html', context)
 
 
 
@@ -175,6 +196,15 @@ class UserLogoutView(DevoteeRequiredMixin, View):
         logout(request)
         #return render(request, 'auth/login.html')
         return redirect('home')
+
+
+class GetCampaignView(DevoteeRequiredMixin, View):
+
+    def get(self, request,pk):
+        campaign_single = Campaign.objects.get(id=pk)
+
+        response = {'description': campaign_single.description,'title': campaign_single.title}
+        return JsonResponse(response)
 
 # Save Abandon Cart
 class AbandonView(View):
@@ -740,4 +770,96 @@ class ForgotPasswordView(View):
 def reset_password(request, token):
     # Handle password reset logic here
     pass
+
+def subscribe_page(request):
+    context = {
+        'razorpay_key_id': settings.RAZOR_PAY_ID,
+        'amount': 1000,  # Amount in paise (₹500)
+    }
+    return render(request, 'frontend/subscribe.html',context)
+
+def create_subscription(request):
+    if request.method == 'POST':
+        if request.POST.get('amount'):
+            print("Amount")
+            print(request.POST.get('amount'))
+            amount = float(request.POST.get('amount')) * 100  # Convert amount to paise
+        else:
+            amount = float(request.POST.get('custom_number')) * 100  # Convert amount to paise
+
+        name = request.POST['name']
+        campaign_id = request.POST['campaign_id']
+        email = request.POST['email']
+        phone_no = request.POST['phone_no']
+        preferred_date = request.POST['preferred_date']
+
+        # Convert the preferred date to a timestamp
+        preferred_date_obj = datetime.strptime(preferred_date, '%Y-%m-%d')
+        current_date = datetime.now()
+
+        # If the preferred date is in the past, schedule for the next month
+        if preferred_date_obj < current_date:
+            preferred_date_obj = preferred_date_obj.replace(year=current_date.year,
+                                                            month=current_date.month) + timedelta(days=30)
+
+        # Convert preferred date to a UNIX timestamp
+        start_at = int(preferred_date_obj.timestamp())
+
+        if request.POST['plan_id']:
+            plan_id = request.POST['plan_id']
+            print("Plan id")
+            print(plan_id)
+            plan = SubscriptionPlan.objects.filter(plan_id=plan_id).first()
+            print("PT price")
+            print(plan.price)
+            subscription_data = {
+                "plan_id": plan_id,
+                "customer_notify": 1,
+                "total_count": 12,  # Optional, for a one-year subscription
+                "quantity": 1,
+                "start_at": start_at,  # Set the start date for the subscription
+                "addons": [{
+                    "item": {
+                        "name": "Monthly Donation",
+                        "amount": amount,
+                        "currency": "INR"
+                    }
+                }],
+                "notes": {
+                    "name": name,
+                    "email": email,
+                    "phone_no": phone_no,
+                    "campaign_id": campaign_id
+                }
+            }
+            # amount = amount - float(plan.price)
+        else:
+            plan = SubscriptionPlan.objects.first()
+            # amount = amount - float(plan.price)*99
+            plan_id = plan.plan_id
+            subscription_data = {
+                "plan_id": plan_id,
+                "customer_notify": 1,
+                "total_count": 12,  # Optional, for a one-year subscription
+                "start_at": start_at,  # Set the start date for the subscription
+
+                "quantity": 1,
+                "addons": [{
+                    "item": {
+                        "name": "Monthly Donation",
+                        "amount": amount,
+                        "currency": "INR"
+                    }
+                }],
+                "notes": {
+                    "name": name,
+                    "email": email,
+                    "phone_no": phone_no,
+                    "campaign_id":campaign_id
+                }
+            }
+
+
+        subscription = razorpay_client.subscription.create(data=subscription_data)
+        return JsonResponse(subscription)
 

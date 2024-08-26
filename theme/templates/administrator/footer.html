@@ -128,7 +128,6 @@ function getAllInputValuesInForm(formId) {
      });
 
 var ajaxUrl = $('#list_page_url').val();
-if(ajaxUrl){
 var oTable = $('#datatable').DataTable({
 					"pageLength": 10,
 					"lengthMenu": [
@@ -156,14 +155,13 @@ var oTable = $('#datatable').DataTable({
 					"initComplete": function(settings, json) {
 					    $('#id_count').html(settings.json.recordsTotal);
 					},
-					
+
 					"columnDefs": [{
 					    "targets": [-1],
 					    "orderable": false,
 					    "className": 'text-right'
 					}],
 });
-}
 $('.start_date').datetimepicker({
     timepicker:false,
     format:'d-m-Y',

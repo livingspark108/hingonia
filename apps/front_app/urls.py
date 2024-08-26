@@ -18,12 +18,35 @@ from django.urls import path, include
 from apps.front_app.views import *
 
 urlpatterns = [
-    #"""Campaign page"""
+#"""Campaign page"""
     path('campaign/add', CreateCampaignView.as_view(), name='campaign-add'),
     path('campaign/', ListCampaignView.as_view(), name='campaign-list'),
     path('campaign/list/ajax', ListCampaignViewJson.as_view(), name='campaign-list-ajax'),
     path('campaign/edit/<str:pk>', UpdateCampaignView.as_view(), name='campaign-edit'),
     path('campaign/delete/<str:pk>', DeleteCampaignView.as_view(), name='campaign-delete'),
+    path('campaign/clone/<str:pk>', CloneCampaignView.as_view(), name='campaign-clone'),
+
+    path('testimonial/add', CreateTestimonialView.as_view(), name='testimonial-add'),
+    path('testimonial/', ListTestimonialView.as_view(), name='testimonial-list'),
+    path('testimonial/list/ajax', ListTestimonialViewJson.as_view(), name='testimonial-list-ajax'),
+    path('testimonial/edit/<str:pk>', UpdateTestimonialView.as_view(), name='testimonial-edit'),
+    path('testimonial/delete/<str:pk>', DeleteTestimonialView.as_view(), name='testimonial-delete'),
+    path('testimonial/clone/<str:pk>', CloneTestimonialView.as_view(), name='testimonial-clone'),
+
+
+    #***** Campaign Product ******
+    path('campaign-product/add', CreateCampaignProductView.as_view(), name='campaign-product-add'),
+    path('campaign-product/', ListCampaignProductView.as_view(), name='campaign-product-list'),
+    path('campaign-product/list/ajax', ListCampaignProductViewJson.as_view(), name='campaign-product-list-ajax'),
+    path('campaign-product/edit/<str:pk>', UpdateCampaignProductView.as_view(), name='campaign-product-edit'),
+    path('campaign-product/delete/<str:pk>', DeleteCampaignProductView.as_view(), name='campaign-product-delete'),
+
+    #"""Product page"""
+    path('product/add', CreateProductView.as_view(), name='product-add'),
+    path('product/', ListProductView.as_view(), name='product-list'),
+    path('product/list/ajax', ListProductViewJson.as_view(), name='product-list-ajax'),
+    path('product/edit/<str:pk>', UpdateProductView.as_view(), name='product-edit'),
+    path('product/delete/<str:pk>', DeleteProductView.as_view(), name='product-delete'),
 
     #"""Mother page"""
     path('mother/add', CreateMotherView.as_view(), name='mother-add'),
@@ -64,5 +87,21 @@ urlpatterns = [
     path('80g-request-approve/<str:id>', Apporve80GView.as_view(), name='80g-request-approve'),
     path('80g-request-list/ajax', List80GRequestViewJson.as_view(), name='80g-request-list-ajax'),
 
+    # Monthly Subscriber
+
+    path('monthly-subscriber/', ListAbandonView.as_view(), name='monthly-subscriber'),
+    path('monthly-subscriber/ajax', ListAbandonViewJson.as_view(), name='monthly-subscriber-ajax'),
+
+    path('upload/', file_upload_view, name='file_upload'),
+    path('files/', file_list_view, name='file_list'),
+    path('delete/', file_delete_view, name='file_delete'),
+
+    path('home-page-setting/', HomePageSettingView.as_view(), name='home-page-setting'),
+
+    #"""Mother page"""
+    path('order/', ListOrderView.as_view(), name='order-list'),
+    path('order/list/ajax', ListOrderViewJson.as_view(), name='order-list-ajax'),
+    path('order/edit/<str:pk>', UpdateOrderView.as_view(), name='order-edit'),
+    path('order/delete/<str:pk>', DeleteOrderView.as_view(), name='order-delete'),
 ]
 

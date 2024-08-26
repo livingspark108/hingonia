@@ -1,16 +1,15 @@
-const html = document.querySelector('html');
-html.setAttribute('data-bs-theme', 'dark');
+//const html = document.querySelector('html');
+//html.setAttribute('data-bs-theme', 'dark');
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Create LightBox
     const galleryGrid = document.querySelector(".gallery-grid");
-    if(galleryGrid){
-        const links = galleryGrid.querySelectorAll("a");
-        const imgs = galleryGrid.querySelectorAll("img");
-        const lightboxModal = document.getElementById("lightbox-modal");
-        const bsModal = new bootstrap.Modal(lightboxModal);
-        const modalBody = lightboxModal.querySelector(".lightbox-content");
-    }
+    const links = galleryGrid.querySelectorAll("a");
+    const imgs = galleryGrid.querySelectorAll("img");
+    const lightboxModal = document.getElementById("lightbox-modal");
+    const bsModal = new bootstrap.Modal(lightboxModal);
+    const modalBody = lightboxModal.querySelector(".lightbox-content");
+
     function createCaption(caption) {
         return `<div class="carousel-caption d-none d-md-block">
         <h4 class="m-0">${caption}</h4>
@@ -80,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modalBody.innerHTML = markup;
     }
-if (typeof links !== 'undefined') {
+
     for (const link of links) {
         link.addEventListener("click", function (e) {
             e.preventDefault();
@@ -100,7 +99,7 @@ if (typeof links !== 'undefined') {
             bsModal.show();
         });
     }
-}
+
     // --- Support Fullscreen
     const fsEnlarge = document.querySelector(".btn-fullscreen-enlarge");
     const fsExit = document.querySelector(".btn-fullscreen-exit");

@@ -129,7 +129,7 @@ MEDIA_URL = '/media/'
 DEBUG = False
 
 #### Project name confix
-APP_NAME = 'Mata ji Admin';
+APP_NAME = 'Hingonia';
 
 SETTINGS_EXPORT = [
     'APP_NAME',
@@ -193,7 +193,7 @@ WEBPUSH_SETTINGS = {
     "VAPID_PRIVATE_KEY": "kdtfl4mj-nVi_trBGlH67XgUFvKrY0EhDKfIdwL8iI4",
     "VAPID_ADMIN_EMAIL": "nairsukumarandeepak@gmail.com"
 }
-USE_TZ = True
+USE_TZ = False
 TIME_ZONE = 'Asia/Kolkata'
 
 # added for user profile image resize/compress
@@ -251,8 +251,8 @@ GOOGLE_ANALYTICS = {
 
 #RAZOR_PAY_ID = "rzp_test_AhOuknmPQlm0es"
 #RAZOR_PAY_SECRET = "94cAr5eXW4pJ9f0ZEjkmo2gG"
-RAZOR_PAY_ID = "rzp_live_9GSRd1cdxiYGSX"
-RAZOR_PAY_SECRET = "gVmzuY523vNuqdhqWFwbAWwc"
+RAZOR_PAY_ID = "rzp_live_72nKopHGn9HWKB"
+RAZOR_PAY_SECRET = "Sw8goe5ZkOeFcElzJn96MB8A"
 
 #Live
 SMS_AUTH_KEY = '4b358371ef203b2a4c3c7c0e1f56197'

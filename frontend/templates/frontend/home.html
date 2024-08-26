@@ -3,340 +3,1432 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-
 <!-- Section Banner -->
-  <section class="banner pt-5 pb-4 position-relative overflow-hidden">
-
-    <div class="banner-component banner-left">
-      <img src="{% static 'frontend/assets/images/circle.png' %}" class="">
-      <h3 class="">Tax <br>Benefits</h3>
-    </div>
-    <div class="container ">
-      <div class="row justify-content-center ">
-        <div class="col-md-8">
-          <h2 class="banner-title text-center">We are the largest NGO that serves <span>more than 10,000 WIDOWS</span> in Vrindavan
-            <span>every year.</span>
-          </h2>
-          <div class="text-center pt-3">
-            <a style="z-index: 9;" data-title="Adopt a Mataji" href="#" data-bs-toggle="modal"
-               data-bs-target="#helpMatajiModal"
-               class="help_mataji btn bg-1 text-white banner-btn"><img
-		            src="{% static 'frontend/assets/images/foot.png' %}" width="20"
-                alt="">&nbsp;&nbsp; Donate Now</a>
+      <section class="bg-9 mx-2 section-banner">
+        <div class="container-fluid ps-lg-5">
+          <div class="row align-items-center">
+            <div class="col-lg-5 col-md-12 py-5 pe-lg-5 order-lg-1 order-2">
+              <div class="text-lg-start text-center">
+                <h5>
+                  Your donation is eligible for
+                  <strong>
+                    Tax Exemption
+                  </strong>
+                  <span class="badge bg-1 text-black rounded-pill">
+                    80G
+                  </span>
+                </h5>
+                <h2 class="ff-antom display-4 pt-1">
+                  Saving Sacred Cows
+                </h2>
+                <div class="pt-2">
+                  <a href="#" class="cm-btn bg-1 text-black">
+                    <img src="{% static 'frontend/assets/images/cow.svg' %}" width="30" alt="">
+                    Donate Now
+                  </a>
+                  <a href="#" class="fw-bold text-decoration-underline ps-md-3 link d-md-inline d-block mt-md-0 mt-3">
+                    Get Involved
+                  </a>
+                </div>
+              </div>
+              <div class="row mt-2 g-4">
+                <div class="col-lg-6 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{% static 'frontend/assets/images/home/icon-01.png' %}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          18000+
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          Stray & Abandoned Cows
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{% static 'frontend/assets/images/home/icon-02.png' %}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          84815+
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          Surgeries Done
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{% static 'frontend/assets/images/home/icon-03.png' %}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          52+
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          Cow Sheds
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{% static 'frontend/assets/images/home/icon-04.png' %}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          400+
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          Go Shevak
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{% static 'frontend/assets/images/home/icon-05.png' %}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          60+
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          Doctors & Nursing Staff
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{% static 'frontend/assets/images/home/icon-06.png' %}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          40+
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          Tractors & Loaders
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-12 p-0 order-lg-2 order-1">
+              <div class="swiper bannerSwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="{% static 'frontend/assets/images/home/slider-01.jpg' %}" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="{% static 'frontend/assets/images/home/slider-01.jpg' %}" alt="">
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="{% static 'frontend/assets/images/home/slider-01.jpg' %}" alt="">
+                  </div>
+                </div>
+                <!-- <div class="swiper-button-next">
+                </div>
+                <div class="swiper-button-prev">
+                </div> -->
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="banner-component banner-right">
-      <img src="{% static 'frontend/assets/images/circle.png' %}" class="">
-      <h3 class="">100% <br>Transparency</h3>
-    </div>
+      </section>
+      <section class="bg-black pt-3 pb-4 mx-2 home-section-2">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <span class="color-11 fw-bold fs-4 ff-Rubik">
+                Seva
+              </span>
+            </div>
+          </div>
+          <div class="row px-lg-3">
+            {% for single in monthly_campaign_obj %}
+            <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
+              <div class="sevaWr text-white">
+                <h6 class="f-30 mb-1 fw-semibold ff-Rubik">{{single.title}}</h6>
+                <div class="d-flex justify-content-xxl-between justify-content-center gap-2">
+                  <div class="amount_box text-white bg-white24 ff-Rubik">₹<span class="text-white">{{single.price}}</span>/MONTH</div>
+                  <div class="pcount text-white d-flex gap-1">
+                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="minus-item text-white bg-white24 ff-Rubik">
+                      <img src="{% static 'frontend/assets/images/minus-white.svg' %}" class="img-fluid" alt="">
+                    </span>
+                      <input style="width: 33px;" type="number" data-maxlength="100" class="item-count" data-id="{{single.id}}" data-name="{{single.title}}" value="1">
+                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="plus-item text-white bg-white24 ff-Rubik">
+                      <img src="{% static 'frontend/assets/images/plus-white.svg' %}" class="img-fluid" alt="">
+                    </span>
+                  </div>
 
-    <div class="pt-5 mt-5 z-3 position-relative">
-      <img src="{% static 'frontend/assets/images/banner-img.png' %}" class="img-fluid" alt="">
-    </div>
-  </section>
-<section class="section-campaign">
-    <div class="container">
-      <div class="col-md-12">
-        <div class="card bg-light shadow">
-          <div class="card-body">
-            <div class="row g-3">
-	          {% for i in campaign_obj %}
-              <div class="col-md-3 text-center sc-box">
-                <div class="mb-3"><img src="{% get_media_prefix %}{{i.campaign_image}}" width="150"
-                                       class="img-fluid" alt="">
                 </div>
-                <h2 class="banner-title-lite fs-4 mb-3">{{i.short_title| add_spam_tag|safe}}</h2>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="fixDonateBottom px-lg-5 px-2 bg-dark rounded-top-4">
+            <div class="d-flex justify-content-sm-between justify-content-center align-items-center flex-wrap gap-2">
+              <div class="f-24 fw-semibold text-white ff-Rubik title order-md-1 order-1 all_item_html"></div>
+              <div class="text-white d-flex align-items-center gap-4 order-md-2 order-3">
+                <a data-bs-toggle="modal" data-bs-target="#donate2" href="#" class="campaign-btn text-dark ff-Rubik">Donate Now</a>
+                <input type="hidden" value="" name="donationAmount" class="donationAmount">
+                <div class="amount text-white">RS. <span id="donationAmount" class="donationAmount_html text-white ff-Rubik"></span></div>
+              </div>
+              <div class="d-flex gap-4 order-md-3 order-2">
+                <div class="d-flex align-items-center messageBox gap-2 text-white">
+                  <input type="checkbox" class="position-relative" id="r-80g">
+                  <label class="f-14 m-0 py-1 form-check-label text-white ff-Rubik" for="r-80g">REQUEST 80G</label>
+                </div>
+                <div class="d-flex align-items-center messageBox gap-2 text-white donate_monthly">
+                  <input type="checkbox" class="position-relative" id="dm-1">
+                  <label class="f-14 m-0 py-1 form-check-label text-white ff-Rubik" for="dm-1">Donate
+                    Monthly</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mx-2 py-2 campaign-section">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="swiper campaignSwiper swiper-container">
+                <div class="swiper-wrapper">
+                  {% for single in home_campaign_obj %}
+                  {% generate_random_color as color %}
+                  <div class="swiper-slide">
+                    <div class="slide_content rounded-5" style="background-color: {{color}};">
+                      <div class="row justify-content-center align-items-center">
+                        <div class="col-8">
+                          <h6 class="text-white">
+                            #Haven_for_cows
+                          </h6>
+                          <h5 class="text-white fw-semibold ff-epilogue mb-0">
+                            Infrastructure
+                          </h5>
+                        </div>
+                        <div class="col-2">
+                          <a href="#">
+                            <i class="bi bi-share text-white fs-3">
+                            </i>
+                          </a>
+                        </div>
+                      </div>
+                      <div>
+                        <img src="{% static 'frontend/assets/images/home/campaign-01.jpg' %}" class="campaign-img" alt="">
+                      </div>
+                      {% get_campaign_data single.id as campaign_single %}
+
+                      <h2 class="campaign-title text-center text-white fw-bold">
+                        {{single.title}}
+                      </h2>
+                      <div class="row mb-1">
+                        <div class="col-6">
+                          <h6 class="text-white mb-0 f-14 fw-medium">
+                            raised
+                          </h6>
+                        </div>
+                        <div class="col-6 text-end">
+                          <h6 class="text-white mb-0 f-14 fw-medium">
+                            Goal
+                          </h6>
+                        </div>
+                      </div>
+                      <div class="progress" role="progressbar" aria-valuenow="{{campaign_single.percent}}" aria-valuemin="0"
+                      aria-valuemax="100">
+                        <div class="progress-bar text-bg-light" style="width: {{campaign_single.percent}}%">
+                        </div>
+                      </div>
+                      <div class="row mt-1">
+                        <div class="col-6">
+                          <h5 class="text-white ff-epilogue f-16">
+                            <i class="bi bi-currency-rupee text-white">
+                            </i>
+                            {{campaign_single.target|indian_number_format}}
+                          </h5>
+                        </div>
+                        <div class="col-6 text-end">
+                          <h5 class="text-white ff-epilogue f-16">
+                            <i class="bi bi-currency-rupee text-white">
+                            </i>
+                            {{single.goal|indian_number_format}}
+                          </h5>
+                        </div>
+                      </div>
+                      <h3 class="campaign-subtitle text-white fw-semibold">
+                        {{single.short_description}}
+                      </h3>
+                      <div class="row pt-3">
+                        <div class="col-12">
+                          <a href="#" class="campaign-btn" style="color: #C21959;" data-bs-toggle="modal" data-bs-target="#donate1">
+                            Donate Now
+                          </a>
+                          <a data-id="{{single.id}}" href="#" class="know_more knowMore-donate ext-decoration-underline text-white fw-bold ps-3 simple-link" data-bs-toggle="modal" data-bs-target="#knowMoredonate1">
+                            know more
+                          </a>
+                        </div>
+                        <div class="col-6">
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  {% endfor %}
+                </div>
+
+                <!-- <div class="swiper-button-next">
+                </div>
+                <div class="swiper-button-prev">
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Model -->
+          <div class="donateModel">
+              <div class="modal fade" id="donate1" data-bs-keyboard="false" tabindex="-1" aria-labelledby="donate1Label" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title fw-bold w-100 f-24">Cow Shed</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body description">
+                      <div class="donateSilde steptabs" id="donateSlide">
+                        <div class="stepper">
+                          <div class="progress-container">
+                            <div class="progress">
+                              <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="step-circles">
+                              <div class="circle active" id="circle-1"></div>
+                              <div class="circle" id="circle-2"></div>
+                              <div class="circle" id="circle-3"></div>
+                            </div>
+                          </div>
+                          <div class="step w-100" id="step-1">
+                            <div class="row pt-5 pb-4">
+                              <div class="col-lg-4 col-md-6">
+                                <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
+                                  <img class="tooltipIcon" src="{% static 'frontend/assets/images/tooltip.svg' %}" alt="">
+                                  <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                  <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
+                                    <div>
+                                      <h5 class="card-title fw-bold">Steel Seva</h5>
+                                    </div>
+                                    <div class="d-flex gap-2 justify-content-between flex-wrap">
+                                      <span class="card-text priceWr f-18 mb-0">₹100</span>
+                                      <div class="add_button">
+                                        <button class="btn btn-primary f-12 add-button">
+                                          <img src="{% static 'frontend/assets/images/plus-black.svg' %}" class="img-fluid" alt="">
+                                        </button>
+                                      </div>
+                                      <div class="quantity-container" style="display: none;">
+                                        <button class="btn btn-primary f-14 decrement-btn">-</button>
+                                        <span class="mx-2 quantity-value">0</span>
+                                        <button class="btn btn-primary f-14 increment-btn">+</button>
+                                        <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
+                                      </div>
+                                      <!-- <div class="added-button" style="display: none;">
+                                                    <button class="btn btn-primary f-12 bg-dark text-white">
+                                                      Added
+                                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
+                                                    </button>
+                                                  </div> -->
+                                    </div>
+                                  </div>
+                                  <div class="tooltipeContentWr d-flex gap-2 d-none">
+                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                    <p class="f-10 mb-0">
+                                      Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
+                                      and care. Join us in creating their sanctuary.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-md-6">
+                                <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
+                                  <img class="tooltipIcon" src="{% static 'frontend/assets/images/tooltip.svg' %}" alt="">
+                                  <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                  <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
+                                    <div>
+                                      <h5 class="card-title fw-bold">Steel Seva</h5>
+                                    </div>
+                                    <div class="d-flex gap-2 justify-content-between flex-wrap">
+                                      <span class="card-text priceWr f-18 mb-0">₹100</span>
+                                      <div class="add_button">
+                                        <button class="btn btn-primary f-12 add-button">
+                                          <img src="{% static 'frontend/assets/images/plus-black.svg' %}" class="img-fluid" alt="">
+                                        </button>
+                                      </div>
+                                      <div class="quantity-container" style="display: none;">
+                                        <button class="btn btn-primary f-14 decrement-btn">-</button>
+                                        <span class="mx-2 quantity-value">0</span>
+                                        <button class="btn btn-primary f-14 increment-btn">+</button>
+                                        <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
+                                      </div>
+                                      <!-- <div class="added-button" style="display: none;">
+                                                    <button class="btn btn-primary f-12 bg-dark text-white">
+                                                      Added
+                                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
+                                                    </button>
+                                                  </div> -->
+                                    </div>
+                                  </div>
+                                  <div class="tooltipeContentWr d-flex gap-2 d-none">
+                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                    <p class="f-10 mb-0">
+                                      Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
+                                      and care. Join us in creating their sanctuary.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-md-6">
+                                <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
+                                  <img class="tooltipIcon" src="{% static 'frontend/assets/images/tooltip.svg' %}" alt="">
+                                  <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                  <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
+                                    <div>
+                                      <h5 class="card-title fw-bold">Steel Seva</h5>
+                                    </div>
+                                    <div class="d-flex gap-2 justify-content-between flex-wrap">
+                                      <span class="card-text priceWr f-18 mb-0">₹100</span>
+                                      <div class="add_button">
+                                        <button class="btn btn-primary f-12 add-button">
+                                          <img src="{% static 'frontend/assets/images/plus-black.svg' %}" class="img-fluid" alt="">
+                                        </button>
+                                      </div>
+                                      <div class="quantity-container" style="display: none;">
+                                        <button class="btn btn-primary f-14 decrement-btn">-</button>
+                                        <span class="mx-2 quantity-value">0</span>
+                                        <button class="btn btn-primary f-14 increment-btn">+</button>
+                                        <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
+                                      </div>
+                                      <!-- <div class="added-button" style="display: none;">
+                                                    <button class="btn btn-primary f-12 bg-dark text-white">
+                                                      Added
+                                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
+                                                    </button>
+                                                  </div> -->
+                                    </div>
+                                  </div>
+                                  <div class="tooltipeContentWr d-flex gap-2 d-none">
+                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                    <p class="f-10 mb-0">
+                                      Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
+                                      and care. Join us in creating their sanctuary.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-md-6">
+                                <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
+                                  <img class="tooltipIcon" src="{% static 'frontend/assets/images/tooltip.svg' %}" alt="">
+                                  <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                  <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
+                                    <div>
+                                      <h5 class="card-title fw-bold">Steel Seva</h5>
+                                    </div>
+                                    <div class="d-flex gap-2 justify-content-between flex-wrap">
+                                      <span class="card-text priceWr f-18 mb-0">₹100</span>
+                                      <div class="add_button">
+                                        <button class="btn btn-primary f-12 add-button">
+                                          <img src="{% static 'frontend/assets/images/plus-black.svg' %}" class="img-fluid" alt="">
+                                        </button>
+                                      </div>
+                                      <div class="quantity-container" style="display: none;">
+                                        <button class="btn btn-primary f-14 decrement-btn">-</button>
+                                        <span class="mx-2 quantity-value">0</span>
+                                        <button class="btn btn-primary f-14 increment-btn">+</button>
+                                        <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
+                                      </div>
+                                      <!-- <div class="added-button" style="display: none;">
+                                                    <button class="btn btn-primary f-12 bg-dark text-white">
+                                                      Added
+                                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
+                                                    </button>
+                                                  </div> -->
+                                    </div>
+                                  </div>
+                                  <div class="tooltipeContentWr d-flex gap-2 d-none">
+                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                    <p class="f-10 mb-0">
+                                      Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
+                                      and care. Join us in creating their sanctuary.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                              <div class="d-flex col-12 gap-3 mt-2 mb-3 mt-3 flex-wrap">
+                                <div class="custom_amount flexBoxCenter">
+                                  <div class="title fw-bold">Custom Amount:</div>
+                                  <div class="amount">
+                                    <input id="number" type="text">
+                                  </div>
+                                </div>
+                                <div class="currency">
+                                  <span class="f-14 fw-semibold">Currency</span>
+                                  <div class="inrSelect">
+                                    <select class="h-100">
+                                      <option value="IN">INR</option>
+                                      <option value="US">USD</option>
+                                      <option value="UK">$</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 pt-1">
+                                <div class="d-flex align-items-center messageBox gap-2">
+                                  <input type="checkbox" class="donationMessage position-relative" id="anonymous">
+                                  <label class="f-14 m-0 py-1 form-check-label" for="anonymous">
+                                    Make my Donation Anonymous
+                                  </label>
+                                </div>
+                                <div class="d-flex align-items-center messageBox gap-2">
+                                  <input type="checkbox" class="donationMessage position-relative" id="whatsapp">
+                                  <label class="f-14 m-0 py-1 form-check-label" for="whatsapp">
+                                    I want to receive transaction and donation updates on WhatsApp
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6 pt-1">
+                                <div class=" messageBox">
+                                  <div class="d-flex align-items-center gap-2 mb-2">
+                                    <input type="checkbox" class="donationMessage gap-2 position-relative" id="request2">
+                                    <label class="f-14 m-0 py-1 form-check-label" for="request2">
+                                      Request 80 G
+                                    </label>
+                                  </div>
+                                  <div class="monthly_donate d-flex align-items-center">
+                                    <div class="monthly d-flex align-items-center justify-content-between">
+                                      <div class="DBtnWr">
+                                        <button class="btn messageBox flexBoxCenter gap-2 fw-bold">
+                                          <input type="checkbox" class="md_btn donationMessage position-relative" id="donateMOnthly">
+                                          <label class="f-14 m-0 py-1 form-check-label" for="donateMOnthly">
+                                            Donate Monthly
+                                          </label>
+                                        </button>
+                                      </div>
+                                      <div class="d-flex flex-column align-items-end pe-lg-3 pe-2">
+                                        <span class="f-12 fw-bold text-white taText">TOTAL AMOUNT</span>
+                                        <span class="f-36 text-white fw-bold taRs" style="line-height:normal">RS. 1,160</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="dSubmit pt-2">
+                                <button class="btn btnPink fw-bold btnAnimation" onclick="nextStep(2)">DONATE NOW</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="step d-none" id="step-2">
+                            <div class="card_donate fw-medium zIndex-3 position-relative">
+                              <p class="mb-1 f-14">
+                                By supporting <span class="color-26 fw-bold">Hingonia</span>, you are helping us reach out to
+                                more campaigns like this and scale our impact. <a href="#" class="color-26 text-decoration-underline fw-bold">Learn More.</a>
+                              </p>
+<!--                              <div class="d-flex justify-content-between">-->
+<!--                                <span class="f-12 fw-bold">Support us by :</span>-->
+<!--                                <span class="supportPer f-12 fw-bold px-1" style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">-->
+<!--                                  <select class="h-100">-->
+<!--                                    <option value="IN">16% (₹160)</option>-->
+<!--                                    <option value="US">22% (₹200)</option>-->
+<!--                                  </select>-->
+<!--                                </span>-->
+<!--                              </div>-->
+                            </div>
+                            <div class="donateForm_wr pt-3 pb-1">
+                              <form onsubmit="return false">
+                                <div class="mb-3 position-relative">
+                                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                                  <input type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                                  <input type="text" name="email" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <div class="position-absolute country_code h-100">
+                                    <select class="h-100">
+                                      <option value="IN">IN</option>
+                                      <option value="US">US</option>
+                                      <option value="UK">UK</option>
+                                    </select>
+                                  </div>
+                                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                                  <input type="text" name="phone_no" class="phone-number w-100" placeholder="+91 00000-00000">
+                                  <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="donate_CountryBtn d-flex align-items-center mb-5">
+                              <div>
+                                <label class="form-check-label fw-bold me-2" for="nationality">Nationality</label>
+                              </div>
+                              <button class="countryBtn active" id="indian-btn">INDIAN</button>
+                              <button class="countryBtn non_indian" id="non-indian-btn">NOT INDIAN</button>
+                            </div>
+                            <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(1)">Previous</button> -->
+                            <div class="col-12">
+                              <div class="dSubmit pt-2">
+                                <button class="btn btnPink fw-bold btnAnimation" onclick="nextStep(3)">DONATE NOW</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="step d-none" id="step-3">
+                            <div class="f-30 fw-semibold text-center color-10 mt-5">🎁 Thank you for the donation 🎁</div>
+                            <h5 class="display-6 fw-bold text-center color-10 pb-4">May Krishna &amp; Gau Mata Bless you.</h5>
+                            <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(2)">Previous</button> -->
+                            <div class="col-12">
+                              <div class="dSubmit pt-2">
+                                <button class="btn btnPink fw-bold btnAnimation">Finish</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="donateModel">
+              <div class="modal fade donate2" id="donate2" data-bs-keyboard="false" tabindex="-1" aria-labelledby="donate1Label" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title fw-bold w-100 f-24">Cow Shed</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                <div class="donateSilde steptabs" id="donateSlide">
+                  <div class="stepper">
+                    <div class="progress-container">
+                      <div class="progress">
+                        <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="step-circles">
+                        <div class="circle active" id="circle-1"></div>
+                        <div class="circle" id="circle-2"></div>
+                        <div class="circle" id="circle-3"></div>
+                      </div>
+                    </div>
+                    <div class="step w-100 d-none" id="step-11">
+
+                    </div>
+                    <div class="step" id="step-21">
+                      <div class="card_donate fw-medium zIndex-3 position-relative">
+                        <p class="mb-1 f-14">
+                          By supporting <span class="color-26 fw-bold">Hingonia</span>, you are helping us reach out to
+                          more campaigns like this and scale our impact. <a href="#" class="color-26 text-decoration-underline fw-bold">Learn More.</a>
+                        </p>
+                        <div class="d-flex justify-content-between">
+                          <span class="f-12 fw-bold">Support us by :</span>
+                          <span class="supportPer f-12 fw-bold px-1" style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">
+                            <select class="h-100">
+                              <option value="IN">16% (₹160)</option>
+                              <option value="US">22% (₹200)</option>
+                            </select>
+                          </span>
+                        </div>
+                      </div>
+                      <form id="subscriptionForm" >
+                          {% csrf_token %}
+                      <div class="donateForm_wr pt-3 pb-1">
+
+                          <input type="hidden" id="campaign_id" name="campaign_id" value="">
+                          <input type="hidden" id="plan_id" name="plan_id" value="">
+                          <div class="mb-3 position-relative">
+                            <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
+                          </div>
+                          <div class="mb-3 position-relative">
+                            <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Preferred date</label>
+                          <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
+                          </div>
+
+                          <div class="mb-3 position-relative">
+                            <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                            <input type="text" name="email" class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
+                          </div>
+                          <div class="mb-3 position-relative">
+                            <div class="position-absolute country_code h-100">
+                              <select class="h-100">
+                                <option value="IN">IN</option>
+                                <option value="US">US</option>
+                                <option value="UK">UK</option>
+                              </select>
+                            </div>
+                            <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                            <input name="phone_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                            <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                          </div>
+
+                      </div>
+                      <div class="donate_CountryBtn d-flex align-items-center mb-5">
+                        <div>
+                          <label class="form-check-label fw-bold me-2" for="nationality">Nationality</label>
+                        </div>
+                        <button class="countryBtn active" id="indian-btn">INDIAN</button>
+                        <button class="countryBtn non_indian" id="non-indian-btn">NOT INDIAN</button>
+                      </div>
+                      <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(1)">Previous</button> -->
+                      <div class="col-12">
+                        <div class="dSubmit pt-2">
+                          <button type="submit" class="btn btnPink fw-bold btnAnimation">DONATE NOW</button>
+                        </div>
+                      </div>
+                      </form>
+                    </div>
+                    <div class="step d-none" id="step-3">
+                      <div class="f-30 fw-semibold text-center color-10 mt-5">🎁 Thank you for the donation 🎁</div>
+                      <h5 class="display-6 fw-bold text-center color-10 pb-4">May Krishna &amp; Gau Mata Bless you.</h5>
+                      <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(2)">Previous</button> -->
+                      <div class="col-12">
+                        <div class="dSubmit pt-2">
+                          <button class="btn btnPink fw-bold btnAnimation">Finish</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="knowMore_donateModel">
+              <div class="modal fade" id="knowMoredonate1"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="knowMoredonate1Label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title fw-bold w-100 f-24">
+                          <span class="title"></span>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body description">
+
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+          <!-- Modal 1 -->
+
+           <!-- Modal 1 -->
+
+          <!-- Model -->
+        </div>
+      </section>
+
+      <section class="bg-black py-3 mx-2 home-section-2">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <span class="color-11 fw-bold fs-4">
+                Green Fodder Seva
+              </span>
+              <i class="bi bi-dot color-11 px-lg-3">
+              </i>
+              <span class="color-11 fw-bold fs-4">
+                Jaggery Seva
+              </span>
+              <i class="bi bi-dot color-11 px-lg-3">
+              </i>
+              <span class="color-11 fw-bold fs-4">
+                Adopt a calf
+              </span>
+              <i class="bi bi-dot color-11 px-lg-3">
+              </i>
+              <span class="color-11 fw-bold fs-4">
+                Adopt a cow
+              </span>
+              <i class="bi bi-dot color-11 px-lg-3">
+              </i>
+              <span class="color-11 fw-bold fs-4">
+                Medicine Kit Seva
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mx-2 bg-6 py-5 home-section-3 position-relative">
+        <div class="container-fluid">
+        <img class="vector_left position-absolute img-fluid" src="{% static 'frontend/assets/images/about/vector-right.png' %}" alt="vector">
+                <img class="vector_right position-absolute img-fluid" src="{% static 'frontend//assets/images/about/vector-left.png' %}" alt="vector">
+                <div><img class="vector_cow position-absolute img-fluid" src="{% static 'frontend//assets/images/about/cow-1.png' %}" alt="vector"></div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h2 class="fw-bold display-4 color-4">
+                World’s largest Cow Rehabilitation Centre
+              </h2>
+              <h5 class="fw-bold color-4 pt-3">
+                Sri Krishna Balaram Seva Trust
+              </h5>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mx-2 py-3 px-lg-5 home-section-4">
+        <div class="container-fluid ">
+          <div class="row justify-content-between align-items-center g-3">
+            <div class="col-lg-5 col-md-6">
+              <h2 class="display-3 ff-antom">
+                Cow
+              </h2>
+              <h3 class="display-3 ff-antom text-bg">
+                rehabilitation
+              </h3>
+              <h5 class="fw-bold pt-2">
+                Sri Krishna Balram Seva Trust
+              </h5>
+            </div>
+            <div class="col-lg-5 col-md-6 ">
+              <h2 class="display-5 fw-semibold lh-1">
+                sanctuary for injured, sick, and vulnerable
+              </h2>
+              <p class="text-muted fw-semibold">
+                We strive to restore their health and well-being with a compassionate
+                approach and expert veterinary care.
+              </p>
+              <h6 class="fw-bold">
+                <span class="text-decoration-underline">
+                  More about Sri Krishna Balram Seva Trust
+                </span>
+                <a href="#" class="ps-2">
+                  <i class="bi bi-box-arrow-up-right">
+                  </i>
+                </a>
+              </h6>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mx-2 px-lg-5 pb-5 home-section-5">
+        <div class="container-fluid">
+          <div class="row g-3 align-items-end">
+            <div class="col-lg-3 col-md-6 order-lg-1 order-2">
+              <img src="{% static 'frontend/assets/images/home/cr-01.jpg' %}" class="img-fluid w-100" alt="">
+              <div class="mt-3 position-relative">
+                <img src="{% static 'frontend/assets/images/home/cr-02.jpg' %}" class="img-fluid w-100" alt="" >
+                <div class="fw-bold position-absolute text-white f-24" style="bottom: 30px;left: 15%; line-height:28px;">Cow <br> Seva</div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12 order-lg-2 order-1">
+              <div class="text-center">
+                <img src="{% static 'frontend/assets/images/home/flower.png' %}" class="img-fluid" alt="">
+              </div>
+              <div class="row justify-content-center ">
+                <div class="col-md-6">
+                  <div class="card card-body rounded-4 shadow">
+                    <div class="row align-items-center">
+                      <div class="col-4">
+                        <img src="{% static 'frontend/assets/images/home/donation.svg' %}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-8">
+                        <h3 class="fw-bold mb-0">
+                          400+
+                        </h3>
+                        <p class="mb-0 fw-semibold">
+                          Pepole as Cow Sevak
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4 g-3">
+                <div class="col-md-6">
+                  <img src="{% static 'frontend/assets/images/home/cr-03.jpg' %}" class="img-fluid w-100" alt="">
+                </div>
+                <div class="col-md-6">
+                  <img src="{% static 'frontend/assets/images/home/cr-04.jpg' %}" class="img-fluid w-100" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 order-lg-3 order-3">
+              <img src="{% static 'frontend/assets/images/home/cr-05.jpg' %}" class="img-fluid w-100" alt="">
+              <div class="mt-3 position-relative">
+                <img src="{% static 'frontend/assets/images/home/cr-06.jpg' %}" class="img-fluid w-100" alt="">
+                <div class="fw-bold position-absolute text-white f-24" style="bottom: 30px;left: 15%; line-height:28px; max-width:170px">
+                World’s Largest Rehabilitation Centre
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="about_hinginiaVideo pt-4">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="h-100">
+                    <div class="video-container text-center" style="width: 100%; height: 100%; border-radius:15px; overflow:hidden">
+                    <iframe width="889" height="500" style="border-radius:20px" src="https://www.youtube.com/embed/IPU9oUjlDoc?si=G_65b4bAMBhOaUpI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <section class="px-lg-5 py-5 home-section-6 position-relative">
+        <img src="{% static 'frontend/assets/images/home/vector-1.png' %}" class="element-1">
+        <img src="{% static 'frontend/assets/images/home/vector-2.png' %}" class="element-2">
+        <img src="{% static 'frontend/assets/images/home/vector-3.png' %}" class="element-3">
+        <div class="container-fluid mx-lg-2  z-3 position-relative">
+          <div class="row g-4">
+            <div class="col-md-12 text-center">
+              <h2 class="color-1 ff-epilogue fw-bold display-4">
+                Hingonia
+              </h2>
+              <h3 class="fw-medium ff-epilogue display-6">
+                Sri Krishna Balram Seva Trust
+              </h3>
+            </div>
+            <div class="col-lg-6">
+              <p class="hs-desc">
+                In 2016, the Government of Rajasthan and the Jaipur Nagar Nigam decided
+                to partner with Hare Krishna Movement Jaipur, which runs the Sri Sri Krishna
+                Balaram Mandir at the Akshaya Patra mid day meal centralized kitchen campus
+                at Jagatpura, Jaipur. The full time missionaries of Hare Krishna Movement
+                accepted the humble service to mother cows at Hingonia. A special purpose
+                vehicle, Sri Krishna Balaram Seva Trust, was set up to run the Hingonia
+                centre with the aid of Jaipur Nagar Nigam. This trust is a non profit organization,
+                dedicated for serving the cattle at Hingonia. The Trust consists of 3 government
+                officials, 3 independent trustees and 9 missionary trustees. The operations
+                are managed by the full time missionaries of the Trust.
+                <a href="#" class="color-1">
+                  Read More
+                </a>
+              </p>
+              <div class="row g-3">
+                <div class="col-lg-6 col-md-6">
+                  <div class="card card-body shadow rounded-5 bg-7 text-center">
+                    <h2 class="fw-bold color-10">
+                      Join 10,000+ Helpers & Doctors
+                    </h2>
+                    <div>
+                      <img src="{% static 'frontend/assets/images/skbt-logo.webp' %}" width="80" alt="">
+                    </div>
+                    <div class="mt-3">
+                      <a href="#" class="cm-btn border border-dark-subtle bg-7 color-10 fs-5">
+                        Become a Voluteer
+                        <i class="bi bi-arrow-right color-10">
+                        </i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="bg-img-card rounded-5 p-4 mt-3" style="background-image: url('{% static 'frontend/assets/images/home/vision.jpg' %}');">
+                    <p class="text-white pb-5 fs-4 lh-sm">
+                      <strong class="text-white">
+                        Our Vision
+                      </strong>
+                      is To ensure that every stray and accidental cows in India is well-fed
+                      and cared for.
+                    </p>
+                    <div class="py-md-4">
+                    </div>
+                    <div class="pt-5">
+                      <a href="#" class="cm-btn p-0">
+                        <img src="{% static 'frontend/assets/images/home/more-btn.png' %}" class="img-fluid" alt="">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="bg-img-card rounded-5 p-4" style="background-image: url('{% static 'frontend/assets/images/home/mission.jpg' %}');">
+                    <p class="text-white pb-5 fs-4 lh-sm">
+                      <strong class="text-white">
+                        Our Mission
+                      </strong>
+                      is To provide nourishment and care to 30,000 stray and accidental cows
+                      by 2030.
+                    </p>
+                    <div class="py-md-4">
+                    </div>
+                    <div class="pt-5">
+                      <a href="#" class="cm-btn p-0">
+                        <img src="{% static 'frontend/assets/images/home/more-btn.png' %}" class="img-fluid" alt="">
+                      </a>
+                    </div>
+                  </div>
+                  <div class="mt-lg-5 mt-4 text-center">
+                    <img src="{% static 'frontend/assets/images/skbt-logo.webp' %}" class="img-fluid" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="contribute-card rounded-5 shadow">
+                <img src="{% static 'frontend/assets/images/home/contribute.png' %}" class="img-fluid" alt="">
+                <div class="p-4">
+                  <h2 class="color-7">
+                    🌟 Join the Online Movement to Support Hingonia's Cause! 🐄💙
+                  </h2>
+                  <p class="color-7 hs-desc">
+                    At Hingonia, we believe that everyone can contribute, regardless of their
+                    financial situation. If you find yourself unable to make a monetary donation,
+                    fret not! You can still make a significant impact by sharing our cause
+                    within your circle and helping us reach more caring hearts.
+                  </p>
+                  <p class="color-7 hs-desc">
+                    How You Can Help Without Spending a Dime:
+                  </p>
+                  <ol>
+                    <li class="color-7 hs-desc">
+                      🌟 Share the Message: Post about Hingonia and our fundraiser on your social
+                      media platforms. Your personal touch can inspire others to join the cause.
+                    </li>
+                    <li class="color-7 hs-desc py-3">
+                      🗣️ Talk About It: Spread the word among your friends, family, and colleagues.
+                      A simple conversation can create ripples of awareness and support.
+                    </li>
+                    <li class="color-7 hs-desc">
+                      🌐 Digital Amplification: Share our digital assets—images, videos, and
+                      infographics—across your online networks. These visuals tell the heartfelt
+                      story of Hingonia and make a lasting impression.
+                    </li>
+                  </ol>
+                  <div class="mt-4">
+                    <a href="#" class="cm-btn bg-7 d-block text-center color-10">
+                      <i class="bi bi-share color-10">
+                      </i>
+                      Spread the Cause
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mx-2 py-5 donation_section">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 ">
+              <div class="px-lg-5 px-md-3 position-relative">
+                <h2 class="fw-bold display-2 color-4 donation_titleWr ">
+                  don’t be
+                  <Span class="longLine">
+                    silent
+                  </Span>
+                  for the
+                  <Span class="color-13">
+                    silent
+                  </Span>
+                  , help our sacred animal
+                </h2>
+                <div class="d-flex donation_lineWr">
+                  <div class="donate_wr d-flex">
+                    <div>
+                      <img class="img-fluid" src="{% static 'frontend/assets/images/home/line.png' %}" alt="line">
+                      <div class="d-flex donation_content">
+                        <div class="d-flex gap-1">
+                          <div class="hashTag flexBoxCenter">
+                            #
+                          </div>
+                          <div>
+                            Feedcows
+                          </div>
+                        </div>
+                        <div class="d-flex gap-1">
+                          <div class="hashTag flexBoxCenter">
+                            #
+                          </div>
+                          <div>
+                            Feedcows
+                          </div>
+                        </div>
+                        <div class="d-flex gap-1">
+                          <div class="hashTag flexBoxCenter">
+                            #
+                          </div>
+                          <div>
+                            Feedcows
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="position-relative email-container text-center">
+                      <img class="img-fluid position-absolute email-cover" src="{% static 'frontend/assets/images/home/email-cover.png' %}" alt="email cover">
+                      <img class="img-fluid email-body" src="{% static 'frontend/assets/images/home/email.jpg' %}" alt="email">
+                      <a href="#" class="text-decoration-underline text-dark fw-semibold f-14">Donate Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mx-2 py-2 px-lg-5 px-md-0 mx-lg-4">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="swiper testimonialsSwiper pt-60">
+                <div class="swiper-wrapper">
+                  {% for single in testimonial_obj %}
+                  <div class="swiper-slide ">
+                    <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                      <div>
+                        <img src="{{single.photo.url}}" class="Profil-picture img-fluid"
+                        alt="Profil-picture">
+                      </div>
+                      <div class="p-3 pb-5">
+                        <h4 class="testimonial_title fw-bold">
+                          {{single.title}}
+                        </h4>
+                        <h4 class="testimonial_Subtitle color-15 mb-3">
+                           {{single.designation}}
+                        </h4>
+                        <p class="hs-desc">
+                           {{single.description}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="arrowsBtn_wr flexBoxCenter">
+                  <div class="swiper-button-prev">
+                    <img src="{% static 'frontend/assets/images/home/arrow_back.png' %}" alt="arrow_back">
+                  </div>
+                  <div class="fw-bold" style="margin-top:-21px">
+                    Testimonials
+                  </div>
+                  <div class="swiper-button-next">
+                    <img src="{% static 'frontend/assets/images/home/arrow_next.png' %}" alt="arrow_next">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mx-2 py-5 px-lg-5 px-md-0 mx-lg-5 csr-supporters-section">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="heart_wr text-center">
+                <img class="img-fluid" src="{% static 'frontend/assets/images/home/icon-heart.png' %}" alt="heart">
+              </div>
+              <div>
+                <h1 class="text-center display-2 csr_supporter_title color-10 fw-medium">
+                  Visibility To Our
+                  <span class="fw-bold color-10 ff-antom">
+                    CSR Supporters
+                  </span>
+                </h1>
+                <p class="color-10 text-justify donor_desc">
+                Donor's registered logo and name will be prominently displayed in form
+                of hoardings & facades in the sponsored area ensuring brand visibility
+                to the visitors. The primary sponsor will be given the maximum visibility
+                on the exterior facade and rest of the supporters will be provided with
+                a specified space termed as the donor wall.
+              </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="csr_supporter_content ps-0 ps-lg-5">
                 <div>
-                  <a style="z-index: 9;" data-title="{{i.short_title}}" href="#"
-                     class="btn bg-1 text-white my-1 help_mataji" data-bs-toggle="modal"
-                     data-bs-target="#helpMatajiModal">Donate Now</a>
-                  <a href="{% url 'ongoing-devotion' i.slug %}" class="btn bg-outline color-2 my-1">Learn More</a>
+                  <div thumbsSlider="" class="swiper CSRSwiper">
+                    <div class="swiper-wrapper">
+                      <!-- Swiper slides with images -->
+                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-01.png' %}" alt="RSDCL"></div>
+                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-02.png' %}" alt="RIICO"></div>
+                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-03.png' %}" alt=""></div>
+                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-04.png' %}" alt=""></div>
+                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-05.png' %}" alt=""></div>
+                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-06.png' %}" alt=""></div>
+                    </div>
+                  </div>
+                  <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper CSRSwiper2 text-center">
+                    <div class="swiper-wrapper">
+                      <!-- Swiper slides with images and text content -->
+                      <div class="swiper-slide">
+                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/1.png' %}" />
+                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >RSDCL</h4>
+                        <div>
+                          <p class="my-3">The number of cows here has grown to over 18,000, making it challenging to feed them on time. Rajasthan Solarpark Development Company Limited (RSDCL) has helped by providing a TMR (Total Mixed Ration) Fodder Feeding Machine that mixes green fodder, dry fodder, and concentrate, ensuring all cows get equal nutrition. With this machine, we can now feed 3,000 cows every day.</p>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/2.png' %}" />
+                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >RIICO</h4>
+                        <div>
+                          <p class="my-3">RIICO's CSR support has helped the Hingonia Cattle Rehabilitation Center in preserving soil and groundwater while promoting environmental sustainability. Their contribution of a dead animal incinerator machine ensures efficient waste management, reflecting RIICO's commitment to creating a healthier environment for all.</p>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/3.png' %}" />
+                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >GCL</h4>
+                        <div>
+                          <p class="my-3">With the generous CSR support from Gayson & Company Limited, our Hingonia Cattle Rehabilitation Center was able to provide arrangements for 4,500 cows in a day, including dry fodder, green fodder, and concentrate. This support has been instrumental in our mission to serve the 18,000 cows in our care. We extend our heartfelt gratitude for their contribution towards our cause.</p>
+                        </div>
+                      </div>
+                      <div class="swiper-slide">
+                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/4.png' %}" />
+                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >H.G.</h4>
+                        <p class="my-3">H.G. Foundation's generous support in building a 44,000 sqft shelter home for 500 stray and abandoned cows is truly commendable. The brick flooring ensures their comfort and safety, particularly during rainy days. Solar lights have been installed to provide care for the cows at night, especially the elderly and sick ones. Additionally, shade-providing trees have been planted to offer relief from the heat during hot weather, further enhancing their well-being.</p>
+                      </div>
+                      <div class="swiper-slide">
+                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/5.png' %}" />
+                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >IOCL</h4>
+                        <p class="my-3">Through the generous CSR contribution of the Indian Oil Corporation Limited, a state-of-the-art biogas plant with a capacity of 100 MTPD has been established within the Hingonia premises. This sustainable initiative underscores our commitment to environmental conservation and renewable energy utilization. The biogas is used to create a Porridge for the ill cows, and Akshaya Patra utilizes it for serving mid-day meals to 1.5 lakh students.</p>
+                      </div>
+                      <div class="swiper-slide">
+                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/6.png' %}" />
+                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >AFL</h4>
+                        <p class="my-3">Aavas Financiers Limited's support for the plantation of 2000 trees promotes sustainable agriculture and provides nutritious fruits for the cattle. The installation of a 200 KW solar grid power plant reduces electricity costs, reliance on non-renewable energy, and the carbon footprint. Brick flooring in the Nandi Shala improves hygiene, reduces infections, and enhances cattle well-being, showcasing Aavas's commitment to CSR.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center gap-3 flex-column flex-md-row">
+                  <div class="csr_partnerbtn_wr flexBoxCenter flex-column gap-2">
+                    <div class="become_csrPartner">
+                      <button class="btn csrPartnerBtn bg-1 py-2 px-3 rounded-5 fw-bold">
+                        <a href="./csr.php" class="text-dark">Become a CSR Partner</a>
+                        <img class="ms-1" style="width:12px" src="{% static 'frontend/assets/images/home/arrow-black-45.png' %}" alt="Become CSR partner">
+                      </button>
+                      <span class="ps-2 pe-1 fw-medium ff-epilogue">Know More</span>
+                    </div>
+                    <span style="opacity:.5" class="fw-bold">Join Our CSR Initiatives</span>
+                  </div>
+                  <div class="view_testimonial_btnWr text-center mt-2">
+                    <div class="btn text-white fw-semibold view_testimonialBtn btnAnimation ff-epilogue">
+                      View Testimonial
+                      <img class="ms-1" style="width:12px" src="{% static 'frontend/assets/images/home/arrow-45.png' %}" alt="view testimonials">
+                    </div>
+                  </div>
                 </div>
               </div>
-              {% endfor %}
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <section class="py-2 py-md-5 section-collage">
-    <div class="container-fluid">
-      <div class="row">
-
-        <!--Left Div Start-->
-        <div class="col-md-9 pt-3">
-          <div class="row g-3">
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-1.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-2.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-3.png' %}" class="img-fluid" alt="">
-              <div class="collage-desc-box-1">
-                <p class="clg-desc pt-2">Contribute to <span>adopt a Mataji</span> In Vrindavan</p>
-                <a href="#" data-title="Adopt a Mataji" href="#" data-bs-toggle="modal" data-bs-target="#helpMatajiModal" class="help_mataji clg-btn">Adopt a Mataji</a>
+      </section>
+      <section class="home_gallery-section px-lg-5 px-md-0 mx-lg-5 mx-2 mb-0 mb-md-5 py-md-5 pt-md-0 py-3">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-5 ">
+              <div class="content text-center text-md-start">
+                <h2 class="display-3 fw-bold pe-lg-40">
+                  Some Glipses of
+                </h2>
+                <h2 class="color-1 display-1 ff-epilogue fw-bold">
+                  Hingonia
+                </h2>
+                <div class="ourGallery_btn position-relative d-inline-block">
+                  <img class="img-fluid" src="{% static 'frontend/assets/images/home/our-gallery.png' %}" alt="our-gallery">
+                  <button class="btnAnimation position-absolute text-white fw-bold">
+                    Our Gallery
+                    <img src="{% static 'frontend/assets/images/home/arrow_next.png' %}" alt="">
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-4.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-          <div class="row g-3 pt-3">
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-5.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-1">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-6.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-2 col-6 collage-2">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-7.png' %}" class="img-fluid" alt="">
-              <div class="collage-desc-box-2">
-                <p class="clg-desc pt-2">Help Widows with <span>Monthly Medical Care</span></p>
-                <a href="#" data-title="Adopt a Mataji" href="#" data-bs-toggle="modal"
-                   data-bs-target="#helpMatajiModal" class="help_mataji clg-btn">Donate in<br> Medical Care</a>
+            <div class="col-md-7">
+            <div class="swiper gallerySwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img class="img-fluid gallery-1" src="{% static 'frontend/assets/images/home/gallery/gallery-1.png' %}" alt="gallery">
+                </div>
+                <div class="swiper-slide">
+                  <img class="img-fluid gallery-2" src="{% static 'frontend/assets/images/home/gallery/gallery-2.png' %}" alt="gallery">
+                </div>
+                <div class="swiper-slide">
+                  <img class="img-fluid gallery-3" src="{% static 'frontend/assets/images/home/gallery/gallery-3.png' %}" alt="gallery">
+                </div>
+                <div class="swiper-slide">
+                  <img class="img-fluid gallery-4" src="{% static 'frontend/assets/images/home/gallery/gallery-4.png' %}" alt="gallery">
+                </div>
               </div>
             </div>
-            <div class="col-md-2 col-6 collage-2">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-8.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-2">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-9.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-          <div class="row g-3 pt-3">
-            <div class="col-md-2 col-6 collage-3">
-              <div class="collage-desc-box-3">
-                <p class="clg-desc pt-2"><span>Grocery Kits For Widows</span> In Vrindavan</p>
-                <a data-title="Grocery Kits" href="#" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
-                   class="help_mataji clg-btn">Donate Grocerykit</a>
-              </div>
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-10.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-11.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-12.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-13.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-2 col-6 collage-3">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-14.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-        </div>
-        <!--Left Div End-->
-
-        <!--Right Div-->
-        <div class="col-md-3 pt-3">
-          <div class="row g-3">
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-15.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-16.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-17.png' %}" class="img-fluid" alt="">
-              <div class="collage-desc-box-4">
-                <p class="clg-desc pt-2"><span>Gift Blanket To Widows</span> In Vrindavan</p>
-                <a href="#" data-title="Gift Blanket" href="#" data-bs-toggle="modal"
-                   data-bs-target="#helpMatajiModal" class="help_mataji clg-btn">Donate Blankets</a>
-              </div>
-            </div>
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-18.png' %}" class="img-fluid" alt="">
-            </div>
-            <div class="col-md-6">
-
-            </div>
-            <div class="col-md-6 col-6 collage-4">
-              <img src="{% static 'frontend/assets/images/mataji/mataji-19.png' %}" class="img-fluid" alt="">
-            </div>
-          </div>
-        </div>
-        <!--Right Div End-->
-
-      </div>
-    </div>
-  </section>
-
-
-  <section class="section-number py-4 py-md-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="number-img-box">
-            <img src="{% static 'frontend/assets/images/number.png' %}" class="img-fluid" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="mb-4">
-    <div class="container ">
-      <div class="py-5 section-box section-grocery text-center position-relative">
-        <div class="box-overlay grocery-overlay"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="box-info ">
-              <h2 class="text-white">1,00,000+</h2>
-              <h3 class="text-white">Grocery Kits</h3>
-              <div>
-                <a data-title="Adopt a Mataji" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
-                   class="help_mataji box-btn grocery-btn bg-2">Contribute & Impact a Life of Mataji</a>
+                <div style="opacity:.5" class="pt-1 text-center fw-bold">
+                  Click to see more
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
+      <section class="donor_privilages-section mx-2 mb-0 mb-md-5 py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 offset-xl-1">
+              <div class="donat_event_wr">
+                <div class="event_Wr p-4 text-center">
+                  <h5 class="text-white fw-bold">
+                    Make Your Own Day Of Charity
+                  </h5>
+                  <p class="text-white" style="font-size:11px">
+                    Add goodwill to your special occations by spreading joy among those who
+                    need your and support the most
+                  </p>
+                  <div class="event_type row">
+                    <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                      <div class="eventBox flexBoxCenter flex-column active" onclick="selectEvent(this)">
+                          <img src="{% static 'frontend/assets/images/home/anniversary.png' %}" alt="">
+                          <input type="checkbox" class="eventCheckbox" checked>
+                          <span class="f-12 fw-bold">Anniversary</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                      <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
+                          <img src="{% static 'frontend/assets/images/home/birthday.png' %}" alt="">
+                          <input type="checkbox" class="eventCheckbox">
+                          <span class="f-12 fw-bold">Birthday</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                      <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
+                          <img src="{% static 'frontend/assets/images/home/honour-of.png' %}" alt="">
+                          <input type="checkbox" class="eventCheckbox">
+                          <span class="f-12 fw-bold">In Honour Of</span>
+                      </div>
+                    </div>
+                    <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                      <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
+                          <img src="{% static 'frontend/assets/images/home/memory-of.png' %}" alt="">
+                          <input type="checkbox" class="eventCheckbox">
+                          <span class="f-12 fw-bold">In Memory Of</span>
+                      </div>
+                    </div>
+                  </div>
 
-
-  <section class="mb-4">
-    <div class="container ">
-      <div class="py-5 section-box section-blankets text-center position-relative">
-        <div class="box-overlay blankets-overlay"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="box-info ">
-              <h2 class="text-white">30,000+</h2>
-              <h3 class="text-white">Blankets</h3>
-              <div>
-                <a data-title="Adopt a Mataji" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
-                   class="help_mataji box-btn blankets-btn bg-3">Contribute & Impact a Life of Mataji</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="mb-4">
-    <div class="container ">
-      <div class="py-5 section-box section-widows text-center position-relative">
-        <div class="box-overlay widows-overlay"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="box-info ">
-              <h2 class="text-white">10,000+</h2>
-              <h3 class="text-white">Widows Impacted</h3>
-              <div>
-                <a data-title="Adopt a Mataji" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
-                   class="help_mataji box-btn widows-btn bg-4">Contribute & Impact a Life of Mataji</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="py-3 py-md-5 faq">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-10 ">
-          <div class="text-center">
-            <h3 class="section-title">Frequently asked questions</h3>
-            <p class="desc">Everything you need to know about the product and billing.</p>
-          </div>
-
-          <div class="accordion pt-3" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                  aria-expanded="true" aria-controls="collapseOne">
-                  How will my donation be used and distributed?
+                </div>
+                <button class="btn donate_nowBtn mt-2 text-white fw-bold">
+                  DONATE NOW
                 </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>Within a week, we will send you the updates with your name printed on the kits, which are
-                    distributed to matajis.</p>
-                </div>
               </div>
             </div>
-            <hr class="divider">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Do we get a tax benefit?
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>Yes, all your donations are eligible for tax benefits under 80G. If someone wants a slip, they can
-                    mail it to us.</p>
-                </div>
-              </div>
-            </div>
-            <hr class="divider">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  How many widows' lives have been impacted?
-                </button>
-              </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>We have adopted 1,000 widows, to whom monthly grocery kits, milk, and basic medical facilities are
-                    provided. Apart from it, we distribute groceries in janmashtami and blankets in winter to 10000+
-                    widows.</p>
-                </div>
-              </div>
-            </div>
-            <hr class="divider">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                  What is there in grocery kits?
-                </button>
-              </h2>
-              <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <p>5 kg basmati rice, 1 liter mustard oil, 1 kg rock salt, 1 kg pulse, 1 haldi packet, and 1 cup
-                    washing powder.</p>
-                </div>
+            <div class="col-xl-4 col-lg-6">
+              <div class="donarPrivilages_point pt-3 pt-lg-0">
+                <h3 class="color-17 fw-bold">
+                  Donor Privileges
+                </h3>
+                <ol class="f-14 fw-medium lh-lg">
+                  <li class="color-17">
+                     Gau Puja on your name 
+                  </li>
+                  <li class="color-17">
+                    Digital Certificate of Your Goseva Contribution
+                  </li>
+                  <li class="color-17">
+                    80G Tax Exemption Certificate
+                  </li>
+                  <li class="color-17">
+                    On donating 11000 & above you will get 100% Pure Products from our gaushala.
+                  </li>
+                </ol>
               </div>
             </div>
           </div>
-
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-3 py-md-5 get-in-touch">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <img src="{% static 'frontend/assets/images/avatar.png' %}" class="img-fluid" alt="avatar">
-          <h4 class="pt-3">Still have questions?</h4>
-          <p class="desc">Can’t find the answer you’re looking for? Please chat to our friendly team.</p>
-          <a href="#" class="btn bg-1 text-white ms-2 rounded">Get in touch</a>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<button class="clear-cart">Clear</button>
 {% endblock %}
 {% block script%}
+<script>
+$(document).on("click",".know_more",function() {
+    var id = $(this).data('id')
+    $.ajax({
+            url: "{% url 'get_campaign' pk=0 %}".replace('0', id),
+            method: 'GET',
+            data: {'id': id},
+            success: function (result) {
+              $('.description').html('')
+              $('.description').html(result.description)
+              $('.title').html(result.title)
+            }
+    })
+})
+</script>
+<script>
+document.getElementById('subscriptionForm').onsubmit = function(e){
+    alert("Test")
+    e.preventDefault(); // Prevent the default form submission
+
+    var form = document.getElementById('subscriptionForm');
+    var formData = new FormData(form);
+
+    // Fetch call to create a subscription on the server
+    fetch('/create_subscription/', {
+        method: 'POST',
+        body: formData
+    }).then(response => response.json()).then(data => {
+        var options = {
+            "key": "{{ RAZORPAY_KEY_ID }}", // Use Django template to pass the key
+            "subscription_id": data.id, // Subscription ID returned from the server
+            "name": formData.get('name'),
+            "description": "Monthly Donation",
+            "image": "https://your-logo-url",  // Your logo
+            "handler": function (response){
+                // Handle the subscription success
+                form.action = "/payment/success/";
+                form.method = "POST";
+                form.appendChild(new Input('hidden', 'razorpay_subscription_id', response.razorpay_subscription_id));
+                form.appendChild(new Input('hidden', 'razorpay_payment_id', response.razorpay_payment_id));
+                form.appendChild(new Input('hidden', 'razorpay_signature', response.razorpay_signature));
+                form.submit();
+            },
+            "prefill": {
+                "name": formData.get('name'),
+                "email": formData.get('email'),
+                "contact": formData.get('phone_no')
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open(); // Initiate the payment immediately
+    });
+}
+
+function Input(type, name, value) {
+    var input = document.createElement("input");
+    input.type = type;
+    input.name = name;
+    input.value = value;
+    return input;
+}
+</script>
 
 {% endblock %}

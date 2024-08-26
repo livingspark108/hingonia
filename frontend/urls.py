@@ -22,6 +22,7 @@ urlpatterns = [
 
     path('', FrontendHomeView.as_view(), name='home'),
     path('about-us', FrontendAboutUsView.as_view(), name='about-us'),
+    path('trustees', FrontendTrusteeView.as_view(), name='trustee'),
     path('our-mothers', FrontendOurMotherView.as_view(), name='our-mothers'),
     path('campaign', FrontendCampaignView.as_view(), name='campaign'),
     path('distribution', FrontendDistributionView.as_view(), name='distribution'),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('user-login', FrontendLoginView.as_view(), name='user-login'),
     path('user-logout/', UserLogoutView.as_view(), name="user-logout"),
     path('save-abandon/', AbandonView.as_view(), name="save-abandon"),
+    path('get_campaign/<str:pk>', GetCampaignView.as_view(), name='get_campaign'),
 
     path('privacy-policy', FrontendPrivacyPolicyView.as_view(), name='privacy-policy'),
     path('term-and-condition', FrontendTermConditionView.as_view(), name='term-and-condition'),
@@ -55,5 +57,7 @@ urlpatterns = [
     path('pay-razor-pay/', initiate_payment, name='pay-razor-pay'),
     path('handle-payment-webhook/', handle_payment_webhook, name='handle-payment-webhook'),
 
+    path('subscribe', subscribe_page, name='subscribe_page'),
+    path('create_subscription/', create_subscription, name='create_subscription'),
 ]
 
