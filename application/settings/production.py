@@ -1,33 +1,55 @@
-# for now fetch the development settings only
-from .staging import *
+# Python imports
+import os
+from os.path import join
 
-# turn off all debugging
-DEBUG = False
+# project imports
+from .common import *
 
-# You will have to determine, which hostnames should be served by Django
-ALLOWED_HOSTS = []
+# uncomment the following line to include i18n
+# from .i18n import *
 
-# ##### SECURITY CONFIGURATION ############################
 
-# TODO: Make sure, that sensitive information uses https
-# TODO: Evaluate the following settings, before uncommenting them
-# redirects all requests to https
-# SECURE_SSL_REDIRECT = True
-# session cookies will only be set, if https is used
-# SESSION_COOKIE_SECURE = True
-# how long is a session cookie valid?
-# SESSION_COOKIE_AGE = 1209600
+# ##### DEBUG CONFIGURATION ###############################
+DEBUG = True
 
-# validates passwords (very low security, but hey...)
-# AUTH_PASSWORD_VALIDATORS = [
-#    { 'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', },
-#    { 'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', },
-#    { 'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
-#    { 'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
-# ]
 
-# the email address, these error notifications to admins come from
-# SERVER_EMAIL = 'root@localhost'
+# allow all hosts during development
+ALLOWED_HOSTS = ['*']
 
-# how many days a password reset should work. I'd say even one day is too long
-# PASSWORD_RESET_TIMEOUT_DAYS = 1
+# adjust the minimal login
+# LOGIN_URL = 'core_login'
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = 'core_login'
+
+PAYU_CONFIG = {
+
+    "merchant_key":"tM5HOf",
+    "merchant_salt":"WMMC7MXGhU9p1cbn8PGgB5msXUA8I7E2",
+    "mode": "Live",
+    "RESPONSE_URL_SUCCESS" : "http://127.0.0.1:8010/payment_response_handler/",
+    "RESPONSE_URL_FAILURE" : "http://127.0.0.1:8010/payment_response_handler/"
+   }
+
+##### DATABASE CONFIGURATION ############################
+DATABASES = {
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'hingonia',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'postgres@123#',
+
+        'HOST': 'localhost',
+
+        'PORT': '5432',
+
+    }
+
+}
+
+# ##### APPLICATION CONFIGURATION #########################
+INSTALLED_APPS = DEFAULT_APPS
+
