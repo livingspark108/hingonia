@@ -52,16 +52,6 @@
                               </div>
 
                               <div class="d-flex col-12 gap-3 mt-2 mb-3 mt-3 flex-wrap">
-                                <div class="cm-input-box position-relative my-3">
-                                  <label>Name</label>
-                                  <input required="" type="text" value="" name="first_name" class="form-control first_name" placeholder="First name">
-                                </div>
-                                <div class="cm-input-box position-relative my-3">
-                                  <label>Number</label>
-                                  <input required="" type="text" value="" name="mobile_no" class="form-control mobile_no" placeholder="Mobile no">
-                                </div>
-                              </div>
-                              <div class="d-flex col-12 gap-3 mt-2 mb-3 mt-3 flex-wrap">
                                 <div class="custom_amount flexBoxCenter">
                                   <div class="title fw-bold">Custom Amount:</div>
                                   <div class="amount">
@@ -148,7 +138,6 @@
                             <form action="/razor-pay" method="post">
                             {% csrf_token %}
                             <div class="donateForm_wr pt-3 pb-1">
-
                               <input type="hidden" value="" class="campaign_id" name="campaign_id">
                               <input type="hidden" value="" class="title" name="title">
                               <input type="hidden" value="" class="all_item_data" name="all_item_data">
