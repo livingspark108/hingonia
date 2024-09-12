@@ -1,9 +1,10 @@
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from application.custom_model import DateTimeModel
-from apps.front_app.models import CampaignProduct
+from apps.front_app.models import CampaignProduct, Campaign
 # Create your models here.
 from apps.user.constants import USER_TYPE_CHOICES
 
@@ -98,18 +99,35 @@ class OTP(models.Model):
 
 
 
+
 class SubscriptionPlan(models.Model):
+    plan_id = models.CharField(max_length=100,unique=True,default=0)
     name = models.CharField(max_length=100)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    interval = models.CharField(max_length=20)  # e.g., 'monthly'
-    razorpay_plan_id = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=False)
+    def __str__(self):
+        return self.name
 
+class Subscription(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriptions')
+    plan = models.ForeignKey(SubscriptionPlan, on_delete=models.SET_NULL, null=True, related_name='subscriptions')
+    compaign = models.ForeignKey(Campaign, on_delete=models.SET_NULL, null=True, related_name='compaign_subscription')
+    start_date = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=True)
+    razorpay_subscription_id = models.CharField(max_length=255, blank=True, null=True)
+    razorpay_payment_id = models.CharField(max_length=255, blank=True, null=True)
 
-class Subscriber(models.Model):
-    email = models.EmailField()
-    subscription_id = models.CharField(max_length=100, blank=True, null=True)
-    plan = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE)
-    status = models.CharField(max_length=50)
+    # def save(self, *args, **kwargs):
+    #     if not self.end_date:
+    #         self.end_date = self.start_date + timezone.timedelta(days=self.plan.duration_in_days)
+    #     super(Subscription, self).save(*args, **kwargs)
 
-    class Meta:
-        unique_together = ('email', 'plan')
+    def __str__(self):
+        return f"{self.user.username} - {self.plan.name} (Active: {self.is_active})"
+
+    # @property
+    # def is_expired(self):
+    #     return timezone.now() > self.end_date

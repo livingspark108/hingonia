@@ -5,6 +5,7 @@ import json
 import random
 import datetime
 import time
+from datetime import datetime, timedelta
 
 import razorpay as razorpay
 import requests
@@ -35,7 +36,7 @@ from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET
 from apps.front_app.forms import CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
-    AbandonCart, Testimonial
+    AbandonCart, Testimonial, CampaignProduct
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -49,6 +50,9 @@ from rest_framework.permissions import AllowAny
 from django.utils import timezone
 from django.conf import settings
 User = get_user_model()
+
+
+razorpay_client = razorpay.Client(auth=(settings.RAZOR_PAY_ID, settings.RAZOR_PAY_SECRET))
 
 
 class FrontendHomeView(View):
@@ -264,6 +268,21 @@ class OngoingDevotionPromoView(ListView):
         context = {'promo_no':promo_no,'compaign': compaign, 'transaction_obj_paginated': transaction_obj_paginated}
         return render(request, 'frontend/ongoing_devotion.html', context)
 
+class GetCampaignProductView(View):
+    def post(self, request):
+        id = request.POST.get('id')
+        campaign_product = Campaign.objects.get(id=id)
+        if campaign_product.product:
+            campaign_with_product_html = render_to_string('frontend/campaign_with_product_html.html',
+                                                 {'campaign_product': campaign_product})
+        else:
+            campaign_with_product_html = ""
+        payload = {
+            'campaign_with_product_html': campaign_with_product_html,
+            'success': 'ok',
+        }
+        return JsonResponse(payload, safe=False)
+
 
 class OngoingDevotionView(ListView):
     def get(self, request, id):
@@ -393,7 +412,7 @@ class FrontendPayView(View):
         }
         return render(request, 'frontend/pay_page.html', context)
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class FrontendRazorPayView(View):
     def post(self, request):
         # Create payu instance
@@ -834,9 +853,11 @@ def create_subscription(request):
             }
             # amount = amount - float(plan.price)
         else:
-            plan = SubscriptionPlan.objects.first()
+            plan = SubscriptionPlan.objects.filter(is_active=True).first()
             # amount = amount - float(plan.price)*99
             plan_id = plan.plan_id
+            print("HERE it came")
+            print(plan_id)
             subscription_data = {
                 "plan_id": plan_id,
                 "customer_notify": 1,

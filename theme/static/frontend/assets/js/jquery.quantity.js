@@ -234,11 +234,21 @@ var quantityCartOld = (function() {
 // Triggers / Events
 // *****************************************
 // Add item
+// *****************************************
+// Triggers / Events
+// *****************************************
+// Add item
 $(document).on("click keypress", ".add-to-cart", function(event) {
   if (event.type === "click" || (event.type === "keypress" && event.which === 13)) {
+    console.log("Test")
     event.preventDefault();
     var name = $(this).data('name');
+    var plate = $(this).data('plate');
+    var img = $(this).data('img');
+    console.log(img)
     var price = Number($(this).data('price'));
+    var half_price = Number($(this).data('half-price'));
+    var full_price = Number($(this).data('full-price'));
     var max_qty = Number($(this).data('max'));
     var id = $(this).data('id');
 
@@ -247,19 +257,20 @@ $(document).on("click keypress", ".add-to-cart", function(event) {
     console.log(count)
     if (!isNaN(max_qty)) {
       if (typeof count === "undefined") {
-            quantityCart.addItemToCart(name, id, price, 1,max_qty);
+            quantityCart.addItemToCart(name, id,img, price, half_price, full_price, 1, plate,max_qty);
             displayCart();
       }
       if(max_qty > count){
-            quantityCart.addItemToCart(name, id, price, 1,max_qty);
+            quantityCart.addItemToCart(name, id,img, price, half_price, full_price, 1, plate,max_qty);
             displayCart();
       }
     }else{
-      quantityCart.addItemToCart(name, id, price, 1,max_qty);
+      quantityCart.addItemToCart(name, id, img, price, half_price, full_price, 1, plate,max_qty);
       displayCart();
     }
   }
 });
+
 
 
 
@@ -325,7 +336,6 @@ function displayCart() {
 
   $('.show-cart').html(output);
   if(quantityCart.totalCart() > 0){
-
     $('.show-cart').show()
     $('.fixDonateBottom').show()
     $('.donationAmount').val(quantityCart.totalCart());
@@ -356,6 +366,7 @@ function displayCart() {
   var jsonString = JSON.stringify(cartArray);
   $('.all_item_data').val(jsonString)
 }
+
 
 const percentages = [0.00,0.08, 0.12, 0.14, 0.16];
 
@@ -418,6 +429,7 @@ $(document).on("click", ".plus-item", function(event) {
   var id = $(this).data('id')
   var name = $(this).data('name')
   var price = $(this).data('price')
+  console.log(price)
   var count = $("input.item-count[data-id='" + id + "']").val();
 
   var inputElement = $("input.item-count[data-id='" + id + "']");
@@ -426,13 +438,17 @@ $(document).on("click", ".plus-item", function(event) {
 
   if (!isNaN(maxlength)) {
       if(maxlength > count){
-      quantityCart.addItemToCart(name, id,price,count,100);
-      displayCart();
+          quantityCart.addItemToCart(name, id,price,count,100);
+          $("input.item-count[data-id='" + id + "']").val(parseInt(count)+1);
+          displayCart();
       }
   }else{
       quantityCart.addItemToCart(name, id,price,count,100);
       displayCart();
   }
+  $('.total_rs_html').html(quantityCart.totalCart())
+  $('.amount').val(quantityCart.totalCart())
+
 })
 
 // Item count input

@@ -40,6 +40,7 @@ urlpatterns = [
     path('campaign-product/list/ajax', ListCampaignProductViewJson.as_view(), name='campaign-product-list-ajax'),
     path('campaign-product/edit/<str:pk>', UpdateCampaignProductView.as_view(), name='campaign-product-edit'),
     path('campaign-product/delete/<str:pk>', DeleteCampaignProductView.as_view(), name='campaign-product-delete'),
+    path('campaign-product/clone/<str:pk>', CloneCampaignProductView.as_view(), name='campaign-product-clone'),
 
     #"""Product page"""
     path('product/add', CreateProductView.as_view(), name='product-add'),
@@ -103,5 +104,16 @@ urlpatterns = [
     path('order/list/ajax', ListOrderViewJson.as_view(), name='order-list-ajax'),
     path('order/edit/<str:pk>', UpdateOrderView.as_view(), name='order-edit'),
     path('order/delete/<str:pk>', DeleteOrderView.as_view(), name='order-delete'),
+
+    #"""Subscriber"""
+    path('subscriber/', ListSubscriberView.as_view(), name='subscriber-list'),
+    path('subscriber/list/ajax', ListSubscriberViewJson.as_view(), name='subscriber-list-ajax'),
+    path('subscriber/edit/<str:pk>', UpdateSubscriberView.as_view(), name='subscriber-edit'),
+    path('subscriber/delete/<str:pk>', DeleteSubscriberView.as_view(), name='subscriber-delete'),
+
+    #"""RazorpayPlan"""
+    path('razorpay-plan/', ListRazorpayPlanView.as_view(), name='razorpay-plan-list'),
+    path('razorpay-plan/list/ajax', ListRazorpayPlanViewJson.as_view(), name='razorpay-plan-list-ajax'),
+    path('razorpay-plan/status/<str:pk>', RazorpayStatusView.as_view(), name='razorpay-plan-status'),
 ]
 

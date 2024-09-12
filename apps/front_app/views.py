@@ -22,7 +22,8 @@ from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distributi
     CampaignProduct, UploadedFile, HomePageCampaign, Order, Testimonial
 from django.contrib import messages
 
-from apps.user.models import TransactionDetails, Subscriber
+from apps.user.forms import CreateSubscriberForm
+from apps.user.models import TransactionDetails, SubscriptionPlan, Subscription
 
 
 class CreateCampaignView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
@@ -186,7 +187,10 @@ class ListCampaignProductViewJson(AjayDatatableView):
                 reverse('campaign-product-edit', kwargs={'pk': row.pk}))
             delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
                 reverse('campaign-product-delete', kwargs={'pk': row.pk}))
-            return edit_action + delete_action
+            clone_action = '<a href="javascript:;" class="confirm ml-1 btn btn-primary btn-sm" data-url={} role="button">Clone</a>'.format(
+                reverse('campaign-product-clone', kwargs={'pk': row.pk}))
+
+            return edit_action + delete_action + clone_action
         else:
             return super(ListCampaignProductViewJson, self).render_column(row, column)
 
@@ -212,6 +216,22 @@ class DeleteCampaignProductView(AdminRequiredMixin, DeleteView):
         self.get_object().delete()
         payload = {'delete': 'ok'}
         return JsonResponse(payload)
+
+
+class CloneCampaignProductView(AdminRequiredMixin,View):
+    def get(self,request,pk):
+        print("HERE")
+        print(pk)
+        # Fetch the original object
+        original_object = get_object_or_404(CampaignProduct, pk=pk)
+
+        # Clone the object by setting its primary key to None
+        original_object.pk = None
+        original_object.title = original_object.title+"-Copy"
+        original_object.save()
+
+        # Redirect to the detail page of the cloned object (or anywhere else)
+        return redirect('campaign-product-edit', pk=original_object.pk)
 
 
 # Mother Modules
@@ -581,11 +601,11 @@ class ListAbandonViewJson(AjayDatatableView):
             return super(ListAbandonViewJson, self).render_column(row, column)
 
 class ListSubscriberView(AdminRequiredMixin, TemplateView):
-    model = Subscriber
+    model = Subscription
     template_name = 'monthly_subscriber/list.html'
 
 class ListSubscriberViewJson(AjayDatatableView):
-    model = Subscriber
+    model = Subscription
     columns = ['email','subscription_id','plan','status', 'actions']
     exclude_from_search_cloumn = ['actions']
 
@@ -863,3 +883,88 @@ class CloneTestimonialView(AdminRequiredMixin,View):
         # Redirect to the detail page of the cloned object (or anywhere else)
         return redirect('testimonial-edit', pk=original_object.pk)
 
+
+#Subscribers
+class UpdateSubscriberView(LoginRequiredMixin, AdminRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Subscription
+    form_class = CreateSubscriberForm
+    template_name = 'subscriber/form.html'
+    success_message = "Subscriber updated successfully"
+    success_url = reverse_lazy('subscriber-list')
+
+
+class ListSubscriberView(AdminRequiredMixin, TemplateView):
+    model = Subscription
+    template_name = 'subscriber/list.html'
+
+
+class ListSubscriberViewJson(AjayDatatableView):
+    model = Subscription
+    columns = ['name','phone_no','email','plan','is_active', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def render_column(self, row, column):
+        if column == 'name':
+            return row.user.first_name
+        if column == 'phone_no':
+            return row.user.username
+        if column == 'email':
+            return row.user.email
+
+        if column == 'actions':
+            edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
+                reverse('subscriber-edit', kwargs={'pk': row.pk}))
+            delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
+                reverse('subscriber-delete', kwargs={'pk': row.pk}))
+            return edit_action + delete_action
+        else:
+            return super(ListSubscriberViewJson, self).render_column(row, column)
+
+
+class DeleteSubscriberView(AdminRequiredMixin, DeleteView):
+    model = Subscription
+
+    def delete(self, request, *args, **kwargs):
+        self.get_object().delete()
+        payload = {'delete': 'ok'}
+        return JsonResponse(payload)
+
+#RazorPay plan
+class ListRazorpayPlanView(AdminRequiredMixin, TemplateView):
+    model = SubscriptionPlan
+    template_name = 'razorpay/list.html'
+
+
+class ListRazorpayPlanViewJson(AjayDatatableView):
+    model = SubscriptionPlan
+    columns = ['plan_id','name','price','is_active', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def render_column(self, row, column):
+
+        if column == 'actions':
+            if row.is_active:
+                is_active_action = '<a href={} role="button" class="btn btn-danger btn-sm mr-1">Deactivate</a>'.format(
+                    reverse('razorpay-plan-status', kwargs={'pk': row.pk}))
+            else:
+                is_active_action = '<a href={} role="button" class="btn btn-success btn-sm mr-1">Activate</a>'.format(
+                    reverse('razorpay-plan-status', kwargs={'pk': row.pk}))
+            return is_active_action
+        else:
+            return super(ListRazorpayPlanViewJson, self).render_column(row, column)
+
+
+class RazorpayStatusView(AdminRequiredMixin,View):
+    def get(self, request,pk):
+        print(pk)
+
+        plan_obj = SubscriptionPlan.objects.get(id=pk)
+        print(plan_obj)
+        if plan_obj.is_active:
+            plan_obj.is_active = False
+            plan_obj.save()
+        else:
+            plan_obj.is_active = True
+            plan_obj.save()
+
+        return HttpResponseRedirect(reverse_lazy('razorpay-plan-list'))

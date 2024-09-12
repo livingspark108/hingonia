@@ -286,7 +286,7 @@
                       </h3>
                       <div class="row pt-3">
                         <div class="col-12">
-                          <a href="#" class="campaign-btn" style="color: #C21959;" data-bs-toggle="modal" data-bs-target="#donate1">
+                          <a href="#" class="campaign-btn campaign-btn-single" data-id="{{single.id}}" data-price="{{single.price}}" style="color: #C21959;" data-bs-toggle="modal" data-bs-target="#donate1">
                             Donate Now
                           </a>
                           <a data-id="{{single.id}}" href="#" class="know_more knowMore-donate ext-decoration-underline text-white fw-bold ps-3 simple-link" data-bs-toggle="modal" data-bs-target="#knowMoredonate1">
@@ -318,306 +318,8 @@
                       <h5 class="modal-title fw-bold w-100 f-24">Cow Shed</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body description">
-                      <div class="donateSilde steptabs" id="donateSlide">
-                        <div class="stepper">
-                          <div class="progress-container">
-                            <div class="progress">
-                              <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <div class="step-circles">
-                              <div class="circle active" id="circle-1"></div>
-                              <div class="circle" id="circle-2"></div>
-                              <div class="circle" id="circle-3"></div>
-                            </div>
-                          </div>
-                          <div class="step w-100" id="step-1">
-                            <div class="row pt-5 pb-4">
-                              <div class="col-lg-4 col-md-6">
-                                <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
-                                  <img class="tooltipIcon" src="{% static 'frontend/assets/images/tooltip.svg' %}" alt="">
-                                  <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
-                                  <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
-                                    <div>
-                                      <h5 class="card-title fw-bold">Steel Seva</h5>
-                                    </div>
-                                    <div class="d-flex gap-2 justify-content-between flex-wrap">
-                                      <span class="card-text priceWr f-18 mb-0">₹100</span>
-                                      <div class="add_button">
-                                        <button class="btn btn-primary f-12 add-button">
-                                          <img src="{% static 'frontend/assets/images/plus-black.svg' %}" class="img-fluid" alt="">
-                                        </button>
-                                      </div>
-                                      <div class="quantity-container" style="display: none;">
-                                        <button class="btn btn-primary f-14 decrement-btn">-</button>
-                                        <span class="mx-2 quantity-value">0</span>
-                                        <button class="btn btn-primary f-14 increment-btn">+</button>
-                                        <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
-                                      </div>
-                                      <!-- <div class="added-button" style="display: none;">
-                                                    <button class="btn btn-primary f-12 bg-dark text-white">
-                                                      Added
-                                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
-                                                    </button>
-                                                  </div> -->
-                                    </div>
-                                  </div>
-                                  <div class="tooltipeContentWr d-flex gap-2 d-none">
-                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
-                                    <p class="f-10 mb-0">
-                                      Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
-                                      and care. Join us in creating their sanctuary.
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-lg-4 col-md-6">
-                                <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
-                                  <img class="tooltipIcon" src="{% static 'frontend/assets/images/tooltip.svg' %}" alt="">
-                                  <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
-                                  <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
-                                    <div>
-                                      <h5 class="card-title fw-bold">Steel Seva</h5>
-                                    </div>
-                                    <div class="d-flex gap-2 justify-content-between flex-wrap">
-                                      <span class="card-text priceWr f-18 mb-0">₹100</span>
-                                      <div class="add_button">
-                                        <button class="btn btn-primary f-12 add-button">
-                                          <img src="{% static 'frontend/assets/images/plus-black.svg' %}" class="img-fluid" alt="">
-                                        </button>
-                                      </div>
-                                      <div class="quantity-container" style="display: none;">
-                                        <button class="btn btn-primary f-14 decrement-btn">-</button>
-                                        <span class="mx-2 quantity-value">0</span>
-                                        <button class="btn btn-primary f-14 increment-btn">+</button>
-                                        <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
-                                      </div>
-                                      <!-- <div class="added-button" style="display: none;">
-                                                    <button class="btn btn-primary f-12 bg-dark text-white">
-                                                      Added
-                                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
-                                                    </button>
-                                                  </div> -->
-                                    </div>
-                                  </div>
-                                  <div class="tooltipeContentWr d-flex gap-2 d-none">
-                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
-                                    <p class="f-10 mb-0">
-                                      Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
-                                      and care. Join us in creating their sanctuary.
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-lg-4 col-md-6">
-                                <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
-                                  <img class="tooltipIcon" src="{% static 'frontend/assets/images/tooltip.svg' %}" alt="">
-                                  <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
-                                  <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
-                                    <div>
-                                      <h5 class="card-title fw-bold">Steel Seva</h5>
-                                    </div>
-                                    <div class="d-flex gap-2 justify-content-between flex-wrap">
-                                      <span class="card-text priceWr f-18 mb-0">₹100</span>
-                                      <div class="add_button">
-                                        <button class="btn btn-primary f-12 add-button">
-                                          <img src="{% static 'frontend/assets/images/plus-black.svg' %}" class="img-fluid" alt="">
-                                        </button>
-                                      </div>
-                                      <div class="quantity-container" style="display: none;">
-                                        <button class="btn btn-primary f-14 decrement-btn">-</button>
-                                        <span class="mx-2 quantity-value">0</span>
-                                        <button class="btn btn-primary f-14 increment-btn">+</button>
-                                        <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
-                                      </div>
-                                      <!-- <div class="added-button" style="display: none;">
-                                                    <button class="btn btn-primary f-12 bg-dark text-white">
-                                                      Added
-                                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
-                                                    </button>
-                                                  </div> -->
-                                    </div>
-                                  </div>
-                                  <div class="tooltipeContentWr d-flex gap-2 d-none">
-                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
-                                    <p class="f-10 mb-0">
-                                      Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
-                                      and care. Join us in creating their sanctuary.
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-lg-4 col-md-6">
-                                <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
-                                  <img class="tooltipIcon" src="{% static 'frontend/assets/images/tooltip.svg' %}" alt="">
-                                  <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
-                                  <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
-                                    <div>
-                                      <h5 class="card-title fw-bold">Steel Seva</h5>
-                                    </div>
-                                    <div class="d-flex gap-2 justify-content-between flex-wrap">
-                                      <span class="card-text priceWr f-18 mb-0">₹100</span>
-                                      <div class="add_button">
-                                        <button class="btn btn-primary f-12 add-button">
-                                          <img src="{% static 'frontend/assets/images/plus-black.svg' %}" class="img-fluid" alt="">
-                                        </button>
-                                      </div>
-                                      <div class="quantity-container" style="display: none;">
-                                        <button class="btn btn-primary f-14 decrement-btn">-</button>
-                                        <span class="mx-2 quantity-value">0</span>
-                                        <button class="btn btn-primary f-14 increment-btn">+</button>
-                                        <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
-                                      </div>
-                                      <!-- <div class="added-button" style="display: none;">
-                                                    <button class="btn btn-primary f-12 bg-dark text-white">
-                                                      Added
-                                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
-                                                    </button>
-                                                  </div> -->
-                                    </div>
-                                  </div>
-                                  <div class="tooltipeContentWr d-flex gap-2 d-none">
-                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
-                                    <p class="f-10 mb-0">
-                                      Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
-                                      and care. Join us in creating their sanctuary.
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
+                    <div class="modal-body campaign_data description">
 
-
-                              <div class="d-flex col-12 gap-3 mt-2 mb-3 mt-3 flex-wrap">
-                                <div class="custom_amount flexBoxCenter">
-                                  <div class="title fw-bold">Custom Amount:</div>
-                                  <div class="amount">
-                                    <input id="number" type="text">
-                                  </div>
-                                </div>
-                                <div class="currency">
-                                  <span class="f-14 fw-semibold">Currency</span>
-                                  <div class="inrSelect">
-                                    <select class="h-100">
-                                      <option value="IN">INR</option>
-                                      <option value="US">USD</option>
-                                      <option value="UK">$</option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-6 pt-1">
-                                <div class="d-flex align-items-center messageBox gap-2">
-                                  <input type="checkbox" class="donationMessage position-relative" id="anonymous">
-                                  <label class="f-14 m-0 py-1 form-check-label" for="anonymous">
-                                    Make my Donation Anonymous
-                                  </label>
-                                </div>
-                                <div class="d-flex align-items-center messageBox gap-2">
-                                  <input type="checkbox" class="donationMessage position-relative" id="whatsapp">
-                                  <label class="f-14 m-0 py-1 form-check-label" for="whatsapp">
-                                    I want to receive transaction and donation updates on WhatsApp
-                                  </label>
-                                </div>
-                              </div>
-                              <div class="col-md-6 pt-1">
-                                <div class=" messageBox">
-                                  <div class="d-flex align-items-center gap-2 mb-2">
-                                    <input type="checkbox" class="donationMessage gap-2 position-relative" id="request2">
-                                    <label class="f-14 m-0 py-1 form-check-label" for="request2">
-                                      Request 80 G
-                                    </label>
-                                  </div>
-                                  <div class="monthly_donate d-flex align-items-center">
-                                    <div class="monthly d-flex align-items-center justify-content-between">
-                                      <div class="DBtnWr">
-                                        <button class="btn messageBox flexBoxCenter gap-2 fw-bold">
-                                          <input type="checkbox" class="md_btn donationMessage position-relative" id="donateMOnthly">
-                                          <label class="f-14 m-0 py-1 form-check-label" for="donateMOnthly">
-                                            Donate Monthly
-                                          </label>
-                                        </button>
-                                      </div>
-                                      <div class="d-flex flex-column align-items-end pe-lg-3 pe-2">
-                                        <span class="f-12 fw-bold text-white taText">TOTAL AMOUNT</span>
-                                        <span class="f-36 text-white fw-bold taRs" style="line-height:normal">RS. 1,160</span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="dSubmit pt-2">
-                                <button class="btn btnPink fw-bold btnAnimation" onclick="nextStep(2)">DONATE NOW</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="step d-none" id="step-2">
-                            <div class="card_donate fw-medium zIndex-3 position-relative">
-                              <p class="mb-1 f-14">
-                                By supporting <span class="color-26 fw-bold">Hingonia</span>, you are helping us reach out to
-                                more campaigns like this and scale our impact. <a href="#" class="color-26 text-decoration-underline fw-bold">Learn More.</a>
-                              </p>
-<!--                              <div class="d-flex justify-content-between">-->
-<!--                                <span class="f-12 fw-bold">Support us by :</span>-->
-<!--                                <span class="supportPer f-12 fw-bold px-1" style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">-->
-<!--                                  <select class="h-100">-->
-<!--                                    <option value="IN">16% (₹160)</option>-->
-<!--                                    <option value="US">22% (₹200)</option>-->
-<!--                                  </select>-->
-<!--                                </span>-->
-<!--                              </div>-->
-                            </div>
-                            <div class="donateForm_wr pt-3 pb-1">
-                              <form onsubmit="return false">
-                                <div class="mb-3 position-relative">
-                                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                                  <input type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
-                                </div>
-                                <div class="mb-3 position-relative">
-                                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                                  <input type="text" name="email" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3 position-relative">
-                                  <div class="position-absolute country_code h-100">
-                                    <select class="h-100">
-                                      <option value="IN">IN</option>
-                                      <option value="US">US</option>
-                                      <option value="UK">UK</option>
-                                    </select>
-                                  </div>
-                                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                                  <input type="text" name="phone_no" class="phone-number w-100" placeholder="+91 00000-00000">
-                                  <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
-                                </div>
-                              </form>
-                            </div>
-                            <div class="donate_CountryBtn d-flex align-items-center mb-5">
-                              <div>
-                                <label class="form-check-label fw-bold me-2" for="nationality">Nationality</label>
-                              </div>
-                              <button class="countryBtn active" id="indian-btn">INDIAN</button>
-                              <button class="countryBtn non_indian" id="non-indian-btn">NOT INDIAN</button>
-                            </div>
-                            <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(1)">Previous</button> -->
-                            <div class="col-12">
-                              <div class="dSubmit pt-2">
-                                <button class="btn btnPink fw-bold btnAnimation" onclick="nextStep(3)">DONATE NOW</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="step d-none" id="step-3">
-                            <div class="f-30 fw-semibold text-center color-10 mt-5">🎁 Thank you for the donation 🎁</div>
-                            <h5 class="display-6 fw-bold text-center color-10 pb-4">May Krishna &amp; Gau Mata Bless you.</h5>
-                            <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(2)">Previous</button> -->
-                            <div class="col-12">
-                              <div class="dSubmit pt-2">
-                                <button class="btn btnPink fw-bold btnAnimation">Finish</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -690,6 +392,7 @@
                                 <option value="UK">UK</option>
                               </select>
                             </div>
+                            <input type="hidden" name="amount" class="amount">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
                             <input name="phone_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
                             <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
@@ -1366,6 +1069,40 @@
 {% endblock %}
 {% block script%}
 <script>
+quantityCart.clearCart();
+$(document).on("click",".campaign-btn-single",function() {
+    var id = $(this).data('id')
+    var amount = $(this).data('price')
+    $('.single_amount').val(amount)
+    $('.actual_amount').val(amount)
+    $('.total_rs_html').html(amount)
+    $.ajax({        // initialize an AJAX request
+                        url: "{% url 'get_campaign_product' %}",
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}','id':id},
+                        method: 'POST',
+                        success: function (data) {
+                            $('.campaign_data').html(data.campaign_with_product_html)
+                        }
+              });
+})
+
+$(document).on("change",".custom_amt",function() {
+    var atm = $(this).val()
+    var actual_amt = $('.actual_amount').val()
+    if(atm != ""){
+
+      $('.single_amount').val(parseInt(actual_amt)+parseInt(atm))
+      $('.total_rs_html').html(parseInt(actual_amt)+parseInt(atm))
+    }else{
+      $('.single_amount').val(parseInt(actual_amt))
+      $('.total_rs_html').html(parseInt(actual_amt))
+    }
+
+})
+$(document).on("click",".campaign-btn",function() {
+    var amount = $('#donationAmount').html()
+    $('.amount').val(amount)
+})
 $(document).on("click",".know_more",function() {
     var id = $(this).data('id')
     $.ajax({
@@ -1382,7 +1119,6 @@ $(document).on("click",".know_more",function() {
 </script>
 <script>
 document.getElementById('subscriptionForm').onsubmit = function(e){
-    alert("Test")
     e.preventDefault(); // Prevent the default form submission
 
     var form = document.getElementById('subscriptionForm');

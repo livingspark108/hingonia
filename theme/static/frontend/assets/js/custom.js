@@ -379,47 +379,92 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Quantity
 
-document.addEventListener('DOMContentLoaded', () => {
-  const cardDonateSections = document.querySelectorAll('.card_donate');
+$(document).ready(function () {
+  // Event delegation for dynamically added .add-button
+  $(document).on('click', '.add-button', function () {
+    const cardDonate = $(this).closest('.card_donate');
+    const buttonContainer = cardDonate.find('.add_button');
+    const quantityContainer = cardDonate.find('.quantity-container');
 
-  cardDonateSections.forEach((cardDonate) => {
-      const addButton = cardDonate.querySelector('.add-button');
-      const buttonContainer = cardDonate.querySelector('.add_button');
-      const quantityContainer = cardDonate.querySelector('.quantity-container');
-      const quantityValue = cardDonate.querySelector('.quantity-value');
-      const enterButton = cardDonate.querySelector('.enter-button');
-      const addedButton = cardDonate.querySelector('.added-button');
+    if (buttonContainer.length && quantityContainer.length) {
+      buttonContainer.hide();
+      quantityContainer.css('display', 'flex');
+    }
+  });
 
-      let quantity = 0;
+  // Increment and decrement button handling
+  $(document).on('click', '.decrement-btn', function () {
+    const cardDonate = $(this).closest('.card_donate');
+    const quantityValue = cardDonate.find('.quantity-value');
+    let quantity = parseInt(quantityValue.text());
 
-      addButton.addEventListener('click', () => {
-          buttonContainer.style.display = 'none';
-          quantityContainer.style.display = 'flex';
-      });
+    if (quantity > 0) {
+      quantity--;
+      quantityValue.text(quantity);
+    }
+  });
 
-      // enterButton.addEventListener('click', () => {
-      //     if (quantity > 0) {
-      //         quantityContainer.style.display = 'none';
-      //         addedButton.style.display = 'inline-flex';
-      //     }
-      // });
+  $(document).on('click', '.increment-btn', function () {
+    const cardDonate = $(this).closest('.card_donate');
+    const quantityValue = cardDonate.find('.quantity-value');
+    let quantity = parseInt(quantityValue.text());
 
-      const decrementBtn = cardDonate.querySelector('.decrement-btn');
-      const incrementBtn = cardDonate.querySelector('.increment-btn');
+    quantity++;
+    quantityValue.text(quantity);
+  });
 
-      decrementBtn.addEventListener('click', () => {
-          if (quantity > 0) {
-              quantity--;
-              quantityValue.textContent = quantity;
-          }
-      });
+  // Handle enter button logic
+  $(document).on('click', '.enter-button', function () {
+    const cardDonate = $(this).closest('.card_donate');
+    const quantityValue = parseInt(cardDonate.find('.quantity-value').text());
+    const quantityContainer = cardDonate.find('.quantity-container');
+    const addedButton = cardDonate.find('.added-button');
 
-      incrementBtn.addEventListener('click', () => {
-          quantity++;
-          quantityValue.textContent = quantity;
-      });
+    if (quantityValue > 0) {
+      quantityContainer.hide();
+      addedButton.css('display', 'inline-flex');
+    }
   });
 });
+
+
+
+// New Seva donate
+
+document.querySelectorAll('.sevaWr').forEach(seva => {
+  seva.addEventListener('click', () => {
+      document.querySelector('.fixDonateBottom').style.display = 'block';
+  });
+});
+document.querySelectorAll('.pplus').forEach(plus => {
+  plus.addEventListener('click', event => {
+      const pnum = event.target.previousElementSibling;
+      let count = parseInt(pnum.textContent);
+      pnum.textContent = ++count;
+      updateAmount();
+  });
+});
+
+document.querySelectorAll('.pminus').forEach(minus => {
+  minus.addEventListener('click', event => {
+      const pnum = event.target.nextElementSibling;
+      let count = parseInt(pnum.textContent);
+      if (count > 1) pnum.textContent = --count;
+      updateAmount();
+  });
+});
+
+function updateAmount() {
+  let totalAmount = 0;
+  document.querySelectorAll('.sevaWr').forEach(seva => {
+      const amount = parseInt(seva.querySelector('.amount_box span').textContent);
+      const count = parseInt(seva.querySelector('.pnum').textContent);
+      totalAmount += amount * count;
+  });
+  document.getElementById('donationAmount').textContent = totalAmount;
+}
+
+
 
 
 // rehabilitation slider New

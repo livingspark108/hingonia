@@ -3,8 +3,10 @@ from django.contrib.auth.forms import PasswordResetForm
 import threading
 from xlrd import open_workbook
 import csv
+import razorpay as razorpay
 
 from application.email_helper import send_email_background
+from apps.user.models import SubscriptionPlan
 
 
 def convert_file_to_dict(file):
@@ -95,3 +97,32 @@ def get_stripe_public_key():
 
 def get_stripe_secret_key():
     return settings.STRIPE_LIVE_SECRET_KEY if settings.STRIPE_LIVE_MODE else settings.STRIPE_TEST_SECRET_KEY
+
+
+
+def fetch_and_save_plans_from_razorpay():
+    # Initialize Razorpay client
+    razorpay_client = razorpay.Client(auth=(settings.RAZOR_PAY_ID, settings.RAZOR_PAY_SECRET))
+
+    try:
+        # Fetch all plans from Razorpay
+        plans = razorpay_client.plan.all()
+        print(plans)
+        for plan_data in plans['items']:
+            # Check if the plan already exists in the database
+            plan, created = SubscriptionPlan.objects.update_or_create(
+                plan_id=plan_data['id'],
+                defaults={
+                    'name': plan_data['item']['name'],
+                    'description': plan_data['item']['description'],
+                    'price': plan_data['item']['amount'] / 100,  # Amount is in paise
+                }
+            )
+
+            if created:
+                print(f"Created new plan: {plan.name}")
+            else:
+                print(f"Updated existing plan: {plan.name}")
+
+    except Exception as e:
+        print(f"Error fetching plans from Razorpay: {str(e)}")

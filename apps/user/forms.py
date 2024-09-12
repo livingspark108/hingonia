@@ -4,6 +4,7 @@ from django import forms
 from django.urls import reverse
 
 from apps.user.constants import USER_TYPE_CHOICES
+from apps.user.models import Subscription
 
 User = get_user_model()
 
@@ -32,3 +33,9 @@ class EditUserForm(UserChangeForm):
         if password:
             password.help_text = self.password_help_text.format(reverse('auth-change-password', kwargs={'user_id': self.instance.id}))
 
+
+class CreateSubscriberForm(forms.ModelForm):
+
+    class Meta:
+        model = Subscription
+        fields = ['plan','start_date']

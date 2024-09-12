@@ -1,0 +1,204 @@
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+<div class="donateSilde steptabs" id="donateSlide">
+                        <div class="stepper">
+
+                          <div class="step w-100" id="step-1">
+                            <div class="row pt-5 pb-4">
+                              <div class="product_row row">
+                              {% for single in campaign_product.product.all %}
+                              <div class="col-lg-4 col-md-6">
+                                  <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
+                                    <img class="tooltipIcon" src="/static/frontend/assets/images/tooltip.svg" alt="">
+                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                    <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
+                                      <div>
+                                        <h5 class="card-title fw-bold">{{single.title}}</h5>
+                                      </div>
+                                      <div class="d-flex gap-2 justify-content-between flex-wrap">
+                                        <span class="card-text priceWr f-18 mb-0">{{single.price}}</span>
+                                        <div class="add_button" data-price="{{single.price}}" data-name="{{single.title}}">
+                                          <button class="btn btn-primary f-12 add-button" data-price="{{single.price}}" data-name="{{single.title}}">
+                                            <img src="/static/frontend/assets/images/plus-black.svg" class="img-fluid" alt="">
+                                          </button>
+                                        </div>
+                                        <div class="quantity-container" style="display: none;">
+                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item btn btn-primary f-14 decrement-btn">-</button>
+                                          <input type='number' data-maxlength='1000' class='item-count form-control text-center quantityInput border ' data-id="{{single.id}}" data-name="{{single.title}}" value="1" >
+                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="plus-item btn btn-primary f-14 increment-btn">+</button>
+                                          <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
+                                        </div>
+                                        <!-- <div class="added-button" style="display: none;">
+                                                      <button class="btn btn-primary f-12 bg-dark text-white">
+                                                        Added
+                                                        <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
+                                                      </button>
+                                                    </div> -->
+                                      </div>
+                                    </div>
+                                    <div class="tooltipeContentWr d-flex gap-2 d-none">
+                                      <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                      <p class="f-10 mb-0">
+                                        Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
+                                        and care. Join us in creating their sanctuary.
+                                      </p>
+                                    </div>
+                                  </div>
+                              </div>
+                              {% endfor %}
+
+
+                              </div>
+
+                              <div class="d-flex col-12 gap-3 mt-2 mb-3 mt-3 flex-wrap">
+                                <div class="cm-input-box position-relative my-3">
+                                  <label>Name</label>
+                                  <input required="" type="text" value="" name="first_name" class="form-control first_name" placeholder="First name">
+                                </div>
+                                <div class="cm-input-box position-relative my-3">
+                                  <label>Number</label>
+                                  <input required="" type="text" value="" name="mobile_no" class="form-control mobile_no" placeholder="Mobile no">
+                                </div>
+                              </div>
+                              <div class="d-flex col-12 gap-3 mt-2 mb-3 mt-3 flex-wrap">
+                                <div class="custom_amount flexBoxCenter">
+                                  <div class="title fw-bold">Custom Amount:</div>
+                                  <div class="amount">
+                                    <input id="number" class="custom_amt" type="text">
+                                  </div>
+                                </div>
+                                <div class="currency">
+                                  <span class="f-14 fw-semibold">Currency</span>
+                                  <div class="inrSelect">
+                                    <select class="h-100">
+                                      <option value="IN">INR</option>
+                                      <option value="US">USD</option>
+                                      <option value="UK">$</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 pt-1">
+                                <div class="d-flex align-items-center messageBox gap-2">
+                                  <input type="checkbox" class="donationMessage position-relative" id="anonymous">
+                                  <label class="f-14 m-0 py-1 form-check-label" for="anonymous">
+                                    Make my Donation Anonymous
+                                  </label>
+                                </div>
+                                <div class="d-flex align-items-center messageBox gap-2">
+                                  <input type="checkbox" class="donationMessage position-relative" id="whatsapp">
+                                  <label class="f-14 m-0 py-1 form-check-label" for="whatsapp">
+                                    I want to receive transaction and donation updates on WhatsApp
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-6 pt-1">
+                                <div class=" messageBox">
+                                  <div class="d-flex align-items-center gap-2 mb-2">
+                                    <input type="checkbox" class="donationMessage gap-2 position-relative" id="request2">
+                                    <label class="f-14 m-0 py-1 form-check-label" for="request2">
+                                      Request 80 G
+                                    </label>
+                                  </div>
+                                  <div class="monthly_donate d-flex align-items-center">
+                                    <div class="monthly d-flex align-items-center justify-content-between">
+                                      <div class="DBtnWr">
+                                        <button class="btn messageBox flexBoxCenter gap-2 fw-bold">
+                                          <input type="checkbox" class="md_btn donationMessage position-relative" id="donateMOnthly">
+                                          <label class="f-14 m-0 py-1 form-check-label" for="donateMOnthly">
+                                            Donate Monthly
+                                          </label>
+                                        </button>
+                                      </div>
+                                      <div class="d-flex flex-column align-items-end pe-lg-3 pe-2">
+                                        <span class="f-12 fw-bold text-white taText">TOTAL AMOUNT</span>
+                                        <span class="f-36 text-white fw-bold taRs total_rs_html" style="line-height:normal">1.0</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <input type="hidden" class="single_amount" value="1.0">
+                            <input type="hidden" class="actual_amount" value="1.0">
+                            <div class="col-12">
+                              <div class="dSubmit pt-2">
+                                <button class="btn btnPink fw-bold btnAnimation" onclick="nextStep(2)">DONATE NOW</button>
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+                          <div class="step d-none" id="step-2">
+                            <div class="card_donate fw-medium zIndex-3 position-relative">
+                              <p class="mb-1 f-14">
+                                By supporting <span class="color-26 fw-bold">Hingonia</span>, you are helping us reach out to
+                                more campaigns like this and scale our impact. <a href="#" class="color-26 text-decoration-underline fw-bold">Learn More.</a>
+                              </p>
+<!--                              <div class="d-flex justify-content-between">-->
+<!--                                <span class="f-12 fw-bold">Support us by :</span>-->
+<!--                                <span class="supportPer f-12 fw-bold px-1" style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">-->
+<!--                                  <select class="h-100">-->
+<!--                                    <option value="IN">16% (₹160)</option>-->
+<!--                                    <option value="US">22% (₹200)</option>-->
+<!--                                  </select>-->
+<!--                                </span>-->
+<!--                              </div>-->
+                            </div>
+                            <form action="/razor-pay" method="post">
+                            {% csrf_token %}
+                            <div class="donateForm_wr pt-3 pb-1">
+
+                              <input type="hidden" value="" class="campaign_id" name="campaign_id">
+                              <input type="hidden" value="" class="title" name="title">
+                              <input type="hidden" value="" class="all_item_data" name="all_item_data">
+                                <div class="mb-3 position-relative">
+                                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                                  <input type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                                  <input type="text" name="email" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <div class="position-absolute country_code h-100">
+                                    <select class="h-100">
+                                      <option value="IN">IN</option>
+                                      <option value="US">US</option>
+                                      <option value="UK">UK</option>
+                                    </select>
+                                  </div>
+                                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                                  <input type="text" name="phone_no" class="phone-number w-100" placeholder="+91 00000-00000">
+                                  <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                                </div>
+                            </div>
+                            <div class="donate_CountryBtn d-flex align-items-center mb-5">
+                              <div>
+                                <label class="form-check-label fw-bold me-2" for="nationality">Nationality</label>
+                              </div>
+                              <button class="countryBtn active" id="indian-btn">INDIAN</button>
+                              <button class="countryBtn non_indian" id="non-indian-btn">NOT INDIAN</button>
+                            </div>
+                            <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(1)">Previous</button> -->
+                            <div class="col-12">
+                              <div class="dSubmit pt-2">
+                                <input type="hidden" name="amount" class="amount">
+
+                                <button type="submit" class="btn btnPink fw-bold btnAnimation" >DONATE NOW</button>
+                              </div>
+                            </div>
+                            </form>
+                          </div>
+                          <div class="step d-none" id="step-3">
+                            <div class="f-30 fw-semibold text-center color-10 mt-5">🎁 Thank you for the donation 🎁</div>
+                            <h5 class="display-6 fw-bold text-center color-10 pb-4">May Krishna &amp; Gau Mata Bless you.</h5>
+                            <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(2)">Previous</button> -->
+                            <div class="col-12">
+                              <div class="dSubmit pt-2">
+                                <button class="btn btnPink fw-bold btnAnimation">Submit</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>

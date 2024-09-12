@@ -59,5 +59,6 @@ urlpatterns = [
 
     path('subscribe', subscribe_page, name='subscribe_page'),
     path('create_subscription/', create_subscription, name='create_subscription'),
+    path('get_campaign_product/',  GetCampaignProductView.as_view(), name='get_campaign_product'),
 ]
 

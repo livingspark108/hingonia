@@ -84,7 +84,26 @@ function getAllInputValuesInForm(formId) {
 
     return inputValues;
 }
+$(document).on('click','.confirm', function(){
 
+     var text = 'Do you really want to delete this record';
+     Swal.fire({
+           title: text,
+           text: 'This process cannot be undone.',
+           type: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#d33',
+           cancelButtonColor: '#999999',
+           confirmButtonText: 'Delete!',
+           cancelButtonText: 'Cancel'
+         }).then((result) => {
+           if (result.value) {
+             var url = $(this).data("url")
+             window.location.href = url;
+           }
+         })
+
+})
   $(document).on('click','.remove_record', function(){
      //$('.removeRecord').click(function(){
          var text = 'Do you really want to delete this record';
