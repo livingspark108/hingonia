@@ -3,39 +3,79 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-lg-11 col-md-12 text-center pt-5">
-                        <h2 class="login-title">🎁 Thank you for the donation 🎁</h2>
-                        <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
-                        <h3 class="login-subtitle pt-3">May Krishna & Gau Mata Bless you.</h3>
+<section class="py-5 thank-you-section">
+        <div class="container">
+            <div class="row g-md-5 g-3">
+                <div class="col-md-5">
+                    <div class="row g-3 form-left-div">
+                        <div class="col-6">
+                            <img src="{% static 'frontend/assets/images/campaing/camp-1.svg' %}" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-6">
+                            <img src="{% static 'frontend/assets/images/about/sustainable-card.png' %}" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-6">
+                            <img src="{% static 'frontend/assets/images/home/campaign-01.jpg' %}" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-6">
+                            <img src="{% static 'frontend/assets/images/home/campaign-02.jpg' %}" class="img-fluid" alt="">
+                        </div>
                     </div>
-                    <div class="col-md-1"></div>
                 </div>
-                <div class="row align-center">
-	                {% if not request.user.is_password_save %}
-                        <form method="post" action="{% url 'set_password' %}" class="login-form pt-md-5 pt-4">
-	                        {% csrf_token %}
-	                        {% for field in form.visible_fields %}
-	                        <div class="col-md-6 mb-3">
-                                    <label class="form-label">{{ field.label_tag }} <span class="text-error">*</span></label>
-									{% render_field field class="form-control" %}
-	                        </div>
-							{% endfor %}
-                            <div class="col-md-12 pt-4 pb-5 text-center">
-	                            <input type="submit" class="btn bg-1">
-                            </div>
-                        </form>
-                    {% endif %}
+                <div class="col-md-7">
+                    <div class="text-center card card-body rounded-4 shadow h-100">
+                        <h2 class="fw-bold">Thank you for your generosity to Hingonia.</h2>
+                        <h2 class="fw-bold color-2">Sri Krishna Balram Seva Trust.</h2>
+                        <p class="fw-bold">Each donation is an essential help which
+                            improves life of cows.</p>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, tempora dignissimos,
+                            maxime rerum placeat quis impedit mollitia quam harum sunt ab delectus qui dolore velit
+                            corrupti voluptate nostrum magni. Perspiciatis.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, suscipit dolores enim voluptas
+                            pariatur, repellendus perferendis dolorem ea cumque et consequuntur animi! Incidunt aliquam,
+                            perferendis nisi minus ex ipsum aspernatur?</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis facere, soluta minus doloribus
+                            nihil nisi beatae at. Ea quidem iste tenetur nam labore! Sapiente ad vel alias voluptatibus
+                            nihil perspiciatis.</p>
+                    </div>
                 </div>
-
             </div>
         </div>
-    </div>
-</section>
+    </section>
+<!--<section>-->
+<!--    <div class="container-fluid">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-lg-11 col-md-12 text-center pt-5">-->
+<!--                        <h2 class="login-title">🎁 Thank you for the donation 🎁</h2>-->
+<!--                        <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">-->
+<!--                        <h3 class="login-subtitle pt-3">May Krishna & Gau Mata Bless you.</h3>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-1"></div>-->
+<!--                </div>-->
+<!--                <div class="row align-center">-->
+<!--	                {% if not request.user.is_password_save %}-->
+<!--                        <form method="post" action="{% url 'set_password' %}" class="login-form pt-md-5 pt-4">-->
+<!--	                        {% csrf_token %}-->
+<!--	                        {% for field in form.visible_fields %}-->
+<!--	                        <div class="col-md-6 mb-3">-->
+<!--                                    <label class="form-label">{{ field.label_tag }} <span class="text-error">*</span></label>-->
+<!--									{% render_field field class="form-control" %}-->
+<!--	                        </div>-->
+<!--							{% endfor %}-->
+<!--                            <div class="col-md-12 pt-4 pb-5 text-center">-->
+<!--	                            <input type="submit" class="btn bg-1">-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    {% endif %}-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
 {% endblock %}
 {% block script%}
 

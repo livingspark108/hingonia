@@ -2582,6 +2582,16 @@ h2.donation_titleWr {
   right: 1.25rem;
 }
 
+.form-left-div img{
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.form-control:focus{
+  box-shadow: none;
+}
+
 @media (min-width: 1400px) {
   .lightbox-modal .carousel-inner {
     max-width: 60%;
