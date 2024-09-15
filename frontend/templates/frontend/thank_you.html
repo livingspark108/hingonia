@@ -6,29 +6,16 @@
 <section>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 ps-0">
-                <div class="login-img-box">
-                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
-                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
-                    <img src="{% static 'frontend/assets/images/login/3.png' %}" class="img-fluid" alt="">
-                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
-                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
-                    <img src="{% static 'frontend/assets/images/login/3.png' %}" class="img-fluid" alt="">
-                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
-                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
-                </div>
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="row">
                     <div class="col-lg-11 col-md-12 text-center pt-5">
-                        <h2 class="login-title">Thank you for your generosity to Pure Devotion Foundation.</h2>
+                        <h2 class="login-title">🎁 Thank you for the donation 🎁</h2>
                         <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
-                        <h3 class="login-subtitle pt-3">Each donation is an essential help which<br> improves life of
-                            widows in Vrindavan.</h3>
+                        <h3 class="login-subtitle pt-3">May Krishna & Gau Mata Bless you.</h3>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
-                <div class="row ">
+                <div class="row align-center">
 	                {% if not request.user.is_password_save %}
                         <form method="post" action="{% url 'set_password' %}" class="login-form pt-md-5 pt-4">
 	                        {% csrf_token %}
@@ -44,29 +31,7 @@
                         </form>
                     {% endif %}
                 </div>
-                <div class="row login-info ">
-                    <div class="col-md-4 py-4">
-                        <div class="about-title position-relative text-center">
-                            <img src="assets/images/about-us/foot.png" alt="">
-                            <h2>10000+</h2>
-                            <h3>Grocery Kits</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="about-title position-relative text-center">
-                            <img src="assets/images/about-us/foot.png" alt="">
-                            <h2>30000+</h2>
-                            <h3>Blankets</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4 py-4">
-                        <div class="about-title position-relative text-center">
-                            <img src="assets/images/about-us/foot.png" alt="">
-                            <h2>10000+</h2>
-                            <h3>Widows Impacted</h3>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>

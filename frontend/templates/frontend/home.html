@@ -1086,17 +1086,17 @@ $(document).on("click",".campaign-btn-single",function() {
               });
 })
 
-$(document).on("change",".custom_amt",function() {
+$(document).on("keyup",".custom_amt",function() {
     var atm = $(this).val()
     var actual_amt = $('.actual_amount').val()
-    if(atm != ""){
+<!--    if(atm != ""){-->
 
-      $('.single_amount').val(parseInt(actual_amt)+parseInt(atm))
-      $('.total_rs_html').html(parseInt(actual_amt)+parseInt(atm))
-    }else{
-      $('.single_amount').val(parseInt(actual_amt))
-      $('.total_rs_html').html(parseInt(actual_amt))
-    }
+<!--      $('.single_amount').val(parseInt(actual_amt)+parseInt(atm))-->
+<!--      $('.total_rs_html').html(parseInt(actual_amt)+parseInt(atm))-->
+<!--    }else{-->
+      $('.final_amount').val(parseInt(atm))
+      $('.total_rs_html').html(parseInt(atm))
+<!--    }-->
 
 })
 $(document).on("click",".campaign-btn",function() {

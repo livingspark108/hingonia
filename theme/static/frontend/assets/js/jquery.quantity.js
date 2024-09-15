@@ -346,6 +346,7 @@ function displayCart() {
     $('.donate_monthly label').hide();
     $('.active_amt').val(quantityCart.totalCart());
     $('.active_price').val(quantityCart.totalCart());
+    $('.final_amount').val(quantityCart.totalCart());
     $('.all_ctm_amount').hide()
     $('.cart_item_html_tmp').show()
     $('.cart_item_html_tmp .ct_item_tmp').html(output_tmp)

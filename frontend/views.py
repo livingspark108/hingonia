@@ -416,10 +416,8 @@ class FrontendPayView(View):
 class FrontendRazorPayView(View):
     def post(self, request):
         # Create payu instance
-        if request.POST.get('custom_check') == 'custom_check':
-            amount = request.POST.get('ctm_amount')
-        else:
-            amount = request.POST.get('amount')
+
+        amount = request.POST.get('amount')
 
         promoter_id = request.POST.get('promoter_id')
         campaign_id = request.POST.get('campaign_id')

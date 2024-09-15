@@ -2,7 +2,7 @@
 from os.path import abspath, basename, dirname, join, normpath
 import sys
 from django.contrib import messages
-
+import os
 # ##### PATH CONFIGURATION ################################
 
 # fetch Django's project directory
@@ -249,12 +249,52 @@ GOOGLE_ANALYTICS = {
     'google_analytics_id': 'UA-165462357-1',
 }
 
-#RAZOR_PAY_ID = "rzp_test_AhOuknmPQlm0es"
-#RAZOR_PAY_SECRET = "94cAr5eXW4pJ9f0ZEjkmo2gG"
-RAZOR_PAY_ID = "rzp_live_72nKopHGn9HWKB"
-RAZOR_PAY_SECRET = "Sw8goe5ZkOeFcElzJn96MB8A"
+RAZOR_PAY_ID = "rzp_test_AhOuknmPQlm0es"
+RAZOR_PAY_SECRET = "94cAr5eXW4pJ9f0ZEjkmo2gG"
+# RAZOR_PAY_ID = "rzp_live_72nKopHGn9HWKB"
+# RAZOR_PAY_SECRET = "Sw8goe5ZkOeFcElzJn96MB8A"
 
 #Live
 SMS_AUTH_KEY = '4b358371ef203b2a4c3c7c0e1f56197'
 SMS_URL = "http://msg.msgclub.net/rest/services/sendSMS/sendGroupSms"
 SENDER_ID = "LVGMNU"
+
+
+# Define BASE_DIR
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Logging configuration
+# Logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'daily_file': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/errors.log'),
+            'when': 'midnight',  # Rotate at midnight
+            'interval': 1,      # Every day
+            'backupCount': 300,  # Keep 30 old log files
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['daily_file', 'console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
