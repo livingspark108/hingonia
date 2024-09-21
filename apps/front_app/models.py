@@ -154,6 +154,11 @@ class Setting(DateTimeModel):
     whatsapp_key = models.CharField(max_length=1000, blank=True,null=True)
     admin_email = models.CharField(max_length=1000, blank=True,null=True)
     header_script = models.TextField(blank=True,null=True)
+    csr_certificate = models.FileField(blank=True,null=True)
+    three_years_report = models.FileField(blank=True,null=True)
+    twelve_a_skbt = models.FileField('12 A - SKBT',blank=True,null=True)
+    eighty_g_skbt = models.FileField('80 G - SKBT',blank=True,null=True)
+    fcra_registration_certificate = models.FileField('FCRA - Registration Certificate',blank=True,null=True)
     thankyou_page_script = models.TextField(blank=True,null=True)
     min_order_value = models.IntegerField(blank=False,null=True)
 
@@ -171,6 +176,19 @@ class UploadedFile(models.Model):
 class Gallery(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
     location = models.CharField(max_length=300, blank=True,null=True)
+
+class HomeIcon(DateTimeModel):
+    title = models.CharField(max_length=300, blank=True, null=True)
+    amount = models.CharField(max_length=300, blank=True, null=True)
+    icon = models.ImageField(max_length=300, blank=True, null=True)
+
+class HomeSlider(DateTimeModel):
+    title = models.CharField(max_length=300, blank=True, null=True)
+    type = models.CharField(choices=SLIDER_TYPE,max_length=300, blank=True, null=True)
+    amount = models.CharField(max_length=300, blank=True, null=True)
+    icon = models.ImageField(max_length=300, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    main_image = models.ImageField(max_length=300, blank=True, null=True)
 
 
 class HomePageCampaign(DateTimeModel):

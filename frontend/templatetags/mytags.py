@@ -11,7 +11,7 @@ import dateutil.parser
 import random
 
 
-from apps.front_app.models import Campaign, Setting, UploadedFile
+from apps.front_app.models import Campaign, Setting, UploadedFile, HomeSlider
 from apps.user.models import TransactionDetails, ProductItemTrans
 
 utc=pytz.UTC
@@ -183,6 +183,15 @@ def get_cam_item(product_id,camp_id):
 @register.simple_tag()
 def get_gallery(id,type):
     upload_obj = UploadedFile.objects.filter(uploader_id=id,file_type=type).order_by('-uploaded_at')
+    if upload_obj:
+        return upload_obj
+    else:
+        return ""
+
+
+@register.simple_tag()
+def get_slider():
+    upload_obj = HomeSlider.objects.all()
     if upload_obj:
         return upload_obj
     else:

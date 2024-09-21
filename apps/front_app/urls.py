@@ -63,6 +63,14 @@ urlpatterns = [
     path('ourteam/edit/<str:pk>', UpdateOurTeamView.as_view(), name='ourteam-edit'),
     path('ourteam/delete/<str:pk>', DeleteOurTeamView.as_view(), name='ourteam-delete'),
 
+    #"""Our Team"""
+    path('slider/add', CreateSliderView.as_view(), name='slider-add'),
+    path('slider/', ListSliderView.as_view(), name='slider-list'),
+    path('slider/list/ajax', ListSliderViewJson.as_view(), name='slider-list-ajax'),
+    path('slider/edit/<str:pk>', UpdateSliderView.as_view(), name='slider-edit'),
+    path('slider/delete/<str:pk>', DeleteSliderView.as_view(), name='slider-delete'),
+    path('slider/clone/<str:pk>', CloneSliderView.as_view(), name='slider-clone'),
+
     #Distribution
 
     path('distribution/add', CreateDistributionView.as_view(), name='distribution-add'),

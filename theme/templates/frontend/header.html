@@ -90,7 +90,16 @@
                           <a class="nav-link" href="">Campaigns</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="./about.php">Products</a>
+                          <a class="nav-link" href="{% url 'product' %}">Products</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'trustee' %}">Truestees</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'our-supporters' %}">Our Supporters</a>
                         </li>
                       </ul>
                     </div>
@@ -99,11 +108,15 @@
                         <li class="nav-item">
                           <a class="nav-link" href="{% url 'about-us' %}">About Us</a>
                         </li>
+
                         <li class="nav-item">
-                          <a class="nav-link" href="{% url 'trustee' %}">Truestees</a>
+                          <a class="nav-link" href="{% url 'csr' %}">CSR</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="./about.php">CSR</a>
+                          <a class="nav-link" href="{% url 'waiting-cow' %}">Waiting Cows</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'adopted-cow' %}">Adopted Cows</a>
                         </li>
                       </ul>
                     </div>

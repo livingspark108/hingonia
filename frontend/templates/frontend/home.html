@@ -4,6 +4,7 @@
 {% load mytags %}
 {% block body %}
 <!-- Section Banner -->
+{% get_slider as all_slider %}
       <section class="bg-9 mx-2 section-banner">
         <div class="container-fluid ps-lg-5">
           <div class="row align-items-center">
@@ -139,15 +140,16 @@
             <div class="col-lg-7 col-md-12 p-0 order-lg-2 order-1">
               <div class="swiper bannerSwiper">
                 <div class="swiper-wrapper">
+                  {% for single in all_slider %}
+                  {% if single.type == 'HomeTop' %}
+                  {% get_gallery single.id 'slider' as all_gallery_image %}
+                  {% for single_image in all_gallery_image %}
                   <div class="swiper-slide">
-                    <img src="{% static 'frontend/assets/images/home/slider-01.jpg' %}" alt="">
+                    <img src="{{single_image.file.url}}" alt="">
                   </div>
-                  <div class="swiper-slide">
-                    <img src="{% static 'frontend/assets/images/home/slider-01.jpg' %}" alt="">
-                  </div>
-                  <div class="swiper-slide">
-                    <img src="{% static 'frontend/assets/images/home/slider-01.jpg' %}" alt="">
-                  </div>
+                  {% endfor %}
+                  {% endif %}
+                  {% endfor %}
                 </div>
                 <!-- <div class="swiper-button-next">
                 </div>
@@ -541,72 +543,96 @@
         </div>
       </section>
       <section class="mx-2 px-lg-5 pb-5 home-section-5">
-        <div class="container-fluid">
-          <div class="row g-3 align-items-end">
-            <div class="col-lg-3 col-md-6 order-lg-1 order-2">
-              <img src="{% static 'frontend/assets/images/home/cr-01.jpg' %}" class="img-fluid w-100" alt="">
-              <div class="mt-3 position-relative">
-                <img src="{% static 'frontend/assets/images/home/cr-02.jpg' %}" class="img-fluid w-100" alt="" >
-                <div class="fw-bold position-absolute text-white f-24" style="bottom: 30px;left: 15%; line-height:28px;">Cow <br> Seva</div>
-              </div>
+    <div class="container-fluid">
+      <div class="row g-3 align-items-end">
+        <div class="col-lg-3 col-md-6 order-lg-1 order-2">
+          <div class="swiper rehabilitationSlider1 swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div class="swiper-wrapper" id="swiper-wrapper-68063cf59f7d963e" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-900px, 0px, 0px); transition-delay: 0ms;">
+              {% for single in all_slider %}
+                  {% if single.type == 'HomeMid1' %}
+                  {% get_gallery single.id 'slider' as all_gallery_image %}
+                  {% for single_image in all_gallery_image %}
+                  <div class="swiper-slide">
+                    <img src="{{single_image.file.url}}" alt="">
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                  {% endfor %}
+
             </div>
-            <div class="col-lg-6 col-md-12 order-lg-2 order-1">
-              <div class="text-center">
-                <img src="{% static 'frontend/assets/images/home/flower.png' %}" class="img-fluid" alt="">
-              </div>
-              <div class="row justify-content-center ">
-                <div class="col-md-6">
-                  <div class="card card-body rounded-4 shadow">
-                    <div class="row align-items-center">
-                      <div class="col-4">
-                        <img src="{% static 'frontend/assets/images/home/donation.svg' %}" class="img-fluid" alt="">
-                      </div>
-                      <div class="col-8">
-                        <h3 class="fw-bold mb-0">
-                          400+
-                        </h3>
-                        <p class="mb-0 fw-semibold">
-                          Pepole as Cow Sevak
-                        </p>
-                      </div>
-                    </div>
+            <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span></div>
+          <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+          <div class="mt-3 position-relative">
+            <a href="campaign.php">
+              <img src="/static/frontend/assets/images/home/cr-02.jpg" class="img-fluid w-100" alt="">
+              <div class="fw-bold position-absolute text-white f-24" style="bottom: 30px;left: 15%; line-height:28px;">
+                Cow <br> Seva</div>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 order-lg-2 order-1">
+          <div class="text-center">
+            <img src="/static/frontend/assets/images/home/flower.png" class="img-fluid" alt="">
+          </div>
+          <div class="row justify-content-center ">
+            <div class="col-md-6">
+              <div class="card card-body rounded-4 shadow">
+                <div class="row align-items-center">
+                  <div class="col-4">
+                    <img src="/static/frontend/assets/images/home/donation.svg" class="img-fluid" alt="">
+                  </div>
+                  <div class="col-8">
+                    <h3 class="fw-bold mb-0">
+                      400+
+                    </h3>
+                    <p class="mb-0 fw-semibold">
+                      Pepole as Cow Sevak
+                    </p>
                   </div>
                 </div>
               </div>
-              <div class="row mt-4 g-3">
-                <div class="col-md-6">
-                  <img src="{% static 'frontend/assets/images/home/cr-03.jpg' %}" class="img-fluid w-100" alt="">
-                </div>
-                <div class="col-md-6">
-                  <img src="{% static 'frontend/assets/images/home/cr-04.jpg' %}" class="img-fluid w-100" alt="">
-                </div>
-              </div>
             </div>
-            <div class="col-lg-3 col-md-6 order-lg-3 order-3">
-              <img src="{% static 'frontend/assets/images/home/cr-05.jpg' %}" class="img-fluid w-100" alt="">
-              <div class="mt-3 position-relative">
-                <img src="{% static 'frontend/assets/images/home/cr-06.jpg' %}" class="img-fluid w-100" alt="">
-                <div class="fw-bold position-absolute text-white f-24" style="bottom: 30px;left: 15%; line-height:28px; max-width:170px">
-                World’s Largest Rehabilitation Centre
+          </div>
+          <div class="row mt-4 g-3">
+            <div class="col-12">
+              <div class="h-100">
+                <div class="video-container text-center" style="width: 100%; height: 100%; border-radius:15px; overflow:hidden">
+                  <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/IPU9oUjlDoc?si=G_65b4bAMBhOaUpI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <section class="about_hinginiaVideo pt-4">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="h-100">
-                    <div class="video-container text-center" style="width: 100%; height: 100%; border-radius:15px; overflow:hidden">
-                    <iframe width="889" height="500" style="border-radius:20px" src="https://www.youtube.com/embed/IPU9oUjlDoc?si=G_65b4bAMBhOaUpI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-              </div>
+        <div class="col-lg-3 col-md-6 order-lg-3 order-3">
+          <div class="swiper rehabilitationSlider2 swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div class="swiper-wrapper" id="swiper-wrapper-867bc9cbd5e204ad" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-300px, 0px, 0px); transition-delay: 0ms;">
+              {% for single in all_slider %}
+                  {% if single.type == 'HomeMid2' %}
+                  {% get_gallery single.id 'slider' as all_gallery_image %}
+                  {% for single_image in all_gallery_image %}
+                  <div class="swiper-slide">
+                    <img src="{{single_image.file.url}}" alt="">
+                  </div>
+
+                  {% endfor %}
+                  {% endif %}
+                  {% endfor %}
             </div>
+            <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+          <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+          <div class="mt-3 position-relative">
+            <a href="campaign.php">
+              <img src="/static/frontend/assets/images/home/cr-06.jpg" class="img-fluid w-100" alt="">
+              <div class="fw-bold position-absolute text-white f-24" style="bottom: 30px;left: 15%; line-height:28px; max-width:170px">
+                World’s Largest Rehabilitation Centre
+              </div>
+            </a>
           </div>
-      </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
       <section class="px-lg-5 py-5 home-section-6 position-relative">
         <img src="{% static 'frontend/assets/images/home/vector-1.png' %}" class="element-1">
         <img src="{% static 'frontend/assets/images/home/vector-2.png' %}" class="element-2">
@@ -872,53 +898,38 @@
                   <div thumbsSlider="" class="swiper CSRSwiper">
                     <div class="swiper-wrapper">
                       <!-- Swiper slides with images -->
-                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-01.png' %}" alt="RSDCL"></div>
-                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-02.png' %}" alt="RIICO"></div>
-                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-03.png' %}" alt=""></div>
-                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-04.png' %}" alt=""></div>
-                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-05.png' %}" alt=""></div>
-                      <div class="swiper-slide"><img src="{% static 'frontend/assets/images/home/csr-06.png' %}" alt=""></div>
+                      {% for single in all_slider %}
+
+                      {% if single.type == 'CSR' %}
+                      <div class="swiper-slide">
+                        <img src="{{single.icon.url}}" alt="RSDCL">
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+
+
                     </div>
                   </div>
                   <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper CSRSwiper2 text-center">
                     <div class="swiper-wrapper">
                       <!-- Swiper slides with images and text content -->
-                      <div class="swiper-slide">
-                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/1.png' %}" />
-                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >RSDCL</h4>
-                        <div>
-                          <p class="my-3">The number of cows here has grown to over 18,000, making it challenging to feed them on time. Rajasthan Solarpark Development Company Limited (RSDCL) has helped by providing a TMR (Total Mixed Ration) Fodder Feeding Machine that mixes green fodder, dry fodder, and concentrate, ensuring all cows get equal nutrition. With this machine, we can now feed 3,000 cows every day.</p>
+                      {% for single in all_slider %}
+
+                         {% if single.type == 'CSR' %}
+                        {% get_gallery single.id 'slider' as all_gallery_image %}
+                        {% for single_image in all_gallery_image %}
+                        <div class="swiper-slide">
+
+                          <img class="img-fluid" src="{{single_image.file.url}}" />
+                          <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >{{single.title}}</h4>
+                          <div>
+                            <p class="my-3">The number of cows here has grown to over 18,000, making it challenging to feed them on time. Rajasthan Solarpark Development Company Limited (RSDCL) has helped by providing a TMR (Total Mixed Ration) Fodder Feeding Machine that mixes green fodder, dry fodder, and concentrate, ensuring all cows get equal nutrition. With this machine, we can now feed 3,000 cows every day.</p>
+                          </div>
                         </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/2.png' %}" />
-                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >RIICO</h4>
-                        <div>
-                          <p class="my-3">RIICO's CSR support has helped the Hingonia Cattle Rehabilitation Center in preserving soil and groundwater while promoting environmental sustainability. Their contribution of a dead animal incinerator machine ensures efficient waste management, reflecting RIICO's commitment to creating a healthier environment for all.</p>
-                        </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/3.png' %}" />
-                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >GCL</h4>
-                        <div>
-                          <p class="my-3">With the generous CSR support from Gayson & Company Limited, our Hingonia Cattle Rehabilitation Center was able to provide arrangements for 4,500 cows in a day, including dry fodder, green fodder, and concentrate. This support has been instrumental in our mission to serve the 18,000 cows in our care. We extend our heartfelt gratitude for their contribution towards our cause.</p>
-                        </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/4.png' %}" />
-                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >H.G.</h4>
-                        <p class="my-3">H.G. Foundation's generous support in building a 44,000 sqft shelter home for 500 stray and abandoned cows is truly commendable. The brick flooring ensures their comfort and safety, particularly during rainy days. Solar lights have been installed to provide care for the cows at night, especially the elderly and sick ones. Additionally, shade-providing trees have been planted to offer relief from the heat during hot weather, further enhancing their well-being.</p>
-                      </div>
-                      <div class="swiper-slide">
-                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/5.png' %}" />
-                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >IOCL</h4>
-                        <p class="my-3">Through the generous CSR contribution of the Indian Oil Corporation Limited, a state-of-the-art biogas plant with a capacity of 100 MTPD has been established within the Hingonia premises. This sustainable initiative underscores our commitment to environmental conservation and renewable energy utilization. The biogas is used to create a Porridge for the ill cows, and Akshaya Patra utilizes it for serving mid-day meals to 1.5 lakh students.</p>
-                      </div>
-                      <div class="swiper-slide">
-                        <img class="img-fluid" src="{% static 'frontend/assets/images/home/csr-gallery/6.png' %}" />
-                        <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >AFL</h4>
-                        <p class="my-3">Aavas Financiers Limited's support for the plantation of 2000 trees promotes sustainable agriculture and provides nutritious fruits for the cattle. The installation of a 200 KW solar grid power plant reduces electricity costs, reliance on non-renewable energy, and the carbon footprint. Brick flooring in the Nandi Shala improves hygiene, reduces infections, and enhances cattle well-being, showcasing Aavas's commitment to CSR.</p>
-                      </div>
+                        {% endfor %}
+                      {% endif %}
+                      {% endfor %}
+
                     </div>
                   </div>
                 </div>
@@ -926,7 +937,7 @@
                   <div class="csr_partnerbtn_wr flexBoxCenter flex-column gap-2">
                     <div class="become_csrPartner">
                       <button class="btn csrPartnerBtn bg-1 py-2 px-3 rounded-5 fw-bold">
-                        <a href="./csr.php" class="text-dark">Become a CSR Partner</a>
+                        <a href="{% url 'csr' %}" class="text-dark">Become a CSR Partner</a>
                         <img class="ms-1" style="width:12px" src="{% static 'frontend/assets/images/home/arrow-black-45.png' %}" alt="Become CSR partner">
                       </button>
                       <span class="ps-2 pe-1 fw-medium ff-epilogue">Know More</span>

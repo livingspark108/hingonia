@@ -1,0 +1,137 @@
+{% extends "administrator/base.html" %}
+{% load widget_tweaks %}
+
+{% block body %}
+
+<div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+                                <div class="col-sm-6">
+                                    <h4 class="page-title">{% if form.instance.id %}Update{% else %}Create{% endif %}
+                                                           Campaign</h4>
+                                </div>
+
+                            </div> <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+	                                <!-- Modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Upload Files</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'file_upload' %}" class="dropzone" id="my-dropzone" method="post" enctype="multipart/form-data">
+                        <input type="hidden" class="file_type" name="file_type" value="">
+                        <input type="hidden" class="campaign_id" name="uploader_id" value="{{form.instance.id}}">
+	                    {% csrf_token %}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	                                <button type="button" data-type="slider"
+                                            class="open_uploader btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#uploadModal">
+                                        Gallery Upload Files
+                                    </button>
+	                                <div id="uploadStatus_slider"></div>
+                                    <div id="sliderFileList"></div>
+	                                   
+	                                   
+                                    <form enctype='multipart/form-data' class="form-horizontal m-t-30" method="POST">
+                                        {{ form.media }}
+                                        {% include "elements/form.html" with form=form %}
+	                                    
+	                                    
+	                                    
+	                                    
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-secondary">Reset</button>
+                                        <button type="cancel" class="btn btn-danger"><a class="text-white" href="{% url 'campaign-list' %}">Cancel</a></button>
+                                    </form>
+	                                   
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+{% endblock %}
+{% block script%}
+<!--<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
+<script>
+$('.open_uploader').click(function(){
+	var type = $(this).data('type')
+	$('.file_type').val(type)
+})
+    Dropzone.options.myDropzone = {
+        init: function() {
+            this.on("complete", function(file) {
+                loadFileList();
+            });
+        }
+    };
+
+    function loadFileList() {
+        var types = ['campaign', 'slider'];
+        var id = "{{form.instance.id}}"
+        types.forEach(type => {
+            fetch(`{% url 'file_list' %}?type=${type}&id=${id}`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(`${type}FileList`).innerHTML = data;
+            });
+        });
+    }
+
+    function deleteFile(fileId) {
+        const formData = new FormData();
+        formData.append('id', fileId);
+        fetch("{% url 'file_delete' %}", {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                loadFileList();
+            } else {
+                alert('Error deleting file');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        loadFileList();
+    });
+</script>
+<script>
+	$("#id_product").select2()
+	$('#id_last_date').datetimepicker({
+        format: 'Y-m-d H:m'})
+</script>
+{% endblock %}

@@ -13,7 +13,19 @@ MODE_TYPE = [
     ('One Time','One Time'),
     ('Both Monthly and One Time','Both Monthly and One Time'),
 ]
+
+SLIDER_TYPE = [
+    ('HomeTop','HomeTop'),
+    ('HomeMid1','HomeMid1'),
+    ('HomeMid2','HomeMid2'),
+    ('CSR','CSR'),
+    ('CSR_MAIN','CSR_MAIN'),
+    ('Objectives & Mission','Objectives & Mission'),
+    ('Why companies should partner','Why companies should partner'),
+    ('Our partners','Our partners'),
+]
 CAMPAIGN_TYPE = [
                     ('Other', 'Other'),
+                    ('Adopt a cow', 'Adopt a cow'),
 
                     ]

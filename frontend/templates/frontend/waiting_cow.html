@@ -1,0 +1,193 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<section class="AandW_page position-relative">
+        <div class="container-fluid">
+            <div class="row mx-2 pt-4 px-lg-5">
+                <div class="col-xxl-6 col-md-7 offset-xxl-3 offset-lg-0">
+                    <div class="d-flex justify-content-center toppart">
+                      <div>
+                          <div class="display-lg-4 display-6 fw-bold color-10 ff-Rubik awTopTitle">783 Cows</div>
+                          <span class="color-10 f-32 ff-Rubik">Waiting</span>
+                      </div>
+                      <div class="line titleMiddleLine" style="width: 2px;background:#04402E;margin-left:30px;margin-right:30px"></div>
+                      <div>
+                          <div class="display-lg-4 display-6 fw-bold color-10 ff-Rubik awTopTitle">133 Cows</div>
+                          <span class="color-10 f-32 ff-Rubik">Adopted</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xxl-3 col-md-5">
+                  <div class="d-flex align-items-end justify-content-center justify-content-md-end gap-2 flex-md-column mt-md-0 mt-4 flex-wrap">
+                    <!-- <a href="" class="awcowBtn ff-Rubik">Adopt Multiple Cows</a> -->
+                    <a href="adopted-cow.php" class="awcowBtn ff-Rubik">Adopted Cows</a>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <p class="adDescTop f-32 text-center color-10 fw-semibold mt-4 ff-Rubik" style="max-width:1100px; margin:0 auto;line-height:40px">
+                  Get blessings of mother cow by adopting her and being a source of her monthly care and nourishments. $20 per month.
+                  </p>
+                </div>
+            </div>
+            <div class="row pt-4">
+              <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="boxCard">
+                    <div class="card p-30 p-md-20 bg-5 borderR-40 ">
+                      <img src="assets/images/adopt-cow/ac1.svg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">No Name - Waiting Cow</h5>
+                        <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
+                        <div class="donatAmountM">
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">$20<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                        </div>
+                        <div class="mt-md-4 mt-2">
+                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">
+                            <input type="checkbox" class="position-relative" id="requestBlog">
+                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
+                          </div>
+                        </div>
+                        <a href="#" class="btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt &amp; Name a Cow</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="boxCard">
+                    <div class="card p-30 p-md-20 bg-5 borderR-40 ">
+                      <img src="assets/images/adopt-cow/ac1.svg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">No Name - Waiting Cow</h5>
+                        <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
+                        <div class="donatAmountM">
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">$20<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                        </div>
+                        <div class="mt-md-4 mt-2">
+                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">
+                            <input type="checkbox" class="position-relative" id="requestBlog">
+                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
+                          </div>
+                        </div>
+                        <a href="#" class="btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt &amp; Name a Cow</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="boxCard">
+                    <div class="card p-30 p-md-20 bg-5 borderR-40 ">
+                      <img src="assets/images/adopt-cow/ac1.svg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">No Name - Waiting Cow</h5>
+                        <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
+                        <div class="donatAmountM">
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">$20<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                        </div>
+                        <div class="mt-md-4 mt-2">
+                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">
+                            <input type="checkbox" class="position-relative" id="requestBlog">
+                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
+                          </div>
+                        </div>
+                        <a href="#" class="btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt &amp; Name a Cow</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="boxCard">
+                    <div class="card p-30 p-md-20 bg-5 borderR-40 ">
+                      <img src="assets/images/adopt-cow/ac1.svg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">No Name - Waiting Cow</h5>
+                        <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
+                        <div class="donatAmountM">
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">$20<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                        </div>
+                        <div class="mt-md-4 mt-2">
+                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">
+                            <input type="checkbox" class="position-relative" id="requestBlog">
+                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
+                          </div>
+                        </div>
+                        <a href="#" class="btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt &amp; Name a Cow</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="boxCard">
+                    <div class="card p-30 p-md-20 bg-5 borderR-40 ">
+                      <img src="assets/images/adopt-cow/ac1.svg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">No Name - Waiting Cow</h5>
+                        <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
+                        <div class="donatAmountM">
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">$20<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                        </div>
+                        <div class="mt-md-4 mt-2">
+                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">
+                            <input type="checkbox" class="position-relative" id="requestBlog">
+                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
+                          </div>
+                        </div>
+                        <a href="#" class="btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt &amp; Name a Cow</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="boxCard">
+                    <div class="card p-30 p-md-20 bg-5 borderR-40 ">
+                      <img src="assets/images/adopt-cow/ac1.svg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">No Name - Waiting Cow</h5>
+                        <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
+                        <div class="donatAmountM">
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">$20<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                        </div>
+                        <div class="mt-md-4 mt-2">
+                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">
+                            <input type="checkbox" class="position-relative" id="requestBlog">
+                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
+                          </div>
+                        </div>
+                        <a href="#" class="btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt &amp; Name a Cow</a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row aw_cow_pagination">
+              <div class="col-12">
+                <nav aria-label="Page navigation">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                      <a class="page-link border-0" href="#" aria-label="Previous">
+                        <span aria-hidden="true">	&lt;</span>
+                      </a>
+                    </li>
+                    <li class="page-item border-0 active" aria-current="page">
+                      <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link border-0" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link border-0" href="#">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link border-0" href="#" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+        </div>
+      </section>
+{% endblock %}
+{% block script%}
+<script>
+
+
+</script>
+{% endblock %}

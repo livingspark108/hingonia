@@ -33,6 +33,12 @@ urlpatterns = [
     path('user-logout/', UserLogoutView.as_view(), name="user-logout"),
     path('save-abandon/', AbandonView.as_view(), name="save-abandon"),
     path('get_campaign/<str:pk>', GetCampaignView.as_view(), name='get_campaign'),
+    path('csr', CsrView.as_view(), name='csr'),
+    path('adopted-cow', AdoptedCowView.as_view(), name='adopted-cow'),
+    path('waiting-cow', WaitingCowView.as_view(), name='waiting-cow'),
+    path('our-supporters', OurSupportersView.as_view(), name='our-supporters'),
+    path('gallery', GalleryView.as_view(), name='gallery'),
+    path('product', ProductView.as_view(), name='product'),
 
     path('privacy-policy', FrontendPrivacyPolicyView.as_view(), name='privacy-policy'),
     path('term-and-condition', FrontendTermConditionView.as_view(), name='term-and-condition'),

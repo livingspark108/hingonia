@@ -19,7 +19,7 @@ from application.custom_classes import AdminRequiredMixin, AjayDatatableView
 from apps.front_app.forms import CreateDistributionForm, CreateCampaignForm, \
     CampaignImageFormset, HomePageCampaignForm, CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, Setting, AbandonCart, Product, \
-    CampaignProduct, UploadedFile, HomePageCampaign, Order, Testimonial
+    CampaignProduct, UploadedFile, HomePageCampaign, Order, Testimonial, HomeSlider
 from django.contrib import messages
 
 from apps.user.forms import CreateSubscriberForm
@@ -388,17 +388,18 @@ class DeleteOurTeamView(AdminRequiredMixin, DeleteView):
 #Update Setting
 
 # Update About us view
-class UpdateSettingView(CreateView, UpdateView):
+class UpdateSettingView(CreateView,SuccessMessageMixin, UpdateView):
     model = Setting
-    fields = ['whatsapp_key','admin_email','min_order_value','header_script','thankyou_page_script']
+    fields = '__all__'
     template_name = 'setting/form.html'  # Provide the path to your template
     success_url = reverse_lazy('setting')  # Specify the URL to redirect after successful creation or update
+    success_message = "Setting has been updated successfully"
 
     def get_object(self, queryset=None):
         # If an object already exists, it's an update; otherwise, it's a create
         return Setting.objects.first()
 
-class UpdateAboutUsView(CreateView, UpdateView):
+class UpdateAboutUsView(CreateView,SuccessMessageMixin, UpdateView):
     model = AboutUs
     fields = ['title', 'description','banner']
     template_name = 'about-us/form.html'  # Provide the path to your template
@@ -884,6 +885,21 @@ class CloneTestimonialView(AdminRequiredMixin,View):
         return redirect('testimonial-edit', pk=original_object.pk)
 
 
+class CloneSliderView(AdminRequiredMixin,View):
+    def get(self,request,pk):
+        print("HERE")
+        print(pk)
+        # Fetch the original object
+        original_object = get_object_or_404(HomeSlider, pk=pk)
+
+        # Clone the object by setting its primary key to None
+        original_object.pk = None
+        original_object.title = original_object.title+"-Copy"
+        original_object.save()
+
+        # Redirect to the detail page of the cloned object (or anywhere else)
+        return redirect('slider-edit', pk=original_object.pk)
+
 #Subscribers
 class UpdateSubscriberView(LoginRequiredMixin, AdminRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Subscription
@@ -968,3 +984,60 @@ class RazorpayStatusView(AdminRequiredMixin,View):
             plan_obj.save()
 
         return HttpResponseRedirect(reverse_lazy('razorpay-plan-list'))
+
+
+# Slider Modules
+
+class CreateSliderView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
+
+    model = HomeSlider
+    fields = ['title', 'type','amount','icon','main_image','description']
+    template_name = 'slider/form.html'
+    success_message = "%(title)s has been created successfully"
+    success_url = reverse_lazy('slider-list')
+
+
+class ListSliderView(AdminRequiredMixin, TemplateView):
+    model = HomeSlider
+    template_name = 'slider/list.html'
+
+
+class ListSliderViewJson(AjayDatatableView):
+    model = HomeSlider
+    columns = ['title','type', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def render_column(self, row, column):
+        if column == 'actions':
+            edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
+                reverse('slider-edit', kwargs={'pk': row.pk}))
+            clone_action = '<a href={} role="button" class="btn btn-info btn-sm mr-1">Clone</a>'.format(
+                reverse('slider-clone', kwargs={'pk': row.pk}))
+            delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
+                reverse('slider-delete', kwargs={'pk': row.pk}))
+            return edit_action + clone_action + delete_action
+        else:
+            return super(ListSliderViewJson, self).render_column(row, column)
+
+
+class UpdateSliderView(AdminRequiredMixin, SuccessMessageMixin, UpdateView):
+
+    model = HomeSlider
+    fields = ['title', 'type','amount','icon','main_image','description']
+    template_name = 'slider/form.html'
+    success_message = "%(title)s has been updated successfully"
+    success_url = reverse_lazy('slider-list')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateSliderView, self).get_context_data(**kwargs)
+        context['pk'] = self.kwargs['pk']
+        return context
+
+
+class DeleteSliderView(AdminRequiredMixin, DeleteView):
+    model = HomeSlider
+
+    def delete(self, request, *args, **kwargs):
+        self.get_object().delete()
+        payload = {'delete': 'ok'}
+        return JsonResponse(payload)

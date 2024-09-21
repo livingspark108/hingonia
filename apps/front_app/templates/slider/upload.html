@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" />
+    <style>
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .thumbnail-container {
+            display: inline-block;
+            position: relative;
+            margin: 10px;
+        }
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Files</h1>
+    <form action="{% url 'file_upload' %}" class="dropzone" id="my-dropzone" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    </form>
+    <div id="uploadStatus"></div>
+    <div id="fileList"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
+    <script>
+        Dropzone.options.myDropzone = {
+            init: function() {
+                this.on("complete", function(file) {
+                    loadFileList();
+                });
+            }
+        };
+
+        function loadFileList() {
+            fetch("{% url 'file_list' %}")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('fileList').innerHTML = data;
+            });
+        }
+
+        function deleteFile(fileId) {
+            const formData = new FormData();
+            formData.append('id', fileId);
+            fetch("{% url 'file_delete' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    loadFileList();
+                } else {
+                    alert('Error deleting file');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFileList();
+        });
+    </script>
+</body>
+</html>

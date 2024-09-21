@@ -32,8 +32,9 @@ from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, DeleteView, UpdateView, TemplateView
 from application.custom_classes import DevoteeRequiredMixin, AdminRequiredMixin, AjayDatatableView
+from application.email_helper import send_email_background
 from application.helper import send_contact_us
-from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET
+from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET, ADMIN_EMAIL
 from apps.front_app.forms import CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
     AbandonCart, Testimonial, CampaignProduct
@@ -209,6 +210,58 @@ class GetCampaignView(DevoteeRequiredMixin, View):
 
         response = {'description': campaign_single.description,'title': campaign_single.title}
         return JsonResponse(response)
+
+
+class AdoptedCowView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/adopted_cow.html', context)
+
+
+class WaitingCowView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/waiting_cow.html', context)
+
+
+class OurSupportersView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/our_supporters.html', context)
+
+class GalleryView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/our_supporters.html', context)
+
+class ProductView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/product.html', context)
+
+class CsrView(View):
+    def get(self, request):
+
+        context = {}
+        return render(request, 'frontend/csr.html', context)
+
+    def post(self, request):
+        print("HERE IT CAME")
+        full_name = request.POST.get('name')
+        mobile_no = request.POST.get('mobile_no')
+        designation = request.POST.get('designation')
+        company_name = request.POST.get('company_name')
+        full_address = request.POST.get('full_address')
+        email = request.POST.get('email')
+        template = 'frontend/email/csr_template.html'
+
+        context = {
+            'name':full_name,
+            'mobile_no': mobile_no,
+            'email': email
+        }
+        send_email_background(request, ADMIN_EMAIL, template, context, subject='CSR Request')
+        return redirect('csr')
 
 # Save Abandon Cart
 class AbandonView(View):

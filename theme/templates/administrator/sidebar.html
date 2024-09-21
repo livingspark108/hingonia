@@ -64,21 +64,32 @@
                             <a href="{% url 'mother-list' %}" class="waves-effect {% active 'mother-list' %}"><i
 		                            class="fa fa-file"></i><span> Our Mata ji </span></a>
                         </li>
-	                    <li>
-                            <a href="{% url 'ourteam-list' %}" class="waves-effect {% active 'ourteam-list' %}"><i
-		                            class="fa fa-file"></i><span> Our Team </span></a>
-                        </li>
+
                         <li>
-                            <a href="{% url 'testimonial-list' %}" class="waves-effect {% active 'testimonial-list' %}"><i
-		                            class="fa fa-file"></i><span> Testimonial </span></a>
-                        </li>
-	                    <li>
-                            <a href="{% url 'update-about-us' %}" class="waves-effect {% active 'update-about-us' %}"><i
-		                            class="fa fa-file"></i><span> AboutUs </span></a>
-                        </li>
-	                    <li>
-                            <a href="{% url 'setting' %}" class="waves-effect {% active 'setting' %}"><i
-		                            class="fa fa-file"></i><span> Setting </span></a>
+                            <a href="javascript:void(0);" class="waves-effect">
+                                <i class="fa fa-file"></i>
+                                <span> Setting </span>
+                            </a>
+                            <!-- Submenu starts here -->
+                            <ul class="submenu">
+                                <li><a href="{% url 'setting' %}" class="{% url 'setting' %}"><i
+                                            class="fa fa-file"></i><span>General setting</span></a></li>
+
+                                <li>
+                                    <a href="{% url 'ourteam-list' %}" class="waves-effect {% active 'ourteam-list' %}"><i
+                                            class="fa fa-file"></i><span> Our Team </span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'testimonial-list' %}" class="waves-effect {% active 'testimonial-list' %}"><i
+                                            class="fa fa-file"></i><span> Testimonial </span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'update-about-us' %}" class="waves-effect {% active 'update-about-us' %}"><i
+                                            class="fa fa-file"></i><span> AboutUs </span></a>
+                                </li>
+                                <li><a href="{% url 'slider-list' %}" class="waves-effect {% url 'slider-list' %}"><i
+                                            class="fa fa-file"></i><span>Slider</span></a></li>
+                            </ul>
                         </li>
 	                    
 	                    

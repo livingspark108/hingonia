@@ -110,7 +110,7 @@ ADMINS = (
     ('your name', 'your_name@example.com'),
 )
 MANAGERS = ADMINS
-
+ADMIN_EMAIL = 'livingsparkglobal@gmail.com'
 # ##### DJANGO RUNNING CONFIGURATION ######################
 
 # the default WSGI application
@@ -222,12 +222,17 @@ STRIPE_TEST_SECRET_KEY = 'sk_test_6p80GWQU7si4C2foYzEAzQSP00o0E31HXF'
 DJSTRIPE_WEBHOOK_SECRET = "whsec_11ov9HJBLwcI7AmXPWU5DcjljMgE6Df0"  # Get it from the section in the Stripe dashboard where you added the webhook endpoint
 
 
+
 #Email Server
-EMAIL_HOST = 'smtp.zoho.in'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'contact@thepuredevotion.in'
-EMAIL_HOST_PASSWORD = 'Shriradha#5'
+EMAIL_HOST_USER = 'livingsparkglobal@gmail.com'
+EMAIL_HOST_PASSWORD = 'lhdq xcpa pkln hfaq'
 EMAIL_USE_TLS = True
+admin_email = 'livingsparkglobal@gmail.com'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = 'livingsparkglobal@gmail.com'
 
 
 FILE_UPLOAD_PERMISSIONS = 0o644

@@ -92,6 +92,7 @@ def send_contact_us(request, to, context={}):
         send_email_background(request, reciepint, template, context, subject='Contact Us - Confirmation')
 
 
+
 def get_stripe_public_key():
     return settings.STRIPE_LIVE_PUBLIC_KEY if settings.STRIPE_LIVE_MODE else settings.STRIPE_LIVE_PUBLIC_KEY
 
