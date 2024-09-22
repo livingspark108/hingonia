@@ -37,7 +37,7 @@ from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET, ADMIN_EMAIL
 from apps.front_app.forms import CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
-    AbandonCart, Testimonial, CampaignProduct
+    AbandonCart, Testimonial, CampaignProduct, Product
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -128,10 +128,14 @@ class FrontendOurMotherView(View):
 
 class FrontendCampaignView(View):
     def get(self, request):
-        campaign_obj = Campaign.objects.all().order_by('-created_at')
+        adopt_a_cow_obj = Campaign.objects.filter(type='Adopt a cow').order_by('-created_at')
+        campaign_obj = Campaign.objects.filter(type='Other').order_by('-created_at')
+        product_obj = Product.objects.all()
         #if request.user.is_authenticated:
         context = {
-            'campaign_obj':campaign_obj
+            'campaign_obj':campaign_obj,
+            'adopt_a_cow_obj':adopt_a_cow_obj,
+            'product_obj':product_obj
         }
         return render(request, 'frontend/campaign.html', context)
 

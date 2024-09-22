@@ -89,7 +89,7 @@ class ListCampaignViewJson(AjayDatatableView):
             clone_action = '<a href={} role="button" class="btn btn-info btn-sm mr-1">Clone</a>'.format(
                 reverse('campaign-clone', kwargs={'pk': row.pk}))
 
-            edit_action = '<a href={} role="button" class="confirm btn btn-warning btn-sm mr-1">Edit</a>'.format(
+            edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
                 reverse('campaign-edit', kwargs={'pk': row.pk}))
             delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
                 reverse('campaign-delete', kwargs={'pk': row.pk}))
@@ -618,6 +618,7 @@ class ListSubscriberViewJson(AjayDatatableView):
         else:
             return super(ListSubscriberViewJson, self).render_column(row, column)
 
+
 class CreateProductView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
 
     model = Product
@@ -641,9 +642,11 @@ class ListProductViewJson(AjayDatatableView):
         if column == 'actions':
             edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
                 reverse('product-edit', kwargs={'pk': row.pk}))
+            clone_action = '<a href={} role="button" class="btn btn-info btn-sm mr-1">Clone</a>'.format(
+                reverse('product-clone', kwargs={'pk': row.pk}))
             delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
                 reverse('product-delete', kwargs={'pk': row.pk}))
-            return edit_action + delete_action
+            return edit_action + clone_action + delete_action
         else:
             return super(ListProductViewJson, self).render_column(row, column)
 
@@ -669,6 +672,22 @@ class DeleteProductView(AdminRequiredMixin, DeleteView):
         self.get_object().delete()
         payload = {'delete': 'ok'}
         return JsonResponse(payload)
+
+
+class CloneProductView(AdminRequiredMixin,View):
+    def get(self,request,pk):
+        print("HERE")
+        print(pk)
+        # Fetch the original object
+        original_object = get_object_or_404(Product, pk=pk)
+
+        # Clone the object by setting its primary key to None
+        original_object.pk = None
+        original_object.title = original_object.title+"-Copy"
+        original_object.save()
+
+        # Redirect to the detail page of the cloned object (or anywhere else)
+        return redirect('product-edit', pk=original_object.pk)
 
 
 

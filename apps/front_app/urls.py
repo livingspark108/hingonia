@@ -48,6 +48,8 @@ urlpatterns = [
     path('product/list/ajax', ListProductViewJson.as_view(), name='product-list-ajax'),
     path('product/edit/<str:pk>', UpdateProductView.as_view(), name='product-edit'),
     path('product/delete/<str:pk>', DeleteProductView.as_view(), name='product-delete'),
+    path('product/clone/<str:pk>', CloneProductView.as_view(), name='product-clone'),
+
 
     #"""Mother page"""
     path('mother/add', CreateMotherView.as_view(), name='mother-add'),

@@ -3,57 +3,910 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-{% for i in campaign_obj %}
-{% if i.backgroud_type == 'red' %}
-<section class="py-5 my-md-5 my-3 bg-1 campaign-section">
-        <div class="container">
-            <div class="row align-items-center justify-content-center g-4">
-                <div class="col-md-3 text-center">
-                    <img src="{% get_media_prefix %}{{i.campaign_image}}" width="270" class="img-fluid" alt="">
-                </div>
-                <div class="col-md-7">
-                    <h2 class="banner-title-lite text-white"><a style="
-    color: #fff;
-" href="{% url 'ongoing-devotion' i.slug %}">{{i.title}}</a></h2>
-                    <p class="page-desc  text-white">{{i.description}}
-                    </p>
-                    <div class="pt-3 pb-5">
-                        <a href="#" data-title="{{i.short_title}}" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
-                           class="help_mataji btn bg-white color-2 bg-white banner-btn campaign-btn-1"><img
-		                        src="assets/images/foot-dark.png" width="20"
-                                alt="">{{i.short_title}}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{% get_slider as all_slider %}
 
-{% elif i.backgroud_type == 'white' %}
-<section class="py-5 campaign-section">
-        <div class="container">
-            <div class="row align-items-center justify-content-center g-4">
-                <div class="col-md-3 text-center">
-                    <img src="{% get_media_prefix %}{{i.campaign_image}}" width="270" class="img-fluid" alt="">
-                </div>
-                <div class="col-md-7">
-<!--                    <h2 class="banner-title">Contribute to <span>Adopt a Mataji</span> in Vrindavan</h2>-->
-                    <h2 class="banner-title"><a href="{% url 'ongoing-devotion' i.slug %}">{{i.title|convert_spaces_to_span|safe}}</a></h2>
-                    <p class="page-desc color-2">{{i.description}}
-                    </p>
-                    <div class="pt-3 pb-5 pb-md-3">
-                        <a data-title="{{i.short_title}}" data-bs-toggle="modal" data-bs-target="#helpMatajiModal"
-                           href="#"
-                           class="help_mataji btn bg-1 text-white banner-btn campaign-btn-1"><img
-		                        src="assets/images/foot.png" width="20"
-                                alt="">{{i.short_title}}</a>
+<!-- Section Banner -->
+  <section class="mx-2 section-banner py-80">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="order-1">
+          <div class="swiper campaingSwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide ">
+                <div class="campaing_sliderWr position-relative rounded-5 overflow-hidden"
+                  style="background-image: url('/static/frontend/assets/images/campaing/campaingslide-1.svg');">
+                  <div class="contentWr position-absolute">
+                    <div>
+                      <img class="me-3" src="/static/frontend/assets/images/campaing/heart.svg" alt="">
+                      <span class="color-11 ff-freehand f-36 slideDesc">Receive monthly gifts from your cow?</span>
                     </div>
+                    <h1 class="display-2 text-white fw-bold ff-Rubik">Adopt a Cow!</h1>
+                    <a href="" class="campaing_pledgeBtn ff-Rubik mt-3">Pledge Monthly</a>
+                  </div>
                 </div>
+              </div>
+              <div class="swiper-slide ">
+                <div class="campaing_sliderWr position-relative rounded-5 overflow-hidden"
+                  style="background-image: url('/static/frontend/assets/images/campaing/campaingslide-1.svg');">
+                  <div class="contentWr position-absolute">
+                    <div>
+                      <img class="me-3" src="/static/frontend/assets/images/campaing/heart.svg" alt="">
+                      <span class="color-11 ff-freehand f-36 slideDesc">Receive monthly gifts from your cow?</span>
+                    </div>
+                    <h1 class="display-2 text-white fw-bold ff-Rubik">Adopt a Cow!</h1>
+                    <a href="" class="campaing_pledgeBtn ff-Rubik mt-3">Pledge Monthly</a>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide ">
+                <div class="campaing_sliderWr position-relative rounded-5 overflow-hidden"
+                  style="background-image: url('/static/frontend/assets/images/campaing/campaingslide-1.svg');">
+                  <div class="contentWr position-absolute">
+                    <div>
+                      <img class="me-3" src="/static/frontend/assets/images/campaing/heart.svg" alt="">
+                      <span class="color-11 ff-freehand f-36 slideDesc">Receive monthly gifts from your cow?</span>
+                    </div>
+                    <h1 class="display-2 text-white fw-bold ff-Rubik">Adopt a Cow!</h1>
+                    <a href="" class="campaing_pledgeBtn ff-Rubik mt-3">Pledge Monthly</a>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide ">
+                <div class="campaing_sliderWr position-relative rounded-5 overflow-hidden"
+                  style="background-image: url('/static/frontend/assets/images/campaing/campaingslide-1.svg');">
+                  <div class="contentWr position-absolute">
+                    <div>
+                      <img class="me-3" src="/static/frontend/assets/images/campaing/heart.svg" alt="">
+                      <span class="color-11 ff-freehand f-36 slideDesc">Receive monthly gifts from your cow?</span>
+                    </div>
+                    <h1 class="display-2 text-white fw-bold ff-Rubik">Adopt a Cow!</h1>
+                    <a href="" class="campaing_pledgeBtn ff-Rubik mt-3">Pledge Monthly</a>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+
         </div>
-    </section>
-    
-{% endif %}
-{% endfor %}
+      </div>
+    </div>
+  </section>
+  <section class="mx-2 pt-2 pb-80">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="display-4 fw-bold pe-lg-40 ff-anton text-center">Give Monthly</h2>
+          <p class=" text-center mx-auto ff-rubik f-24 mb-4 color-blck85" style="max-width:600px; line-height:normal">
+            Create sustainable impact. Support verified projects. Get regular updates. Save tax. Cancel anytime.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        {% for single in adopt_a_cow_obj %}
+        <div class="col-lg-4 col-md-6 mb-lg-0 mb-4">
+          <div class="campaingWr campcolor1 p-30 rounded-5" style="background-color: #C21959;">
+            <div class="d-flex gap-3 align-items-center">
+              <img src="/static/frontend/assets/images/campaing/camp-1.svg" alt="">
+              <div>
+                <div class="amountpg fw-semibold ff-rubik bg-white24 text-white d-inline-block rounded-4"
+                  style="padding:4px 12px">₹{{single.price}}/MONTH</div>
+                <h2 class="amountpg display-5 fw-bold ff-rubik text-white">{{single.title}}</h2>
+                <p class="f-10 ff-rubik text-white mb-0">Join us in creating a haven for mother cows.</p>
+              </div>
+            </div>
+            <a href="" class="campaing_pledgeBtn fullWdith ff-Rubik mt-3 w-100 ff-rubik" style="color: #C21959;"
+              data-bs-toggle="modal" data-bs-target="#PledgeModel1">Pledge Monthly</a>
+            <div
+              class="d-flex align-items-center messageBox campaingWrBtn gap-2 text-white justify-content-center mt-3">
+              <input type="checkbox" class="position-relative" id="mg-1">
+              <label class="f-14 m-0 py-1 form-check-label text-white  ff-Rubik" for="mg-1">Receive monthly gifts
+                from your cow?</label>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </section>
+  <section class="bg-black py-3 mx-2 home-section-2">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <span class="color-11 fw-bold fs-4">
+            Green Fodder Seva
+          </span>
+          <i class="bi bi-dot color-11 px-lg-3">
+          </i>
+          <span class="color-11 fw-bold fs-4">
+            Jaggery Seva
+          </span>
+          <i class="bi bi-dot color-11 px-lg-3">
+          </i>
+          <span class="color-11 fw-bold fs-4">
+            Adopt a calf
+          </span>
+          <i class="bi bi-dot color-11 px-lg-3">
+          </i>
+          <span class="color-11 fw-bold fs-4">
+            Adopt a cow
+          </span>
+          <i class="bi bi-dot color-11 px-lg-3">
+          </i>
+          <span class="color-11 fw-bold fs-4">
+            Medicine Kit Seva
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+<section class="mx-2 py-80 SCTWr">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="display-4 fw-bold ff-antom text-dark">Support a Campaign</h2>
+          <p class="f-28 color-blck85" style="line-height: 32px;">Pick a cause close to your heart and donate now</p>
+        </div>
+      </div>
+      <div class="row content">
+        <div class="col-12">
+          <div class="nav nav-tabs border-0 mb-5 flex-wrap" id="nav-tab" role="tablist">
+            {% for single in campaign_obj %}
+            <button class="nav-link {% if forloop.first %}active{% endif %}" id="nav-{{single.id}}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{single.id}}"
+              type="button" role="tab" aria-controls="nav-{{single.id}}" aria-selected="true">
+              <h3 class="f-28 ff-epilogue fw-bold m-0">{{single.title}}</h3>
+            </button>
+            {% endfor %}
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            {% for single in campaign_obj %}
+            <div class="tab-pane steptabs fade {% if forloop.first %}active{% endif %} show" id="nav-{{single.id}}" role="tabpanel"
+              aria-labelledby="nav-{{single.id}}-tab">
+              <div class="px-lg-5 ">
+                <h3 class="display-6 fw-bold text-uppercase my-4">Join Us in Creating a HEaven for Abandoned Cows!2</h3>
+                <div class="stepper">
+                  <div class="progress-container">
+                    <div class="progress">
+                      <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 33%;"
+                        aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="step-circles">
+                      <div class="circle active" id="circle-1"></div>
+                      <div class="circle" id="circle-2"></div>
+                      <div class="circle" id="circle-3"></div>
+                    </div>
+                  </div>
+
+                  <div class="step {% if forloop.first %}w-100{% else %}d-none{% endif %} " id="step-{{single.id}}">
+                    <div class="row">
+                      <div class="col-lg-9">
+                        <div class="row">
+                          {% for single_item in single.product.all %}
+                          <div class="col-lg-6">
+                            <div class="card_donate d-flex gap-2 mb-2" id="card_donate_1">
+                              <img src="assets/images/home/steel.png" class="card-img-top img-fluid"
+                                alt="Steel Structure Seva">
+                              <div class="card-body d-flex flex-row gap-2">
+                                <div>
+                                  <h5 class="card-title fw-bold">{{single_item.title}}</h5>
+                                  <p class="card-text f-12">{{single_item.description}}</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                  <div class="add_button">
+                                    <button class="btn btn-primary f-12 add-button">Add <img
+                                        src="assets/images/plus-black.svg" alt=""></button>
+                                  </div>
+                                  <div class="quantity-container" style="display: none;">
+                                    <button class="btn btn-primary f-14 decrement-btn">-</button>
+                                    <span class="mx-2 quantity-value">0</span>
+                                    <button class="btn btn-primary f-14 increment-btn">+</button>
+                                    <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
+                                  </div>
+                                  <div class="added-button" style="display: none;">
+                                    <button class="btn btn-primary f-12 bg-dark text-white">
+                                      Added
+                                      <img src="assets/images/home/done_all.png" class="card-img-top img-fluid"
+                                        style="width:auto; height:16px" alt="done">
+                                    </button>
+                                  </div>
+                                  <p class="card-text f-22 fw-semibold text-end">₹100</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {% endfor %}
+                        </div>
+                      </div>
+                      <div class="col-lg-3 pt-1">
+                        <div>
+                          <div class="d-flex gap-3 mt-2 mb-4">
+                            <div class=" flexBoxCenter position-relative">
+                              <div class="title fw-bold position-absolute f-10"
+                                style="top:-5px;left:20px; background:#fff">Custom Amount</div>
+                              <div class="amount">
+                                <input id="number" type="text" placeholder="₹5000">
+                                <div class="currency position-absolute" style="top:10px;right:10px;">
+                                  <div class="inrSelect">
+                                    <select class="h-100">
+                                      <option value="IN">INR</option>
+                                      <option value="US">USD</option>
+                                      <option value="UK">$</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-start messageBox gap-2">
+                          <input type="checkbox" class="donationMessage position-relative" id="anonymous">
+                          <label class="f-14 m-0 py-1 form-check-label" for="anonymous">
+                            Make my Donation Anonymous
+                          </label>
+                        </div>
+                        <div class="d-flex align-items-start messageBox gap-2">
+                          <input type="checkbox" class="donationMessage position-relative" id="whatsapp">
+                          <label class="f-14 m-0 py-1 form-check-label" for="whatsapp">
+                            I want to receive transaction and donation updates on WhatsApp
+                          </label>
+                        </div>
+                        <div class="d-flex align-items-start messageBox gap-2">
+                          <input type="checkbox" class="donationMessage position-relative" id="whatsapp">
+                          <label class="f-14 m-0 py-1 form-check-label" for="donate-monthly">
+                            Donate Monthly
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="stepDonateBtnWr mt-4">
+                      <span class="fw-bold">RS. 1,500</span>
+                      <button class="btn next-btn bg-black text-white fw-semibold f-12 borderR-40"
+                        onclick="nextStep(2)">Donate Now</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home_gallery-section position-relative campaingGallery">
+    <img class="img-fluid position-absolute veactorImg1" src="assets/images/campaing/vector1.svg" alt="">
+    <img class="img-fluid position-absolute veactorImg2" src="assets/images/campaing/vector2.svg" alt="">
+    <div class="px-lg-5 px-md-0 mx-lg-5 mx-2 mb-0 py-md-5 pt-md-0 py-3">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-5 ">
+            <div class="content text-center text-md-start">
+              <h2 class="display-3 fw-bold pe-lg-40">
+                Some Glipses of
+              </h2>
+              <h2 class="color-1 display-1 ff-epilogue fw-bold">
+                Hingonia
+              </h2>
+              <div class="ourGallery_btn position-relative d-inline-block">
+                <img class="img-fluid" src="./assets/images/home/our-gallery.png" alt="our-gallery">
+                <button class="btnAnimation position-absolute text-white fw-bold">
+                  Our Gallery
+                  <img src="./assets/images/home/arrow_next.png" alt="">
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="swiper gallerySwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img class="img-fluid gallery-1" src="./assets/images/home/gallery/gallery-1.png" alt="gallery">
+                </div>
+                <div class="swiper-slide">
+                  <img class="img-fluid gallery-2" src="./assets/images/home/gallery/gallery-2.png" alt="gallery">
+                </div>
+                <div class="swiper-slide">
+                  <img class="img-fluid gallery-3" src="./assets/images/home/gallery/gallery-3.png" alt="gallery">
+                </div>
+                <div class="swiper-slide">
+                  <img class="img-fluid gallery-4" src="./assets/images/home/gallery/gallery-4.png" alt="gallery">
+                </div>
+              </div>
+            </div>
+            <div style="opacity:.5" class="pt-1 text-center fw-bold">
+              Click to see more
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section class="mx-2 py-80 PD_productsSection">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="text-center">
+            <img src="assets/images/campaing/heart.svg" alt="">
+            <h2 class="display-4 ff-antom fw-semibold text-dark">Pure Dairy Cow Products</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        {% for single in product_obj %}
+        <div class="col-lg-3 col-sm-6">
+          <div class="productWr position-relative p-30">
+            <img class="img-fluid pBg position-absolute" src="/static/frontend/assets/images/campaing/product-vector.svg" alt="">
+            <div class="productImgSlider">
+              <div class="swiper productslide1 pb-30">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide ">
+                    <img class="img-fluid" src="{{single.image.url}}" alt="">
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+              <div class="text-center">
+                <h4 class="display-6 fw-semibold ff-rubik color-10">{{single.title}}</h4>
+                <p class="f-12 color-10 fw-semibold">{{single.description}}</p>
+                <div class="d-flex align-items-center justify-content-center gap-3">
+                  <span class="f-24 ff-rubik">₹ {{single.price}}</span>
+                  <a href="" class="buyBtn color-5 ff-rubik">Buy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <section class="donor_privilages-section mx-2 mb-0 mb-md-5 pb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-5 col-lg-6 offset-xl-1">
+          <div class="donat_event_wr">
+            <div class="event_Wr p-4 text-center">
+              <h5 class="text-white fw-bold">
+                Make Your Own Day Of Charity
+              </h5>
+              <p class="text-white" style="font-size:11px">
+                Add goodwill to your special occations by spreading joy among those who
+                need your and support the most
+              </p>
+              <div class="event_type row">
+                <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                  <div class="eventBox flexBoxCenter flex-column">
+                    <img src="/static/frontend/assets/images/home/anniversary.png" alt="">
+                    <div>
+                      <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <span class="f-12 fw-bold">Anniversary</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                  <div class="eventBox flexBoxCenter flex-column">
+                    <img src="/static/frontend/assets/images/home/birthday.png" alt="">
+                    <div>
+                      <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <span class="f-12 fw-bold">Birthday</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                  <div class="eventBox flexBoxCenter flex-column">
+                    <img src="/static/frontend/assets/images/home/honour-of.png" alt="">
+                    <div>
+                      <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <span class="f-12 fw-bold">In Honour Of</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                  <div class="eventBox flexBoxCenter flex-column">
+                    <img src="/static/frontend/assets/images/home/memory-of.png" alt="">
+                    <div>
+                      <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <span class="f-12 fw-bold">In Memory Of</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn donate_nowBtn mt-2 text-white fw-bold" data-bs-toggle="modal"
+              data-bs-target="#eventsModel">
+              Schedule Now
+            </button>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6">
+          <div class="donarPrivilages_point pt-3 pt-lg-0">
+            <h3 class="color-17 fw-bold">
+              Donor Privileges
+            </h3>
+            <ol class="f-14 fw-medium lh-lg">
+              <li class="color-17">
+                Gau Puja on your name 
+              </li>
+              <li class="color-17">
+                Digital Certificate of Your Goseva Contribution
+              </li>
+              <li class="color-17">
+                80G Tax Exemption Certificate
+              </li>
+              <li class="color-17">
+                On donating 11000 & above you will get 100% Pure Products from our gaushala.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- Model -->
+      <div class="eventsModelBoxWr">
+        <div class="modal fade" id="eventsModel" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="eventsModelLabel2" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="donat_event_wr">
+                  <div class="event_Wr p-4 text-center">
+                    <h5 class="text-white fw-bold">Make Your Own Day Of Charity</h5>
+                    <p class="text-white" style="font-size:11px">
+                      Add goodwill to your special occations by spreading joy among those who
+                      need your and support the most
+                    </p>
+                    <div class="nav nav-tabs border-0 flex-wrap event_type" id="nav-tab" role="tablist">
+                      <button class="nav-link position-relative active" id="nav-anniversary-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-anniversary" type="button" role="tab" aria-controls="nav-anniversary"
+                        aria-selected="true">
+                        <div class="eventBox flexBoxCenter flex-column">
+                          <img src="./assets/images/home/anniversary.png" alt="">
+                          <div>
+                            <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                            <span class="f-12 fw-bold">Anniversary</span>
+                          </div>
+                        </div>
+                      </button>
+                      <button class="nav-link position-relative" id="nav-birthday-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-birthday" type="button" role="tab" aria-controls="nav-birthday"
+                        aria-selected="false">
+                        <div class="eventBox flexBoxCenter flex-column">
+                          <img src="./assets/images/home/birthday.png" alt="">
+                          <div>
+                            <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                            <span class="f-12 fw-bold">Birthday</span>
+                          </div>
+                        </div>
+                      </button>
+                      <button class="nav-link position-relative" id="nav-inhonour-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-inhonour" type="button" role="tab" aria-controls="nav-inhonour"
+                        aria-selected="false">
+                        <div class="eventBox flexBoxCenter flex-column">
+                          <img src="./assets/images/home/honour-of.png" alt="">
+                          <div>
+                            <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                            <span class="f-12 fw-bold">In Honour Of</span>
+                          </div>
+                        </div>
+                      </button>
+                      <button class="nav-link position-relative" id="nav-inmemory-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-inmemory" type="button" role="tab" aria-controls="nav-inmemory"
+                        aria-selected="false">
+                        <div class="eventBox flexBoxCenter flex-column">
+                          <img src="./assets/images/home/memory-of.png" alt="">
+                          <div>
+                            <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                            <span class="f-12 fw-bold">In Memory Of</span>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane steptabs fade active show" id="nav-anniversary" role="tabpanel"
+                    aria-labelledby="nav-anniversary-tab">
+                    <div class="donateForm_wr py-3" id="donateForm">
+                      <form onsubmit="return false">
+                        <div class="mb-3 position-relative">
+                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                            here</label>
+                          <input type="textarea" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                          <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
+                            aria-describedby="nameHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                          <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
+                            aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <div class="position-absolute country_code h-100">
+                            <select class="h-100">
+                              <option value="IN">IN</option>
+                              <option value="US">US</option>
+                              <option value="UK">UK</option>
+                            </select>
+                          </div>
+                          <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                          <input type="text" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                          <div class="help-icon position-absolute flexBoxCenter"
+                            title="Enter your mobile number including the country code.">?</div>
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                            Date</label>
+                          <input type="text" class="form-control" placeholder="23/04/2024" id="emailInput"
+                            aria-describedby="emailHelp">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane steptabs fade" id="nav-birthday" role="tabpanel"
+                    aria-labelledby="nav-birthday-tab">
+                    <div class="donateForm_wr py-3" id="donateForm">
+                      <form onsubmit="return false">
+                        <div class="mb-3 position-relative">
+                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                            here</label>
+                          <input type="textarea" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                          <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
+                            aria-describedby="nameHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                          <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
+                            aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <div class="position-absolute country_code h-100">
+                            <select class="h-100">
+                              <option value="IN">IN</option>
+                              <option value="US">US</option>
+                              <option value="UK">UK</option>
+                            </select>
+                          </div>
+                          <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                          <input type="text" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                          <div class="help-icon position-absolute flexBoxCenter"
+                            title="Enter your mobile number including the country code.">?</div>
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                            Date</label>
+                          <input type="text" class="form-control" placeholder="23/04/2024" id="emailInput"
+                            aria-describedby="emailHelp">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane steptabs fade" id="nav-inhonour" role="tabpanel"
+                    aria-labelledby="nav-inhonour-tab">
+                    <div class="donateForm_wr py-3" id="donateForm">
+                      <form onsubmit="return false">
+                        <div class="mb-3 position-relative">
+                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                            here</label>
+                          <input type="textarea" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                          <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
+                            aria-describedby="nameHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                          <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
+                            aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <div class="position-absolute country_code h-100">
+                            <select class="h-100">
+                              <option value="IN">IN</option>
+                              <option value="US">US</option>
+                              <option value="UK">UK</option>
+                            </select>
+                          </div>
+                          <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                          <input type="text" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                          <div class="help-icon position-absolute flexBoxCenter"
+                            title="Enter your mobile number including the country code.">?</div>
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                            Date</label>
+                          <input type="text" class="form-control" placeholder="23/04/2024" id="emailInput"
+                            aria-describedby="emailHelp">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane steptabs fade" id="nav-inmemory" role="tabpanel"
+                    aria-labelledby="nav-inmemory-tab">
+                    <div class="donateForm_wr py-3" id="donateForm">
+                      <form onsubmit="return false">
+                        <div class="mb-3 position-relative">
+                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                            here</label>
+                          <input type="textarea" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                          <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
+                            aria-describedby="nameHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                          <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
+                            aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <div class="position-absolute country_code h-100">
+                            <select class="h-100">
+                              <option value="IN">IN</option>
+                              <option value="US">US</option>
+                              <option value="UK">UK</option>
+                            </select>
+                          </div>
+                          <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                          <input type="text" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                          <div class="help-icon position-absolute flexBoxCenter"
+                            title="Enter your mobile number including the country code.">?</div>
+                        </div>
+                        <div class="mb-3 position-relative">
+                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                            Date</label>
+                          <input type="text" class="form-control" placeholder="23/04/2024" id="emailInput"
+                            aria-describedby="emailHelp">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer border-0 modelBtns_wr">
+                <button class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Model -->
+    </div>
+  </section>
+  <section class="mx-2 py-3 px-lg-5 home-section-4">
+        <div class="container-fluid ">
+          <div class="row justify-content-between align-items-center g-3">
+            <div class="col-lg-5 col-md-6">
+              <h2 class="display-3 ff-antom">
+                Cow
+              </h2>
+              <h3 class="display-3 ff-antom text-bg">
+                rehabilitation
+              </h3>
+              <h5 class="fw-bold pt-2">
+                Sri Krishna Balram Seva Trust
+              </h5>
+            </div>
+            <div class="col-lg-5 col-md-6 ">
+              <h2 class="display-5 fw-semibold lh-1">
+                sanctuary for injured, sick, and vulnerable
+              </h2>
+              <p class="text-muted fw-semibold">
+                We strive to restore their health and well-being with a compassionate
+                approach and expert veterinary care.
+              </p>
+              <h6 class="fw-bold">
+                <span class="text-decoration-underline">
+                  More about Sri Krishna Balram Seva Trust
+                </span>
+                <a href="#" class="ps-2">
+                  <i class="bi bi-box-arrow-up-right">
+                  </i>
+                </a>
+              </h6>
+            </div>
+          </div>
+        </div>
+      </section>
+  <section class="mx-2 px-lg-5 pb-5 home-section-5">
+    <div class="container-fluid">
+      <div class="row g-3 align-items-end">
+        <div class="col-lg-3 col-md-6 order-lg-1 order-2">
+          <div class="swiper rehabilitationSlider1 swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div class="swiper-wrapper" id="swiper-wrapper-68063cf59f7d963e" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-900px, 0px, 0px); transition-delay: 0ms;">
+              {% for single in all_slider %}
+                  {% if single.type == 'HomeMid1' %}
+                  {% get_gallery single.id 'slider' as all_gallery_image %}
+                  {% for single_image in all_gallery_image %}
+                  <div class="swiper-slide">
+                    <img src="{{single_image.file.url}}" alt="">
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                  {% endfor %}
+
+            </div>
+            <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span></div>
+          <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+          <div class="mt-3 position-relative">
+            <a href="campaign.php">
+              <img src="/static/frontend/assets/images/home/cr-02.jpg" class="img-fluid w-100" alt="">
+              <div class="fw-bold position-absolute text-white f-24" style="bottom: 30px;left: 15%; line-height:28px;">
+                Cow <br> Seva</div>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 order-lg-2 order-1">
+          <div class="text-center">
+            <img src="/static/frontend/assets/images/home/flower.png" class="img-fluid" alt="">
+          </div>
+          <div class="row justify-content-center ">
+            <div class="col-md-6">
+              <div class="card card-body rounded-4 shadow">
+                <div class="row align-items-center">
+                  <div class="col-4">
+                    <img src="/static/frontend/assets/images/home/donation.svg" class="img-fluid" alt="">
+                  </div>
+                  <div class="col-8">
+                    <h3 class="fw-bold mb-0">
+                      400+
+                    </h3>
+                    <p class="mb-0 fw-semibold">
+                      Pepole as Cow Sevak
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4 g-3">
+            <div class="col-12">
+              <div class="h-100">
+                <div class="video-container text-center" style="width: 100%; height: 100%; border-radius:15px; overflow:hidden">
+                  <iframe width="100%" height="400" style="border-radius:20px" src="https://www.youtube.com/embed/IPU9oUjlDoc?si=G_65b4bAMBhOaUpI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 order-lg-3 order-3">
+          <div class="swiper rehabilitationSlider2 swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div class="swiper-wrapper" id="swiper-wrapper-867bc9cbd5e204ad" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-300px, 0px, 0px); transition-delay: 0ms;">
+              {% for single in all_slider %}
+                  {% if single.type == 'HomeMid2' %}
+                  {% get_gallery single.id 'slider' as all_gallery_image %}
+                  {% for single_image in all_gallery_image %}
+                  <div class="swiper-slide">
+                    <img src="{{single_image.file.url}}" alt="">
+                  </div>
+
+                  {% endfor %}
+                  {% endif %}
+                  {% endfor %}
+            </div>
+            <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
+          <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+          <div class="mt-3 position-relative">
+            <a href="campaign.php">
+              <img src="/static/frontend/assets/images/home/cr-06.jpg" class="img-fluid w-100" alt="">
+              <div class="fw-bold position-absolute text-white f-24" style="bottom: 30px;left: 15%; line-height:28px; max-width:170px">
+                World’s Largest Rehabilitation Centre
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="PledgeModels knowMore_donateModel">
+    <div class="modal fade" id="PledgeModel1" data-bs-keyboard="false" tabindex="-1" aria-labelledby="PledgeModel1Label"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold w-100 f-24">Pledge Monthly</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row g-3">
+                <div class="col-lg-6 col-md-6">
+                  <div class="card_donate fw-medium zIndex-3 position-relative">
+                    <p class="mb-1 f-14">
+                      By supporting <span class="color-26 fw-bold">Hingonia</span>, you are helping us reach out to more
+                      campaigns like this and scale our impact. <a href="#"
+                        class="color-26 text-decoration-underline fw-bold">Learn More.</a>
+                    </p>
+                    <div class="d-flex justify-content-between">
+                      <span class="f-12 fw-bold">Support us by :</span>
+                      <span class="supportPer f-12 fw-bold px-1"
+                        style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">
+                        <select class="h-100">
+                          <option value="IN">16% (₹160)</option>
+                          <option value="US">22% (₹200)</option>
+                        </select>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="donateForm_wr pt-3 pb-1">
+                    <div class="mb-3 position-relative">
+                      <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                      <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
+                        aria-describedby="nameHelp">
+                    </div>
+                    <div class="mb-3 position-relative">
+                      <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Address <span
+                          class="color-26">(Mandatory for 80G)</span></label>
+                      <input type="text" class="form-control" placeholder="MIG F 2/9, nagar park, Nagpur, MH"
+                        id="emailInput" aria-describedby="emailHelp">
+                    </div>
+                  </div>
+                  <div class="donate_CountryBtn d-flex align-items-center">
+                    <div>
+                      <label class="form-check-label fw-bold me-2" for="nationality">Nationality</label>
+                    </div>
+                    <button class="countryBtn active" id="indian-btn">INDIAN</button>
+                    <button class="countryBtn non_indian" id="non-indian-btn">NOT INDIAN</button>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="donateForm_wr pt-3 pb-1">
+                    <div class="mb-3 position-relative">
+                      <label for="nameInput" class="form-label position-absolute f-12 fw-medium">PAN Card <span
+                          class="color-26">(Mandatory for 80G)</span></label>
+                      <input type="text" class="form-control" placeholder="FHODD6587H" id="nameInput"
+                        aria-describedby="nameHelp">
+                    </div>
+                    <div class="mb-3 position-relative">
+                      <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                      <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
+                        aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3 position-relative">
+                      <div class="position-absolute country_code h-100">
+                        <select class="h-100">
+                          <option value="IN">IN</option>
+                          <option value="US">US</option>
+                          <option value="UK">UK</option>
+                        </select>
+                      </div>
+                      <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number <span
+                          class="color-26">(Mandatory for 80G)</span></label>
+                      <input type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                      <div class="help-icon position-absolute flexBoxCenter"
+                        title="Enter your mobile number including the country code.">?</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <a href="#" class="btn btnPink fw-bold btnAnimation">DONATE NOW</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 {% block script%}
 
