@@ -36,6 +36,24 @@ class Testimonial(DateTimeModel):
         return self.title
 
 
+class Trustee(DateTimeModel):
+    title = models.CharField(max_length=3000, blank=False)
+    designation = models.CharField(max_length=3000, blank=False)
+    description = models.CharField(max_length=3000, blank=False)
+    type = models.CharField(choices=TRUSTEE_CHOICE,max_length=200, blank=False,default='Trustee')
+    photo = models.ImageField(null=True)
+    def __str__(self):
+        return self.title
+
+
+class OurSupporter(DateTimeModel):
+    title = models.CharField(max_length=3000, blank=False)
+    description = models.CharField(max_length=3000, blank=False)
+    photo = models.ImageField(null=True)
+    def __str__(self):
+        return self.title
+
+
 class Campaign(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
     slug = models.SlugField(unique=True,max_length=300, blank=False,null=True)

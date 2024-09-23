@@ -7,7 +7,7 @@
 <div class="container-fluid">
  <div class="row">
   <div class="col-12 text-center">
-  <img class="img-fluid me-3" src="assets/images/products/heart.svg" alt="">
+  <img class="img-fluid me-3" src="/static/frontend/assets/images/products/heart.svg" alt="">
   <h3 class="display-4 ff-antom f-36 text-dark fw-bold">High Quality Dairy Based Products with</h3>
   <h1 class="display-2 ff-antom fw-bold" style="color:#FF0061;">COW <span class="ff-antom" style="color:#22AA96">Blessings</span></h1>
   </div>
@@ -20,8 +20,8 @@
       <div class="row">
           <div class="col-12">
             <div class="d-flex justify-content-center gap-4">
-            <div><img class="img-fluid bottel me-3" src="assets/images/products/bottel.png" alt="" style=""></div>
-            <div><img class="img-fluid cowP me-3" src="assets/images/products/cow-product.png" alt="" style=""></div>
+            <div><img class="img-fluid bottel me-3" src="/static/frontend/assets/images/products/bottel.png" alt="" style=""></div>
+            <div><img class="img-fluid cowP me-3" src="/static/frontend/assets/images/products/cow-product.png" alt="" style=""></div>
           </div>
           </div>
       </div>
@@ -33,140 +33,42 @@
             <div class="row">
               <div class="col-12">
                  <div class="text-center">
-                  <img class="img-fluid" src="assets/images/campaing/heart.svg" alt="">
+                  <img class="img-fluid" src="/static/frontend/assets/images/campaing/heart.svg" alt="">
                   <h2 class="display-4 ff-antom fw-semibold text-dark">Pure Dairy Cow Products</h2>
                  </div>
               </div>
             </div>
             <div class="row">
+              {% for single in product_obj %}
               <div class="col-lg-3 col-sm-6">
                   <div class="productWr position-relative p-30">
-                  <img class="img-fluid pBg position-absolute" src="assets/images/campaing/product-vector.svg" alt="">
+                  <img class="img-fluid pBg position-absolute" src="/static/frontend/assets/images/campaing/product-vector.svg" alt="">
                     <div class="productImgSlider">
                       <div class="swiper productslide1 pb-30 swiper-initialized swiper-horizontal swiper-backface-hidden">
                         <div class="swiper-wrapper" id="swiper-wrapper-69152611459acc11" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-774px, 0px, 0px); transition-delay: 0ms;">
-                          <div class="swiper-slide" role="group" aria-label="1 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
+                          <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="width: 258px;">
+                            <img class="img-fluid" src="{{single.image.url}}" alt="">
                           </div>
-                          <div class="swiper-slide" role="group" aria-label="2 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
+                          <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="width: 258px;">
+                            <img class="img-fluid" src="{{single.image.url}}" alt="">
                           </div>
-                          <div class="swiper-slide swiper-slide-prev" role="group" aria-label="3 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide swiper-slide-active" role="group" aria-label="4 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
+
+
                         </div>
                         <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span></div>
                       <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
                       <div class="text-center">
-                        <h4 class="display-6 fw-semibold ff-rubik color-10">Cow Milk</h4>
-                        <p class="f-12 color-10 fw-semibold">Get blessings of mother cow by adopting her and being a source of her monthly care and nourishments.</p>
+                        <h4 class="display-6 fw-semibold ff-rubik color-10">{{single.title}}</h4>
+                        <p class="f-12 color-10 fw-semibold">{{single.short_description}}</p>
                         <div class="d-flex align-items-center justify-content-center gap-3">
-                          <span class="f-24 ff-rubik">₹ 59</span>
+                          <span class="f-24 ff-rubik">₹ {{single.price}}</span>
                           <a href="" class="buyBtn color-5 ff-rubik">Buy</a>
                         </div>
                       </div>
                     </div>
                   </div>
               </div>
-              <div class="col-lg-3 col-sm-6">
-                  <div class="productWr position-relative p-30">
-                  <img class="img-fluid pBg position-absolute" src="assets/images/campaing/product-vector.svg" alt="">
-                    <div class="productImgSlider">
-                      <div class="swiper productslide1 pb-30 swiper-initialized swiper-horizontal swiper-backface-hidden">
-                        <div class="swiper-wrapper" id="swiper-wrapper-938ad08287247b43" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-774px, 0px, 0px); transition-delay: 0ms;">
-                          <div class="swiper-slide" role="group" aria-label="1 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide" role="group" aria-label="2 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide swiper-slide-prev" role="group" aria-label="3 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide swiper-slide-active" role="group" aria-label="4 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                        </div>
-                        <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span></div>
-                      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-                      <div class="text-center">
-                        <h4 class="display-6 fw-semibold ff-rubik color-10">Cow Milk</h4>
-                        <p class="f-12 color-10 fw-semibold">Get blessings of mother cow by adopting her and being a source of her monthly care and nourishments.</p>
-                        <div class="d-flex align-items-center justify-content-center gap-3">
-                          <span class="f-24 ff-rubik">₹ 59</span>
-                          <a href="" class="buyBtn color-5 ff-rubik">Buy</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                  <div class="productWr position-relative p-30">
-                  <img class="img-fluid pBg position-absolute" src="assets/images/campaing/product-vector.svg" alt="">
-                    <div class="productImgSlider">
-                      <div class="swiper productslide1 pb-30 swiper-initialized swiper-horizontal swiper-backface-hidden">
-                        <div class="swiper-wrapper" id="swiper-wrapper-3426dbd5d38ac22f" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-774px, 0px, 0px); transition-delay: 0ms;">
-                          <div class="swiper-slide" role="group" aria-label="1 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide" role="group" aria-label="2 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide swiper-slide-prev" role="group" aria-label="3 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide swiper-slide-active" role="group" aria-label="4 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                        </div>
-                        <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span></div>
-                      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-                      <div class="text-center">
-                        <h4 class="display-6 fw-semibold ff-rubik color-10">Cow Milk</h4>
-                        <p class="f-12 color-10 fw-semibold">Get blessings of mother cow by adopting her and being a source of her monthly care and nourishments.</p>
-                        <div class="d-flex align-items-center justify-content-center gap-3">
-                          <span class="f-24 ff-rubik">₹ 59</span>
-                          <a href="" class="buyBtn color-5 ff-rubik">Buy</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-              <div class="col-lg-3 col-sm-6">
-                  <div class="productWr position-relative p-30">
-                  <img class="img-fluid pBg position-absolute" src="assets/images/campaing/product-vector.svg" alt="">
-                    <div class="productImgSlider">
-                      <div class="swiper productslide1 pb-30 swiper-initialized swiper-horizontal swiper-backface-hidden">
-                        <div class="swiper-wrapper" id="swiper-wrapper-ccd757c15733f754" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-774px, 0px, 0px); transition-delay: 0ms;">
-                          <div class="swiper-slide" role="group" aria-label="1 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide" role="group" aria-label="2 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide swiper-slide-prev" role="group" aria-label="3 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                          <div class="swiper-slide swiper-slide-active" role="group" aria-label="4 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="assets/images/campaing/product-1.svg" alt="">
-                          </div>
-                        </div>
-                        <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span></div>
-                      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-                      <div class="text-center">
-                        <h4 class="display-6 fw-semibold ff-rubik color-10">Cow Milk</h4>
-                        <p class="f-12 color-10 fw-semibold">Get blessings of mother cow by adopting her and being a source of her monthly care and nourishments.</p>
-                        <div class="d-flex align-items-center justify-content-center gap-3">
-                          <span class="f-24 ff-rubik">₹ 59</span>
-                          <a href="" class="buyBtn color-5 ff-rubik">Buy</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
+              {% endfor %}
             </div>
           </div>
       </section>

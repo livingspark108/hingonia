@@ -17,9 +17,9 @@ from application.email_helper import WhatsAppThread
 from apps.cms.models import Page
 from application.custom_classes import AdminRequiredMixin, AjayDatatableView
 from apps.front_app.forms import CreateDistributionForm, CreateCampaignForm, \
-    CampaignImageFormset, HomePageCampaignForm, CreateTestimonialForm
+    CampaignImageFormset, HomePageCampaignForm, CreateTestimonialForm, CreateTrusteeForm, CreateOurSupporterForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, Setting, AbandonCart, Product, \
-    CampaignProduct, UploadedFile, HomePageCampaign, Order, Testimonial, HomeSlider
+    CampaignProduct, UploadedFile, HomePageCampaign, Order, Testimonial, HomeSlider, Trustee, OurSupporter
 from django.contrib import messages
 
 from apps.user.forms import CreateSubscriberForm
@@ -816,7 +816,7 @@ class CreateTestimonialView(AdminRequiredMixin, SuccessMessageMixin, CreateView)
 
         return HttpResponseRedirect(self.success_url)
 
-
+#Testimonial
 class ListTestimonialView(AdminRequiredMixin, TemplateView):
     model = Testimonial
     template_name = 'testimonial/list.html'
@@ -902,6 +902,255 @@ class CloneTestimonialView(AdminRequiredMixin,View):
 
         # Redirect to the detail page of the cloned object (or anywhere else)
         return redirect('testimonial-edit', pk=original_object.pk)
+
+
+#Trustee
+
+class CreateTrusteeView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
+
+    model = Trustee
+    form_class = CreateTrusteeForm
+    template_name = 'trustee/form.html'
+    success_message = "Trustee has been created successfully"
+    success_url = reverse_lazy('trustee-list')
+    object = None
+
+    def get_form_kwargs(self):
+        kwargs = super(CreateTrusteeView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get(self, request, *args, **kwargs):
+
+        form = self.form_class()
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+            )
+        )
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            self.object = form.save()
+            messages.success(request, self.success_message)
+        else:
+            return render(request, self.template_name,
+                          {'form': form })
+
+        return HttpResponseRedirect(self.success_url)
+
+
+class ListTrusteeView(AdminRequiredMixin, TemplateView):
+    model = Trustee
+    template_name = 'trustee/list.html'
+
+
+class ListTrusteeViewJson(AjayDatatableView):
+    model = Trustee
+    columns = ['title', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def render_column(self, row, column):
+
+        if column == 'actions':
+
+            clone_action = '<a href={} role="button" class="btn btn-info btn-sm mr-1">Clone</a>'.format(
+                reverse('trustee-clone', kwargs={'pk': row.pk}))
+
+            edit_action = '<a href={} role="button" class="confirm btn btn-warning btn-sm mr-1">Edit</a>'.format(
+                reverse('trustee-edit', kwargs={'pk': row.pk}))
+            delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
+                reverse('trustee-delete', kwargs={'pk': row.pk}))
+            return edit_action + clone_action +  delete_action
+        else:
+            return super(ListTrusteeViewJson, self).render_column(row, column)
+
+
+class UpdateTrusteeView(AdminRequiredMixin, SuccessMessageMixin, UpdateView):
+
+    model = Trustee
+    form_class = CreateTrusteeForm
+    template_name = 'trustee/form.html'
+    success_message = "Trustee updated successfully"
+    success_url = reverse_lazy('trustee-list')
+
+    def get(self, request, pk, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(instance=self.object)
+
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  )
+        )
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(self.request.POST, self.request.FILES, instance=self.object)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.success(self.request, self.success_message)
+        return HttpResponseRedirect(self.success_url)
+
+    def form_invalid(self, form):
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  )
+        )
+
+class DeleteTrusteeView(AdminRequiredMixin, DeleteView):
+    model = Trustee
+
+    def delete(self, request, *args, **kwargs):
+        self.get_object().delete()
+        payload = {'delete': 'ok'}
+        return JsonResponse(payload)
+
+class CloneTrusteeView(AdminRequiredMixin,View):
+    def get(self,request,pk):
+        print("HERE")
+        print(pk)
+        # Fetch the original object
+        original_object = get_object_or_404(Trustee, pk=pk)
+
+        # Clone the object by setting its primary key to None
+        original_object.pk = None
+        original_object.title = original_object.title+"-Copy"
+        original_object.save()
+
+        # Redirect to the detail page of the cloned object (or anywhere else)
+        return redirect('trustee-edit', pk=original_object.pk)
+
+
+
+#OurSupporter
+
+class CreateOurSupporterView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
+
+    model = OurSupporter
+    form_class = CreateOurSupporterForm
+    template_name = 'our_supporter/form.html'
+    success_message = "OurSupporter has been created successfully"
+    success_url = reverse_lazy('our_supporter-list')
+    object = None
+
+    def get_form_kwargs(self):
+        kwargs = super(CreateOurSupporterView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get(self, request, *args, **kwargs):
+
+        form = self.form_class()
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+            )
+        )
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            self.object = form.save()
+            messages.success(request, self.success_message)
+        else:
+            return render(request, self.template_name,
+                          {'form': form })
+
+        return HttpResponseRedirect(self.success_url)
+
+
+class ListOurSupporterView(AdminRequiredMixin, TemplateView):
+    model = OurSupporter
+    template_name = 'our_supporter/list.html'
+
+
+class ListOurSupporterViewJson(AjayDatatableView):
+    model = OurSupporter
+    columns = ['title', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def render_column(self, row, column):
+
+        if column == 'actions':
+
+            clone_action = '<a href={} role="button" class="btn btn-info btn-sm mr-1">Clone</a>'.format(
+                reverse('our_supporter-clone', kwargs={'pk': row.pk}))
+
+            edit_action = '<a href={} role="button" class="confirm btn btn-warning btn-sm mr-1">Edit</a>'.format(
+                reverse('our_supporter-edit', kwargs={'pk': row.pk}))
+            delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
+                reverse('our_supporter-delete', kwargs={'pk': row.pk}))
+            return edit_action + clone_action +  delete_action
+        else:
+            return super(ListOurSupporterViewJson, self).render_column(row, column)
+
+
+class UpdateOurSupporterView(AdminRequiredMixin, SuccessMessageMixin, UpdateView):
+
+    model = OurSupporter
+    form_class = CreateOurSupporterForm
+    template_name = 'our_supporter/form.html'
+    success_message = "OurSupporter updated successfully"
+    success_url = reverse_lazy('our_supporter-list')
+
+    def get(self, request, pk, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(instance=self.object)
+
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  )
+        )
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(self.request.POST, self.request.FILES, instance=self.object)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.success(self.request, self.success_message)
+        return HttpResponseRedirect(self.success_url)
+
+    def form_invalid(self, form):
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  )
+        )
+
+class DeleteOurSupporterView(AdminRequiredMixin, DeleteView):
+    model = OurSupporter
+
+    def delete(self, request, *args, **kwargs):
+        self.get_object().delete()
+        payload = {'delete': 'ok'}
+        return JsonResponse(payload)
+
+class CloneOurSupporterView(AdminRequiredMixin,View):
+    def get(self,request,pk):
+        print("HERE")
+        print(pk)
+        # Fetch the original object
+        original_object = get_object_or_404(OurSupporter, pk=pk)
+
+        # Clone the object by setting its primary key to None
+        original_object.pk = None
+        original_object.title = original_object.title+"-Copy"
+        original_object.save()
+
+        # Redirect to the detail page of the cloned object (or anywhere else)
+        return redirect('our_supporter-edit', pk=original_object.pk)
 
 
 class CloneSliderView(AdminRequiredMixin,View):

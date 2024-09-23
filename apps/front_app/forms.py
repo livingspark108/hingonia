@@ -5,7 +5,7 @@ from django.forms import Select, inlineformset_factory
 from django.urls import reverse
 
 from apps.front_app.models import Distribution, DistributionImage, Campaign, CampaignImage, UploadedFile, \
-    HomePageCampaign, Testimonial
+    HomePageCampaign, Testimonial, Trustee, OurSupporter
 
 User = get_user_model()
 
@@ -64,3 +64,17 @@ class CreateTestimonialForm(forms.ModelForm):
     class Meta:
         model = Testimonial
         fields = ['title','designation','description','photo']
+
+
+class CreateTrusteeForm(forms.ModelForm):
+
+    class Meta:
+        model = Trustee
+        fields = ['title','designation','type','description','photo']
+
+
+class CreateOurSupporterForm(forms.ModelForm):
+
+    class Meta:
+        model = OurSupporter
+        fields = ['title','description','photo']

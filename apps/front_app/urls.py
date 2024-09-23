@@ -33,6 +33,19 @@ urlpatterns = [
     path('testimonial/delete/<str:pk>', DeleteTestimonialView.as_view(), name='testimonial-delete'),
     path('testimonial/clone/<str:pk>', CloneTestimonialView.as_view(), name='testimonial-clone'),
 
+    path('trustee/add', CreateTrusteeView.as_view(), name='trustee-add'),
+    path('trustee/', ListTrusteeView.as_view(), name='trustee-list'),
+    path('trustee/list/ajax', ListTrusteeViewJson.as_view(), name='trustee-list-ajax'),
+    path('trustee/edit/<str:pk>', UpdateTrusteeView.as_view(), name='trustee-edit'),
+    path('trustee/delete/<str:pk>', DeleteTrusteeView.as_view(), name='trustee-delete'),
+    path('trustee/clone/<str:pk>', CloneTrusteeView.as_view(), name='trustee-clone'),
+
+    path('our_supporter/add', CreateOurSupporterView.as_view(), name='our_supporter-add'),
+    path('our_supporter/', ListOurSupporterView.as_view(), name='our_supporter-list'),
+    path('our_supporter/list/ajax', ListOurSupporterViewJson.as_view(), name='our_supporter-list-ajax'),
+    path('our_supporter/edit/<str:pk>', UpdateOurSupporterView.as_view(), name='our_supporter-edit'),
+    path('our_supporter/delete/<str:pk>', DeleteOurSupporterView.as_view(), name='our_supporter-delete'),
+    path('our_supporter/clone/<str:pk>', CloneOurSupporterView.as_view(), name='our_supporter-clone'),
 
     #***** Campaign Product ******
     path('campaign-product/add', CreateCampaignProductView.as_view(), name='campaign-product-add'),

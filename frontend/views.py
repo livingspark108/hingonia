@@ -37,7 +37,7 @@ from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET, ADMIN_EMAIL
 from apps.front_app.forms import CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
-    AbandonCart, Testimonial, CampaignProduct, Product
+    AbandonCart, Testimonial, CampaignProduct, Product, Trustee, OurSupporter
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -107,9 +107,10 @@ class FrontendAboutUsView(View):
 class FrontendTrusteeView(View):
     def get(self, request):
 
+        trustree_obj = Trustee.objects.all()
         # if request.user.is_authenticated:
         context = {
-
+            'trustree_obj':trustree_obj
         }
 
         return render(request, 'frontend/trustee.html', context)
@@ -224,13 +225,19 @@ class AdoptedCowView(View):
 
 class WaitingCowView(View):
     def get(self, request):
-        context = {}
+        waiting_cow_obj = Campaign.objects.filter(type='Adopt a cow')
+        context = {
+            'waiting_cow_obj':waiting_cow_obj
+        }
         return render(request, 'frontend/waiting_cow.html', context)
 
 
 class OurSupportersView(View):
     def get(self, request):
-        context = {}
+        our_supporter_obj = OurSupporter.objects.all()
+        context = {
+            'our_supporter_obj':our_supporter_obj
+        }
         return render(request, 'frontend/our_supporters.html', context)
 
 class GalleryView(View):
@@ -240,7 +247,11 @@ class GalleryView(View):
 
 class ProductView(View):
     def get(self, request):
-        context = {}
+        product_obj = Product.objects.all()
+
+        context = {
+            'product_obj':product_obj
+        }
         return render(request, 'frontend/product.html', context)
 
 class CsrView(View):
@@ -935,6 +946,7 @@ def create_subscription(request):
                 }
             }
 
+        print(subscription_data)
 
         subscription = razorpay_client.subscription.create(data=subscription_data)
         return JsonResponse(subscription)

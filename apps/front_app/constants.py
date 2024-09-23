@@ -29,3 +29,9 @@ CAMPAIGN_TYPE = [
                     ('Adopt a cow', 'Adopt a cow'),
 
                     ]
+
+TRUSTEE_CHOICE = [
+                    ('Trustee', 'Trustee'),
+                    ('Executive Committee', 'Executive Committee'),
+
+                    ]

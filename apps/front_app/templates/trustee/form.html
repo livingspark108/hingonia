@@ -1,0 +1,68 @@
+{% extends "administrator/base.html" %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div class="content">
+                    <div class="container-fluid">
+                        <div class="page-title-box">
+                            <div class="row align-items-center">
+
+
+                            </div> <!-- end row -->
+                        </div>
+                        <!-- end page-title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card m-b-30">
+                                    <div class="card-body">
+                                    <form enctype="multipart/form-data" class="form-horizontal m-t-30" method="POST">
+                                        {{ form.media }}
+<!--                                        <div class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">-->
+<!--                                            <label for="{{ field.name }}" class="col-sm-2 col-form-label">Order items</label>-->
+<!--                                                  {{ order_item_form.management_form }}-->
+<!--                                                  {{ order_item_form.non_form_errors }}-->
+<!--                                                  <div id="empty_form" style="display:none">-->
+<!--                                                    <table class='no_error'>-->
+<!--                                                        {{ order_item_form.empty_form }}-->
+<!--                                                    </table>-->
+<!--                                                  </div>-->
+<!--                                                  <div class="col-sm-10">-->
+<!--                                                    <div class="card">-->
+<!--                                                          <div class="card-header">-->
+<!--                                                        Order item-->
+<!--                                                          </div>-->
+<!--                                                          <div class="card-body">-->
+<!--                                                            <div class="row">-->
+<!--                                                              {% for form in order_item_form %}-->
+<!--                                                                <div class="col-sm-12 inline {{order_item_form.prefix}}">-->
+<!--                                                                  {% include "elements/form_formset.html" with form=form product=product %}-->
+<!--                                                                </div>-->
+<!--                                                              {% endfor %}-->
+<!--                                                            </div>-->
+<!--                                                          </div>-->
+<!--                                                    </div>-->
+<!--                                                   </div>-->
+<!--                                        </div>-->
+                                        {% include "elements/form.html" with form=form %}
+
+										<div class="row float-right mt-5">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+										</div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+
+                    </div>
+                    <!-- container-fluid -->
+
+                </div>
+{% endblock %}
+{% block script %}
+<script>
+
+</script>
+{% endblock %}
