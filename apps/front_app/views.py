@@ -1153,20 +1153,6 @@ class CloneOurSupporterView(AdminRequiredMixin,View):
         return redirect('our_supporter-edit', pk=original_object.pk)
 
 
-class CloneSliderView(AdminRequiredMixin,View):
-    def get(self,request,pk):
-        print("HERE")
-        print(pk)
-        # Fetch the original object
-        original_object = get_object_or_404(HomeSlider, pk=pk)
-
-        # Clone the object by setting its primary key to None
-        original_object.pk = None
-        original_object.title = original_object.title+"-Copy"
-        original_object.save()
-
-        # Redirect to the detail page of the cloned object (or anywhere else)
-        return redirect('slider-edit', pk=original_object.pk)
 
 #Subscribers
 class UpdateSubscriberView(LoginRequiredMixin, AdminRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -1309,3 +1295,18 @@ class DeleteSliderView(AdminRequiredMixin, DeleteView):
         self.get_object().delete()
         payload = {'delete': 'ok'}
         return JsonResponse(payload)
+
+class CloneSliderView(AdminRequiredMixin,View):
+    def get(self,request,pk):
+        print("HERE")
+        print(pk)
+        # Fetch the original object
+        original_object = get_object_or_404(HomeSlider, pk=pk)
+
+        # Clone the object by setting its primary key to None
+        original_object.pk = None
+        original_object.title = original_object.title+"-Copy"
+        original_object.save()
+
+        # Redirect to the detail page of the cloned object (or anywhere else)
+        return redirect('slider-edit', pk=original_object.pk)

@@ -37,7 +37,8 @@ urlpatterns = [
     path('adopted-cow', AdoptedCowView.as_view(), name='adopted-cow'),
     path('waiting-cow', WaitingCowView.as_view(), name='waiting-cow'),
     path('our-supporters', OurSupportersView.as_view(), name='our-supporters'),
-    path('gallery', GalleryView.as_view(), name='gallery'),
+    path('gallery', FrontendDistributionView.as_view(), name='gallery'),
+    path('gallery/<str:pk>', FrontendDistributionDetailView.as_view(), name='distribution_detail'),
     path('product', ProductView.as_view(), name='product'),
 
     path('privacy-policy', FrontendPrivacyPolicyView.as_view(), name='privacy-policy'),

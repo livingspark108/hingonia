@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import Select, inlineformset_factory
 from django.urls import reverse
 
-from apps.front_app.models import Distribution, DistributionImage, Campaign, CampaignImage, UploadedFile, \
+from apps.front_app.models import Distribution, Campaign, CampaignImage, UploadedFile, \
     HomePageCampaign, Testimonial, Trustee, OurSupporter
 
 User = get_user_model()
@@ -14,7 +14,7 @@ class CreateDistributionForm(forms.ModelForm):
 
     class Meta:
         model = Distribution
-        fields = ['title','location','main_image','youtube_1','youtube_2','youtube_3','youtube_4']
+        fields = ['title','location','main_image']
 
 
 

@@ -37,7 +37,7 @@ from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET, ADMIN_EMAIL
 from apps.front_app.forms import CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
-    AbandonCart, Testimonial, CampaignProduct, Product, Trustee, OurSupporter
+    AbandonCart, Testimonial, CampaignProduct, Product, Trustee, OurSupporter, UploadedFile, Gallery
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -62,9 +62,10 @@ class FrontendHomeView(View):
         monthly_campaign_obj = Campaign.objects.filter(mode='Monthly')
         home_campaign_obj = Campaign.objects.filter(is_home=True)
         testimonial_obj = Testimonial.objects.all()
-
+        gallery_obj = Gallery.objects.all()
         # if request.user.is_authenticated:
         context = {
+            'gallery_obj':gallery_obj,
             'campaign_obj': campaign_obj,
             'testimonial_obj':testimonial_obj,
             'home_campaign_obj':home_campaign_obj,
@@ -130,10 +131,13 @@ class FrontendOurMotherView(View):
 class FrontendCampaignView(View):
     def get(self, request):
         adopt_a_cow_obj = Campaign.objects.filter(type='Adopt a cow').order_by('-created_at')
-        campaign_obj = Campaign.objects.filter(type='Other').order_by('-created_at')
+        campaign_obj = Campaign.objects.filter().order_by('-created_at')
+
+        gallery_obj = Distribution.objects.all()
         product_obj = Product.objects.all()
         #if request.user.is_authenticated:
         context = {
+            'gallery_obj':gallery_obj,
             'campaign_obj':campaign_obj,
             'adopt_a_cow_obj':adopt_a_cow_obj,
             'product_obj':product_obj
@@ -149,7 +153,7 @@ class FrontendDistributionView(View):
         unique_years_list = [entry.year for entry in unique_years_queryset]
 
         context = {'distribution_obj': distribution_obj, 'unique_years_list': unique_years_list}
-        return render(request, 'frontend/distribution.html', context)
+        return render(request, 'frontend/gallery.html', context)
 
     def post(self, request):
         month = request.POST.get('month')
@@ -167,11 +171,9 @@ class FrontendDistributionView(View):
 
 class FrontendDistributionDetailView(View):
     def get(self, request,pk):
-        distribution_obj = Distribution.objects.get(id=pk)
-
-        distribution_detail_obj = DistributionImage.objects.filter(distribution=pk)
+        distribution_detail_obj = UploadedFile.objects.filter(uploader_id=pk)
         #if request.user.is_authenticated:
-        context = {'distribution_detail_obj':distribution_detail_obj,'distribution_obj':distribution_obj}
+        context = {'distribution_detail_obj':distribution_detail_obj}
         return render(request, 'frontend/distribution_detail.html', context)
 
 
@@ -243,7 +245,7 @@ class OurSupportersView(View):
 class GalleryView(View):
     def get(self, request):
         context = {}
-        return render(request, 'frontend/our_supporters.html', context)
+        return render(request, 'frontend/gallery.html', context)
 
 class ProductView(View):
     def get(self, request):

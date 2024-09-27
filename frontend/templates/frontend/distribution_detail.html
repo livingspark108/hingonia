@@ -4,50 +4,32 @@
 {% load mytags %}
 {% block body %}
 <style>
-	.sticky-header{
-		display:none;
-	}
+    .btn-fullscreen-enlarge{
+        display:none;
+    }
 </style>
-<section class="bg-black">
-		<section class="pt-5">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col-md-12 text-center">
-	                    <a
-			                    href="/"><img src="{% static 'frontend/assets/images/distribution/logo-light.png' %}"
-	                                           class="img-fluid"
-	                                           alt=""></a>
-	                </div>
-	            </div>
-	        </div>
-	    </section>
+<section class="pt-5">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4 py-3 text-center text-md-start">
-                    <h2 class="text-white">{{distribution_obj.title}}</h2>
-                    <p class="mb-0 text-white"><img src="frontend/assets/images/distribution/location.png"
-                                                    class="img-fluid" alt="">
-                        {{distribution_obj.location}}
+            <div class="row text-center justify-content-center">
+                <div class="col-lg-8 col-md-12">
+                    <h5 class="f-36 fw-bold">Our Gallery</h5>
+                    <p>
+                        Welcome to the heartwarming world of our Cow Rehabilitation Centre, where we invite you to
+                        explore and witness the incredible stories of compassion and care through our Image Gallery. Our
+                        gallery showcases the serene and picturesque environment where rescued cows find solace and
+                        healing.
                     </p>
-                </div>
-                <div class="col-md-4 py-3 text-center">
-                    <img src="{% static 'frontend/assets/images/campaign/contribute.png' %}" width="80"
-                         class="img-fluid"
-                         alt="">
-                </div>
-                <div class="col-md-4 py-3 text-center text-md-end">
-                    <h4 class="text-white">{{distribution_obj.date}}</h4>
                 </div>
             </div>
         </div>
     </section>
-<section class="photo-gallery pt-3 bg-black">
+<section class="photo-gallery pt-3">
         <div class="container">
             <div class="row pb-4 g-4 gallery-grid">
 	            {% for single in distribution_detail_obj %}
                 <div class="col-md-3 col-6 gallery-col">
-                    <a class="gallery-item" href="{{single.image.url}}">
-                        <img src="{{single.image.url}}" class="img-fluid" alt="Mataji Adoption">
+                    <a class="gallery-item" href="{{single.file.url}}">
+                        <img src="{{single.file.url}}" class="img-fluid" alt="">
                     </a>
                 </div>
                 {% endfor %}

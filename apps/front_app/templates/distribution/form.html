@@ -3,98 +3,150 @@
 
 {% block body %}
 <div class="content">
-                    <div class="container-fluid">
-                        <div class="page-title-box">
-                            <div class="row align-items-center">
+    <div class="container-fluid">
+        <div class="page-title-box">
+            <div class="row align-items-center">
 
 
-                            </div> <!-- end row -->
-                        </div>
-                        <!-- end page-title -->
+            </div> <!-- end row -->
+        </div>
+        <!-- end page-title -->
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card m-b-30">
-                                    <div class="card-body">
-                                    <form enctype="multipart/form-data" class="form-horizontal m-t-30" method="POST">
-                                        {{ form.media }}
-<!--                                        <div class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">-->
-<!--                                            <label for="{{ field.name }}" class="col-sm-2 col-form-label">Order items</label>-->
-<!--                                                  {{ order_item_form.management_form }}-->
-<!--                                                  {{ order_item_form.non_form_errors }}-->
-<!--                                                  <div id="empty_form" style="display:none">-->
-<!--                                                    <table class='no_error'>-->
-<!--                                                        {{ order_item_form.empty_form }}-->
-<!--                                                    </table>-->
-<!--                                                  </div>-->
-<!--                                                  <div class="col-sm-10">-->
-<!--                                                    <div class="card">-->
-<!--                                                          <div class="card-header">-->
-<!--                                                        Order item-->
-<!--                                                          </div>-->
-<!--                                                          <div class="card-body">-->
-<!--                                                            <div class="row">-->
-<!--                                                              {% for form in order_item_form %}-->
-<!--                                                                <div class="col-sm-12 inline {{order_item_form.prefix}}">-->
-<!--                                                                  {% include "elements/form_formset.html" with form=form product=product %}-->
-<!--                                                                </div>-->
-<!--                                                              {% endfor %}-->
-<!--                                                            </div>-->
-<!--                                                          </div>-->
-<!--                                                    </div>-->
-<!--                                                   </div>-->
-<!--                                        </div>-->
-                                        {% include "elements/form.html" with form=form %}
-	                                    {{ distribution_image_form.management_form }}
-	                                    {% for form in distribution_image_form %}
-					                        <div style="    padding-left: 0px;" class="col-sm-12 inline {{ distribution_image_form.prefix }}">
-					                          {% include "elements/form_formset.html" with form=form %}
-					                        </div>
-					                      {% endfor %}
-										<div class="row float-right mt-5">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-										</div>
-                                    </form>
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <div aria-hidden="true" aria-labelledby="uploadModalLabel" class="modal fade" id="uploadModal" role="dialog" tabindex="-1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="uploadModalLabel">Upload Files</h5>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{% url 'file_upload' %}" class="dropzone" enctype="multipart/form-data" id="my-dropzone" method="post">
+                                            <input class="file_type" name="file_type" type="hidden" value="">
+                                            <input class="campaign_id" name="uploader_id" type="hidden" value="{{form.instance.id}}">
+                                            {% csrf_token %}
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
                                     </div>
                                 </div>
-                            </div> <!-- end col -->
-                        </div> <!-- end row -->
+                            </div>
+                        </div>
+                        <div id="uploadStatus"></div>
 
+                        <button class="open_uploader btn btn-primary" data-target="#uploadModal"
+                                data-toggle="modal"
+                                data-type="gallery"
+                                type="button">
+                            Gallery Upload Files
+                        </button>
+                        <div id="galleryFileList"></div>
 
+                        <form enctype="multipart/form-data" class="form-horizontal m-t-30" method="POST">
+                            {{ form.media }}
+                            <!--                                        <div class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">-->
+                            <!--                                            <label for="{{ field.name }}" class="col-sm-2 col-form-label">Order items</label>-->
+                            <!--                                                  {{ order_item_form.management_form }}-->
+                            <!--                                                  {{ order_item_form.non_form_errors }}-->
+                            <!--                                                  <div id="empty_form" style="display:none">-->
+                            <!--                                                    <table class='no_error'>-->
+                            <!--                                                        {{ order_item_form.empty_form }}-->
+                            <!--                                                    </table>-->
+                            <!--                                                  </div>-->
+                            <!--                                                  <div class="col-sm-10">-->
+                            <!--                                                    <div class="card">-->
+                            <!--                                                          <div class="card-header">-->
+                            <!--                                                        Order item-->
+                            <!--                                                          </div>-->
+                            <!--                                                          <div class="card-body">-->
+                            <!--                                                            <div class="row">-->
+                            <!--                                                              {% for form in order_item_form %}-->
+                            <!--                                                                <div class="col-sm-12 inline {{order_item_form.prefix}}">-->
+                            <!--                                                                  {% include "elements/form_formset.html" with form=form product=product %}-->
+                            <!--                                                                </div>-->
+                            <!--                                                              {% endfor %}-->
+                            <!--                                                            </div>-->
+                            <!--                                                          </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                   </div>-->
+                            <!--                                        </div>-->
+                            {% include "elements/form.html" with form=form %}
+                            {{ distribution_image_form.management_form }}
+                            {% for form in distribution_image_form %}
+                            <div style="    padding-left: 0px;" class="col-sm-12 inline {{ distribution_image_form.prefix }}">
+                                {% include "elements/form_formset.html" with form=form %}
+                            </div>
+                            {% endfor %}
+                            <div class="row float-right mt-5">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- container-fluid -->
-
                 </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+
+    </div>
+    <!-- container-fluid -->
+
+</div>
 {% endblock %}
 {% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
 <script>
-    $(function() {
-        $('.inline.{{ distribution_image_form.prefix }}').formset({
-            prefix: '{{ distribution_image_form.prefix }}',
-            addCssClass: "btn btn-primary btn-sm", // CSS class applied to the add link
-                    deleteCssClass: "clear float-right", // CSS class applied to the delete link
-                    addText: 'Add more', // Text for the add link
-                    deleteText: '<i class="text-danger mdi mdi-delete-forever"></i>', // Text for the delete link
-                    formCssClass: 'inline-form', // CSS class applied to each form in a formset
-        });
+    $('.open_uploader').click(function(){
+        var type = $(this).data('type')
+        $('.file_type').val(type)
     })
-<!--    $(document).on("change",".all_product",function() {-->
-<!--         var product_val = [];-->
-<!--         var temp = ""-->
-<!--        $(".all_product").each(function(){-->
-<!--            console.log($(this).attr('data-id'))-->
-<!--            var tt = $(this).attr('data-id')-->
-<!--            temp = tt.match(/\d+/)-->
-<!--            console.log(temp[0])-->
-<!--            var product_id = $("#id_order_order_item-"+temp[0]+"-product").val()-->
-<!--            var quantity =  $("#id_order_order_item-"+temp[0]+"-quantity").val()-->
-<!--            var arr = []-->
-<!--            arr['product_id'] = product_id-->
-<!--            arr['quantity'] = quantity-->
+        Dropzone.options.myDropzone = {
+            init: function() {
+                this.on("complete", function(file) {
+                    loadFileList();
+                });
+            }
+        };
 
-<!--            product_val.push(arr);-->
-<!--        })-->
-<!--        console.log(product_val)-->
-<!--    })-->
+        function loadFileList() {
+            var types = ['gallery'];
+            var id = "{{form.instance.id}}"
+            types.forEach(type => {
+                fetch(`{% url 'file_list' %}?type=${type}&id=${id}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(`${type}FileList`).innerHTML = data;
+                });
+            });
+        }
+
+        function deleteFile(fileId) {
+            const formData = new FormData();
+            formData.append('id', fileId);
+            fetch("{% url 'file_delete' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    loadFileList();
+                } else {
+                    alert('Error deleting file');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFileList();
+        });
 </script>
 {% endblock %}

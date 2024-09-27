@@ -979,18 +979,11 @@
             <div class="col-md-7">
             <div class="swiper gallerySwiper">
               <div class="swiper-wrapper">
+                {% for single in gallery_obj %}
                 <div class="swiper-slide">
-                  <img class="img-fluid gallery-1" src="{% static 'frontend/assets/images/home/gallery/gallery-1.png' %}" alt="gallery">
+                  <img class="img-fluid gallery-1" src="{{single.main_image}}" alt="gallery">
                 </div>
-                <div class="swiper-slide">
-                  <img class="img-fluid gallery-2" src="{% static 'frontend/assets/images/home/gallery/gallery-2.png' %}" alt="gallery">
-                </div>
-                <div class="swiper-slide">
-                  <img class="img-fluid gallery-3" src="{% static 'frontend/assets/images/home/gallery/gallery-3.png' %}" alt="gallery">
-                </div>
-                <div class="swiper-slide">
-                  <img class="img-fluid gallery-4" src="{% static 'frontend/assets/images/home/gallery/gallery-4.png' %}" alt="gallery">
-                </div>
+                {% endfor %}
               </div>
             </div>
                 <div style="opacity:.5" class="pt-1 text-center fw-bold">

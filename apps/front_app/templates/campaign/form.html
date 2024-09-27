@@ -4,141 +4,141 @@
 {% block body %}
 
 <div class="content">
-                    <div class="container-fluid">
-                        <div class="page-title-box">
-                            <div class="row align-items-center">
-                                <div class="col-sm-6">
-                                    <h4 class="page-title">{% if form.instance.id %}Update{% else %}Create{% endif %}
-                                                           Campaign</h4>
-                                </div>
+    <div class="container-fluid">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <h4 class="page-title">{% if form.instance.id %}Update{% else %}Create{% endif %}
+                        Campaign</h4>
+                </div>
 
-                            </div> <!-- end row -->
-                        </div>
-                        <!-- end page-title -->
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card m-b-30">
-                                    <div class="card-body">
-	                                <!-- Modal -->
-    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="uploadModalLabel">Upload Files</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{% url 'file_upload' %}" class="dropzone" id="my-dropzone" method="post" enctype="multipart/form-data">
-                        <input type="hidden" class="file_type" name="file_type" value="">
-                        <input type="hidden" class="campaign_id" name="uploader_id" value="{{form.instance.id}}">
-	                    {% csrf_token %}
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+            </div> <!-- end row -->
         </div>
-    </div>
-	                                <button type="button" data-type="campaign"
-	                                            class="open_uploader btn btn-primary"
-	                                            data-toggle="modal"
-	                                            data-target="#uploadModal">
-									        Compaign Upload Files
-									    </button>
-	                                <div id="uploadStatus"></div>
-                                    <div id="campaignFileList"></div>
-	                                <button type="button" data-type="gallery"
-	                                            class="open_uploader btn btn-primary"
-	                                            data-toggle="modal"
-	                                            data-target="#uploadModal">
-									        Gallery Upload Files
-									    </button>
-	                                <div id="uploadStatus_gallery"></div>
-                                    <div id="galleryFileList"></div>
-	                                   
-	                                   
-                                    <form enctype='multipart/form-data' class="form-horizontal m-t-30" method="POST">
-                                        {{ form.media }}
-                                        {% include "elements/form.html" with form=form %}
-	                                    
-	                                    
-	                                    
-	                                    
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-secondary">Reset</button>
-                                        <button type="cancel" class="btn btn-danger"><a class="text-white" href="{% url 'campaign-list' %}">Cancel</a></button>
-                                    </form>
-	                                   
+        <!-- end page-title -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <!-- Modal -->
+                        <div aria-hidden="true" aria-labelledby="uploadModalLabel" class="modal fade" id="uploadModal" role="dialog" tabindex="-1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="uploadModalLabel">Upload Files</h5>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{% url 'file_upload' %}" class="dropzone" enctype="multipart/form-data" id="my-dropzone" method="post">
+                                            <input class="file_type" name="file_type" type="hidden" value="">
+                                            <input class="campaign_id" name="uploader_id" type="hidden" value="{{form.instance.id}}">
+                                            {% csrf_token %}
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
                                     </div>
                                 </div>
-                            </div> <!-- end col -->
-                        </div> <!-- end row -->
+                            </div>
+                        </div>
+                        <button class="open_uploader btn btn-primary" data-target="#uploadModal"
+                                data-toggle="modal"
+                                data-type="campaign"
+                                type="button">
+                            Compaign Upload Files
+                        </button>
+                        <div id="uploadStatus"></div>
+                        <div id="campaignFileList"></div>
+                        <button class="open_uploader btn btn-primary" data-target="#uploadModal"
+                                data-toggle="modal"
+                                data-type="gallery"
+                                type="button">
+                            Gallery Upload Files
+                        </button>
+                        <div id="uploadStatus_gallery"></div>
+                        <div id="galleryFileList"></div>
 
+
+                        <form class="form-horizontal m-t-30" enctype='multipart/form-data' method="POST">
+                            {{ form.media }}
+                            {% include "elements/form.html" with form=form %}
+
+
+
+
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-secondary" type="reset">Reset</button>
+                            <button class="btn btn-danger" type="cancel"><a class="text-white" href="{% url 'campaign-list' %}">Cancel</a></button>
+                        </form>
 
                     </div>
-                    <!-- container-fluid -->
-
                 </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+
+    </div>
+    <!-- container-fluid -->
+
+</div>
 {% endblock %}
 {% block script%}
 <!--<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
 <script>
-$('.open_uploader').click(function(){
-	var type = $(this).data('type')
-	$('.file_type').val(type)
-})
-    Dropzone.options.myDropzone = {
-        init: function() {
-            this.on("complete", function(file) {
-                loadFileList();
+    $('.open_uploader').click(function(){
+        var type = $(this).data('type')
+        $('.file_type').val(type)
+    })
+        Dropzone.options.myDropzone = {
+            init: function() {
+                this.on("complete", function(file) {
+                    loadFileList();
+                });
+            }
+        };
+
+        function loadFileList() {
+            var types = ['campaign', 'gallery'];
+            var id = "{{form.instance.id}}"
+            types.forEach(type => {
+                fetch(`{% url 'file_list' %}?type=${type}&id=${id}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(`${type}FileList`).innerHTML = data;
+                });
             });
         }
-    };
 
-    function loadFileList() {
-        var types = ['campaign', 'gallery'];
-        var id = "{{form.instance.id}}"
-        types.forEach(type => {
-            fetch(`{% url 'file_list' %}?type=${type}&id=${id}`)
-            .then(response => response.text())
+        function deleteFile(fileId) {
+            const formData = new FormData();
+            formData.append('id', fileId);
+            fetch("{% url 'file_delete' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+            })
+            .then(response => response.json())
             .then(data => {
-                document.getElementById(`${type}FileList`).innerHTML = data;
+                if (data.message) {
+                    loadFileList();
+                } else {
+                    alert('Error deleting file');
+                }
             });
-        });
-    }
+        }
 
-    function deleteFile(fileId) {
-        const formData = new FormData();
-        formData.append('id', fileId);
-        fetch("{% url 'file_delete' %}", {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                loadFileList();
-            } else {
-                alert('Error deleting file');
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFileList();
         });
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        loadFileList();
-    });
 </script>
 <script>
-	$("#id_product").select2()
-	$('#id_last_date').datetimepicker({
+    $("#id_product").select2()
+    $('#id_last_date').datetimepicker({
         format: 'Y-m-d H:m'})
 </script>
 {% endblock %}
