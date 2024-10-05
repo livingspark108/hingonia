@@ -1,0 +1,1184 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+ <section class="ourWork_activity_section py-5">
+        <div class="container-fluid">
+            <div class="row content">
+                <div class="col-12">
+                    <div class="nav nav-tabs border-0 mb-3 justify-content-center" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-Activities-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-Activities" type="button" role="tab" aria-controls="nav-Activities"
+                            aria-selected="true">
+                            <h3 class="display-6 textwith-bgActive ff-antom text-bg">Activities</h3>
+                        </button>
+                        <button class="nav-link" id="nav-Hospital-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-Hospital" type="button" role="tab" aria-controls="nav-Hospital"
+                            aria-selected="true">
+                            <h3 class="display-6 textwith-bgActive ff-antom">Hospital</h3>
+                        </button>
+                        <button class="nav-link" id="nav-BioGas-tab" data-bs-toggle="tab" data-bs-target="#nav-BioGas"
+                            type="button" role="tab" aria-controls="nav-BioGas" aria-selected="false">
+                            <h3 class="display-6 textwith-bgActive ff-antom">Bio Gas</h3>
+                        </button>
+                        <button class="nav-link" id="nav-OurSupporters-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-OurSupporters" type="button" role="tab"
+                            aria-controls="nav-OurSupporters" aria-selected="false">
+                            <h3 class="display-6 textwith-bgActive ff-antom">Our Supporters</h3>
+                        </button>
+                        <button class="nav-link" id="nav-Impact-tab" data-bs-toggle="tab" data-bs-target="#nav-Impact"
+                            type="button" role="tab" aria-controls="nav-Impact" aria-selected="false">
+                            <h3 class="display-6 textwith-bgActive ff-antom">Impact</h3>
+                        </button>
+                    </div>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade active show" id="nav-Activities" role="tabpanel"
+                            aria-labelledby="nav-Activities-tab">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-center pb-4 f-18 desc fw-semibold mx-auto">We aspire to create a
+                                            world-class and iconic monument for Hare Krishna Cultural Complex in the
+                                            holy land of Jaipur in pursuance of Srila Prabhupada's direction. Hare
+                                            Krishna Cultural Complex will place Krishna proudly on the world mindscape
+                                            and Jaipur on the world map. This project is dedicated to playing a larger
+                                            role in shaping the future of India.</p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row factSlider px-lg-5 px-md-3">
+                                    <div class="col-12">
+                                        <div class="swiper factSwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="nav-Hospital" role="tabpanel"
+                            aria-labelledby="nav-Hospital-tab">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-center pb-4 f-18 desc fw-semibold mx-auto">We aspire to create a
+                                            world-class and iconic monument for Hare Krishna Cultural Complex in the
+                                            holy land of Jaipur in pursuance of Srila Prabhupada's direction. Hare
+                                            Krishna Cultural Complex will place Krishna proudly on the world mindscape
+                                            and Jaipur on the world map. This project is dedicated to playing a larger
+                                            role in shaping the future of India.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 pb-5 ps-md-5">
+                                        <div class="">
+                                            <div>
+                                                <img src="assets/images/our-work/hospital.png" class=" img-fluid"
+                                                    alt="hospital">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 pb-5 pe-md-5">
+                                        <div class="section-banner">
+                                            <div class="row mt-2 g-4">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-01.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    18000+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Stray & Abandoned Cows
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-02.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    84815+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Surgeries Done
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-03.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    52+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Cow Sheds
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-04.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    400+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Go Shevak
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-05.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    60+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Doctors & Nursing Staff
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-06.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    40+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Tractors & Loaders
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row factSlider px-lg-5 px-md-3">
+                                    <div class="col-12">
+                                        <div class="swiper factSwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="nav-BioGas" role="tabpanel"
+                            aria-labelledby="nav-BioGas-tab">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-center pb-4 f-18 desc fw-semibold mx-auto">We aspire to create a
+                                            world-class and iconic monument for Hare Krishna Cultural Complex in the
+                                            holy land of Jaipur in pursuance of Srila Prabhupada's direction. Hare
+                                            Krishna Cultural Complex will place Krishna proudly on the world mindscape
+                                            and Jaipur on the world map. This project is dedicated to playing a larger
+                                            role in shaping the future of India.</p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7 pb-5 ps-md-5">
+                                        <div class="h-100">
+                                            <div class="video-container"
+                                                style="width: 100%; height: 100%; border-radius:15px; overflow:hidden">
+                                                <iframe width="100%" height="100%"
+                                                    src="https://www.youtube.com/embed/9xwazD5SyVg?si=ENXtwO6BKVf9XYLu"
+                                                    title="YouTube video player" frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                    referrerpolicy="strict-origin-when-cross-origin"
+                                                    allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 pb-5 pe-md-5">
+                                        <div class="section-banner">
+                                            <div class="row mt-2 g-4">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-01.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    18000+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Stray & Abandoned Cows
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-02.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    84815+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Surgeries Done
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-03.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    52+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Cow Sheds
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-04.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    400+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Go Shevak
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-05.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    60+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Doctors & Nursing Staff
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="card-box">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-5">
+                                                                <img src="assets/images/home/icon-06.png"
+                                                                    class="img-fluid" alt="">
+                                                            </div>
+                                                            <div class="col-7 ps-0 text-end">
+                                                                <h3 class="fw-bold color-10 mb-0">
+                                                                    40+
+                                                                </h3>
+                                                                <p class="mb-0 fw-semibold color-10">
+                                                                    Tractors & Loaders
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/about/sustainable-card.png"
+                                                        class="sustainable-card img-fluid" alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h3 class="title fw-bold">
+                                                        On Solar Grid
+                                                    </h3>
+                                                    <p class="f-14 fw-bold lineHeight-18">
+                                                        Presently gaushala is having a contract demand of 1200KW and
+                                                        monthly electricity bill of 2.5 lac is received against it. For
+                                                        meeting out this expanse we have installed on grid solar plant
+                                                        by CSR support and still we are looking forward for CSR support
+                                                        to set up 1000KW on grid solar plant.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <p class="fw-bold">
+                                                The volume of disposable bio-waste in India is estimated to be around
+                                                600 million tonnes, according to an article in OkCredit, a digital
+                                                ledger service provider. “If all of these are put into productive use,
+                                                it will produce 25 times the CNG that we are using today, and replace
+                                                more than 50 per cent of the total fuel imports.”
+                                                India is the second largest consumer of biogas in the world, the article
+                                                noted. “As per Shri Dharmendra Pradhan, the minister for Oil and Natural
+                                                Resources, India will receive an investment of Rs 2 lakh crore in
+                                                setting up 5000 biogas plants, by 2023-24.”
+                                                The infrastructure required for setting up a biogas plant is available
+                                                in India. Financial assistance and strict waste segregation and
+                                                management rules could help the industry to grow and meet the energy
+                                                demand of the country.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row factSlider px-lg-5 px-md-3">
+                                    <div class="col-12">
+                                        <div class="swiper factSwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="img-fluid" src="./assets/images/our-work/fact-img.png"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="nav-OurSupporters" role="tabpanel"
+                            aria-labelledby="nav-OurSupporters-tab">
+                            <div class="container-fluid">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <p class="text-center pb-4 f-18 desc fw-semibold mx-auto">
+                                            Donor's registered logo and name will be prominently displayed in form of
+                                            hoardings & facades in the sponsored area ensuring brand visibility to the
+                                            visitors. The primary sponsor will be given the maximum visibility on the
+                                            exterior facade and rest of the supporters will be provided with a specified
+                                            space termed as the donor wall.
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="rounded-5 overflow-hidden shadow">
+                                                <div class="">
+                                                    <div class="swiper supportSlider1">
+                                                        <div class="swiper-wrapper">
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid" alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid" alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid" alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid" alt="sustainable-card">
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-pagination"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="card_desc py-3 pb-2 px-3">
+                                                    <div class="iconWDesc mb-3 ">
+                                                        <div class="icon d-flex align-items-center gap-3">
+                                                            <img src="assets/images/our-work/supporter/ioc.svg" alt="" style="width:40px">
+                                                            <span>Indian Oil</span>
+                                                        </div>
+                                                    </div>
+                                                    <p class="f-14 fw-medium lineHeight-18 color-black75">
+                                                        #IndianOil's biogas plant at Hingonia Cattle Rehabilitation
+                                                        Centre is not just reducing waste but also benefiting the
+                                                        community. 
+                                                    </p>
+                                                    <a href="" class="aw_cowfllBtn ourSupportBtn text-center" data-bs-toggle="modal"
+                                                        data-bs-target="#supportModel1">Know
+                                                        More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="rounded-5 overflow-hidden shadow">
+                                                <div class="">
+                                                    <div class="swiper supportSlider1">
+                                                        <div class="swiper-wrapper">
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid" alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid" alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid" alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid" alt="sustainable-card">
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-pagination"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="card_desc py-3 pb-2 px-3">
+                                                    <div class="iconWDesc mb-3 ">
+                                                        <div class="icon d-flex align-items-center gap-3">
+                                                            <img src="assets/images/our-work/supporter/ioc.svg" alt="" style="width:40px">
+                                                            <span>Indian Oil</span>
+                                                        </div>
+                                                    </div>
+                                                    <p class="f-14 fw-medium lineHeight-18 color-black75">
+                                                        #IndianOil's biogas plant at Hingonia Cattle Rehabilitation
+                                                        Centre is not just reducing waste but also benefiting the
+                                                        community. 
+                                                    </p>
+                                                    <a href="" class="aw_cowfllBtn ourSupportBtn text-center" data-bs-toggle="modal"
+                                                        data-bs-target="#supportModel1">Know
+                                                        More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="supportModel1" data-bs-keyboard="false" tabindex="-1"
+                                    aria-labelledby="supportModel1Label" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title fw-bold w-100 f-24">Indian Oil</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="text-center">
+                                                    <div class="swiper supportSlider1">
+                                                        <div class="swiper-wrapper">
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid"
+                                                                    alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid"
+                                                                    alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid"
+                                                                    alt="sustainable-card">
+                                                            </div>
+                                                            <div class="swiper-slide ">
+                                                                <img src="assets/images/our-work/supporter/support-1.svg"
+                                                                    class="sustainable-card img-fluid"
+                                                                    alt="sustainable-card">
+                                                            </div>
+                                                        </div>
+                                                        <div class="swiper-pagination"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="card_desc pt-5 px-2 px-md-5 pb-3">
+                                                    <div class="iconWDesc mb-3 ">
+                                                        <div class="icon d-flex align-items-center gap-3">
+                                                            <img src="assets/images/our-work/supporter/ioc.svg" alt=""
+                                                                style="width:40px">
+                                                            <span>Indian Oil</span>
+                                                        </div>
+                                                    </div>
+                                                    <p class="f-14 fw-medium lineHeight-18 color-black75">
+                                                        #IndianOil's biogas plant at Hingonia Cattle Rehabilitation
+                                                        Centre is not just reducing waste but also benefiting the
+                                                        community. 
+                                                    </p>
+                                                    <p>
+                                                        Welcome to the heartwarming world of our Cow Rehabilitation
+                                                        Centre, where we invite you to
+                                                        explore and witness the incredible stories of compassion and
+                                                        care through our Image Gallery. Our
+                                                        gallery showcases the serene and picturesque environment where
+                                                        rescued cows find solace and
+                                                        healing.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="nav-Impact" role="tabpanel"
+                            aria-labelledby="nav-Impact-tab">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-center pb-4 f-18 desc fw-semibold mx-auto">
+                                            At our Animal Hospital, we aspire to be a beacon of hope and healing for
+                                            every cow that comes through our gates. It is a testament to our dedication
+                                            to creating a haven where compassion, expertise, and love intersect,
+                                            fostering a brighter future for our bovine companions.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/our-work/impact.png" class=" img-fluid"
+                                                        alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h4 class="title fw-bold">
+                                                        Hingonia returns to life
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/our-work/impact.png" class=" img-fluid"
+                                                        alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h4 class="title fw-bold">
+                                                        Hingonia returns to life
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/our-work/impact.png" class=" img-fluid"
+                                                        alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h4 class="title fw-bold">
+                                                        Hingonia returns to life
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/our-work/impact.png" class=" img-fluid"
+                                                        alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h4 class="title fw-bold">
+                                                        Hingonia returns to life
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/our-work/impact.png" class=" img-fluid"
+                                                        alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h4 class="title fw-bold">
+                                                        Hingonia returns to life
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/our-work/impact.png" class=" img-fluid"
+                                                        alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h4 class="title fw-bold">
+                                                        Hingonia returns to life
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="">
+                                            <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                                <div>
+                                                    <img src="assets/images/our-work/impact.png" class=" img-fluid"
+                                                        alt="sustainable-card">
+                                                </div>
+                                                <div class="card_desc px-4 py-3 pb-2">
+                                                    <h4 class="title fw-bold">
+                                                        Hingonia returns to life
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+{% block script%}
+<script type="text/javascript" src="{% static 'frontend/assets/js/gallery.js' %}"></script>
+
+<script>
+	$(document).on("change","#selectMonth,#selectyear",function(e) {
+		var month = $('#selectMonth').val()
+		var year = $('#selectyear').val()
+        if ((month !== null && month !== '') && (year !== null && year !== '')) {
+			$.ajax({
+				url: "{%  url 'distribution'  %}",
+				method: 'POST',
+				data: {'month':month, 'year': year,csrfmiddlewaretoken: '{{ csrf_token }}'},
+				success: function (data) {
+				    $('.distribution_html').html(data.distribution_html)
+				}
+			})
+		}
+})
+</script>
+{% endblock %}

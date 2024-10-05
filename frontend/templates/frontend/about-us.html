@@ -71,21 +71,22 @@
         </div>
       </section>
 
-      <section class="ourMission_section px-lg-5 pt-4 pb-2">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="star_pg lineHeight_normail w-100 text-center">*</div>
-                    <div class="title fw-bold ">Our Mission</div>
-                    <div class="title_desc fw-bold ms-auto">To ensure that every stray and accidental cows in India is well-fed and cared for.</div>
-                    <div class="title fw-bold text-end pt-lg-5 pt-md-4 mt-lg-4 mt-md-3 mt-0 pt-3">Our Vision</div>
-                    <div class="title_desc fw-bold">To provide nourishment and care to 30,000 stray and accidental cows by 2030.</div>
-                    <div class="star_pg w-100 text-center">*</div>
-                </div>
-            </div>
-        </div>
-      </section>
-
+    <section class="ourMission_section px-lg-5 py-5">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-12">
+            <div class=" fw-bold display-5">Our Vision</div>
+            <div class=" fw-bold ms-auto">To ensure that every stray and accidental cows is well-fed and cared for.</div>
+            <div class=" fw-bold display-5 pt-4">Our Mission</div>
+            <div class=" fw-bold">To provide nourishment and care to 30,000 stray and accidental cows by 2030.</div>
+            <div class=" fw-bold display-5 pt-4">Whom We Serve</div>
+            <div class=" fw-bold">We undertake the compassionate mission of rescuing and rehabilitating stray and accidental cows in the Jaipur metropolitan region. These gentle creatures are offered a sanctuary filled with love, care, and respect.</div>
+            <div class=" fw-bold display-5 pt-4">Our Approach</div>
+            <div class=" fw-bold">When we rescue these cows, our first priority is their well-being. We provide them with immediate medical attention and ensure they are in good health. Once they are stable, we welcome them into our sanctuary, where they are embraced with compassion and kindness.</div>
+         </div>
+      </div>
+   </div>
+</section>
         <section class="our_partner position-relative">
                 <img src="{% static 'frontend/assets/images/home/vector-1.png' %}" class="element-1">
                 <img src="{% static 'frontend/assets/images/home/vector-2.png' %}" class="element-2">
@@ -143,7 +144,15 @@
                     </div>
                     <div class="col-lg-5 col-md-6">
                         <div class="home_gallery-section text-center">
-                            <img class="img-fluid" style="max-width:500px" src="assets/images/about/Gallery.png" alt="Gallery">
+                            <div class="swiper gallerySwiper">
+                              <div class="swiper-wrapper">
+                                {% for single in gallery_obj %}
+                                <div class="swiper-slide">
+                                  <a href="{% url 'gallery' %}"> <img class="img-fluid gallery-1" src="{{single.main_image.url}}" alt="gallery"></a>
+                                </div>
+                                {% endfor %}
+                              </div>
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="col-lg-5 col-md-6">
@@ -189,86 +198,24 @@
                 <div class="row">
                     <div class="swiper heavenCowSwiper pt-1">
                         <div class="swiper-wrapper">
+                            {% for single in about_1 %}
                             <div class="swiper-slide ">
                                 <div class="heavenCow_content_wr position-relative rounded-5 overflow-hidden">
                                 <div>
-                                    <img src="assets/images/about/heaven-card.png" class="Profil-picture img-fluid"
+                                    <img src="{{single.main_image.url}}" class="Profil-picture img-fluid"
                                     alt="Profil-picture">
                                 </div>
                                 <div class="card_desc position-absolute px-4 pb-2">
                                     <h3 class=" text-white title fw-bold">
-                                    Raj. Biggest Animal Hospital
+                                    {{single.title}}
                                     </h3>
                                     <p class="text-white f-14 fw-semibold lineHeight-18">
-                                    A non-degradable element “polythene”, when enter in cattle's stomach, damage all internal organs (kidney, intestine etc.) and causes a very painful death. To remove polythene from cow's stomach, Rumenotomy operations are done successfully, by a team of 15 Doctors and 32 compounders.
+                                        {{single.description}}
                                     </p>
                                 </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide ">
-                                <div class="heavenCow_content_wr position-relative rounded-5 overflow-hidden">
-                                <div>
-                                    <img src="assets/images/about/heaven-card.png" class="Profil-picture img-fluid"
-                                    alt="Profil-picture">
-                                </div>
-                                <div class="card_desc position-absolute px-4 pb-2">
-                                    <h3 class=" text-white title fw-bold">
-                                        ICU for Sick Cattle
-                                    </h3>
-                                    <p class="text-white f-14 fw-semibold lineHeight-18">
-                                    City round Ambulance brought around 30 cattle from Jaipur city to rehabilitation center, Every day. Out of them more than 15 are critically injured, sick, or diseased.
-                                    </p>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide ">
-                                <div class="heavenCow_content_wr position-relative rounded-5 overflow-hidden">
-                                <div>
-                                    <img src="assets/images/about/heaven-card.png" class="Profil-picture img-fluid"
-                                    alt="Profil-picture">
-                                </div>
-                                <div class="card_desc position-absolute px-4 pb-2">
-                                    <h3 class=" text-white title fw-bold">
-                                    Special Facility For Orphan Calves
-                                    </h3>
-                                    <p class="text-white f-14 fw-semibold lineHeight-18">
-                                    The stray cattle, we receive from city generally are pregnant and very weak. In some cases, mother died because of weakness at the time of delivery. This cowshed is especially for such orphan calves. They are care taking by workers of rehabilitation center, very affectionately.
-                                    </p>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide ">
-                                <div class="heavenCow_content_wr position-relative rounded-5 overflow-hidden">
-                                <div>
-                                    <img src="assets/images/about/heaven-card.png" class="Profil-picture img-fluid"
-                                    alt="Profil-picture">
-                                </div>
-                                <div class="card_desc position-absolute px-4 pb-2">
-                                    <h3 class=" text-white title fw-bold">
-                                    Special Facility For Orphan Calves
-                                    </h3>
-                                    <p class="text-white f-14 fw-semibold lineHeight-18">
-                                    The stray cattle, we receive from city generally are pregnant and very weak. In some cases, mother died because of weakness at the time of delivery. This cowshed is especially for such orphan calves. They are care taking by workers of rehabilitation center, very affectionately.
-                                    </p>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide ">
-                                <div class="heavenCow_content_wr position-relative rounded-5 overflow-hidden">
-                                <div>
-                                    <img src="assets/images/about/heaven-card.png" class="Profil-picture img-fluid"
-                                    alt="Profil-picture">
-                                </div>
-                                <div class="card_desc position-absolute px-4 pb-2">
-                                    <h3 class=" text-white title fw-bold">
-                                    Special Facility For Orphan Calves
-                                    </h3>
-                                    <p class="text-white f-14 fw-semibold lineHeight-18">
-                                    The stray cattle, we receive from city generally are pregnant and very weak. In some cases, mother died because of weakness at the time of delivery. This cowshed is especially for such orphan calves. They are care taking by workers of rehabilitation center, very affectionately.
-                                    </p>
-                                </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                         <div class="arrowsBtn_wr flexBoxCenter">
                             <div class="swiper-button-prev"></div>
@@ -297,86 +244,24 @@
                         <div class="col-md-12">
                         <div class="swiper sustainableSwiper pt-1">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide ">
-                                    <div class="testimonials_content_wr rounded-5 overflow-hidden">
+                                {% for single in about_1 %}
+                            <div class="swiper-slide ">
+                                <div class="testimonials_content_wr rounded-5 overflow-hidden">
                                     <div>
-                                        <img src="assets/images/about/sustainable-card.png" class="sustainable-card img-fluid"
+                                        <img src="{{single.main_image.url}}" class="sustainable-card img-fluid"
                                         alt="sustainable-card">
                                     </div>
                                     <div class="card_desc px-4 py-3 pb-2">
                                         <h3 class="title fw-bold">
-                                            On Solar Grid
+                                            {{single.title}}
                                         </h3>
                                         <p class="f-14 fw-bold lineHeight-18">
-                                        Presently gaushala is having a contract demand of 1200KW and monthly electricity bill of 2.5 lac is received against it. For meeting out this expanse we have installed on grid solar plant by CSR support and still we are looking forward for CSR support to set up 1000KW on grid solar plant.
+                                            {{single.description}}
                                         </p>
                                     </div>
                                     </div>
-                                </div>
-                                <div class="swiper-slide ">
-                                    <div class="testimonials_content_wr rounded-5 overflow-hidden">
-                                    <div>
-                                        <img src="assets/images/about/sustainable-card.png" class="sustainable-card img-fluid"
-                                        alt="sustainable-card">
-                                    </div>
-                                    <div class="card_desc px-4 py-3 pb-2">
-                                        <h3 class="title fw-bold">
-                                        New Cow Shed Construction
-                                        </h3>
-                                        <p class="f-14 fw-bold lineHeight-18">
-                                        This centre was handed over to SKBT in year 2016 at that time there were around 7500 cows in the centre but as on date, there are more than 15000 cows living in the centre. Therefore, there is need of making shelter for 4000 cows.
-                                        </p>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide ">
-                                    <div class="testimonials_content_wr rounded-5 overflow-hidden">
-                                    <div>
-                                        <img src="assets/images/about/sustainable-card.png" class="sustainable-card img-fluid"
-                                        alt="sustainable-card">
-                                    </div>
-                                    <div class="card_desc px-4 py-3 pb-2">
-                                        <h3 class="title fw-bold">
-                                        Fodder Warehouse Construction
-                                        </h3>
-                                        <p class="f-14 fw-bold lineHeight-18">
-                                        The present warehouses are of very small capacity and have capacity to store fodder of almost a week, because of which we are unable to stock fodder during harvesting season result to which centre has to purchase fodder at higher price. 
-                                        </p>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide ">
-                                    <div class="testimonials_content_wr rounded-5 overflow-hidden">
-                                    <div>
-                                        <img src="assets/images/about/sustainable-card.png" class="sustainable-card img-fluid"
-                                        alt="sustainable-card">
-                                    </div>
-                                    <div class="card_desc px-4 py-3 pb-2">
-                                        <h3 class="title fw-bold">
-                                        Fodder Warehouse Construction
-                                        </h3>
-                                        <p class="f-14 fw-bold lineHeight-18">
-                                        The present warehouses are of very small capacity and have capacity to store fodder of almost a week, because of which we are unable to stock fodder during harvesting season result to which centre has to purchase fodder at higher price. 
-                                        </p>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide ">
-                                    <div class="testimonials_content_wr rounded-5 overflow-hidden">
-                                    <div>
-                                        <img src="assets/images/about/sustainable-card.png" class="sustainable-card img-fluid"
-                                        alt="sustainable-card">
-                                    </div>
-                                    <div class="card_desc px-4 py-3 pb-2">
-                                        <h3 class="title fw-bold">
-                                        Fodder Warehouse Construction
-                                        </h3>
-                                        <p class="f-14 fw-bold lineHeight-18">
-                                        The present warehouses are of very small capacity and have capacity to store fodder of almost a week, because of which we are unable to stock fodder during harvesting season result to which centre has to purchase fodder at higher price. 
-                                        </p>
-                                    </div>
-                                    </div>
-                                </div>
+                            </div>
+                            {% endfor %}
                             </div>
                             <div class="arrowsBtn_wr flexBoxCenter">
                                 <div class="swiper-button-prev"></div>

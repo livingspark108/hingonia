@@ -981,7 +981,7 @@
               <div class="swiper-wrapper">
                 {% for single in gallery_obj %}
                 <div class="swiper-slide">
-                  <img class="img-fluid gallery-1" src="{{single.main_image}}" alt="gallery">
+                  <a href="{% url 'gallery' %}"> <img class="img-fluid gallery-1" src="{{single.main_image.url}}" alt="gallery"></a>
                 </div>
                 {% endfor %}
               </div>

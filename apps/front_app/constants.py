@@ -23,6 +23,8 @@ SLIDER_TYPE = [
     ('Objectives & Mission','Objectives & Mission'),
     ('Why companies should partner','Why companies should partner'),
     ('Our partners','Our partners'),
+    ('About 1','About 1'),
+    ('About 2','About 2'),
 ]
 CAMPAIGN_TYPE = [
                     ('Other', 'Other'),

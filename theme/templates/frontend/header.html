@@ -60,7 +60,7 @@
           </button>
         </div>
         <div class="col-lg-6 col-md-12 text-lg-end text-center pt-3 pt-md-0">
-          <a href="./csr.php" class="fw-bold text-decoration-underline nav-link">Get Involved</a>
+          <a href="{% url 'csr' %}" class="fw-bold text-decoration-underline nav-link">Get Involved</a>
           <a href="#" class="btn btn-light cm-btn-light fw-bold rounded-pill ms-md-3 ms-1">Donate Now</a>
           <a href="#" class="btn "><i class="bi bi-person-circle text-white fs-4"></i></a>
           <div class="d-none d-lg-inline-block">
@@ -84,7 +84,7 @@
                     <div class="me-3">
                       <ul class="navbar-nav flex-column">
                         <li class="nav-item">
-                          <a class="nav-link" href="./our-work.php">Seva</a>
+                          <a class="nav-link" href="{% url 'seva' %}">Seva</a>
                         </li>
                         <li class="nav-item">
                           <a class="nav-link" href="{% url 'campaign' %}">Campaigns</a>
@@ -175,7 +175,7 @@
     </div>
     <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="./our-work.php">Seva</a>
+                <a class="nav-link" href="{% url 'seva' %}">Seva</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'trustee' %}">Truestees</a>
@@ -184,7 +184,7 @@
                 <a class="nav-link" href="{% url 'about-us' %}">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./gallery.php">Gallery</a>
+                <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
               </li>
             </ul>
   </div>

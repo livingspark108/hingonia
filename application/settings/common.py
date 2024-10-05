@@ -265,6 +265,8 @@ SMS_AUTH_KEY = '4b358371ef203b2a4c3c7c0e1f56197'
 SMS_URL = "http://msg.msgclub.net/rest/services/sendSMS/sendGroupSms"
 SENDER_ID = "LVGMNU"
 
+AUTH_USER_MODEL = 'user.User'
+
 
 # Define BASE_DIR
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

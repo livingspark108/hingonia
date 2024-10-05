@@ -2,10 +2,10 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 
+from application.settings.common import AUTH_USER_MODEL
 # Create your models here.
 from application.custom_model import DateTimeModel
 from apps.front_app.constants import *
-
 
 class Mother(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
@@ -98,6 +98,16 @@ class Campaign(DateTimeModel):
     def __str__(self):
         return self.title
 
+
+class AdoptedCow(DateTimeModel):
+    user = models.ForeignKey(
+        AUTH_USER_MODEL,  # Use the custom user model defined in settings
+        on_delete=models.CASCADE,
+        related_name='adopted_cows_user',  # Changed to make the related name more descriptive
+        null=True,
+        blank=False
+    )
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, related_name='adopted_campaign', null=True, blank=False)
 
 class Product(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)

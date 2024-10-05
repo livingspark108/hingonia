@@ -37,7 +37,8 @@ from application.helper import send_contact_us
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET, ADMIN_EMAIL
 from apps.front_app.forms import CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
-    AbandonCart, Testimonial, CampaignProduct, Product, Trustee, OurSupporter, UploadedFile, Gallery
+    AbandonCart, Testimonial, CampaignProduct, Product, Trustee, OurSupporter, UploadedFile, Gallery, AdoptedCow, \
+    HomeSlider
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -62,7 +63,8 @@ class FrontendHomeView(View):
         monthly_campaign_obj = Campaign.objects.filter(mode='Monthly')
         home_campaign_obj = Campaign.objects.filter(is_home=True)
         testimonial_obj = Testimonial.objects.all()
-        gallery_obj = Gallery.objects.all()
+        gallery_obj = Distribution.objects.all()
+        print(gallery_obj)
         # if request.user.is_authenticated:
         context = {
             'gallery_obj':gallery_obj,
@@ -77,8 +79,14 @@ class FrontendAboutUsView(View):
     def get(self, request):
         ourteam_obj = OurTeam.objects.all()
         about_obj = AboutUs.objects.first()
+        gallery_obj = Distribution.objects.all()
+        about_1 = HomeSlider.objects.filter(type='About 1')
+        about_2 = HomeSlider.objects.filter(type='About 2')
         # if request.user.is_authenticated:
         context = {
+            'about_1':about_1,
+            'about_2':about_2,
+            'gallery_obj':gallery_obj,
             'ourteam_obj': ourteam_obj,
             'about_obj':about_obj,
         }
@@ -221,15 +229,50 @@ class GetCampaignView(DevoteeRequiredMixin, View):
 
 class AdoptedCowView(View):
     def get(self, request):
-        context = {}
+        campaign_ids = Campaign.objects.filter(type='Adopt a cow').values_list('id', flat=True)
+        adopted_ids = AdoptedCow.objects.values_list('campaign_id', flat=True)
+
+        campaigns_data = []
+        adopted_cow = AdoptedCow.objects.filter(campaign_id__in=campaign_ids,is_active=True)
+        waiting_cow = Campaign.objects.filter(type='Adopt a cow').exclude(id__in=adopted_ids)
+
+        context = {
+            'waiting_cow_len':len(waiting_cow),
+            'adopted_cow_len': len(adopted_cow),
+            'adopted_cow':adopted_cow,
+        }
         return render(request, 'frontend/adopted_cow.html', context)
 
 
-class WaitingCowView(View):
+class WaitingCowView(ListView):
     def get(self, request):
-        waiting_cow_obj = Campaign.objects.filter(type='Adopt a cow')
+
+        campaign_ids = Campaign.objects.filter(type='Adopt a cow').values_list('id', flat=True)
+        adopted_ids = AdoptedCow.objects.values_list('campaign_id', flat=True)
+
+        campaigns_data = []
+        adopted_cow = AdoptedCow.objects.filter(campaign_id__in=campaign_ids, is_active=True)
+        waiting_cow_obj = Campaign.objects.filter(type='Adopt a cow').exclude(id__in=adopted_ids)
+
+
+        # Pagination
+        paginator = Paginator(waiting_cow_obj, 20)  # 5 items per page
+        page = request.GET.get('page')
+
+        try:
+            waiting_cow_paginated = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            waiting_cow_paginated = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            waiting_cow_paginated = paginator.page(paginator.num_pages)
+
         context = {
-            'waiting_cow_obj':waiting_cow_obj
+            'waiting_cow_len': len(waiting_cow_obj),
+            'adopted_cow_len': len(adopted_cow),
+            'adopted_cow': adopted_cow,
+            'waiting_cow_paginated':waiting_cow_obj
         }
         return render(request, 'frontend/waiting_cow.html', context)
 
@@ -246,6 +289,11 @@ class GalleryView(View):
     def get(self, request):
         context = {}
         return render(request, 'frontend/gallery.html', context)
+
+class SevaView(View):
+    def get(self, request):
+        context = {}
+        return render(request, 'frontend/seva.html', context)
 
 class ProductView(View):
     def get(self, request):

@@ -36,6 +36,7 @@ urlpatterns = [
     path('csr', CsrView.as_view(), name='csr'),
     path('adopted-cow', AdoptedCowView.as_view(), name='adopted-cow'),
     path('waiting-cow', WaitingCowView.as_view(), name='waiting-cow'),
+    path('seva', SevaView.as_view(), name='seva'),
     path('our-supporters', OurSupportersView.as_view(), name='our-supporters'),
     path('gallery', FrontendDistributionView.as_view(), name='gallery'),
     path('gallery/<str:pk>', FrontendDistributionDetailView.as_view(), name='distribution_detail'),
