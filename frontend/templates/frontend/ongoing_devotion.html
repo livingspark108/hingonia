@@ -6,232 +6,335 @@
 <meta property="og:title" content="{{compaign.title}}" />
 <meta property="og:url" content="{% url 'ongoing-devotion' compaign.slug %}" />
 <meta property="og:image" content="{% get_media_prefix %}{{compaign.campaign_backgroud}}" />
-<section>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h2 class="py-3 color-2 display-5 fw-bold">{{compaign.title}}</h2>
-            </div>
-            <div class="col-md-12 p-md-0 text-center">
-                <img src="{% get_media_prefix %}{{compaign.campaign_backgroud}}" width="800" class="img-fluid rounded" alt="">
-            </div>
-	        <div class="col-md-12 pt-5">
-                    <!-- Flexbox container for aligning the toasts -->
-                    <div aria-live="polite" aria-atomic="true"
-                        class="og-notification-box d-flex justify-content-center align-items-center w-100">
-                        <!-- Then put toasts within -->
-                        <div class="toast show" id="ogNotification" role="alert" aria-live="assertive"
-                            aria-atomic="true">
-                            <div class="toast-header">
-                                <strong class="me-auto">New Donation</strong>
-                                <!-- <small>11 mins ago</small> -->
-                                <button type="button" class="btn-close" data-bs-dismiss="toast"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="toast-body" id="ogToastBody">
-	                            
-                                {{transaction_obj.first.firstname}} Just donated <strong><i class="bi bi-currency-rupee"></i>{{transaction_obj.first.amount}}</strong> for
-                                Medical
-                            </div>
-                        </div>
-                    </div>
-	        </div>
-        </div>
-    </div>
-</section>
+
 <input type="hidden" class="promo_id" value="{{promo_no}}">
 <input type="hidden" class="camp_id" value="{{compaign.id}}">
-<!--<section class="bg-img py-60 position-relative og-box"-->
-<!--        style="background-image: url('{% get_media_prefix %}{{compaign.campaign_backgroud}}');">-->
-<!--        <div class="campaign-overlay"></div>-->
-<!--        <div class="container z-3 position-relative">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-12 pb-5">-->
-<!--                    <div class="text-center">-->
-<!--                        <span class="og-box-title display-5 bg-white color-2 fw-bold">{{compaign.title}} campaign</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-12 py-5">-->
-<!--                    <div class="circle_all pt-5">-->
-<!--                        <div class="circle_A">-->
-<!--                            <img src="{% static 'frontend/assets/images/campaign/mango-icon.png' %}" class="img-fluid"-->
-<!--                                 alt="">-->
-<!--                        </div>-->
-<!--                        <div class="circle_B"></div>-->
-<!--                        <div class="circle_C"></div>-->
-<!--                        &lt;!&ndash; <div class="circle_D"></div>-->
-<!--                        <div class="circle_E"></div> &ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-12 pt-5">-->
-<!--                    &lt;!&ndash; Flexbox container for aligning the toasts &ndash;&gt;-->
-<!--                    <div aria-live="polite" aria-atomic="true"-->
-<!--                        class="og-notification-box d-flex justify-content-center align-items-center w-100">-->
-<!--                        &lt;!&ndash; Then put toasts within &ndash;&gt;-->
-<!--                        <div class="toast show" id="ogNotification" role="alert" aria-live="assertive" aria-atomic="true">-->
-<!--                            <div class="toast-header">-->
-<!--                                <strong class="me-auto">New Donation</strong>-->
-<!--                                &lt;!&ndash; <small>11 mins ago</small> &ndash;&gt;-->
-<!--                                <button type="button" class="btn-close" data-bs-dismiss="toast"-->
-<!--                                    aria-label="Close"></button>-->
-<!--                            </div>-->
-<!--                            <div class="toast-body" id="ogToastBody">-->
-<!--                                {{transaction_obj.first.firstname}} Just donated <strong><i-->
-<!--                                    class="bi bi-currency-rupee"></i>{{transaction_obj.first.amount}}</strong> for-->
-<!--                                Bricks-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--</section>-->
-<div class="row mt-5">
-    <div class="col d-flex justify-content-center">
-        <a data-title="{{compaign.short_title}}" data-bs-toggle="modal" data-bs-target="#helpMatajiModal" class="help_mataji box-btn blankets-btn bg-3"><img src="/static/frontend/assets/images/foot.png" width="20" alt="">&nbsp;&nbsp; Donate Now</a>
-    </div>
-</div>
-	<section class="pt-5 section-campaign-details">
+<section class="campaign_details_section mt-3 mb-5">
         <div class="container">
-            <div class="row align-items-center g-4">
-                <div class="col-md-4">
-                    <img src="{% get_media_prefix %}{{compaign.campaign_image}}" class="img-fluid og-cmp-img"alt="">
-                </div>
-                <div class="col-md-8">
-                    <h3>{{compaign.title}}</h3>
-                    <p>{{compaign.description}}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-<section class="pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <a href="{% url 'distribution' %}" class="btn bg-1 text-white fs-3">Our Recent Distribution ></a>
-                </div>
-            </div>
-        </div>
-    </section>
-<!--<section class="photo-gallery pt-5">-->
-<!--        <div class="container">-->
-<!--            <div class="row pb-3">-->
-<!--                <div class="col-md-12 text-center">-->
-<!--                    <h2 class="banner-title">Campaign <span>Gallery</span></h2>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="row pb-4 g-4 gallery-grid">-->
-<!--                <div class="col-md-3 col-6 gallery-col">-->
-<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-1.jpg' %}">-->
-<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-1.jpg' %}" class="img-fluid"-->
-<!--                             alt="Mataji Adoption">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 col-6 gallery-col">-->
-<!--                    <a class="gallery-item" href="assets/images/gallery/mataji-2.jpg' %}">-->
-<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-2.jpg' %}" class="img-fluid" alt="Blanket Donation">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 col-6 gallery-col">-->
-<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}">-->
-<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-3.jpg' %}" class="img-fluid" alt="Medical care">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 col-6 gallery-col">-->
-<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-4.jpg' %}">-->
-<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-4.jpg' %}" class="img-fluid" alt="Mataji Adoption">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 col-6 gallery-col">-->
-<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-5.jpg' %}">-->
-<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-5.jpg' %}" class="img-fluid" alt="Mataji Adoption">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 col-6 gallery-col">-->
-<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}">-->
-<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-6.jpg' %}" class="img-fluid" alt="Mataji Adoption">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 col-6 gallery-col">-->
-<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-7.jpg' %}">-->
-<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-7.jpg' %}" class="img-fluid" alt="Mataji Adoption">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <div class="col-md-3 col-6 gallery-col">-->
-<!--                    <a class="gallery-item" href="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}">-->
-<!--                        <img src="{% static 'frontend/assets/images/gallery/mataji-8.jpg' %}" class="img-fluid"-->
-<!--                             alt="Mataji Adoption">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
-<section class="py-5 donor-list-section" id="donor-list">
-        <div class="container">
-            <div class="row g-md-3 g-3">
-                <div class="col-md-12 text-center">
-                    <h2 class="banner-title">Donor <span>List</span></h2>
-                </div>
-	            {% for single in transaction_obj_paginated %}
-                <div class="col-md-3">
-                    <div class="card bg-white border-dark">
-                        <div class="card-body">
-                            <h5 class="text-dark">Donor Name :
-	                            {% if single.firstname %}
-	                            <span class="color-2 fw-bold">{{single.firstname}}</span>
-	                            {% else %}
-                                <span class="color-2 fw-bold">Anonymous</span>
-	                            {% endif %}
-                            </h5>
-                            <h6 class="text-dark">Donated <span class="color-2 fw-bold fs-5"><i
-		                            class="bi bi-currency-rupee color-2"></i>{{single.amount}}</span> for {{single.productinfo}}</h6>
+            <div class="row g-4">
+
+                <div class="col-lg-7 col-md-7">
+                    <div class="mb-3">
+                        <a href="campaigns.php" class="text-muted fw-semibold f-18">Campaigns</a>
+                        <i class="bi bi-chevron-right gray"></i>
+                        <span class="pink f-18 fw-semibold">Construction Seva</span>
+                    </div>
+                    <div>
+                        <video class="campaign_video" autoplay controls muted>
+                            <source src="assets/video/bk-video.mp4" />
+                        </video>
+                    </div>
+                    <div class="campaign_amt">
+                        <div class="row pb-2">
+                            <div class="col-6">
+                                <h6 class="mb-1 f-18 fw-bold">Raised</h6>
+                                <h3 class="pink mb-1 fw-bold"><i class="bi bi-currency-rupee pink"></i>38,000</h3>
+                                <p class="f-12 mb-0 fw-medium">Requirement Deadline | 22nd June, 24</p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <h6 class="mb-1 f-18 fw-bold">Goal</h6>
+                                <h3 class="mb-1 fw-bold"><i class="bi bi-currency-rupee"></i>7,00,000</h3>
+                                <p class="f-12 mb-0 fw-medium">Three Months Remaining</p>
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-1"
+                                role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0"
+                                aria-valuemax="100">80%</div>
                         </div>
                     </div>
+                    <!--Gallery slider start-->
+                    <div class="cds_gallery pt-2">
+                        <div class="row align-items-center my-3">
+                            <div class="col-7">
+                                <img src="{% static 'frontend/assets/images/campaign/calendar.svg' %}" class="img-fluid" alt="">
+                                <span class="date">23rd Oct, 2024</span>
+                            </div>
+                            <div class="col-5 text-end">
+                                <a href="javascript:void(0)" id="leftCdsGalleryIcon">
+                                    <img src="{% static 'frontend/assets/images/campaign/left-arrow.png' %}" alt="">
+                                </a>
+                                <a href="javascript:void(0)" class="" id="rightCdsGalleryIcon">
+                                    <img src="{% static 'frontend/assets/images/campaign/right-arrow.png' %}" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="swiper campaignGallerySwiper">
+                            <div class="swiper-wrapper gallery-grid">
+                                {% get_gallery compaign.id 'gallery' as all_campaign_images %}
+                                {% for single in all_campaign_images %}
+                                {% if single.file %}
+                                <div class="swiper-slide gallery-col">
+                                     <a class="gallery-item" href="{{single.file.url}}">
+                                    <img src="{{single.file.url}}"
+                                         class="img-fluid"
+                                         alt="">
+                                     </a>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--Gallery slider end-->
+
+                    <div class="pt-4">
+                        <h2 class="cds_title">{{compaign.title}}
+                        </h2>
+                    </div>
+                    <div class="cds_ckeditor mt-4">
+                        {{compaign.description|safe}}
+                    </div>
+
+                    <div class="mt-4 cds_social_link">
+                        <h2 class="cds_sub_title">Share & Support:</h2>
+                        <div>
+                            <a href="#"><img src="{% static 'frontend/assets/images/campaign/facebook.svg' %}" class="img-fluid" alt=""></a>
+                            <a href="#"><img src="{% static 'frontend/assets/images/campaign/insta.svg' %}" class="img-fluid" alt=""></a>
+                            <a href="#"><img src="{% static 'frontend/assets/images/campaign/wp.svg' %}" class="img-fluid" alt=""></a>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h2 class="cds_sub_title">Contact Us:</h2>
+                        <div>
+                            <a href="mailto:support@hingonia.com" class="gray d-block fw-semibold mb-2 color-1"><img
+                                    src="{% static 'frontend/assets/images/campaign/mail.svg' %}" class="img-fluid pe-2" alt="mail">
+                                    support@hingonia.com</a>
+                            <a href="tel:+12345678920" class="gray  d-block fw-semibold color-1"><img
+                                    src="{% static 'frontend/assets/images/campaign/call.svg' %}" class="img-fluid pe-2" alt="call"> +91 12345678920</a>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h2 class="cds_sub_title">Terms & Conditions:</h2>
+                        <p class="f-16 fw-medium">Please be advised that all contributions to our organization are final
+                            and non-refundable.</p>
+                        <p class="f-16 fw-medium">You agree to share information entered on this page with HINGONIA
+                            (owner of this page) and Living Spark, adhering to applicable laws.</p>
+                    </div>
                 </div>
-                {% endfor %}
-            </div>
-	        <!-- Display pagination controls -->
-<div class="" style="text-align: center;margin-top: 10px;">
-    <span class="step-links">
-        {% if transaction_obj_paginated.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ transaction_obj_paginated.previous_page_number }}">previous</a>
-        {% endif %}
 
-        <span class="current">
-            Page {{ transaction_obj_paginated.number }} of {{ transaction_obj_paginated.paginator.num_pages }}.
-        </span>
+                <div class="col-lg-5 col-md-5 d-md-block d-none">
+                    <div class="sticky-top cds-pt-110 z-0">
+                        <h2 class="cds_title mb-3">Payment Details</h2>
+                        <form action="" class="cds_form">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Full Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="number" class="form-control" placeholder="Phone" required>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input request_80g" type="checkbox" value="" id="request80g">
+                                <span class="checkmark"></span>
+                                <label class="form-check-label" for="request80g">
+                                    Request 80 G
+                                </label>
+                            </div>
+                            <div id="request80gField" class="request_80g_Field" style="display: none;">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="PAN (Mandatory for 80G)"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Address (Mandatory for 80G)"
+                                        required>
+                                </div>
+                            </div>
 
-        {% if transaction_obj_paginated.has_next %}
-            <a href="?page={{ transaction_obj_paginated.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
-	       
-        </div>
-    </section>
-<div class="modal fade lightbox-modal" id="lightbox-modal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-            <div class="modal-content">
-                <button type="button" class="btn-fullscreen-enlarge" aria-label="Enlarge fullscreen">
-                    <svg class="bi">
-                        <use href="#enlarge"></use>
-                    </svg>
-                </button>
-                <button type="button" class="btn-fullscreen-exit d-none" aria-label="Exit fullscreen">
-                    <svg class="bi">
-                        <use href="#exit"></use>
-                    </svg>
-                </button>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="modal-body">
-                    <div class="lightbox-content">
-                        <!-- JS content here -->
+                            <div class="cds_product mb-3">
+                                <div class="cds_pbox">
+                                    <div class="row  align-items-center position-relative">
+                                        <div class="col-md-7 col-7 pe-0">
+                                            <img src="assets/images/campaign/steel.jpg" class="cds_product_img">
+                                            <span class="cds_product_title">Steel</span>
+                                        </div>
+                                        <div class="col-md-5 col-5 ps-0 text-end">
+                                            <span class="cds_product_price"><i
+                                                    class="bi bi-currency-rupee"></i>400</span>
+                                            <div class="cds_qty">
+                                                <input type="button" value="" class="qty-minus minusBtn">
+                                                <input type="number" value="1" class="qty quantityInput" min="1" max="10">
+                                                <input type="button" value="" class="qty-plus plusBtn">
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0)" class="cds_info_icon">
+                                            <img src="assets/images/campaign/info.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div class="cds_product_info" style="display: none;">
+                                            <p class="f-12 fw-medium">
+                                                <img src="assets/images/campaign/steel.jpg" class="cds_product_img"
+                                                    alt="">
+                                                Welcome abandoned cows to a safe haven, with sturdy steel structures
+                                                offering shelter and care. Join us in creating their sanctuary.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cds_pbox">
+                                    <div class="row align-items-center position-relative">
+                                        <div class="col-md-7 col-7 pe-0">
+                                            <img src="assets/images/campaign/brick.jpg" class="cds_product_img">
+                                            <span class="cds_product_title">Brick</span>
+                                        </div>
+                                        <div class="col-md-5 col-5 ps-0 text-end">
+                                            <span class="cds_product_price"><i
+                                                    class="bi bi-currency-rupee"></i>400</span>
+                                            <div class="cds_qty">
+                                                <input type="button" value="" class="qty-minus minusBtn">
+                                                <input type="number" value="1" class="qty quantityInput" min="1" max="10">
+                                                <input type="button" value="" class="qty-plus plusBtn">
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0)" class="cds_info_icon">
+                                            <img src="assets/images/campaign/info.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div class="cds_product_info" style="display: none;">
+                                            <p class="f-12 fw-medium">
+                                                <img src="assets/images/campaign/brick.jpg" class="cds_product_img"
+                                                    alt="">
+                                                Welcome abandoned cows to a safe haven, with sturdy steel structures
+                                                offering shelter and care. Join us in creating their sanctuary.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cds_pbox">
+                                    <div class="row  align-items-center position-relative">
+                                        <div class="col-md-7 col-7 pe-0">
+                                            <img src="assets/images/campaign/sand.jpg" class="cds_product_img">
+                                            <span class="cds_product_title">Sand</span>
+                                        </div>
+                                        <div class="col-md-5 col-5 ps-0 text-end">
+                                            <span class="cds_product_price"><i
+                                                    class="bi bi-currency-rupee"></i>300</span>
+                                            <div class="cds_qty">
+                                                <input type="button" value="" class="qty-minus minusBtn">
+                                                <input type="number" value="1" class="qty quantityInput" min="1" max="10">
+                                                <input type="button" value="" class="qty-plus plusBtn">
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0)" class="cds_info_icon">
+                                            <img src="assets/images/campaign/info.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div class="cds_product_info" style="display: none;">
+                                            <p class="f-12 fw-medium">
+                                                <img src="assets/images/campaign/sand.jpg" class="cds_product_img"
+                                                    alt="">
+                                                Welcome abandoned cows to a safe haven, with sturdy steel structures
+                                                offering shelter and care. Join us in creating their sanctuary.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cds_pbox">
+                                    <div class="row  align-items-center position-relative">
+                                        <div class="col-md-7 col-7 pe-0">
+                                            <img src="assets/images/campaign/cement.jpg" class="cds_product_img">
+                                            <span class="cds_product_title">Repair & Maintenance</span>
+                                        </div>
+                                        <div class="col-md-5 col-5 ps-0 text-end">
+                                            <span class="cds_product_price"><i
+                                                    class="bi bi-currency-rupee"></i>1300</span>
+                                            <div class="cds_qty">
+                                                <input type="button" value="" class="qty-minus minusBtn">
+                                                <input type="number" value="1" class="qty quantityInput" min="1" max="10">
+                                                <input type="button" value="" class="qty-plus plusBtn">
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0)" class="cds_info_icon">
+                                            <img src="assets/images/campaign/info.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div class="cds_product_info" style="display: none;">
+                                            <p class="f-12 fw-medium">
+                                                <img src="assets/images/campaign/cement.jpg" class="cds_product_img"
+                                                    alt="">
+                                                Welcome abandoned cows to a safe haven, with sturdy steel structures
+                                                offering shelter and care. Join us in creating their sanctuary.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 cds_custom_amt position-relative">
+                                <span>Donate Custom Amount - <i class="bi bi-currency-rupee"></i></span>
+                                <input type="text" class="form-control" placeholder="_ _ _ _ _ _ _ _ _ _">
+                            </div>
+                            <div class="mb-3 border border-dark rounded-4 p-3">
+                                <p class="mb-0 f-16 fw-medium">By supporting <span class="color-1">Hingonia</span>, you
+                                    are
+                                    helping us reach out to more campaigns like this and scale our impact. <a
+                                        href="#">Learn More</a>.</p>
+                                <div class="row mt-2">
+                                    <div class="col-7">
+                                        <p class="mb-0 fw-bold f-14">Support us by :</p>
+                                    </div>
+                                    <div class="col-5 text-end">
+                                        <select class="rounded-2 w-100">
+                                            <option>Select</option>
+                                            <option>16% (<i class="bi bi-currency-rupee"></i>160)</option>
+                                            <option>18% (<i class="bi bi-currency-rupee"></i>260)</option>
+                                            <option>24% (<i class="bi bi-currency-rupee"></i>360)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="residenceCheck">
+                                <span class="checkmark"></span>
+                                <label class="form-check-label" for="residenceCheck">
+                                    Resident of India
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="anonymousCheck">
+                                <span class="checkmark"></span>
+                                <label class="form-check-label" for="anonymousCheck">
+                                    Anonymous Donation
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="updateWpCheck">
+                                <span class="checkmark"></span>
+                                <label class="form-check-label" for="updateWpCheck">
+                                    I want to receive transaction and donation updates on WhatsApp
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="monthlyCheck">
+                                <span class="checkmark"></span>
+                                <label class="form-check-label" for="monthlyCheck">
+                                    Donate Monthly
+                                </label>
+                            </div>
+                            <div class="mb-4">
+                                <img src="assets/images/campaign/payment.svg" class="img-fluid" alt="">
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="cds_btn ">
+                                    Donate Here
+                                    <span class="text-white float-end"><i
+                                            class="bi bi-currency-rupee text-white"></i>500</span>
+                                </button>
+                            </div>
+                            <div class="cds_badge">
+                                <span style="background: #00CD300D;">*Tax Exemptions Available</span>
+                                <span style="background: #FF05050D;">*80G Receipt</span>
+                                <span style="background: #004BD70D;">*Protected Payment</span>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
 {% endblock %}
 {% block script%}
 <script>
@@ -261,4 +364,17 @@ $(document).ready(function () {
   }, 3000); // 5 seconds
 });
 </script>
+<script>
+        /****** pledgeSwiper ******/
+        document.getElementById('leftCdsGalleryIcon').addEventListener('click', function (e) {
+            e.preventDefault();
+            campaignGallerySwiper.slidePrev();
+        });
+
+        document.getElementById('rightCdsGalleryIcon').addEventListener('click', function (e) {
+            e.preventDefault();
+            campaignGallerySwiper.slideNext();
+        });
+        /**************/
+    </script>
 {% endblock %}

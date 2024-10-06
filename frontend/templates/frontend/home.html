@@ -291,7 +291,7 @@
                           <a href="#" class="campaign-btn campaign-btn-single" data-id="{{single.id}}" data-price="{{single.price}}" style="color: #C21959;" data-bs-toggle="modal" data-bs-target="#donate1">
                             Donate Now
                           </a>
-                          <a data-id="{{single.id}}" href="#" class="know_more knowMore-donate ext-decoration-underline text-white fw-bold ps-3 simple-link" data-bs-toggle="modal" data-bs-target="#knowMoredonate1">
+                          <a  href="{% url 'ongoing-devotion' single.slug %}" class=" knowMore-donate ext-decoration-underline text-white fw-bold ps-3 simple-link" >
                             know more
                           </a>
                         </div>

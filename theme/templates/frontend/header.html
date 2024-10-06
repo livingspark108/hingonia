@@ -128,20 +128,24 @@
                       <img class="img-fluid" src="{% static 'frontend/assets/images/menu-pro-img.svg' %}" alt="our-gallery">
                       <div class="position-absolute menuPro_wr">
                         <span>Products</span>
+                          <a href="{% url 'product' %}">
                         <button class="btnAnimation  text-white fw-bold">
                           Explore
                           <img src="{% static 'frontend/assets/images/home/arrow_next.png' %}" alt="">
                         </button>
+                              </a>
                       </div>
                     </div>
                     <div class="ourGallery_btn position-relative d-inline-block">
                       <img class="img-fluid" src="{% static 'frontend/assets/images/adope-cow.svg' %}" alt="our-gallery">
                       <div class="position-absolute menuPro_wr">
                         <span>Adopt A Cow</span>
+                          <a href="{% url 'waiting-cow' %}">
                         <button class="btnAnimation  text-white fw-bold">
                           More Details
                           <img src="{% static 'frontend/assets/images/home/arrow_next.png' %}" alt="">
                         </button>
+                          </a>
                       </div>
                     </div>
                   </div>
