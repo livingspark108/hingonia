@@ -41,7 +41,11 @@
                         <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">{{single.title}}</h5>
                         <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
                         <div class="donatAmountM">
-                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">$20<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                          {% if single.mode == 'One Time' %}
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">{{single.price}}</span></span>
+                          {% else %}
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">{{single.price}}<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                          {% endif %}
                         </div>
                         <div class="mt-md-4 mt-2">
                           <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">
@@ -49,7 +53,8 @@
                             <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
                           </div>
                         </div>
-                        <a href="#" class="btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt &amp; Name a Cow</a>
+                        <a data-type="{{single.mode}}" data-amount="{{single.price}}" data-bs-toggle="modal" data-bs-target="#{% if single.mode == 'One Time' %}donate1{% else %}donate2{% endif %}" data-id="{{single.id}}" href="#" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt
+                            {{single.title}} Cow</a>
                       </div>
                     </div>
                   </div>
@@ -80,10 +85,222 @@
             </div>
         </div>
       </section>
+<!--Payment model-->
+ <div class="donateModel">
+  <div class="modal fade donate2" id="donate2" data-bs-keyboard="false" tabindex="-1" aria-labelledby="donate1Label" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold w-100 f-24">Cow Shed</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+    <div class="donateSilde steptabs" id="donateSlide">
+      <div class="stepper">
+        <div class="progress-container">
+          <div class="progress">
+            <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="step-circles">
+            <div class="circle active" id="circle-1"></div>
+            <div class="circle" id="circle-2"></div>
+            <div class="circle" id="circle-3"></div>
+          </div>
+        </div>
+        <div class="step w-100 d-none" id="step-11">
+
+        </div>
+        <div class="step" id="step-21">
+          <div class="card_donate fw-medium zIndex-3 position-relative">
+            <p class="mb-1 f-14">
+              By supporting <span class="color-26 fw-bold">Hingonia</span>, you are helping us reach out to
+              more campaigns like this and scale our impact. <a href="#" class="color-26 text-decoration-underline fw-bold">Learn More.</a>
+            </p>
+            <div class="d-flex justify-content-between">
+              <span class="f-12 fw-bold">Support us by :</span>
+              <span class="supportPer f-12 fw-bold px-1" style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">
+                <select class="h-100">
+                  <option value="IN">16% (₹160)</option>
+                  <option value="US">22% (₹200)</option>
+                </select>
+              </span>
+            </div>
+          </div>
+          <form method="post" action="post" id="" >
+              {% csrf_token %}
+          <div class="donateForm_wr pt-3 pb-1">
+
+              <input type="hidden" id="campaign_id" name="campaign_id" value="">
+              <input type="hidden" id="plan_id" name="plan_id" value="">
+              <div class="mb-3 position-relative">
+                <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
+              </div>
+              <div class="mb-3 position-relative">
+                <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Preferred date</label>
+              <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
+              </div>
+
+              <div class="mb-3 position-relative">
+                <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                <input type="text" name="email" class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3 position-relative">
+                <div class="position-absolute country_code h-100">
+                  <select class="h-100">
+                    <option value="IN">IN</option>
+                    <option value="US">US</option>
+                    <option value="UK">UK</option>
+                  </select>
+                </div>
+                <input type="hidden" name="amount" class="amount">
+                <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                <input name="phone_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+              </div>
+
+          </div>
+          <div class="donate_CountryBtn d-flex align-items-center mb-5">
+            <div>
+              <label class="form-check-label fw-bold me-2" for="nationality">Nationality</label>
+            </div>
+            <button class="countryBtn active" id="indian-btn">INDIAN</button>
+            <button class="countryBtn non_indian" id="non-indian-btn">NOT INDIAN</button>
+          </div>
+          <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(1)">Previous</button> -->
+          <div class="col-12">
+            <div class="dSubmit pt-2">
+              <button type="submit" class="btn btnPink fw-bold btnAnimation">DONATE NOW</button>
+            </div>
+          </div>
+          </form>
+        </div>
+        <div class="step d-none" id="step-3">
+          <div class="f-30 fw-semibold text-center color-10 mt-5">🎁 Thank you for the donation 🎁</div>
+          <h5 class="display-6 fw-bold text-center color-10 pb-4">May Krishna &amp; Gau Mata Bless you.</h5>
+          <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(2)">Previous</button> -->
+          <div class="col-12">
+            <div class="dSubmit pt-2">
+              <button class="btn btnPink fw-bold btnAnimation">Finish</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade donate1" id="donate1" data-bs-keyboard="false" tabindex="-1" aria-labelledby="donate1Label" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title fw-bold w-100 f-24">Cow Shed</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                <div class="donateSilde steptabs" id="donateSlide">
+                  <div class="stepper">
+                    <div class="progress-container">
+                      <div class="progress">
+                        <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <div class="step-circles">
+                        <div class="circle active" id="circle-1"></div>
+                        <div class="circle" id="circle-2"></div>
+                        <div class="circle" id="circle-3"></div>
+                      </div>
+                    </div>
+                    <div class="step w-100 d-none" id="step-11">
+
+                    </div>
+                    <div class="step" id="step-21">
+                      <div class="card_donate fw-medium zIndex-3 position-relative">
+                        <p class="mb-1 f-14">
+                          By supporting <span class="color-26 fw-bold">Hingonia</span>, you are helping us reach out to
+                          more campaigns like this and scale our impact. <a href="#" class="color-26 text-decoration-underline fw-bold">Learn More.</a>
+                        </p>
+                        <div class="d-flex justify-content-between">
+                          <span class="f-12 fw-bold">Support us by :</span>
+                          <span class="supportPer f-12 fw-bold px-1" style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">
+                            <select class="h-100">
+                              <option value="IN">16% (₹160)</option>
+                              <option value="US">22% (₹200)</option>
+                            </select>
+                          </span>
+                        </div>
+                      </div>
+                      <form method="post" action="/razor-pay" id="" >
+                          {% csrf_token %}
+                      <div class="donateForm_wr pt-3 pb-1">
+
+                          <input type="hidden" class="amount" id="amount" name="amount" value="">
+                          <input type="hidden" class="campaign_id" id="campaign_id" name="campaign_id" value="">
+                          <input type="hidden" class="plan_id" id="plan_id" name="plan_id" value="">
+                          <div class="mb-3 position-relative">
+                            <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                            <input type="text" name="first_name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
+                          </div>
+
+
+                          <div class="mb-3 position-relative">
+                            <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                            <input type="text" name="email" class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
+                          </div>
+                          <div class="mb-3 position-relative">
+                            <div class="position-absolute country_code h-100">
+                              <select class="h-100">
+                                <option value="IN">IN</option>
+                                <option value="US">US</option>
+                                <option value="UK">UK</option>
+                              </select>
+                            </div>
+                            <input type="hidden" name="amount" class="amount">
+                            <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                            <input name="phone_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                            <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                          </div>
+
+                      </div>
+                      <div class="donate_CountryBtn d-flex align-items-center mb-5">
+                        <div>
+                          <label class="form-check-label fw-bold me-2" for="nationality">Nationality</label>
+                        </div>
+                        <button class="countryBtn active" id="indian-btn">INDIAN</button>
+                        <button class="countryBtn non_indian" id="non-indian-btn">NOT INDIAN</button>
+                      </div>
+                      <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(1)">Previous</button> -->
+                      <div class="col-12">
+                        <div class="dSubmit pt-2">
+                          <button type="submit" class="btn btnPink fw-bold btnAnimation">DONATE NOW</button>
+                        </div>
+                      </div>
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+                  </div>
+                </div>
+              </div>
+
+ </div>
+<!--End-->
 {% endblock %}
 {% block script%}
 <script>
 
+$(document).on("click",".donate_now",function() {
+    var type = $(this).data('type')
+    if(type == 'One Time'){
+        var id = $(this).data('id')
+        var amount = $(this).data('amount')
+        $('.donate1 .amount').val(amount)
+        $('.donate1 .campaign_id').val(id)
+    }
+
+})
 
 </script>
 {% endblock %}

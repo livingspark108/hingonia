@@ -28,6 +28,7 @@ SLIDER_TYPE = [
 ]
 CAMPAIGN_TYPE = [
                     ('Other', 'Other'),
+                    ('Seva', 'Seva'),
                     ('Adopt a cow', 'Adopt a cow'),
 
                     ]
