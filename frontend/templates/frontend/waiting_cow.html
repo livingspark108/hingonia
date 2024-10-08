@@ -53,7 +53,7 @@
                             <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
                           </div>
                         </div>
-                        <a data-type="{{single.mode}}" data-amount="{{single.price}}" data-bs-toggle="modal" data-bs-target="#{% if single.mode == 'One Time' %}donate1{% else %}donate2{% endif %}" data-id="{{single.id}}" href="#" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt
+                        <a data-title="{{single.title}}" data-type="{{single.mode}}" data-amount="{{single.price}}" data-bs-toggle="modal" data-bs-target="#{% if single.mode == 'One Time' %}donate1{% else %}donate2{% endif %}" data-id="{{single.id}}" href="#" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt
                             {{single.title}} Cow</a>
                       </div>
                     </div>
@@ -236,6 +236,7 @@
 
                           <input type="hidden" class="amount" id="amount" name="amount" value="">
                           <input type="hidden" class="campaign_id" id="campaign_id" name="campaign_id" value="">
+                          <input type="hidden" class="title" id="title" name="title" value="">
                           <input type="hidden" class="plan_id" id="plan_id" name="plan_id" value="">
                           <div class="mb-3 position-relative">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
@@ -296,8 +297,10 @@ $(document).on("click",".donate_now",function() {
     if(type == 'One Time'){
         var id = $(this).data('id')
         var amount = $(this).data('amount')
+        var title = $(this).data('title')
         $('.donate1 .amount').val(amount)
         $('.donate1 .campaign_id').val(id)
+        $('.donate1 .title').val(title)
     }
 
 })
