@@ -347,6 +347,22 @@ class AbandonView(View):
         return JsonResponse(response)
 
 
+class SendCSRView(DevoteeRequiredMixin, View):
+
+    def post(self, request):
+        template = 'frontend/email/event_admin_template.html'
+        context = {
+            'name': request.POST.get('name'),
+            'mobile_no': request.POST.get('mobile_no'),
+            'email': request.POST.get('email'),
+            'message': request.POST.get('message'),
+            'for_vi': request.POST.get('for'),
+            'schedule_date': request.POST.get('schedule_date'),
+        }
+        setting_obj = Setting.objects.first()
+        send_email_background(request, setting_obj.admin_email, template, context, subject='CSR - Confirmation')
+
+        return redirect('home')
 # Request 80G
 class Request80GView(DevoteeRequiredMixin, View):
 

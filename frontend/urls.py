@@ -56,6 +56,7 @@ urlpatterns = [
     path('set_password/', set_password, name='set_password'),
     path('download-80g/<str:id>', Download80gView.as_view(), name='download-80g'),
     path('request-80g', Request80GView.as_view(), name="request-80g"),
+    path('send-csr', SendCSRView.as_view(), name="send-csr"),
     path('forgot-password/', ForgotPasswordView.as_view(), name='forgot_password'),
     path('verify-otp/<str:user_id>', VerifyOTPView.as_view(), name='verify_otp'),
     path('reset-password/<str:token>/', reset_password, name='reset_password'),

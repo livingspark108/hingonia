@@ -11,7 +11,11 @@
                               <div class="col-lg-4 col-md-6">
                                   <div class="card_donate d-flex gap-2 mb-2 align-items-center" id="card_donate_1">
                                     <img class="tooltipIcon" src="/static/frontend/assets/images/tooltip.svg" alt="">
-                                    <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                    {% if single.image %}
+                                    <img src="{{single.image.url}}" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                    {% else %}
+                                    <img src="/static/frontend/assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                    {% endif %}
                                     <div class="card-body d-flex flex-row gap-2 align-items-center justify-content-between">
                                       <div>
                                         <h5 class="card-title fw-bold">{{single.title}}</h5>
@@ -24,9 +28,9 @@
                                           </button>
                                         </div>
                                         <div class="quantity-container" style="display: none;">
-                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item btn btn-primary f-14 decrement-btn">-</button>
-                                          <input type='number' data-maxlength='1000' class='item-count form-control text-center quantityInput border ' data-id="{{single.id}}" data-name="{{single.title}}" value="1" >
-                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="plus-item btn btn-primary f-14 increment-btn">+</button>
+                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item f-14 decrement-btn">-</button>
+                                          <input style="width: 19px;padding: 0px;" type='number' data-maxlength='1000' class='item-count form-control text-center quantityInput border ' data-id="{{single.id}}" data-name="{{single.title}}" value="1" >
+                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="plus-item f-14 increment-btn">+</button>
                                           <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
                                         </div>
                                         <!-- <div class="added-button" style="display: none;">
@@ -38,7 +42,11 @@
                                       </div>
                                     </div>
                                     <div class="tooltipeContentWr d-flex gap-2 d-none">
-                                      <img src="assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                      {% if single.image %}
+                                      <img src="{{single.image.url}}" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                      {% else %}
+                                      <img src="/static/frontend/assets/images/home/steel.png" class="card-img-top img-fluid" alt="Steel Structure Seva">
+                                      {% endif %}
                                       <p class="f-10 mb-0">
                                         Welcome abandoned cows to a safe haven, with sturdy steel structures offering shelter
                                         and care. Join us in creating their sanctuary.

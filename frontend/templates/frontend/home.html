@@ -5,7 +5,7 @@
 {% block body %}
 <!-- Section Banner -->
 {% get_slider as all_slider %}
-      <section class="bg-9 mx-2 section-banner">
+<section class="bg-9 mx-2 section-banner" xmlns="http://www.w3.org/1999/html">
         <div class="container-fluid ps-lg-5">
           <div class="row align-items-center">
             <div class="col-lg-5 col-md-12 py-5 pe-lg-5 order-lg-1 order-2">
@@ -396,7 +396,7 @@
                             </div>
                             <input type="hidden" name="amount" class="amount">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                            <input name="phone_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                            <input name="mobile_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
                             <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
                           </div>
 
@@ -1011,36 +1011,35 @@
                     <div class="col-sm-3 col-6 mb-4 mb-md-0">
                       <div class="eventBox flexBoxCenter flex-column active" onclick="selectEvent(this)">
                           <img src="{% static 'frontend/assets/images/home/anniversary.png' %}" alt="">
-                          <input type="checkbox" class="eventCheckbox" checked>
+                          <input type="checkbox" name="event" value="anniversary" class="eventCheckbox" checked>
                           <span class="f-12 fw-bold">Anniversary</span>
                       </div>
                     </div>
                     <div class="col-sm-3 col-6 mb-4 mb-md-0">
                       <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
                           <img src="{% static 'frontend/assets/images/home/birthday.png' %}" alt="">
-                          <input type="checkbox" class="eventCheckbox">
+                          <input type="checkbox" name="event"  value="birthday" class="eventCheckbox">
                           <span class="f-12 fw-bold">Birthday</span>
                       </div>
                     </div>
                     <div class="col-sm-3 col-6 mb-4 mb-md-0">
                       <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
                           <img src="{% static 'frontend/assets/images/home/honour-of.png' %}" alt="">
-                          <input type="checkbox" class="eventCheckbox">
+                          <input type="checkbox" name="event"  value="honour of" class="eventCheckbox">
                           <span class="f-12 fw-bold">In Honour Of</span>
                       </div>
                     </div>
                     <div class="col-sm-3 col-6 mb-4 mb-md-0">
                       <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
                           <img src="{% static 'frontend/assets/images/home/memory-of.png' %}" alt="">
-                          <input type="checkbox" class="eventCheckbox">
+                          <input type="checkbox" name="event"  value="Memory of"class="eventCheckbox">
                           <span class="f-12 fw-bold">In Memory Of</span>
                       </div>
                     </div>
                   </div>
-
                 </div>
-                <button class="btn donate_nowBtn mt-2 text-white fw-bold">
-                  DONATE NOW
+                <button class="btn donate_nowBtn mt-2 text-white fw-bold" data-bs-toggle="modal" data-bs-target="#eventsModel">
+                  Schedule Now
                 </button>
               </div>
             </div>
@@ -1065,9 +1064,251 @@
                 </ol>
               </div>
             </div>
+            <!--Event Model-->
+                <div class="eventsModelBoxWr">
+<div class="modal fade" id="eventsModel" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eventsModelLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="donat_event_wr">
+          <div class="event_Wr p-4 text-center">
+            <h5 class="text-white fw-bold">Make Your Own Day Of Charity</h5>
+            <p class="text-white" style="font-size:11px">
+              Add goodwill to your special occations by spreading joy among those who
+              need your and support the most
+            </p>
+            <div class="nav nav-tabs border-0 flex-wrap event_type" id="nav-tab" role="tablist">
+              <button class="nav-link position-relative active" id="nav-anniversary-tab" data-bs-toggle="tab" data-bs-target="#nav-anniversary" type="button" role="tab" aria-controls="nav-anniversary" aria-selected="true">
+                <div class="eventBox flexBoxCenter flex-column">
+                  <img src="{% static 'frontend/assets/images/home/anniversary.png' %}" alt="">
+                  <div>
+                          <input type="checkbox" name="event" value="anniversary" class="eventCheckbox" checked>
+                    <span class="f-12 fw-bold">Anniversary</span>
+                  </div>
+                </div>
+              </button>
+              <button class="nav-link position-relative" id="nav-birthday-tab" data-bs-toggle="tab" data-bs-target="#nav-birthday" type="button" role="tab" aria-controls="nav-birthday" aria-selected="false" tabindex="-1">
+                <div class="eventBox flexBoxCenter flex-column">
+                  <img src="{% static 'frontend/assets/images/home/birthday.png' %}" alt="">
+                  <div>
+                          <input type="checkbox" name="event"  value="birthday" class="eventCheckbox">
+                    <span class="f-12 fw-bold">Birthday</span>
+                  </div>
+                </div>
+              </button>
+              <button class="nav-link position-relative" id="nav-inhonour-tab" data-bs-toggle="tab" data-bs-target="#nav-inhonour" type="button" role="tab" aria-controls="nav-inhonour" aria-selected="false" tabindex="-1">
+                <div class="eventBox flexBoxCenter flex-column">
+                  <img src="{% static 'frontend/assets/images/home/honour-of.png' %}" alt="">
+                  <div>
+                          <input type="checkbox" name="event"  value="honour of" class="eventCheckbox">
+                    <span class="f-12 fw-bold">In Honour Of</span>
+                  </div>
+                </div>
+              </button>
+              <button class="nav-link position-relative" id="nav-inmemory-tab" data-bs-toggle="tab" data-bs-target="#nav-inmemory" type="button" role="tab" aria-controls="nav-inmemory" aria-selected="false" tabindex="-1">
+                <div class="eventBox flexBoxCenter flex-column">
+                  <img src="{% static 'frontend/assets/images/home/memory-of.png' %}" alt="">
+                  <div>
+                          <input type="checkbox" name="event"  value="Memory of"class="eventCheckbox">
+                    <span class="f-12 fw-bold">In Memory Of</span>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane steptabs fade active show" id="nav-anniversary" role="tabpanel" aria-labelledby="nav-anniversary-tab">
+            <div class="donateForm_wr py-3" id="donateForm">
+              <form action="send-csr" method="post">
+                <input type="hidden" name="for" class="for">
+                {% csrf_token %}
+                <div class="mb-3 position-relative">
+                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                    here</label>
+                  <input type="textarea" name="message" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                  <input type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                  <input type="text" name="email" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <div class="position-absolute country_code h-100">
+                    <select class="h-100">
+                      <option value="IN">IN</option>
+                      <option value="US">US</option>
+                      <option value="UK">UK</option>
+                    </select>
+                  </div>
+                  <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                  <input type="text" name="mobile_no" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                  <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                    Date</label>
+                  <input type="date" name="schedule_date" class="form-control" placeholder="23/04/2024" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="tab-pane steptabs fade" id="nav-birthday" role="tabpanel" aria-labelledby="nav-birthday-tab">
+            <div class="donateForm_wr py-3" id="donateForm">
+              <form action="/send-csr" method="post">
+                {% csrf_token %}
+
+                <input type="hidden" name="for" class="for">
+                <div class="mb-3 position-relative">
+                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                    here</label>
+                  <input type="textarea" name="message" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                  <input type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                  <input type="text" class="form-control" name="email" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <div class="position-absolute country_code h-100">
+                    <select class="h-100">
+                      <option value="IN">IN</option>
+                      <option value="US">US</option>
+                      <option value="UK">UK</option>
+                    </select>
+                  </div>
+                  <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                  <input type="text" name="mobile_no" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                  <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                    Date</label>
+                  <input type="date" name="schedule_date" class="form-control" placeholder="23/04/2024" id="emailInput" aria-describedby="emailHelp">
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="tab-pane steptabs fade" id="nav-inhonour" role="tabpanel" aria-labelledby="nav-inhonour-tab">
+            <div class="donateForm_wr py-3" id="donateForm">
+              <form action="/send-csr" class="csr_form" method="post">
+                <input type="hidden" name="for" class="for">
+                {% csrf_token %}
+                <div class="mb-3 position-relative">
+                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                    here</label>
+                  <input type="textarea" name="message" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                  <input type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                  <input type="text" class="form-control" name="email" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <div class="position-absolute country_code h-100">
+                    <select class="h-100">
+                      <option value="IN">IN</option>
+                      <option value="US">US</option>
+                      <option value="UK">UK</option>
+                    </select>
+                  </div>
+                  <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                  <input type="text" name="mobile_no" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                  <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                    Date</label>
+                  <input type="date" name="schedule_date" class="form-control" placeholder="23/04/2024" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="tab-pane steptabs fade" id="nav-inmemory" role="tabpanel" aria-labelledby="nav-inmemory-tab">
+            <div class="donateForm_wr py-3" id="donateForm">
+              <form onsubmit="return false">
+                <div class="mb-3 position-relative">
+                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                    here</label>
+                  <input type="textarea" name="message" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                  <input type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                  <input type="text" class="form-control" name="email" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <div class="position-absolute country_code h-100">
+                    <select class="h-100">
+                      <option value="IN">IN</option>
+                      <option value="US">US</option>
+                      <option value="UK">UK</option>
+                    </select>
+                  </div>
+                  <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                  <input type="text" name="mobile_no" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                  <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                </div>
+                <div class="mb-3 position-relative">
+                  <label name="schedule_date" for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                    Date</label>
+                  <input type="date" class="form-control" placeholder="23/04/2024" id="emailInput" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3 position-relative">
+                  <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer border-0 modelBtns_wr">
+<!--        <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">-->
+<!--          Send-->
+<!--        </button>-->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+            </form>
+            <!--End-->
           </div>
         </div>
       </section>
+
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <button class="clear-cart">Clear</button>
 {% endblock %}
@@ -1107,6 +1348,12 @@ $(document).on("click",".campaign-btn",function() {
     var amount = $('#donationAmount').html()
     $('.amount').val(amount)
 })
+$(document).on("click",".eventCheckbox",function() {
+    var dd = $(this).val()
+    $('.for').val(dd)
+    console.log(dd)
+})
+
 $(document).on("click",".know_more",function() {
     var id = $(this).data('id')
     $.ajax({
