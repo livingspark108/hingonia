@@ -77,7 +77,7 @@
                         <h3 class="fw-bold color-10 mb-0">
                           52+
                         </h3>
-                        <p class="mb-0 fw-semibold color-10">
+                        <p class="mb-0 fw-semibold color-10 pop_up_title">
                           Cow Sheds
                         </p>
                       </div>
@@ -288,7 +288,7 @@
                       </h3>
                       <div class="row pt-3">
                         <div class="col-12">
-                          <a href="#" class="campaign-btn campaign-btn-single" data-id="{{single.id}}" data-price="{{single.price}}" style="color: #C21959;" data-bs-toggle="modal" data-bs-target="#donate1">
+                          <a data-title="{{single.title}}" href="#" class="campaign-btn campaign-btn-single" data-id="{{single.id}}" data-price="{{single.price}}" style="color: #C21959;" data-bs-toggle="modal" data-bs-target="#donate1">
                             Donate Now
                           </a>
                           <a  href="{% url 'ongoing-devotion' single.slug %}" class=" knowMore-donate ext-decoration-underline text-white fw-bold ps-3 simple-link" >
@@ -317,7 +317,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title fw-bold w-100 f-24">Cow Shed</h5>
+                      <h5 class="modal-title fw-bold w-100 f-24 pop_up_title">Cow Shed</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body campaign_data description">
@@ -332,7 +332,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title fw-bold w-100 f-24">Cow Shed</h5>
+                      <h5 class="modal-title fw-bold w-100 f-24 pop_up_title">Cow Shed</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -375,7 +375,7 @@
                           <input type="hidden" id="plan_id" name="plan_id" value="">
                           <div class="mb-3 position-relative">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
+                            <input required type="text" name="name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
                           </div>
                           <div class="mb-3 position-relative">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Preferred date</label>
@@ -384,7 +384,7 @@
 
                           <div class="mb-3 position-relative">
                             <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                            <input type="text" name="email" class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
+                            <input required type="text" name="email" class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
                           </div>
                           <div class="mb-3 position-relative">
                             <div class="position-absolute country_code h-100">
@@ -396,7 +396,7 @@
                             </div>
                             <input type="hidden" name="amount" class="amount">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                            <input name="mobile_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                            <input required name="mobile_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
                             <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
                           </div>
 
@@ -411,7 +411,7 @@
                       <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(1)">Previous</button> -->
                       <div class="col-12">
                         <div class="dSubmit pt-2">
-                          <button type="submit" class="btn btnPink fw-bold btnAnimation">DONATE NOW</button>
+                          <button type="submit" class="btn btnPink fw-bold btnAnimation final_submit">DONATE NOW</button>
                         </div>
                       </div>
                       </form>
@@ -673,7 +673,7 @@
                       <img src="{% static 'frontend/assets/images/skbt-logo.webp' %}" width="80" alt="">
                     </div>
                     <div class="mt-3">
-                      <a href="#" class="cm-btn border border-dark-subtle bg-7 color-10 fs-5">
+                      <a href="{% url 'csr' %}" class="cm-btn border border-dark-subtle bg-7 color-10 fs-5">
                         Become a Voluteer
                         <i class="bi bi-arrow-right color-10">
                         </i>
@@ -691,7 +691,7 @@
                     <div class="py-md-4">
                     </div>
                     <div class="pt-5">
-                      <a href="#" class="cm-btn p-0">
+                      <a href="{% url 'about-us' %}" class="cm-btn p-0">
                         <img src="{% static 'frontend/assets/images/home/more-btn.png' %}" class="img-fluid" alt="">
                       </a>
                     </div>
@@ -709,7 +709,7 @@
                     <div class="py-md-4">
                     </div>
                     <div class="pt-5">
-                      <a href="#" class="cm-btn p-0">
+                      <a href="{% url 'about-us' %}" class="cm-btn p-0">
                         <img src="{% static 'frontend/assets/images/home/more-btn.png' %}" class="img-fluid" alt="">
                       </a>
                     </div>
@@ -923,7 +923,9 @@
                           <img class="img-fluid" src="{{single_image.file.url}}" />
                           <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >{{single.title}}</h4>
                           <div>
-                            <p class="my-3">The number of cows here has grown to over 18,000, making it challenging to feed them on time. Rajasthan Solarpark Development Company Limited (RSDCL) has helped by providing a TMR (Total Mixed Ration) Fodder Feeding Machine that mixes green fodder, dry fodder, and concentrate, ensuring all cows get equal nutrition. With this machine, we can now feed 3,000 cows every day.</p>
+                            {% if single.description %}
+                            <p class="my-3">{{single.description|safe}}</p>
+                            {% endif %}
                           </div>
                         </div>
                         {% endfor %}
@@ -1007,36 +1009,44 @@
                     Add goodwill to your special occations by spreading joy among those who
                     need your and support the most
                   </p>
-                  <div class="event_type row">
-                    <div class="col-sm-3 col-6 mb-4 mb-md-0">
-                      <div class="eventBox flexBoxCenter flex-column active" onclick="selectEvent(this)">
-                          <img src="{% static 'frontend/assets/images/home/anniversary.png' %}" alt="">
-                          <input type="checkbox" name="event" value="anniversary" class="eventCheckbox" checked>
-                          <span class="f-12 fw-bold">Anniversary</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 col-6 mb-4 mb-md-0">
-                      <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
-                          <img src="{% static 'frontend/assets/images/home/birthday.png' %}" alt="">
-                          <input type="checkbox" name="event"  value="birthday" class="eventCheckbox">
-                          <span class="f-12 fw-bold">Birthday</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 col-6 mb-4 mb-md-0">
-                      <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
-                          <img src="{% static 'frontend/assets/images/home/honour-of.png' %}" alt="">
-                          <input type="checkbox" name="event"  value="honour of" class="eventCheckbox">
-                          <span class="f-12 fw-bold">In Honour Of</span>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 col-6 mb-4 mb-md-0">
-                      <div class="eventBox flexBoxCenter flex-column" onclick="selectEvent(this)">
-                          <img src="{% static 'frontend/assets/images/home/memory-of.png' %}" alt="">
-                          <input type="checkbox" name="event"  value="Memory of"class="eventCheckbox">
-                          <span class="f-12 fw-bold">In Memory Of</span>
-                      </div>
+                    <div class="event_type row">
+                <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                  <div class="eventBox flexBoxCenter flex-column">
+                    <img src="{% static 'frontend/assets/images/home/anniversary.png' %}" alt="">
+                    <div>
+                      <input value="Anniversary"  type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <span class="f-12 fw-bold">Anniversary</span>
                     </div>
                   </div>
+                </div>
+                <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                  <div class="eventBox flexBoxCenter flex-column">
+                    <img src="{% static 'frontend/assets/images/home/birthday.png' %}" alt="">
+                    <div>
+                      <input value="Birthday"  type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <span class="f-12 fw-bold">Birthday</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                  <div class="eventBox flexBoxCenter flex-column">
+                    <img src="{% static 'frontend/assets/images/home/honour-of.png' %}" alt="">
+                    <div>
+                      <input value="In Honour Of" type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <span class="f-12 fw-bold">In Honour Of</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-6 mb-4 mb-md-0">
+                  <div class="eventBox flexBoxCenter flex-column">
+                    <img src="{% static 'frontend/assets/images/home/memory-of.png' %}" alt="">
+                    <div>
+                      <input value="In Memory Of" type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <span class="f-12 fw-bold">In Memory Of</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
                 </div>
                 <button class="btn donate_nowBtn mt-2 text-white fw-bold" data-bs-toggle="modal" data-bs-target="#eventsModel">
                   Schedule Now
@@ -1086,8 +1096,7 @@
                 <div class="eventBox flexBoxCenter flex-column">
                   <img src="{% static 'frontend/assets/images/home/anniversary.png' %}" alt="">
                   <div>
-                          <input type="checkbox" name="event" value="anniversary" class="eventCheckbox" checked>
-                    <span class="f-12 fw-bold">Anniversary</span>
+                        <input onclick="selectEvent(this)" type="checkbox" name="event" value="anniversary" class="eventCheckbox" checked>                    <span class="f-12 fw-bold">Anniversary</span>
                   </div>
                 </div>
               </button>
@@ -1095,7 +1104,7 @@
                 <div class="eventBox flexBoxCenter flex-column">
                   <img src="{% static 'frontend/assets/images/home/birthday.png' %}" alt="">
                   <div>
-                          <input type="checkbox" name="event"  value="birthday" class="eventCheckbox">
+                         <input onclick="selectEvent(this)" type="checkbox" name="event"  value="birthday" class="eventCheckbox">
                     <span class="f-12 fw-bold">Birthday</span>
                   </div>
                 </div>
@@ -1104,7 +1113,7 @@
                 <div class="eventBox flexBoxCenter flex-column">
                   <img src="{% static 'frontend/assets/images/home/honour-of.png' %}" alt="">
                   <div>
-                          <input type="checkbox" name="event"  value="honour of" class="eventCheckbox">
+                          <input onclick="selectEvent(this)" type="checkbox" name="event"  value="honour of" class="eventCheckbox">
                     <span class="f-12 fw-bold">In Honour Of</span>
                   </div>
                 </div>
@@ -1113,7 +1122,7 @@
                 <div class="eventBox flexBoxCenter flex-column">
                   <img src="{% static 'frontend/assets/images/home/memory-of.png' %}" alt="">
                   <div>
-                          <input type="checkbox" name="event"  value="Memory of"class="eventCheckbox">
+                          <input onclick="selectEvent(this)" type="checkbox" name="event"  value="Memory of" class="eventCheckbox">
                     <span class="f-12 fw-bold">In Memory Of</span>
                   </div>
                 </div>
@@ -1310,7 +1319,7 @@
       </section>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<button class="clear-cart">Clear</button>
+<!--<button class="clear-cart">Clear</button>-->
 {% endblock %}
 {% block script%}
 <script>
@@ -1318,6 +1327,8 @@ quantityCart.clearCart();
 $(document).on("click",".campaign-btn-single",function() {
     var id = $(this).data('id')
     var amount = $(this).data('price')
+    var title = $(this).data('title')
+    $('.pop_up_title').html(title)
     $('.single_amount').val(amount)
     $('.actual_amount').val(amount)
     $('.total_rs_html').html(amount)
@@ -1339,6 +1350,7 @@ $(document).on("keyup",".custom_amt",function() {
 <!--      $('.single_amount').val(parseInt(actual_amt)+parseInt(atm))-->
 <!--      $('.total_rs_html').html(parseInt(actual_amt)+parseInt(atm))-->
 <!--    }else{-->
+      $('.amount').val(parseInt(atm))
       $('.final_amount').val(parseInt(atm))
       $('.total_rs_html').html(parseInt(atm))
 <!--    }-->
@@ -1366,6 +1378,15 @@ $(document).on("click",".know_more",function() {
               $('.title').html(result.title)
             }
     })
+})
+$(document).on("click",".check_amount",function() {
+  var amt = $('.amount').val()
+  if(amt < 300){
+    alert("Amount should be greater than 300")
+    return false;
+  }else{
+    nextStep(2)
+  }
 })
 </script>
 <script>

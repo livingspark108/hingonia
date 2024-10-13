@@ -47,6 +47,7 @@ var quantityCart = (function() {
     var item = new Item(name, id, price, count,max_qty);
     console.log(item)
     cart.push(item);
+
     saveCart();
   }
   // Set count from item
@@ -423,6 +424,13 @@ $(document).on("click", ".delete-item", function(event) {
 $(document).on("click", ".minus-item", function(event) {
   var id = $(this).data('id')
   quantityCart.removeItemFromCart(id);
+  var count = $("input.item-count[data-id='" + id + "']").val();
+
+  $("input.item-count[data-id='" + id + "']").val(parseInt(count) - 1);
+  $('.total_rs_html').html(quantityCart.totalCart())
+  $('.amount').val(quantityCart.totalCart())
+
+
   displayCart();
 })
 // +1

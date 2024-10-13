@@ -283,6 +283,7 @@ var swiper = new Swiper(".objectiveCowSwiper", {
 
 
 // Event Box
+// Event Box
 document.addEventListener("DOMContentLoaded", function() {
   const checkboxes = document.querySelectorAll('.eventCheckbox');
   checkboxes.forEach(checkbox => {
@@ -292,7 +293,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function selectEvent(selectedCheckbox) {
   const checkboxes = document.querySelectorAll('.eventCheckbox');
-  
+
   checkboxes.forEach(checkbox => {
     if (checkbox !== selectedCheckbox) {
       checkbox.checked = false;
@@ -306,6 +307,8 @@ function selectEvent(selectedCheckbox) {
     selectedCheckbox.closest('.eventBox').classList.remove('active');
   }
 }
+
+
 
 
 

@@ -45,11 +45,11 @@
     <div class="container-fluid px-md-5 d-block">
       <div class="row align-items-center g-md-3">
         <div class="col-lg-6 col-md-8 col-6">
-          <a class="ff-epilogue" href="./">
+          <a class="ff-epilogue" href="{% url 'home' %}">
             <span class="mb-0 color-1 fw-bold fs-4">Hingonia.org</span>
           </a>
           <span class="text-white ff-epilogue d-md-inline d-none">/
-            <img src="assets/images/skbt-logo.webp" width="25" alt="">
+            <img src="{% static 'frontend/assets/images/skbt-logo.webp' %}" width="25" alt="">
             Sri Krishna Balram Seva Trust
           </span>
         </div>

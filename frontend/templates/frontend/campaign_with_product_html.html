@@ -110,8 +110,10 @@
                                         </button>
                                       </div>
                                       <div class="d-flex flex-column align-items-end pe-lg-3 pe-2">
-                                        <span class="f-12 fw-bold text-white taText">TOTAL AMOUNT</span>
-                                        <span class="f-36 text-white fw-bold taRs total_rs_html" style="line-height:normal">1.0</span>
+                                        <span class="f-12 fw-bold text-white taText" {{single.price}}>TOTAL AMOUNT</span>
+                                        <input type="hidden" class="amount" >
+                                        <input type="hidden" class="actual_amount" >
+                                        <span class="f-36 text-white fw-bold taRs total_rs_html" style="line-height:normal">{{single.price}}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -122,7 +124,7 @@
                             <input type="hidden" class="actual_amount" value="1.0">
                             <div class="col-12">
                               <div class="dSubmit pt-2">
-                                <button class="btn btnPink fw-bold btnAnimation" onclick="nextStep(2)">DONATE NOW</button>
+                                <button class="btn btnPink fw-bold btnAnimation check_amount">DONATE NOW</button>
                               </div>
                             </div>
                           </div>
@@ -151,11 +153,11 @@
                               <input type="hidden" value="" class="all_item_data" name="all_item_data">
                                 <div class="mb-3 position-relative">
                                   <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                                  <input type="text" class="form-control" placeholder="Enter your name" name="first_name" id="nameInput" aria-describedby="nameHelp">
+                                  <input required type="text" class="form-control" placeholder="Enter your name" name="first_name" id="nameInput" aria-describedby="nameHelp">
                                 </div>
                                 <div class="mb-3 position-relative">
                                   <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                                  <input type="text" name="email" class="form-control" placeholder="Enter you email" id="emailInput" aria-describedby="emailHelp">
+                                  <input required type="email" name="email" class="form-control" placeholder="Enter you email" id="emailInput" aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3 position-relative">
                                   <div class="position-absolute country_code h-100">
@@ -166,7 +168,7 @@
                                     </select>
                                   </div>
                                   <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                                  <input type="text" name="phone_no" class="phone-number w-100" placeholder="+91 00000-00000">
+                                  <input required type="text" name="phone_no" class="phone-number w-100" placeholder="+91 00000-00000">
                                   <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
                                 </div>
                             </div>
