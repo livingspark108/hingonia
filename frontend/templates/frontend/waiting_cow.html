@@ -47,12 +47,12 @@
                           <span class="fw-semibold color-10 ff-Rubik cardprice_title">{{single.price}}<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
                           {% endif %}
                         </div>
-                        <div class="mt-md-4 mt-2">
-                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">
-                            <input type="checkbox" class="position-relative" id="requestBlog">
-                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>
-                          </div>
-                        </div>
+<!--                        <div class="mt-md-4 mt-2">-->
+<!--                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">-->
+<!--                            <input type="checkbox" class="position-relative" id="requestBlog">-->
+<!--                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>-->
+<!--                          </div>-->
+<!--                        </div>-->
                         <a data-title="{{single.title}}" data-type="{{single.mode}}" data-amount="{{single.price}}" data-bs-toggle="modal" data-bs-target="#{% if single.mode == 'One Time' %}donate1{% else %}donate2{% endif %}" data-id="{{single.id}}" href="#" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt
                             {{single.title}} Cow</a>
                       </div>
@@ -134,7 +134,7 @@
               <input type="hidden" id="plan_id" name="plan_id" value="">
               <div class="mb-3 position-relative">
                 <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                <input type="text" name="name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
+                <input type="text" required name="name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
               </div>
               <div class="mb-3 position-relative">
                 <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Preferred date</label>
@@ -143,7 +143,7 @@
 
               <div class="mb-3 position-relative">
                 <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                <input type="text" name="email" class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
+                <input type="email" required name="email" class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
               </div>
               <div class="mb-3 position-relative">
                 <div class="position-absolute country_code h-100">
@@ -155,7 +155,7 @@
                 </div>
                 <input type="hidden" name="amount" class="amount">
                 <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                <input name="phone_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                <input name="phone_no" required type="number" class="phone-number w-100" placeholder="+91 00000-00000">
                 <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
               </div>
 
@@ -240,13 +240,13 @@
                           <input type="hidden" class="plan_id" id="plan_id" name="plan_id" value="">
                           <div class="mb-3 position-relative">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                            <input type="text" name="first_name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
+                            <input type="text" name="first_name" required class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
                           </div>
 
 
                           <div class="mb-3 position-relative">
                             <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                            <input type="text" name="email" class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
+                            <input type="text" name="email" required class="form-control" placeholder="Enter your email" id="emailInput" aria-describedby="emailHelp">
                           </div>
                           <div class="mb-3 position-relative">
                             <div class="position-absolute country_code h-100">
@@ -258,7 +258,7 @@
                             </div>
                             <input type="hidden" name="amount" class="amount">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                            <input name="phone_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                            <input name="phone_no" required type="text" class="phone-number w-100" placeholder="+91 00000-00000">
                             <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
                           </div>
 
