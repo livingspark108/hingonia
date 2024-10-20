@@ -1009,6 +1009,67 @@
 {% endblock %}
 {% block script%}
 <script>
+var minimum_value = $('.minimum_value').val()
+ function final_amt(){
+    var donate_amt = $('.donate_amt_1').val()
+
+    var support = $('.support_option').val()
+    var support_amt = 0
+    if(support == 'other'){
+        support_amt = $('.ctm_support_amt').val()
+        if(support_amt == ''){
+            support_amt = 0
+        }
+    }else{
+        support_amt = support
+    }
+    console.log("Donate amt")
+
+    console.log(donate_amt)
+    console.log("Support")
+    $('.tip').val(support_amt)
+    console.log(support_amt)
+
+    donate_amt = parseInt(donate_amt) + parseInt(support_amt);
+
+    $('.active_amt_html').html(donate_amt)
+	$('.active_amt').val('')
+	$('.active_amt').val(donate_amt)
+
+ }
+
+$(document).on("change",".support_option",function() {
+	var selected = $(this).val()
+	if(selected == 'other'){
+		$('.ctm_support_amt').show()
+		$('.ctm_support_amt').val(0)
+	}else{
+		$('.ctm_support_amt').hide()
+		final_amt()
+	}
+})
+
+$(document).on("keyup",".ctm_support_amt",function() {
+
+	final_amt()
+})
+$(document).on("keyup",".ctm_amt",function() {
+      console.log("test")
+      var amt = $(this).val()
+      var amt_1 = (8 / 100) * amt
+      var amt_2 = (12 / 100) * amt
+      var amt_3 = (14 / 100) * amt
+      var amt_4 = (16 / 100) * amt
+      console.log("HERE")
+      console.log(amt_1)
+      console.log("End")
+      make_dropdown(amt)
+      $('.active_amt_html').html(amt)
+      $('.donate_amt_1').val(amt)
+      final_amt()
+
+  })
+
 $(document).on("click",".campaign-btn-single",function() {
     shoppingCart.clearCart();
     var id = $(this).data('id')

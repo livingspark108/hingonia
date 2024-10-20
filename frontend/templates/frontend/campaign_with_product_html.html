@@ -56,7 +56,7 @@
                                 <div class="custom_amount flexBoxCenter">
                                   <div class="title fw-bold">Custom Amount:</div>
                                   <div class="amount">
-                                    <input id="number" class="custom_amt" type="number">
+                                    <input id="number" class="ctm_amt" type="number">
                                   </div>
                                 </div>
                                 <div class="currency">
@@ -80,12 +80,15 @@
                                         <p class="mb-0 fw-bold f-14">Support us by :</p>
                                     </div>
                                     <div class="col-5 text-end">
-                                        <select class="rounded-2 w-100 support_option"><option value="4.80">8% (4.80) ▼</option><option value="7.20">12% (7.20) ▼</option><option value="8.40">14% (8.40) ▼</option><option value="9.60">16% (9.60) ▼</option><option value="other">Other ▼</option></select>
+                                        <select class="rounded-2 w-100 support_option">
+                                        </select>
                                         <input style="display:none" type="number" placeholder="Amount" class="ctm_support_amt form-control mt-1" value="" name="ctm_support_amt">
                                     </div>
                                 </div>
                             </div>
                               </div>
+                              <input type="hidden" value="" name="amount" class="active_amt">
+                              <input type="hidden" value="" name="amount_11" class="donate_amt_1">
                               <div class="col-md-6 pt-1">
                                 <div class=" messageBox">
                                   <div class="d-flex align-items-center gap-2 mb-2">
