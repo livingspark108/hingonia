@@ -1,16 +1,17 @@
 // ************************************************
 // Shopping Cart API
 // ************************************************
-var quantityCart = (function() {
+var shoppingCart = (function() {
   // =============================
   // Private methods and propeties
   // =============================
   cart = [];
 
   // Constructor
-  function Item(name, id, price, count,max_qty) {
+  function Item(name, id,img, price, count, max_qty) {
     this.name = name;
     this.price = price;
+    this.img = img;
     this.count = count;
     this.id = id;
     this.max_qty = max_qty;
@@ -18,14 +19,14 @@ var quantityCart = (function() {
 
   // Save cart
   function saveCart() {
-    sessionStorage.setItem('quantityCart', JSON.stringify(cart));
+    sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
   }
 
     // Load cart
   function loadCart() {
-    cart = JSON.parse(sessionStorage.getItem('quantityCart'));
+    cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
   }
-  if (sessionStorage.getItem("quantityCart") != null) {
+  if (sessionStorage.getItem("shoppingCart") != null) {
     loadCart();
   }
 
@@ -36,7 +37,11 @@ var quantityCart = (function() {
   var obj = {};
 
   // Add to cart
-  obj.addItemToCart = function(name, id, price, count,max_qty) {
+  obj.addItemToCart = function(name, id,img, price, count, max_qty) {
+    console.log("Img", img)
+    console.log("Name", name)
+    console.log("Price", price)
+
     for(var item in cart) {
       if(cart[item].id === id) {
         cart[item].count ++;
@@ -44,10 +49,10 @@ var quantityCart = (function() {
         return;
       }
     }
-    var item = new Item(name, id, price, count,max_qty);
+    console.log(img)
+    var item = new Item(name, id, img,price,count,max_qty);
     console.log(item)
     cart.push(item);
-
     saveCart();
   }
   // Set count from item
@@ -60,7 +65,15 @@ var quantityCart = (function() {
     }
   };
   // Set Plat from item
-
+  obj.setPlateForItem = function(id, plate,price) {
+    for(var i in cart) {
+      if (cart[i].id === id) {
+        cart[i].plate = plate;
+        cart[i].price = price;
+        break;
+      }
+    }
+  };
   // Remove item from cart
   obj.removeItemFromCart = function(id) {
       for(var item in cart) {
@@ -99,6 +112,7 @@ var quantityCart = (function() {
   obj.totalCount = function() {
     var totalCount = 0;
     for(var item in cart) {
+
       totalCount += cart[item].count;
     }
     return totalCount;
@@ -107,23 +121,16 @@ var quantityCart = (function() {
   // Total cart
   obj.totalCart = function() {
     var totalCart = 0;
+    console.log(cart)
     for(var item in cart) {
-      totalCart += cart[item].price * cart[item].count;
+      console.log("here")
+      console.log(cart[item].price)
+      totalCart += Number(cart[item].price) * cart[item].count;
+
     }
+    console.log("Here")
+    console.log(totalCart)
     return Number(totalCart.toFixed(2));
-  }
-  obj.totalName = function() {
-    var totalName = "";
-    for(var item in cart) {
-      if (!totalName.includes(cart[item].name)) {
-            // If it's not the first item, add a comma and space before appending the name
-            if (totalName.length > 0) {
-                totalName += ", ";
-            }
-            totalName += cart[item].name;
-        }
-    }
-    return totalName
   }
 
   // List cart
@@ -157,29 +164,30 @@ var quantityCart = (function() {
 })();
 
 // Start Old UI
-var quantityCartOld = (function() {
+var shoppingCartOld = (function() {
   // =============================
   // Private methods and propeties
   // =============================
   cart_old = [];
 
   // Constructor
-  function ItemOld(name, id,qty) {
+  function ItemOld(name, id, plate,qty) {
     this.name = name;
     this.id = id;
+    this.plate = plate;
     this.count = qty;
   }
 
   // Save cart
   function saveCartOld() {
-    sessionStorage.setItem('quantityCartOld', JSON.stringify(cart_old));
+    sessionStorage.setItem('shoppingCartOld', JSON.stringify(cart_old));
   }
 
     // Load cart
   function loadCartOld() {
-    cart_old = JSON.parse(sessionStorage.getItem('quantityCartOld'));
+    cart_old = JSON.parse(sessionStorage.getItem('shoppingCartOld'));
   }
-  if (sessionStorage.getItem("quantityCartOld") != null) {
+  if (sessionStorage.getItem("shoppingCartOld") != null) {
     loadCartOld();
   }
 
@@ -190,16 +198,16 @@ var quantityCartOld = (function() {
   var obj_old = {};
 
   // Add to cart
-  obj_old.addItemToCartOld = function(name, id,qty) {
+  obj_old.addItemToCartOld = function(name, id, plate,qty) {
     console.log("Old item"+ cart_old)
     for(var item in cart_old) {
-      if(cart_old[item].id === id) {
+      if(cart_old[item].id === id && cart_old[item].plate === plate) {
         cart_old[item].count =  Number(cart_old[item].count) + Number(qty);
         saveCartOld();
         return;
       }
     }
-    var item = new ItemOld(name, id,qty);
+    var item = new ItemOld(name, id, plate,qty);
     console.log(item)
     cart_old.push(item);
     saveCartOld();
@@ -235,13 +243,8 @@ var quantityCartOld = (function() {
 // Triggers / Events
 // *****************************************
 // Add item
-// *****************************************
-// Triggers / Events
-// *****************************************
-// Add item
 $(document).on("click keypress", ".add-to-cart", function(event) {
   if (event.type === "click" || (event.type === "keypress" && event.which === 13)) {
-    console.log("Test")
     event.preventDefault();
     var name = $(this).data('name');
     var plate = $(this).data('plate');
@@ -258,41 +261,65 @@ $(document).on("click keypress", ".add-to-cart", function(event) {
     console.log(count)
     if (!isNaN(max_qty)) {
       if (typeof count === "undefined") {
-            quantityCart.addItemToCart(name, id,img, price, half_price, full_price, 1, plate,max_qty);
+      name, id, img,price,count,maxlength
+            shoppingCart.addItemToCart(name, id,img, price, 1, max_qty);
             displayCart();
       }
       if(max_qty > count){
-            quantityCart.addItemToCart(name, id,img, price, half_price, full_price, 1, plate,max_qty);
+            shoppingCart.addItemToCart(name, id,img, price, 1, max_qty);
             displayCart();
       }
     }else{
-      quantityCart.addItemToCart(name, id, img, price, half_price, full_price, 1, plate,max_qty);
+      shoppingCart.addItemToCart(name, id,img, price, 1, max_qty);
       displayCart();
     }
   }
 });
 
+function make_dropdown(amt){
 
+
+    var percentages = [8, 12, 14, 16];
+    $(".support_option").html('')
+    percentages.forEach(function(percent) {
+        var value = (amt * percent / 100).toFixed(2);
+        var optionText = percent + "% (" + value + ") ▼";
+        $(".support_option").append(
+            $("<option></option>").val(value).text(optionText)
+        );
+    });
+
+    $(".support_option").append(
+        $("<option></option>").val("other").text("Other ▼")
+    );
+}
 
 
 // Clear items
 $(document).on("click",".clear-cart",function() {
-  quantityCart.clearCart();
-  quantityCartOld.clearCartOld()
+  shoppingCart.clearCart();
+  shoppingCartOld.clearCartOld()
   displayCart();
 });
 
 
 function displayCart() {
-  var cartArray = quantityCart.listCart();
+  var cartArray = shoppingCart.listCart();
   var output = "";
   var output_tmp = "";
   console.log(cartArray)
   for(var i in cartArray) {
+    if(cartArray[i].plate == 'half'){
+        console.log("Hlaf")
+        console.log(cartArray[i].half_price)
+        var plate_select = "<select data-id='" + cartArray[i].id + "'   class='form-control plateType'><option selected value='half' data-price='"+cartArray[i].half_price+"' >Half</option><option value='full' data-price='"+cartArray[i].full_price+"'>Full</option></select>"
+    }else if(cartArray[i].plate == 'full'){
+        var plate_select = "<select data-id='" + cartArray[i].id + "' class='form-control plateType'><option  value='half' data-price='"+cartArray[i].half_price+"' >Half</option><option selected value='full' data-price='"+cartArray[i].full_price+"'>Full</option></select>"
 
+    }else{
         var plate_select = "<select data-id='" + cartArray[i].id + "' data-price='"+cartArray[i].price+"' class='form-control plateType'><option value='flat'>Flat</option></select>"
 
-
+    }
 //    var jain = "<div class='form-check form-check-inline py-2'><input type='checkbox' class='form-check-input' id='jain-" + cartArray[i].id + "'><label class='form-check-label' for='jain-" + cartArray[i].id + "'>Jain</label></div>"
     var jain = ''
 //    output += "<tr>"
@@ -336,39 +363,31 @@ function displayCart() {
       }
 
   $('.show-cart').html(output);
-  if(quantityCart.totalCart() > 0){
+  console.log(shoppingCart.totalCart())
+  if(shoppingCart.totalCart() > 0){
     $('.show-cart').show()
-    $('.fixDonateBottom').show()
-    $('.donationAmount').val(quantityCart.totalCart());
-    $('.donationAmount_html').html(quantityCart.totalCart());
-    $('.all_item_html').html(quantityCart.totalName());
-    $('.donate_monthly').hide();
-    $('.donate_monthly input').hide();
-    $('.donate_monthly label').hide();
-    $('.active_amt').val(quantityCart.totalCart());
-    $('.active_price').val(quantityCart.totalCart());
-    $('.final_amount').val(quantityCart.totalCart());
+    console.log("Calculation")
+    $('.active_amt_html').html(shoppingCart.totalCart());
+    $('.donate_amt_1').val(shoppingCart.totalCart());
+    make_dropdown(shoppingCart.totalCart())
+    $('.active_price').val(shoppingCart.totalCart());
+    $('.tmp_amount').val(shoppingCart.totalCart());
     $('.all_ctm_amount').hide()
     $('.cart_item_html_tmp').show()
     $('.cart_item_html_tmp .ct_item_tmp').html(output_tmp)
 
-//    generateOptions(quantityCart.totalCart())
+//    generateOptions(shoppingCart.totalCart())
   }else{
-    $('.donationAmount_html').html('');
-    $('.donationAmount').html('');
-
-    $('.fixDonateBottom').hide()
     $('.show-cart').hide()
     $('.all_ctm_amount').show()
     $('.cart_item_html_tmp').hide()
   }
 
-  $('.total-count').html(quantityCart.totalCount());
+  $('.total-count').html(shoppingCart.totalCount());
   $('.all_item_data').val('')
   var jsonString = JSON.stringify(cartArray);
   $('.all_item_data').val(jsonString)
 }
-
 
 const percentages = [0.00,0.08, 0.12, 0.14, 0.16];
 
@@ -393,7 +412,7 @@ function generateOptions(totalAmount) {
 }
 
 function displayCartOld() {
-  var cartArray = quantityCartOld.listCart();
+  var cartArray = shoppingCartOld.listCart();
 
 
   var output = "";
@@ -411,7 +430,7 @@ function displayCartOld() {
 
 $(document).on("click", ".delete-item", function(event) {
   var id = $(this).data('id')
-  quantityCart.removeItemFromCartAll(id);
+  shoppingCart.removeItemFromCartAll(id);
   displayCart();
   $('.add-to-cart[data-id="' + id + '"]').show()
   $('.qtyBoxCmp[data-id="' + id + '"]').hide();
@@ -423,22 +442,15 @@ $(document).on("click", ".delete-item", function(event) {
 // -1
 $(document).on("click", ".minus-item", function(event) {
   var id = $(this).data('id')
-  quantityCart.removeItemFromCart(id);
-  var count = $("input.item-count[data-id='" + id + "']").val();
-
-  $("input.item-count[data-id='" + id + "']").val(parseInt(count) - 1);
-  $('.total_rs_html').html(quantityCart.totalCart())
-  $('.amount').val(quantityCart.totalCart())
-
-
+  shoppingCart.removeItemFromCart(id);
   displayCart();
 })
 // +1
 $(document).on("click", ".plus-item", function(event) {
   var id = $(this).data('id')
   var name = $(this).data('name')
+  var img = $(this).data('img')
   var price = $(this).data('price')
-  console.log(price)
   var count = $("input.item-count[data-id='" + id + "']").val();
 
   var inputElement = $("input.item-count[data-id='" + id + "']");
@@ -447,17 +459,13 @@ $(document).on("click", ".plus-item", function(event) {
 
   if (!isNaN(maxlength)) {
       if(maxlength > count){
-          quantityCart.addItemToCart(name, id,price,count,100);
-          $("input.item-count[data-id='" + id + "']").val(parseInt(count)+1);
-          displayCart();
+      shoppingCart.addItemToCart(name, id, img,price,count,maxlength);
+      displayCart();
       }
   }else{
-      quantityCart.addItemToCart(name, id,price,count,100);
+      shoppingCart.addItemToCart(name, id, img,price,count,maxlength);
       displayCart();
   }
-  $('.total_rs_html').html(quantityCart.totalCart())
-  $('.amount').val(quantityCart.totalCart())
-
 })
 
 // Item count input
@@ -467,11 +475,11 @@ $(document).on("change", ".item-count", function(event) {
    var count = Number($(this).val());
    if (!isNaN(maxlength)) {
       if(maxlength > count){
-      quantityCart.addItemToCart(name, id);
+      shoppingCart.addItemToCart(name, id);
       displayCart();
       }
   }else{
-      quantityCart.addItemToCart(name, id);
+      shoppingCart.addItemToCart(name, id);
       displayCart();
   }
 });
@@ -481,7 +489,7 @@ $(document).on("change", ".plateType", function(event) {
    var price = $(this).find(':selected').attr('data-price')
    console.log(price)
   var plate = $(this).val()
-  quantityCart.setPlateForItem(id, plate,price);
+  shoppingCart.setPlateForItem(id, plate,price);
   displayCart();
 });
 
@@ -510,7 +518,7 @@ $(document).on("click keypress", ".add-to-cart-old", function(event) {
     console.log(id)
     console.log(plate)
     if (!isNaN(qty)) {
-        quantityCartOld.addItemToCartOld(name, id, plate, qty);
+        shoppingCartOld.addItemToCartOld(name, id, plate, qty);
         displayCartOld();
   }
   }

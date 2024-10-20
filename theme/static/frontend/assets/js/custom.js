@@ -712,3 +712,26 @@ var campaignGallerySwiper = new Swiper(".campaignGallerySwiper", {
     },
   },
 });
+
+
+$(document).ready(function () {
+  $(document).on('click', '.plusBtn', function () {
+    var input = $(this).prev(".quantityInput");
+    var currentValue = parseInt(input.val());
+    input.val(currentValue + 1);
+    if (currentValue === 0) {
+      $(this).closest(".col-5").find(".qty-box-btn").show();
+      $(this).closest(".col-5").find(".qtyBoxCmp").hide();
+    }
+  });
+  $(document).on('click', '.minusBtn', function () {
+    var input = $(this).next(".quantityInput");
+    var currentValue = parseInt(input.val());
+    if (currentValue > 1) {
+      input.val(currentValue - 1);
+    } else {
+      $(this).closest(".col-5").find(".qty-box-btn").show();
+      $(this).closest(".col-5").find(".qtyBoxCmp").hide();
+    }
+  });
+});

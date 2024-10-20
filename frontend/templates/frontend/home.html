@@ -229,11 +229,11 @@
                       <div class="row justify-content-center align-items-center">
                         <div class="col-8">
                           <h6 class="text-white">
-                            #Haven_for_cows
+                            {% if single.tag %}
+                               {{single.tag|generate_tag}}
+                            {% endif %}
                           </h6>
-                          <h5 class="text-white fw-semibold ff-epilogue mb-0">
-                            Infrastructure
-                          </h5>
+
                         </div>
                         <div class="col-2">
                           <a href="#">
@@ -243,7 +243,7 @@
                         </div>
                       </div>
                       <div>
-                        <img src="{% static 'frontend/assets/images/home/campaign-01.jpg' %}" class="campaign-img" alt="">
+                        <img src="{{single.campaign_image.url}}" class="campaign-img" alt="">
                       </div>
                       {% get_campaign_data single.id as campaign_single %}
 
@@ -1319,12 +1319,12 @@
       </section>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<!--<button class="clear-cart">Clear</button>-->
+<button class="clear-cart">Clear</button>
 {% endblock %}
 {% block script%}
 <script>
-quantityCart.clearCart();
 $(document).on("click",".campaign-btn-single",function() {
+    shoppingCart.clearCart();
     var id = $(this).data('id')
     var amount = $(this).data('price')
     var title = $(this).data('title')
@@ -1352,7 +1352,7 @@ $(document).on("keyup",".custom_amt",function() {
 <!--    }else{-->
       $('.amount').val(parseInt(atm))
       $('.final_amount').val(parseInt(atm))
-      $('.total_rs_html').html(parseInt(atm))
+      $('.active_amt_html').html(parseInt(atm))
 <!--    }-->
 
 })

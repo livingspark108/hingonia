@@ -22,23 +22,16 @@
                                       </div>
                                       <div class="d-flex gap-2 justify-content-between flex-wrap">
                                         <span class="card-text priceWr f-18 mb-0">{{single.price}}</span>
-                                        <div class="add_button" data-price="{{single.price}}" data-name="{{single.title}}">
+                                        <div class="add_button add-to-cart" data-max="1000" data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}">
                                           <button class="btn btn-primary f-12 add-button" data-price="{{single.price}}" data-name="{{single.title}}">
                                             <img src="/static/frontend/assets/images/plus-black.svg" class="img-fluid" alt="">
                                           </button>
                                         </div>
                                         <div class="quantity-container" style="display: none;">
-                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item f-14 decrement-btn">-</button>
+                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item f-14 decrement-btn minusBtn">-</button>
                                           <input style="width: 19px;padding: 0px;" type='number' data-maxlength='1000' class='item-count form-control text-center quantityInput border ' data-id="{{single.id}}" data-name="{{single.title}}" value="1" >
-                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="plus-item f-14 increment-btn">+</button>
-                                          <!-- <button class="btn btn-primary interBtn enter-button">Enter</button> -->
+                                          <button data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="plus-item f-14 increment-btn plusBtn">+</button>
                                         </div>
-                                        <!-- <div class="added-button" style="display: none;">
-                                                      <button class="btn btn-primary f-12 bg-dark text-white">
-                                                        Added
-                                                        <img src="assets/images/home/done_all.png" class="card-img-top img-fluid" style="width:auto; height:16px" alt="done">
-                                                      </button>
-                                                    </div> -->
                                       </div>
                                     </div>
                                     <div class="tooltipeContentWr d-flex gap-2 d-none">
@@ -63,7 +56,7 @@
                                 <div class="custom_amount flexBoxCenter">
                                   <div class="title fw-bold">Custom Amount:</div>
                                   <div class="amount">
-                                    <input id="number" class="custom_amt" type="text">
+                                    <input id="number" class="custom_amt" type="number">
                                   </div>
                                 </div>
                                 <div class="currency">
@@ -77,19 +70,21 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-md-6 pt-1">
-                                <div class="d-flex align-items-center messageBox gap-2">
-                                  <input type="checkbox" class="donationMessage position-relative" id="anonymous">
-                                  <label class="f-14 m-0 py-1 form-check-label" for="anonymous">
-                                    Make my Donation Anonymous
-                                  </label>
+                              <div class="col-md-6 pt-1 mt-4">
+                                <div class="mb-3 border border-dark rounded-4 p-3">
+                                <p class="mb-0 f-16 fw-medium">By supporting <span class="color-1">Hingonia</span>, you
+                                    are
+                                    helping us reach out to more campaigns like this and scale our impact. <a href="#">Learn More</a>.</p>
+                                <div class="row mt-2">
+                                    <div class="col-7">
+                                        <p class="mb-0 fw-bold f-14">Support us by :</p>
+                                    </div>
+                                    <div class="col-5 text-end">
+                                        <select class="rounded-2 w-100 support_option"><option value="4.80">8% (4.80) ▼</option><option value="7.20">12% (7.20) ▼</option><option value="8.40">14% (8.40) ▼</option><option value="9.60">16% (9.60) ▼</option><option value="other">Other ▼</option></select>
+                                        <input style="display:none" type="number" placeholder="Amount" class="ctm_support_amt form-control mt-1" value="" name="ctm_support_amt">
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center messageBox gap-2">
-                                  <input type="checkbox" class="donationMessage position-relative" id="whatsapp">
-                                  <label class="f-14 m-0 py-1 form-check-label" for="whatsapp">
-                                    I want to receive transaction and donation updates on WhatsApp
-                                  </label>
-                                </div>
+                            </div>
                               </div>
                               <div class="col-md-6 pt-1">
                                 <div class=" messageBox">
@@ -113,7 +108,7 @@
                                         <span class="f-12 fw-bold text-white taText" {{single.price}}>TOTAL AMOUNT</span>
                                         <input type="hidden" class="amount" >
                                         <input type="hidden" class="actual_amount" >
-                                        <span class="f-36 text-white fw-bold taRs total_rs_html" style="line-height:normal">{{single.price}}</span>
+                                        <span class="f-36 text-white fw-bold taRs active_amt_html" style="line-height:normal">{{single.price}}</span>
                                       </div>
                                     </div>
                                   </div>

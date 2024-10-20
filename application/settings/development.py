@@ -12,6 +12,7 @@ from .common import *
 # ##### DEBUG CONFIGURATION ###############################
 DEBUG = True
 
+BASE_URL = "http://127.0.0.1:8013/"
 
 # allow all hosts during development
 ALLOWED_HOSTS = ['*']

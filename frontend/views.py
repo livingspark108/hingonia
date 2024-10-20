@@ -33,19 +33,19 @@ from django.views import View
 from django.views.generic import CreateView, DeleteView, UpdateView, TemplateView
 from application.custom_classes import DevoteeRequiredMixin, AdminRequiredMixin, AjayDatatableView
 from application.email_helper import send_email_background
-from application.helper import send_contact_us
+from application.helper import send_contact_us, write_log, send_whatsapp_message, send_donation_thank_you_email
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET, ADMIN_EMAIL
 from apps.front_app.forms import CreateTestimonialForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, DistributionImage, Setting, \
     AbandonCart, Testimonial, CampaignProduct, Product, Trustee, OurSupporter, UploadedFile, Gallery, AdoptedCow, \
-    HomeSlider
+    HomeSlider, Order
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.core import serializers
 
 from apps.promoter.models import Promoter
-from apps.user.models import TransactionDetails, OTP, SubscriptionPlan
+from apps.user.models import TransactionDetails, OTP, SubscriptionPlan, ProductItemTrans
 from frontend.forms import SetPasswordForm, VerifyOTPForm
 from frontend.serializer import TransactionDetailsSerializer
 from rest_framework.permissions import AllowAny
@@ -139,7 +139,7 @@ class FrontendOurMotherView(View):
 class FrontendCampaignView(View):
     def get(self, request):
         adopt_a_cow_obj = Campaign.objects.filter(type='Adopt a cow').order_by('-created_at')
-        campaign_obj = Campaign.objects.filter().order_by('-created_at')
+        campaign_obj = Campaign.objects.exclude(type='Adopt a cow').order_by('-created_at')
 
         gallery_obj = Distribution.objects.all()
         product_obj = Product.objects.all()
@@ -509,10 +509,10 @@ class FrontendThankYouView(DevoteeRequiredMixin,View):
 
         return render(request, 'frontend/thank_you.html', context)
 
-class FrontendRazorThankYouView(DevoteeRequiredMixin,View):
-    def get(self, request):
+class FrontendRazorThankYouView(View):
+    def get(self, request,id):
         form = SetPasswordForm()
-        context = {'form':form}
+        context = {'form':form,'id':id}
         return render(request, 'frontend/thank_you.html', context)
 
 # Payment gateway
@@ -549,17 +549,89 @@ class FrontendPayView(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class FrontendRazorPayView(View):
     def post(self, request):
-        # Create payu instance
+        # Create payu instance:
+        if request.POST.get('custom_check') == 'custom_check':
+            amount = request.POST.get('ctm_amount')
+        else:
+            amount = request.POST.get('amount')
+        print("amount")
+        print(amount)
+        if request.POST.get('phone'):
+            phone = request.POST.get('phone')
+        else:
+            phone = request.POST.get('mobile_no')
+        if request.POST.get('type') == 'product':
+            # Retrieve form data
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            country = request.POST['country']
+            state = request.POST['state']
+            print("country"+ country)
+            print("Stat", state)
+            pincode = request.POST['pincode']
+            address = request.POST['address']
+            comment = request.POST.get('comment', '')
+            product_name = request.POST.get('product_name', '')
+            product_id = request.POST.get('product_id', None)
+            quantity = request.POST.get('quantity', 1)
 
-        amount = request.POST.get('amount')
+            # Calculate total_amount based on the product and quantity
+            product = Product.objects.get(id=product_id) if product_id else None
 
-        promoter_id = request.POST.get('promoter_id')
+            total_amount = product.price * int(quantity) if product else 0.0
+            amount = request.POST.get('total_price')
+            # Create and save the order
+            order = Order(
+                product_name=product_name,
+                first_name=first_name,
+                last_name=last_name,
+                phone=phone,
+                email=email,
+                product=product,
+                address=address,
+                comment=comment,
+                country=country,
+                pincode=pincode,
+                state=state,
+                quantity=quantity,
+                total_amount=amount,
+                payment_method='',
+                payment_status='',
+                discount=0.0,
+                tax=0.0,
+                notes='',
+                tracking_number='',
+                status='pending'
+            )
+
+            order.save()
+
+
         campaign_id = request.POST.get('campaign_id')
+        tip = request.POST.get('tip')
+        city = request.POST.get('city')
+        all_item_data = request.POST.get('all_item_data')
 
-        print(promoter_id)
-        print(campaign_id)
+        if tip:
+            tip = float(tip)
+        else:
+            tip = 0
 
-        order_id = initiate_payment(amount,request.POST.get('first_name'))
+        order_id = initiate_payment(amount,request.POST.get('first_name'),request.POST.get('email'),phone,tip,city)
+
+        if all_item_data:
+            my_object = json.loads(all_item_data)
+            for single in my_object:
+                print(single)
+                prod_obj = CampaignProduct.objects.get(id=single['id'])
+                prod_item = ProductItemTrans()
+                prod_item.order_id = order_id
+                prod_item.quantity = single['count']
+                prod_item.product = prod_obj
+                prod_item.save()
+
+
         payload = {
             'key': RAZOR_PAY_ID,
             'order_id': order_id,
@@ -567,16 +639,16 @@ class FrontendRazorPayView(View):
             "firstname": request.POST.get('first_name'),
             "email": request.POST.get('email'),
             "phone": request.POST.get('mobile_no'),
+            'custom_campaign_id': campaign_id,
+            'tip': tip,
+            'all_item_data':all_item_data,
             "productinfo": request.POST.get('title'),
             "txnid": "OR_"+str(random.random()),
-            'custom_promoter_id': promoter_id,
-            'custom_campaign_id': campaign_id,
             "furl": PAYU_CONFIG['RESPONSE_URL_FAILURE'],
             "surl": PAYU_CONFIG['RESPONSE_URL_SUCCESS']
         }
 
         return render(request, 'frontend/razor_pay_page.html', payload)
-
 class PayuSuccessAPIView(View):
 
     permission_classes = [AllowAny]
@@ -652,7 +724,7 @@ class PayuFailureAPiView(GenericAPIView):
 
         return HttpResponseRedirect(reverse('home', kwargs={}))
 
-def initiate_payment(amt,name):
+def initiate_payment(amt,name,email,phone,tip,city):
     client = razorpay.Client(auth=(RAZOR_PAY_ID, RAZOR_PAY_SECRET))
     print(client)
     float_number = float(amt)
@@ -663,125 +735,122 @@ def initiate_payment(amt,name):
         'amount': amt * 100,  # Razorpay expects amount in paise (e.g., 100 INR = 10000 paise)
         'currency': 'INR',
         'notes': {
-            'firstname': name
+            'firstname': name,
+            'email': email,
+            'contact': phone,
+            'city': city
         },
         'payment_capture': '1'  # Auto capture the payment after successful authorization
     }
     response = client.order.create(data=data)
+    tran_obj = TransactionDetails()
+    tran_obj.order_id = response['id']
+    tran_obj.status = 'pending'
+    tran_obj.amount = 0
+    tran_obj.tip = tip
+    tran_obj.save()
     return response['id']
 
 @csrf_exempt
 def payment_success_view(request):
+   write_log("ALl POST DATA ORDER", request.POST.dict())
    order_id = request.POST.get('order_id')
+   write_log("Order id", order_id)
    payment_id = request.POST.get('razorpay_payment_id')
-   # headers = request.headers
-   # cookie_header = headers.get('Cookie', '')
-   # cookies = cookie_header.split('; ')
-   sessionid = None
-
-   # for cookie in cookies:
-   #     name, value = cookie.split('=')
-   #     if name.strip() == 'sessionid':
-   #         sessionid = value.strip()
-   #         break
-   # if request.COOKIES.get('sessionid') != sessionid:
-   #     return HttpResponseRedirect(reverse('home'))
 
    client = razorpay.Client(auth=(RAZOR_PAY_ID, RAZOR_PAY_SECRET))
    try:
        res_data=client.order.payments(order_id)
-       print(res_data)
+       write_log("Order details", res_data)
        dic_data = res_data['items'][0]
-       print(dic_data)
-       first_name = dic_data['notes']['firstname']
-       email = dic_data['email']
-       phone = dic_data['contact']
-       phone = phone.replace("+91", "")
+       if dic_data['status'] != 'failed':
+           write_log("Order details single", dic_data)
+           first_name = dic_data['notes']['firstname']
+           city = dic_data['notes']['city']
+           email = dic_data['email']
+           phone = dic_data['contact']
+           phone = phone.replace("+91", "")
+           write_log("Order notes",dic_data['notes'])
+           user_obj = User.objects.filter(Q(username=phone) | Q(email=email)).first()
 
-       user_obj = User.objects.filter(username=phone).first()
-       if not user_obj:
-           user_obj = User.objects.create_user(first_name=first_name, type='devotee',
-                                               username=phone, email=email,
-                                               password=phone)
-           user_obj.save()
-       elif not user_obj.first_name:
-           user_obj.first_name = first_name
-           user_obj.save()
+           if not user_obj:
+               # Create a new user if not found
+               user_obj = User.objects.create_user(
+                   first_name=first_name,
+                   username=phone,  # Use phone as the username
+                   email=email,
+                   city=city,
+                   password=phone  # Ensure password is hashed by Django
+               )
+           else:
+               # Update the first_name if it is not set
+               if not user_obj.first_name:
+                   user_obj.first_name = first_name
+                   user_obj.city = city
+                   user_obj.save()
 
-       pay_id = dic_data['id']
-       amt = dic_data['amount']/100
-       method = dic_data['method']
-       status = dic_data['status']
-       custom_promoter_id = dic_data['notes']['custom_promoter_id']
-       custom_campaign_id = dic_data['notes']['custom_campaign_id']
-       print("New New")
-       print(custom_promoter_id)
-       print(custom_campaign_id)
-       description = dic_data['description']
-       tran_detail_obj = TransactionDetails()
-       tran_detail_obj.mihpayid = pay_id
-       tran_detail_obj.mode = method
-       if custom_promoter_id:
-           tran_detail_obj.promoter_no = custom_promoter_id
+           write_log("User create for ", email)
 
-       if custom_campaign_id:
-           tran_detail_obj.campaign_id = custom_campaign_id
+           custom_campaign_id = dic_data['notes']['custom_campaign_id']
 
-       tran_detail_obj.firstname = first_name
-       tran_detail_obj.productinfo = description
-       tran_detail_obj.payment_source = method
-       tran_detail_obj.amount = float(amt)
-       tran_detail_obj.status = status
-       tran_detail_obj.email = email
-       tran_detail_obj.phone = phone
-       tran_detail_obj.save()
-       login(request, user_obj)
+           pay_id = dic_data['id']
+           amt = dic_data['amount']/100
+           method = dic_data['method']
+           status = dic_data['status']
+           description = dic_data['description']
+           tran_detail_obj = TransactionDetails.objects.filter(order_id=order_id).first()
+           if not tran_detail_obj:
+               tran_detail_obj = TransactionDetails()
 
-       # try:
-       #     url = "https://graph.facebook.com/v12.0/1033966767593889/events"
-       #     access_token = "EAANYXoAl26YBO62vZBBZB42ylahHTzFY0ymuQO86bso3fWZBLuGugy5iToJprfLsZBmqCZBCbqhnt1OvUz5UkqWP3ZC2SCeZBuCVawjfLPKhddhr3Uq4SwBcZCely43k3ynDjMqa2TOtHUP6ZC2PaMjVXLviOBxZBr5waa1ziuxduHfEWZCMDARQdnu4igZAfOzgpKaZC8gZDZD"
-       #     current_timestamp = int(time.time())
-       #
-       #
-       #     # Define your payload
-       #     payload = {
-       #                  "data": [
-       #                      {
-       #                          "event_name": "Donate",
-       #                          "event_time": current_timestamp,
-       #                          "action_source": "website",
-       #                          "user_data": {
-       #                              "em": [
-       #                 "7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"
-       #                              ],
-       #                              "ph": [
-       #                                  None
-       #                              ]
-       #                          },
-       #                          "custom_data": {
-       #                              "currency": "INR",
-       #                              "value": "0"
-       #                          }
-       #                      }
-       #                  ]
-       #              }
-       #
-       #     # Define headers
-       #     headers = {
-       #         "Authorization": f"Bearer {access_token}",
-       #         "Content-Type": "application/json"
-       #     }
-       #
-       #     # Make the request
-       #     response = requests.post(url, json=payload, headers=headers)
-       #     print(response.status_code)
-       #     print(response.text)
-       # except Exception as e:
-       #     print(e)
-       #     pass
-       return HttpResponseRedirect(reverse('thank-you-rj'))
+           tran_detail_obj.mihpayid = pay_id
+           tran_detail_obj.order_id = order_id
+           tran_detail_obj.mode = method
+           tran_detail_obj.firstname = first_name
+           tran_detail_obj.productinfo = description
+           tran_detail_obj.payment_source = method
+           if custom_campaign_id:
+               tran_detail_obj.campaign_id = custom_campaign_id
 
-   except razorpay.errors.SignatureVerificationError as e:
+           tran_detail_obj.amount = float(amt)
+           tran_detail_obj.status = status
+           tran_detail_obj.email = email
+           tran_detail_obj.phone = phone
+           tran_detail_obj.save()
+           write_log("Transation created for ", email)
+           write_log("Transaction no", tran_detail_obj.id)
+
+           receipt_url = settings.BASE_URL+"/receipt/"+str(tran_detail_obj.id)
+           send_donation_thank_you_email(first_name, email, float(amt), receipt_url)
+           write_log("Message send for ", email)
+           #login(request, user_obj)
+
+           invoice_link = settings.BASE_URL+str(tran_detail_obj.id)
+           message = (
+               f"🕉️ *Hingonia* 🕉️\n\n"
+               f"Dear {first_name},\n\n"
+               "🙏 *Thank you for your generous donation!* 🙏\n\n"
+               "We are truly grateful for your support towards our mission. "
+               f"Your contribution of ₹{amt} will go a long way in supporting our cause and making a positive impact.\n\n"
+               "You can download your invoice from the following link:\n"
+               f"{invoice_link}\n\n"  # Add the invoice link dynamically
+               "If you have any queries or would like to stay updated on our activities, "
+               "feel free to contact us at +91 9112524911 or visit our website.\n\n"
+               "May Lord Shiva's blessings be with you always.\n\n"
+               "*Om Namah Shivaya* 🙏\n\n"
+               "Hingonia"
+           )
+
+           send_whatsapp_message(phone,message)
+
+           return HttpResponseRedirect(reverse('thank-you-rj', args=[tran_detail_obj.id]))
+
+       else:
+           write_log("This Transaction ", "Failed")
+           return HttpResponseRedirect(reverse('home'))
+
+   except Exception as e:
+
+       write_log("Payment page error", e)  # Use f-string for formatting
 
        return HttpResponseRedirect(reverse('home'))
 
@@ -838,6 +907,14 @@ class Download80gView(DevoteeRequiredMixin,View):
         # Get the HTML template
         transaction_obj = TransactionDetails.objects.get(id=id)
         return render(request, 'frontend/invoice_80g.html', {'transaction_obj':transaction_obj})
+
+
+class DownloadReceiptView(View):
+    def get(self, request,id):
+        # Get the HTML template
+        transaction_obj = TransactionDetails.objects.get(id=id)
+        return render(request, 'frontend/receipt.html', {'transaction_obj':transaction_obj})
+
 
 class VerifyOTPView(View):
     template_name = 'frontend/verify_otp.html'

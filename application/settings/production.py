@@ -15,7 +15,7 @@ DEBUG = True
 
 # allow all hosts during development
 ALLOWED_HOSTS = ['*']
-
+BASE_URL = "http://167.71.230.81:8014/"
 # adjust the minimal login
 # LOGIN_URL = 'core_login'
 # LOGIN_REDIRECT_URL = '/'

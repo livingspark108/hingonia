@@ -30,6 +30,7 @@ class TransactionDetails(DateTimeModel):
     order_id = models.CharField(max_length=255, null=True, blank=True)
     mode = models.CharField(max_length=255, null=True, blank=True)
     status = models.CharField(max_length=255)
+    tip = models.FloatField(max_length=255,null=True, blank=True)
     unmappedstatus = models.CharField(max_length=255)
     campaign_id = models.CharField(max_length=255, null=True, blank=True)
 
@@ -84,6 +85,8 @@ class TransactionDetails(DateTimeModel):
     card_type = models.CharField(max_length=255, null=True, blank=True)
     is_80g_request = models.BooleanField(default=False)
     is_80g_request_approve = models.BooleanField(default=False)
+
+
 
 class ProductItemTrans(DateTimeModel):
     product = models.ForeignKey(CampaignProduct, on_delete=models.CASCADE)

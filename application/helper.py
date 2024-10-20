@@ -1,13 +1,24 @@
+import logging
+
 from django.conf import settings
 from django.contrib.auth.forms import PasswordResetForm
 import threading
 from xlrd import open_workbook
 import csv
 import razorpay as razorpay
-
-from application.email_helper import send_email_background
+from django.template.loader import render_to_string, get_template
+from django.utils.html import strip_tags
+from django.core.mail import send_mail
+from application.email_helper import send_email_background, WhatsAppThread
+from application.settings.common import EMAIL_HOST_USER
+from apps.front_app.models import Setting
 from apps.user.models import SubscriptionPlan
 
+
+logger = logging.getLogger('custom_logger')
+
+def write_log(subject, message):
+    logger.debug(f"{subject} | Context: {message}")  # Include context if provided
 
 def convert_file_to_dict(file):
     if file.name.endswith('.csv'):
@@ -127,3 +138,41 @@ def fetch_and_save_plans_from_razorpay():
 
     except Exception as e:
         print(f"Error fetching plans from Razorpay: {str(e)}")
+
+
+def send_whatsapp_message(mobile_no,message):
+    setting_obj = Setting.objects.first()
+    if setting_obj.whatsapp_key:
+        key = setting_obj.whatsapp_key
+        msg = message
+        sssss_url = "https://web.cloudwhatsapp.com/wapp/api/send?apikey=" + str(key) + "&mobile=" + str(
+            mobile_no) + "&msg=" + msg
+        try:
+            WhatsAppThread(sssss_url).start()
+        except:
+            pass
+
+
+def send_donation_thank_you_email(donor_name, donor_email, donation_amount, receipt_url):
+    try:
+        subject = 'Thank You for Your Donation!'
+        context = {
+            'donor_name': donor_name,
+            'donation_amount': donation_amount,
+            'receipt_url': receipt_url,  # Add receipt URL to context
+        }
+        html_message = render_to_string('email/donation_thank_you.html', context)
+        plain_message = strip_tags(html_message)  # Strip HTML to create a plain-text alternative
+        from_email = EMAIL_HOST_USER
+        recipient_list = [donor_email]
+
+        send_mail(
+            subject,
+            plain_message,
+            from_email,
+            recipient_list,
+            html_message=html_message,
+        )
+        return True
+    except:
+        pass

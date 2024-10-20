@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Your Donation!</title>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #FFA500; /* Orange color */
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #E59400; /* Darker shade of orange for hover */
+        }
+        .heading {
+            color: #FFA500; /* Orange color for the heading */
+        }
+    </style>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6;">
+
+    <!-- Logo Section -->
+    <div style="text-align: center;">
+        <img src="http://167.71.230.81:8014/static/frontend/assets/images/skbt-logo.webp" alt="Hingonia Foundation Logo" width="200" />
+    </div>
+
+    <h1 class="heading">Thank You, {{ donor_name }}!</h1>
+    <p>
+        We truly appreciate your generous donation of <strong>₹{{ donation_amount }}</strong> to Hingonia Foundation.
+        Your support is crucial in helping us continue our mission and make a difference.
+    </p>
+    <p>
+        You can view or download your receipt by clicking the button below:
+    </p>
+    <p>
+        <a href="{{ receipt_url }}" class="button">View Receipt</a>
+    </p>
+    <p>
+        If you have any questions or need further information, please don't hesitate to contact us.
+    </p>
+    <p>Warm regards,<br>
+    Hingonia Foundation Team</p>
+
+    <!-- Support Information -->
+    <p style="margin-top: 30px; font-size: 14px; color: #777;">
+        For any query and support, contact us at:
+        <br>
+        Email: <a href="mailto:team@hingonia.org" style="color: #FFA500;">team@hingonia.org</a>
+        <br>
+        Telephone: <a href="tel:+9112524911" style="color: #FFA500;">9112524911</a>
+    </p>
+</body>
+</html>

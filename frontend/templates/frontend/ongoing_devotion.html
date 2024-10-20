@@ -6,6 +6,7 @@
 <meta property="og:title" content="{{compaign.title}}" />
 <meta property="og:url" content="{% url 'ongoing-devotion' compaign.slug %}" />
 <meta property="og:image" content="{% get_media_prefix %}{{compaign.campaign_backgroud}}" />
+{% get_campaign_data compaign.id as campaign_data %}
 
 <input type="hidden" class="promo_id" value="{{promo_no}}">
 <input type="hidden" class="camp_id" value="{{compaign.id}}">
@@ -17,24 +18,22 @@
                     <div class="mb-3">
                         <a href="campaigns.php" class="text-muted fw-semibold f-18">Campaigns</a>
                         <i class="bi bi-chevron-right gray"></i>
-                        <span class="pink f-18 fw-semibold">Construction Seva</span>
+                        <span class="pink f-18 fw-semibold">{{campaign.title}}</span>
                     </div>
                     <div>
-                        <video class="campaign_video" autoplay controls muted>
-                            <source src="assets/video/bk-video.mp4" />
-                        </video>
+                    {% if campaign_data.video_id %}
+                        <iframe height="315" style="width: 100%;border-radius: 20px;" src="https://www.youtube.com/embed/{{campaign_data.video_id}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                    {% endif %}
                     </div>
                     <div class="campaign_amt">
                         <div class="row pb-2">
                             <div class="col-6">
                                 <h6 class="mb-1 f-18 fw-bold">Raised</h6>
-                                <h3 class="pink mb-1 fw-bold"><i class="bi bi-currency-rupee pink"></i>38,000</h3>
-                                <p class="f-12 mb-0 fw-medium">Requirement Deadline | 22nd June, 24</p>
+                                <h3 class="pink mb-1 fw-bold"><i class="bi bi-currency-rupee pink"></i>{{campaign_data.target|indian_number_format}}</h3>
                             </div>
                             <div class="col-6 text-end">
                                 <h6 class="mb-1 f-18 fw-bold">Goal</h6>
-                                <h3 class="mb-1 fw-bold"><i class="bi bi-currency-rupee"></i>7,00,000</h3>
-                                <p class="f-12 mb-0 fw-medium">Three Months Remaining</p>
+                                <h3 class="mb-1 fw-bold"><i class="bi bi-currency-rupee"></i>{{compaign.goal|indian_number_format}}</h3>
                             </div>
                         </div>
                         <div class="progress">
@@ -48,7 +47,7 @@
                         <div class="row align-items-center my-3">
                             <div class="col-7">
                                 <img src="{% static 'frontend/assets/images/campaign/calendar.svg' %}" class="img-fluid" alt="">
-                                <span class="date">23rd Oct, 2024</span>
+                                <span class="date">{{compaign.created_at}}</span>
                             </div>
                             <div class="col-5 text-end">
                                 <a href="javascript:void(0)" id="leftCdsGalleryIcon">
@@ -119,48 +118,42 @@
                 <div class="col-lg-5 col-md-5 d-md-block d-none">
                     <div class="sticky-top cds-pt-110 z-0">
                         <h2 class="cds_title mb-3">Payment Details</h2>
-                        <form action="" class="cds_form">
+                        <form action="/razor-pay" method="post" class="cds_form">
+                            <input type="hidden" value="{{compaign.id}}" class="campaign_id" name="campaign_id">
+                            <input type="hidden" value="{{compaign.title}}" class="title" name="title">
+                            <input type="hidden" value="" class="all_item_data" name="all_item_data">
+
+                                {% csrf_token %}
                             <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Full Name" required>
+                                <input type="text" name="first_name" class="form-control" placeholder="Full Name" required>
                             </div>
                             <div class="mb-3">
-                                <input type="email" class="form-control" placeholder="Email" required>
+                                <input type="email" name="email" class="form-control" placeholder="Email" required>
                             </div>
                             <div class="mb-3">
-                                <input type="number" class="form-control" placeholder="Phone" required>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input request_80g" type="checkbox" value="" id="request80g">
-                                <span class="checkmark"></span>
-                                <label class="form-check-label" for="request80g">
-                                    Request 80 G
-                                </label>
-                            </div>
-                            <div id="request80gField" class="request_80g_Field" style="display: none;">
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="PAN (Mandatory for 80G)"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Address (Mandatory for 80G)"
-                                        required>
-                                </div>
+                                <input type="number" name="mobile_no" class="form-control" placeholder="Phone" required>
                             </div>
 
+
                             <div class="cds_product mb-3">
+                                {% for single in compaign.product.all %}
+		                        {% get_cam_item single.id compaign.id as all_cam_item %}
                                 <div class="cds_pbox">
                                     <div class="row  align-items-center position-relative">
                                         <div class="col-md-7 col-7 pe-0">
-                                            <img src="assets/images/campaign/steel.jpg" class="cds_product_img">
-                                            <span class="cds_product_title">Steel</span>
+                                            {% if single.image %}
+                                            <img src="{{single.image.url}}" class="cds_product_img">
+                                            {% endif %}
+                                            <span class="cds_product_title">{{single.title}}</span>
                                         </div>
                                         <div class="col-md-5 col-5 ps-0 text-end">
                                             <span class="cds_product_price"><i
-                                                    class="bi bi-currency-rupee"></i>400</span>
+                                                    class="bi bi-currency-rupee"></i>{{single.price}}</span>
+
                                             <div class="cds_qty">
-                                                <input type="button" value="" class="qty-minus minusBtn">
-                                                <input type="number" value="1" class="qty quantityInput" min="1" max="10">
-                                                <input type="button" value="" class="qty-plus plusBtn">
+                                                <input data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item f-14 decrement-btn qty-minus minusBtn" >
+                                                <input type="number" class="item-count qty quantityInput" data-maxlength='1000' data-id="{{single.id}}" data-name="{{single.title}}" value="1">
+                                                <input data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" type="button" value="" class="plus-item f-14 increment-btn qty-plus plusBtn">
                                             </div>
                                         </div>
                                         <a href="javascript:void(0)" class="cds_info_icon">
@@ -176,95 +169,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cds_pbox">
-                                    <div class="row align-items-center position-relative">
-                                        <div class="col-md-7 col-7 pe-0">
-                                            <img src="assets/images/campaign/brick.jpg" class="cds_product_img">
-                                            <span class="cds_product_title">Brick</span>
-                                        </div>
-                                        <div class="col-md-5 col-5 ps-0 text-end">
-                                            <span class="cds_product_price"><i
-                                                    class="bi bi-currency-rupee"></i>400</span>
-                                            <div class="cds_qty">
-                                                <input type="button" value="" class="qty-minus minusBtn">
-                                                <input type="number" value="1" class="qty quantityInput" min="1" max="10">
-                                                <input type="button" value="" class="qty-plus plusBtn">
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0)" class="cds_info_icon">
-                                            <img src="assets/images/campaign/info.png" class="img-fluid" alt="">
-                                        </a>
-                                        <div class="cds_product_info" style="display: none;">
-                                            <p class="f-12 fw-medium">
-                                                <img src="assets/images/campaign/brick.jpg" class="cds_product_img"
-                                                    alt="">
-                                                Welcome abandoned cows to a safe haven, with sturdy steel structures
-                                                offering shelter and care. Join us in creating their sanctuary.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cds_pbox">
-                                    <div class="row  align-items-center position-relative">
-                                        <div class="col-md-7 col-7 pe-0">
-                                            <img src="assets/images/campaign/sand.jpg" class="cds_product_img">
-                                            <span class="cds_product_title">Sand</span>
-                                        </div>
-                                        <div class="col-md-5 col-5 ps-0 text-end">
-                                            <span class="cds_product_price"><i
-                                                    class="bi bi-currency-rupee"></i>300</span>
-                                            <div class="cds_qty">
-                                                <input type="button" value="" class="qty-minus minusBtn">
-                                                <input type="number" value="1" class="qty quantityInput" min="1" max="10">
-                                                <input type="button" value="" class="qty-plus plusBtn">
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0)" class="cds_info_icon">
-                                            <img src="assets/images/campaign/info.png" class="img-fluid" alt="">
-                                        </a>
-                                        <div class="cds_product_info" style="display: none;">
-                                            <p class="f-12 fw-medium">
-                                                <img src="assets/images/campaign/sand.jpg" class="cds_product_img"
-                                                    alt="">
-                                                Welcome abandoned cows to a safe haven, with sturdy steel structures
-                                                offering shelter and care. Join us in creating their sanctuary.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cds_pbox">
-                                    <div class="row  align-items-center position-relative">
-                                        <div class="col-md-7 col-7 pe-0">
-                                            <img src="assets/images/campaign/cement.jpg" class="cds_product_img">
-                                            <span class="cds_product_title">Repair & Maintenance</span>
-                                        </div>
-                                        <div class="col-md-5 col-5 ps-0 text-end">
-                                            <span class="cds_product_price"><i
-                                                    class="bi bi-currency-rupee"></i>1300</span>
-                                            <div class="cds_qty">
-                                                <input type="button" value="" class="qty-minus minusBtn">
-                                                <input type="number" value="1" class="qty quantityInput" min="1" max="10">
-                                                <input type="button" value="" class="qty-plus plusBtn">
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0)" class="cds_info_icon">
-                                            <img src="assets/images/campaign/info.png" class="img-fluid" alt="">
-                                        </a>
-                                        <div class="cds_product_info" style="display: none;">
-                                            <p class="f-12 fw-medium">
-                                                <img src="assets/images/campaign/cement.jpg" class="cds_product_img"
-                                                    alt="">
-                                                Welcome abandoned cows to a safe haven, with sturdy steel structures
-                                                offering shelter and care. Join us in creating their sanctuary.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
 
                             <div class="mb-3 cds_custom_amt position-relative">
                                 <span>Donate Custom Amount - <i class="bi bi-currency-rupee"></i></span>
-                                <input type="text" class="form-control" placeholder="_ _ _ _ _ _ _ _ _ _">
+                                <input type="number" class="ctm_amt form-control" placeholder="_ _ _ _ _ _ _ _ _ _">
                             </div>
                             <div class="mb-3 border border-dark rounded-4 p-3">
                                 <p class="mb-0 f-16 fw-medium">By supporting <span class="color-1">Hingonia</span>, you
@@ -276,41 +186,18 @@
                                         <p class="mb-0 fw-bold f-14">Support us by :</p>
                                     </div>
                                     <div class="col-5 text-end">
-                                        <select class="rounded-2 w-100">
-                                            <option>Select</option>
-                                            <option>16% (<i class="bi bi-currency-rupee"></i>160)</option>
-                                            <option>18% (<i class="bi bi-currency-rupee"></i>260)</option>
-                                            <option>24% (<i class="bi bi-currency-rupee"></i>360)</option>
+                                        <select class="rounded-2 w-100 support_option">
                                         </select>
+                                        <input style="display:none" type="number" placeholder="Amount" class="ctm_support_amt form-control mt-1" value="" name="ctm_support_amt">
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="residenceCheck">
-                                <span class="checkmark"></span>
-                                <label class="form-check-label" for="residenceCheck">
-                                    Resident of India
-                                </label>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="anonymousCheck">
-                                <span class="checkmark"></span>
-                                <label class="form-check-label" for="anonymousCheck">
-                                    Anonymous Donation
-                                </label>
-                            </div>
+
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" value="" id="updateWpCheck">
                                 <span class="checkmark"></span>
                                 <label class="form-check-label" for="updateWpCheck">
                                     I want to receive transaction and donation updates on WhatsApp
-                                </label>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="monthlyCheck">
-                                <span class="checkmark"></span>
-                                <label class="form-check-label" for="monthlyCheck">
-                                    Donate Monthly
                                 </label>
                             </div>
                             <div class="mb-4">
@@ -320,23 +207,246 @@
                                 <button type="submit" class="cds_btn ">
                                     Donate Here
                                     <span class="text-white float-end"><i
-                                            class="bi bi-currency-rupee text-white"></i>500</span>
+                                            class="bi bi-currency-rupee text-white"></i><span class="text-white active_amt_html"></span></span>
                                 </button>
+                                <input type="hidden" value="" name="amount" class="active_amt">
+                                <input type="hidden" value="" name="amount_11" class="donate_amt_1">
                             </div>
                             <div class="cds_badge">
                                 <span style="background: #00CD300D;">*Tax Exemptions Available</span>
                                 <span style="background: #FF05050D;">*80G Receipt</span>
                                 <span style="background: #004BD70D;">*Protected Payment</span>
                             </div>
+                             <input type="hidden" value="" class="tip" name="tip">
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 {% endblock %}
 {% block script%}
+<script>
+ shoppingCart.clearCart();
+ var minimum_value = $('.minimum_value').val()
+ function final_amt(){
+    var donate_amt = $('.donate_amt_1').val()
+
+    var support = $('.support_option').val()
+    var support_amt = 0
+    if(support == 'other'){
+        support_amt = $('.ctm_support_amt').val()
+        if(support_amt == ''){
+            support_amt = 0
+        }
+    }else{
+        support_amt = support
+    }
+    console.log("Donate amt")
+
+    console.log(donate_amt)
+    console.log("Support")
+    $('.tip').val(support_amt)
+    console.log(support_amt)
+
+    donate_amt = parseInt(donate_amt) + parseInt(support_amt);
+
+    $('.active_amt_html').html(donate_amt)
+	$('.active_amt').val('')
+	$('.active_amt').val(donate_amt)
+
+ }
+ final_amt()
+ $(".ctm_option").click(function(){
+     $('label').removeClass('cps-active')
+     $('.cps-amount-radio input[name="amount_tt"]:checked').prop('checked', false);
+
+	 $('.donate_amt_1').val(0)
+	 console.log(minimum_value)
+	 $('.ctm_amt').val()
+	 $('.active_amt').val('')
+	 $('.active_amt_html').html('')
+     $('.ctm_option label').addClass('cps-active')
+<!--     final_amt()-->
+ })
+
+$(".cps-amount-radio input").click(function(){
+    shoppingCart.clearCart();
+    $('.show-cart').html('')
+    $('.quantityInput').val(1);
+    $('.qtyBoxCmp').hide();
+    $('.qty-box-btn').show();
+	var amt = $(this).val()
+	// Clear existing options
+    $(".support_option").empty();
+    $(".ctm_support_amt").val(0);
+    $(".ctm_support_amt").hide()
+
+    $('input[name="cps-pay"]:checked').prop('checked', false);
+
+    if (amt !== "custom") {
+        amt = parseInt(amt);
+
+        var percentages = [8, 12, 14, 16];
+
+        percentages.forEach(function(percent) {
+            var value = (amt * percent / 100).toFixed(2);
+            var optionText = percent + "% (" + value + ") ▼";
+            $(".support_option").append(
+                $("<option></option>").val(value).text(optionText)
+            );
+        });
+
+        $(".support_option").append(
+            $("<option></option>").val("other").text("Other ▼")
+        );
+    } else {
+        $(".support_option").append(
+<!--            $("<option></option>").val("other").text("Other ▼")-->
+        );
+    }
+	var support = $('.support_option').val()
+	var support_amt = 0
+	if(support == 'other'){
+		support_amt = $('.ctm_support_amt').val()
+	}else{
+		support_amt = support
+	}
+	$('.donate_amt_1').val(amt)
+	amt = parseInt(amt)+parseInt(support_amt)
+	if(amt!="custom"){
+	console.log(amt)
+
+	$('.active_amt_html').html(amt)
+	$('.active_amt').val(amt)
+	}
+
+})
+$('.ctm_option').click(function(){
+
+	$('.ctm_amt').show()
+<!--	ctm_calculate()-->
+
+})
+
+$(document).on("click",".qty-box-btn",function() {
+    $('.cps-amount-radio input[name="amount_tt"]:checked').prop('checked', false);
+    $('input[name="cps-pay"]:checked').prop('checked', false);
+})
+
+<!--$(document).on("click",".ctm_submit",function() {-->
+<!--	var name = $('.mobile_view .first_name').val();-->
+<!--    var mobile_no = $('.mobile_view .mobile_no').val();-->
+
+<!--    if (name === "" || mobile_no === "") {-->
+<!--        event.preventDefault(); // Prevent the form from submitting-->
+<!--        alert("Name and mobile no fields are required.");-->
+<!--    }-->
+<!--})-->
+$(document).on("keyup",".ctm_support_amt",function() {
+
+	final_amt()
+})
+
+$(document).on("click", ".donate_now,.ctm_submit", function(e) {
+    var amm = $('.active_amt').val();
+    var payment_type = $('.payment_type').val();
+    var firstName = $('.first_name').val().trim();
+    var email = $('[name="email"]').val().trim();
+    var mobileNo = $('[name="mobile_no"]').val().trim();
+    support_val = $('.support_option').val()
+    ctm_support_amt = $('.ctm_support_amt').val()
+    if(support_val == 'other' & ctm_support_amt == ''){
+        alert('Please add tip amount.');
+        e.preventDefault();
+        return;
+    }
+
+    console.log(minimum_value);
+    console.log("Done");
+
+    // Check if the fields are empty and prevent form submission if they are
+    if (firstName === '') {
+        alert('Please enter your name.');
+        e.preventDefault();
+        return;
+    }
+
+    if (email === '') {
+        alert('Please enter your email.');
+        e.preventDefault();
+        return;
+    }
+
+    if (mobileNo === '') {
+        alert('Please enter your mobile number.');
+        e.preventDefault();
+        return;
+    }
+
+    // Check if the donation amount meets the minimum value condition
+    if (amm === '' || parseFloat(amm) <= minimum_value) {
+        e.preventDefault();
+        if (payment_type === 'Product') {
+            var vv = parseFloat(minimum_value)+1
+            alert('Please add some items. Minimum value is ' + vv);
+        } else {
+            var vv = parseFloat(minimum_value)+1
+            alert('Minimum value is ' + vv);
+        }
+        return;
+    }
+
+    // If all conditions are met, submit the form
+    $('form').submit();
+});
+
+
+
+$(document).on("change",".support_option",function() {
+	var selected = $(this).val()
+	if(selected == 'other'){
+		$('.ctm_support_amt').show()
+		$('.ctm_support_amt').val(0)
+	}else{
+		$('.ctm_support_amt').hide()
+		final_amt()
+	}
+})
+function ctm_calculate(amt){
+    var amt_1 = (8 / 100) * amt
+    var amt_2 = (12 / 100) * amt
+    var amt_3 = (14 / 100) * amt
+    var amt_4 = (16 / 100) * amt
+
+    $('.support_option option').eq(0).text('8%(' + amt_1.toFixed(2) + ')').val(amt_1.toFixed(2));
+    $('.support_option option').eq(1).text('12%(' + amt_2.toFixed(2) + ')').val(amt_2.toFixed(2));
+    $('.support_option option').eq(2).text('14%(' + amt_3.toFixed(2) + ')').val(amt_3.toFixed(2));
+    $('.support_option option').eq(3).text('16%(' + amt_4.toFixed(2) + ')').val(amt_4.toFixed(2));
+
+
+    $('.active_amt_html').html(amt)
+    $('.donate_amt_1').val(amt)
+    final_amt()
+}
+$(document).on("keyup",".ctm_amt",function() {
+		var amt = $(this).val()
+		var amt_1 = (8 / 100) * amt
+        var amt_2 = (12 / 100) * amt
+        var amt_3 = (14 / 100) * amt
+        var amt_4 = (16 / 100) * amt
+        console.log("HERE")
+        console.log(amt_1)
+        console.log("End")
+        make_dropdown(amt)
+		$('.active_amt_html').html(amt)
+		$('.donate_amt_1').val(amt)
+		final_amt()
+
+	})
+
+</script>
+
 <script>
 	//======= Ongoing campaign ========
 $(document).ready(function () {

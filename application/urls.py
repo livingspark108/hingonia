@@ -31,6 +31,9 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     # Ckeditor urls
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    #logs
+    path('logs/', include('logs.urls')),
+
     #cms urls
     path('cms/', include('apps.cms.urls')),
     path('promoter/', include('apps.promoter.urls')),

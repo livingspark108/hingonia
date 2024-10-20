@@ -54,6 +54,7 @@ DEFAULT_APPS = [
     'apps.user',
     'apps.promoter',
     'apps.front_app',
+    'logs',
     'frontend',
     'widget_tweaks',
     'payu',
@@ -272,7 +273,7 @@ AUTH_USER_MODEL = 'user.User'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Logging configuration
-# Logging configuration
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -282,8 +283,17 @@ LOGGING = {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/errors.log'),
             'when': 'midnight',  # Rotate at midnight
-            'interval': 1,      # Every day
-            'backupCount': 300,  # Keep 30 old log files
+            'interval': 1,       # Every day
+            'backupCount': 300,  # Keep 300 old log files
+            'formatter': 'error',
+        },
+        'custom_file': {  # New handler for logging custom events
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/custom.log'),
+            'when': 'midnight',  # Rotate at midnight
+            'interval': 1,       # Every day
+            'backupCount': 30,   # Keep 30 old log files
             'formatter': 'verbose',
         },
         'console': {
@@ -297,12 +307,21 @@ LOGGING = {
             'format': '{levelname} {asctime} {module} {message}',
             'style': '{',
         },
+        'error': {
+            'format': '{levelname} {asctime} {module} {filename}:{lineno} - {message}\n\n--------{asctime}----------\n\n',
+            'style': '{',
+        },
     },
     'loggers': {
         'django': {
             'handlers': ['daily_file', 'console'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        'custom_logger': {  # New custom logger for general logs
+            'handlers': ['custom_file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
         },
     },
 }

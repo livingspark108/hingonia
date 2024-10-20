@@ -1,4 +1,6 @@
 import re
+from urllib.parse import urlparse, parse_qs
+
 from django.db.models import Sum
 
 from django import template
@@ -118,10 +120,21 @@ def get_campaign_data(campaign_id):
     else:
         total_sum = 0
     pr = calculate_percentage(campaign_obj.goal,total_sum)
+    if campaign_obj.youtube_link:
+        try:
+            parsed_url = urlparse(campaign_obj.youtube_link)
+            video_id = parse_qs(parsed_url.query).get('v')[0]
+        except:
+            video_id = ""
+
+    else:
+        video_id = ""
+
 
     context = {
         'target': total_sum,
         'percent': pr,
+        'video_id':video_id,
         'date': datetime.now()
     }
     print(context)
@@ -204,6 +217,15 @@ def handle_image_url(img):
         return img.url
     else:
         return ""
+
+@register.filter(name='generate_tag')
+def generate_tag(txt):
+    if txt:
+        words = txt.split()  # Split the text by spaces
+        return ' '.join([f"#{word}" for word in words])  # Prefix each word with '#'
+    else:
+        return txt
+
 @register.simple_tag()
 def get_youtube_embed(link):
     # Extract the video ID from the URL
