@@ -47,14 +47,13 @@
                           <span class="fw-semibold color-10 ff-Rubik cardprice_title">{{single.price}}<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
                           {% endif %}
                         </div>
-<!--                        <div class="mt-md-4 mt-2">-->
-<!--                          <div class="d-flex align-items-center justify-content-center messageBox AWCowcheck gap-2 text-white">-->
-<!--                            <input type="checkbox" class="position-relative" id="requestBlog">-->
-<!--                            <label class="f-14 m-0 py-1 form-check-label color-10 ff-Rubik" for="requestBlog">Receive monthly gifts from your cow?</label>-->
-<!--                          </div>-->
-<!--                        </div>-->
+                        {% if single.mode == 'One Time' %}
                         <a data-title="{{single.title}}" data-type="{{single.mode}}" data-amount="{{single.price}}" data-bs-toggle="modal" data-bs-target="#{% if single.mode == 'One Time' %}donate1{% else %}donate2{% endif %}" data-id="{{single.id}}" href="#" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt
                             {{single.title}} Cow</a>
+                          {% else %}
+                          <a href="{% url 'donate-monthly' single.slug %}" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt
+                            {{single.title}} Cow</a>
+                          {% endif %}
                       </div>
                     </div>
                   </div>

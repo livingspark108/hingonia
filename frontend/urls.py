@@ -56,6 +56,7 @@ urlpatterns = [
     path('set_password/', set_password, name='set_password'),
     path('download-80g/<str:id>', Download80gView.as_view(), name='download-80g'),
     path('receipt/<str:id>', DownloadReceiptView.as_view(), name='download-receipt'),
+    path('payment/success/', payment_success, name='payment_success'),
 
     path('request-80g', Request80GView.as_view(), name="request-80g"),
     path('send-csr', SendCSRView.as_view(), name="send-csr"),
@@ -67,6 +68,7 @@ urlpatterns = [
     path('ongoing-devotion/<str:id>/<str:promo_no>', OngoingDevotionPromoView.as_view(), name='ongoing-devotion-promo'),
     path('pay-razor-pay/', initiate_payment, name='pay-razor-pay'),
     path('handle-payment-webhook/', handle_payment_webhook, name='handle-payment-webhook'),
+    path('donate-monthly/<str:id>', DonateMontlyView.as_view(), name='donate-monthly'),
 
     path('subscribe', subscribe_page, name='subscribe_page'),
     path('create_subscription/', create_subscription, name='create_subscription'),

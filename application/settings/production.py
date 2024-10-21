@@ -37,6 +37,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
         'NAME': 'hingonia_dev',
+
         'USER': 'postgres',
 
         'PASSWORD': 'postgres@123#',

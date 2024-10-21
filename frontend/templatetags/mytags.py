@@ -137,7 +137,6 @@ def get_campaign_data(campaign_id):
         'video_id':video_id,
         'date': datetime.now()
     }
-    print(context)
     return context
 
 @register.simple_tag()

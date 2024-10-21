@@ -45,7 +45,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core import serializers
 
 from apps.promoter.models import Promoter
-from apps.user.models import TransactionDetails, OTP, SubscriptionPlan, ProductItemTrans
+from apps.user.models import TransactionDetails, OTP, SubscriptionPlan, ProductItemTrans, Subscription
 from frontend.forms import SetPasswordForm, VerifyOTPForm
 from frontend.serializer import TransactionDetailsSerializer
 from rest_framework.permissions import AllowAny
@@ -64,7 +64,6 @@ class FrontendHomeView(View):
         home_campaign_obj = Campaign.objects.filter(is_home=True)
         testimonial_obj = Testimonial.objects.all()
         gallery_obj = Distribution.objects.all()
-        print(gallery_obj)
         # if request.user.is_authenticated:
         context = {
             'gallery_obj':gallery_obj,
@@ -501,6 +500,8 @@ class FrontendDonationView(DevoteeRequiredMixin,View):
         transaction_obj = TransactionDetails.objects.filter(phone=request.user.username)
         context = {'transaction_obj':transaction_obj}
         return render(request, 'frontend/donation.html', context)
+
+
 #Thank you page
 class FrontendThankYouView(DevoteeRequiredMixin,View):
     def get(self, request):
@@ -509,11 +510,33 @@ class FrontendThankYouView(DevoteeRequiredMixin,View):
 
         return render(request, 'frontend/thank_you.html', context)
 
+
 class FrontendRazorThankYouView(View):
     def get(self, request,id):
         form = SetPasswordForm()
         context = {'form':form,'id':id}
         return render(request, 'frontend/thank_you.html', context)
+
+
+# Donate Monthly
+class DonateMontlyView(ListView):
+    def get(self, request, id):
+        compaign = Campaign.objects.get(slug=id)
+        subscription_plan = SubscriptionPlan.objects.filter(is_active=True)
+
+        order_data = {
+            "amount": 50000,  # Amount in paise
+            "currency": "INR",
+            "receipt": "receipt#1",
+            "payment_capture": 1  # Auto-capture the payment
+        }
+
+        order = razorpay_client.order.create(data=order_data)
+
+
+        context = { 'razorpay_key_id': settings.RAZOR_PAY_ID,'order': order,'compaign': compaign,'subscription_plan':subscription_plan }
+        return render(request, 'frontend/donate_monthly.html', context)
+
 
 # Payment gateway
 class FrontendPayView(View):
@@ -907,6 +930,59 @@ class Download80gView(DevoteeRequiredMixin,View):
         # Get the HTML template
         transaction_obj = TransactionDetails.objects.get(id=id)
         return render(request, 'frontend/invoice_80g.html', {'transaction_obj':transaction_obj})
+
+
+@csrf_exempt
+def payment_success(request):
+    razorpay_payment_id = request.POST.get('razorpay_payment_id', '')
+    razorpay_subscription_id = request.POST.get('razorpay_subscription_id', '')
+    razorpay_signature = request.POST.get('razorpay_signature', '')
+    email = request.POST.get('email', '')
+    name = request.POST.get('name', '')
+    phone_no = request.POST.get('phone_no', '')
+    plan_id = request.POST.get('plan_id', '')
+    campaign_id = request.POST.get('campaign_id', '')
+    params_dict_dd = request.POST.dict()
+    params_dict = {
+        'razorpay_payment_id': razorpay_payment_id,
+        'razorpay_subscription_id': razorpay_subscription_id,
+        'razorpay_signature': razorpay_signature,
+    }
+    try:
+        # Verify the payment signature
+        result = razorpay_client.utility.verify_subscription_payment_signature(params_dict)
+        user_obj = User.objects.filter(username=phone_no).first()
+        if not user_obj:
+            user_obj = User.objects.create_user(first_name=name, type='devotee',
+                                                username=phone_no, email=email,
+                                                password=phone_no)
+            user_obj.save()
+        if plan_id:
+            plan = SubscriptionPlan.objects.get(plan_id=plan_id)
+        else:
+            plan = SubscriptionPlan.objects.filter(is_active=True).first()
+
+        compaign = Campaign.objects.get(id=campaign_id)
+        # Create the subscription for the user
+        subscription = Subscription.objects.create(
+            user=user_obj,
+            plan=plan,
+            compaign=compaign,
+            start_date=timezone.now(),
+            is_active=True,
+            razorpay_subscription_id=razorpay_subscription_id,
+            razorpay_payment_id=razorpay_payment_id
+        )
+
+        login(request, user_obj)
+        return HttpResponseRedirect(reverse('thank-you'))
+
+        # Payment is successful
+    except razorpay.errors.SignatureVerificationError:
+        # Payment failed
+        messages.error(request, 'Payment failed.')
+
+        return HttpResponseRedirect(reverse('Home'))
 
 
 class DownloadReceiptView(View):

@@ -1,0 +1,203 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+<section class="bg-1 py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-10 text-center">
+                <h1 class="text-white">Make an Impact Every Month</h1>
+                <p class="text-white">Change lives with monthly donations, Hingonia creates impact everyday. Join us to make a difference.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 donate-monthly-section border-bottom">
+    <div class="container">
+        <div class="row justify-content-center g-3">
+            <div class="col-lg-7 col-md-12">
+                <form id="subscriptionForm" >
+                    {% csrf_token %}
+
+                    <div class="card card-body shadow border-0 rounded-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                            </div>
+                        </div>
+                        <div class="row mt-1 g-3 align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="fw-semibold mb-0">Select a Cause:</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="plan_id" class="plan_choice form-control form-select">
+                                    {% for single in subscription_plan %}
+                                    <option data-price="{{single.price}}" value="{{single.plan_id}}">{{single.name}}</option>
+                                    {% endfor %}
+                                    <option value="">Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-1 g-3 align-items-center monthly_div">
+                            <div class="col-md-8">
+                                <h6 class="fw-semibold mb-0">Monthly Donation:</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group mb-1">
+                                    <span class="input-group-text pb-2 pt-1" id="amt-addon"><i class="bi bi-currency-rupee color-2"></i></span>
+                                    <input readonly type="number" name="amount" id="amount" class="form-control price" placeholder="0" aria-describedby="amt-addon" value="{{subscription_plan.first.price}}" required="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-1 g-3 align-items-center ctm_div" style="display:none">
+                            <div class="col-md-8">
+                                <h6 class="fw-semibold mb-0">Custom Amount:</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group mb-1">
+                                    <span class="input-group-text pb-2 pt-1" id="amt-addon"><i class="bi bi-currency-rupee color-2"></i></span>
+                                    <input type="number" id="custom_number" name="custom_number" value="100" class="form-control custom_number" placeholder="0" aria-describedby="amt-addon" required="" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-body shadow mt-4 border-0 rounded-4">
+                        <div class="row  g-3 align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="fw-semibold mb-0">Preferred Date:</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-body shadow mt-4 b-color rounded-4">
+                        <div class="row  g-3 align-items-center">
+                            <div class="col-md-6">
+                                <label for="">Name</label>
+                                <input type="text" class="form-control" name="name" placeholder="Name" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" name="email" placeholder="Email" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Mobile Number</label>
+                                <div class="input-group mb-1">
+                                    <span class="input-group-text" id="phn-addon">IN</span>
+                                    <input type="number" name="phone_no" id="phone_no" class="form-control" placeholder="Mobile number" aria-describedby="phn-addon" required="">
+                                </div>
+                                <input type="hidden" id="campaign_id" name="campaign_id" value="{{compaign.id}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="form-check">
+                            <input style="display:block" required class="form-check-input b-color" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                By continuing, you are agreeing to <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <div class="mt-3 md-btn-box p-3 text-center rounded-4 shadow bg-1">
+                            <span class="text-white fw-semibold pe-md-3">
+                                <i class="bi bi-currency-rupee text-white"></i><span class="html_amt text-white">{{subscription_plan.first.price}}</span> / month
+                            </span>
+                            <input type="submit" class="btn btn-light continue" id="rzp-button" value="Continue">
+                        </div>
+                    </div>
+                </form>
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block script%}
+<script>
+document.getElementById('custom_number').addEventListener('input', function() {
+
+    var price = this.value
+    $('.html_amt').html(price)
+})
+$(document).on("change",".plan_choice",function() {
+    var id = $(this).val()
+
+    var selectedOption = this.options[this.selectedIndex];
+
+    // Get the data-price attribute of the selected option
+    var price = selectedOption.getAttribute('data-price');
+    console.log(price)
+    $('.price').val(price)
+    if(price === null){
+        $('.ctm_div').show()
+        $('.custom_number').removeAttr("disabled")
+        $('.price').attr("disabled",'disabled')
+        $('.monthly_div').hide()
+        var ct_price = $('.custom_number').val()
+        $('.html_amt').html(ct_price)
+
+    }else{
+        $('.ctm_div').hide()
+        $('.price').removeAttr("disabled")
+        $('.custom_number').attr('disabled','disabled')
+        $('.html_amt').html(price)
+        $('.monthly_div').show()
+    }
+
+})
+
+
+</script>
+<script>
+document.getElementById('subscriptionForm').onsubmit = function(e){
+    console.log("Test")
+    e.preventDefault(); // Prevent the default form submission
+    console.log("Test")
+    var form = document.getElementById('subscriptionForm');
+    var formData = new FormData(form);
+
+    // Fetch call to create a subscription on the server
+    fetch('/create_subscription/', {
+        method: 'POST',
+        body: formData
+    }).then(response => response.json()).then(data => {
+        var options = {
+            "key": "{{ RAZORPAY_KEY_ID }}", // Use Django template to pass the key
+            "subscription_id": data.id, // Subscription ID returned from the server
+            "name": formData.get('name'),
+            "description": "Monthly Donation",
+            "image": "https://your-logo-url",  // Your logo
+            "handler": function (response){
+                // Handle the subscription success
+                form.action = "/payment/success/";
+                form.method = "POST";
+                form.appendChild(new Input('hidden', 'razorpay_subscription_id', response.razorpay_subscription_id));
+                form.appendChild(new Input('hidden', 'razorpay_payment_id', response.razorpay_payment_id));
+                form.appendChild(new Input('hidden', 'razorpay_signature', response.razorpay_signature));
+                form.submit();
+            },
+            "prefill": {
+                "name": formData.get('name'),
+                "email": formData.get('email'),
+                "contact": formData.get('phone_no')
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open(); // Initiate the payment immediately
+    });
+}
+
+function Input(type, name, value) {
+    var input = document.createElement("input");
+    input.type = type;
+    input.name = name;
+    input.value = value;
+    return input;
+}
+</script>
+{% endblock %}
