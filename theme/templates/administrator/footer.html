@@ -214,4 +214,18 @@ $(document).on('click', '#apply', function() {
 
 });
 
+$(document).on('click', '#apply_slider', function() {
+	var dynamicData = getAllInputValuesInForm('slider_form')
+    console.log(dynamicData)
+    // Update DataTable's AJAX configuration with dynamic data
+    oTable.settings()[0].ajax.data = dynamicData;
+	oTable.page.len(1000).draw();
+    oTable.ajax.reload(null, false); // Ensure to keep current page
+
+    // Reload DataTable
+
+
+
+});
+
 </script>

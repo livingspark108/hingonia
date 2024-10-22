@@ -13,7 +13,7 @@ import dateutil.parser
 import random
 
 
-from apps.front_app.models import Campaign, Setting, UploadedFile, HomeSlider
+from apps.front_app.models import Campaign, Setting, UploadedFile, HomeSlider, HomePageContent
 from apps.user.models import TransactionDetails, ProductItemTrans
 
 utc=pytz.UTC
@@ -40,6 +40,12 @@ def get_campain_data():
 @register.simple_tag()
 def get_setting_data():
     return Setting.objects.first()
+
+
+@register.simple_tag()
+def get_home_setting_data():
+    return HomePageContent.objects.first()
+
 
 @register.simple_tag()
 def calculate_support_amt(amt):
@@ -260,3 +266,11 @@ def indian_number_format(value):
             return value_str
     except (ValueError, TypeError):
         return value
+
+
+
+@register.filter(name='is_image')
+def is_image(file_url):
+    """Check if a file URL is an image based on its extension."""
+    valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
+    return any(file_url.lower().endswith(ext) for ext in valid_extensions)

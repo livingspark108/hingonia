@@ -5,6 +5,8 @@
 {% block body %}
 <!-- Section Banner -->
 {% get_slider as all_slider %}
+{% get_home_setting_data as home_page_setting_data %}
+
 <section class="bg-9 mx-2 section-banner" xmlns="http://www.w3.org/1999/html">
         <div class="container-fluid ps-lg-5">
           <div class="row align-items-center">
@@ -23,11 +25,11 @@
                   Saving Sacred Cows
                 </h2>
                 <div class="pt-2">
-                  <a href="#" class="cm-btn bg-1 text-black">
+                  <a href="{% url 'campaign' %}" class="cm-btn bg-1 text-black">
                     <img src="{% static 'frontend/assets/images/cow.svg' %}" width="30" alt="">
                     Donate Now
                   </a>
-                  <a href="#" class="fw-bold text-decoration-underline ps-md-3 link d-md-inline d-block mt-md-0 mt-3">
+                  <a href="{% url 'csr' %}" class="fw-bold text-decoration-underline ps-md-3 link d-md-inline d-block mt-md-0 mt-3">
                     Get Involved
                   </a>
                 </div>
@@ -37,14 +39,14 @@
                   <div class="card-box">
                     <div class="row align-items-center">
                       <div class="col-5">
-                        <img src="{% static 'frontend/assets/images/home/icon-01.png' %}" class="img-fluid" alt="">
+                        <img src="{{home_page_setting_data.first_icon|handle_image_url}}" class="img-fluid" alt="">
                       </div>
                       <div class="col-7 ps-0 text-end">
                         <h3 class="fw-bold color-10 mb-0">
-                          18000+
+                          {{home_page_setting_data.first_number|handle_none}}
                         </h3>
                         <p class="mb-0 fw-semibold color-10">
-                          Stray & Abandoned Cows
+                          {{home_page_setting_data.first_title|handle_none}}
                         </p>
                       </div>
                     </div>
@@ -54,14 +56,14 @@
                   <div class="card-box">
                     <div class="row align-items-center">
                       <div class="col-5">
-                        <img src="{% static 'frontend/assets/images/home/icon-02.png' %}" class="img-fluid" alt="">
+                        <img src="{{home_page_setting_data.second_icon|handle_image_url}}" class="img-fluid" alt="">
                       </div>
                       <div class="col-7 ps-0 text-end">
                         <h3 class="fw-bold color-10 mb-0">
-                          84815+
+                          {{home_page_setting_data.second_number|handle_none}}
                         </h3>
                         <p class="mb-0 fw-semibold color-10">
-                          Surgeries Done
+                          {{home_page_setting_data.second_title|handle_none}}
                         </p>
                       </div>
                     </div>
@@ -71,14 +73,14 @@
                   <div class="card-box">
                     <div class="row align-items-center">
                       <div class="col-5">
-                        <img src="{% static 'frontend/assets/images/home/icon-03.png' %}" class="img-fluid" alt="">
+                        <img src="{{home_page_setting_data.third_icon|handle_image_url}}" class="img-fluid" alt="">
                       </div>
                       <div class="col-7 ps-0 text-end">
                         <h3 class="fw-bold color-10 mb-0">
-                          52+
+                          {{home_page_setting_data.third_number|handle_none}}
                         </h3>
                         <p class="mb-0 fw-semibold color-10 pop_up_title">
-                          Cow Sheds
+                          {{home_page_setting_data.third_title|handle_none}}
                         </p>
                       </div>
                     </div>
@@ -88,14 +90,15 @@
                   <div class="card-box">
                     <div class="row align-items-center">
                       <div class="col-5">
-                        <img src="{% static 'frontend/assets/images/home/icon-04.png' %}" class="img-fluid" alt="">
+                        <img src="{{home_page_setting_data.fourth_icon|handle_image_url}}" class="img-fluid" alt="">
                       </div>
                       <div class="col-7 ps-0 text-end">
                         <h3 class="fw-bold color-10 mb-0">
-                          400+
+                          {{home_page_setting_data.fourth_number|handle_none}}
+
                         </h3>
                         <p class="mb-0 fw-semibold color-10">
-                          Go Shevak
+                          {{home_page_setting_data.fourth_number|handle_none}}
                         </p>
                       </div>
                     </div>
@@ -105,14 +108,14 @@
                   <div class="card-box">
                     <div class="row align-items-center">
                       <div class="col-5">
-                        <img src="{% static 'frontend/assets/images/home/icon-05.png' %}" class="img-fluid" alt="">
+                        <img src="{{home_page_setting_data.five_icon|handle_image_url}}" class="img-fluid" alt="">
                       </div>
                       <div class="col-7 ps-0 text-end">
                         <h3 class="fw-bold color-10 mb-0">
-                          60+
+                          {{home_page_setting_data.five_number|handle_none}}
                         </h3>
                         <p class="mb-0 fw-semibold color-10">
-                          Doctors & Nursing Staff
+                            {{home_page_setting_data.five_title|handle_none}}
                         </p>
                       </div>
                     </div>
@@ -122,14 +125,14 @@
                   <div class="card-box">
                     <div class="row align-items-center">
                       <div class="col-5">
-                        <img src="{% static 'frontend/assets/images/home/icon-06.png' %}" class="img-fluid" alt="">
+                        <img src="{{home_page_setting_data.six_icon|handle_image_url}}" class="img-fluid" alt="">
                       </div>
                       <div class="col-7 ps-0 text-end">
                         <h3 class="fw-bold color-10 mb-0">
-                          40+
+                          {{home_page_setting_data.six_number|handle_none}}
                         </h3>
                         <p class="mb-0 fw-semibold color-10">
-                          Tractors & Loaders
+                          {{home_page_setting_data.six_title|handle_none}}
                         </p>
                       </div>
                     </div>
@@ -160,7 +163,7 @@
           </div>
         </div>
       </section>
-      <section class="bg-black pt-3 pb-4 mx-2 home-section-2">
+      <section class=" bg-black pt-3 pb-4 mx-2 home-section-2">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 text-center">
@@ -533,7 +536,7 @@
                 <span class="text-decoration-underline">
                   More about Sri Krishna Balram Seva Trust
                 </span>
-                <a href="#" class="ps-2">
+                <a href="{% url 'about-us' %}" class="ps-2">
                   <i class="bi bi-box-arrow-up-right">
                   </i>
                 </a>
@@ -659,7 +662,7 @@
                 dedicated for serving the cattle at Hingonia. The Trust consists of 3 government
                 officials, 3 independent trustees and 9 missionary trustees. The operations
                 are managed by the full time missionaries of the Trust.
-                <a href="#" class="color-1">
+                <a href="{% url 'about-us' %}" class="color-1">
                   Read More
                 </a>
               </p>
@@ -1319,7 +1322,7 @@
       </section>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<button class="clear-cart">Clear</button>
+<!--<button class="clear-cart">Clear</button>-->
 {% endblock %}
 {% block script%}
 <script>

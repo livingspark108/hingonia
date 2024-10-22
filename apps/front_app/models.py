@@ -232,6 +232,29 @@ class HomePageCampaign(DateTimeModel):
                                    related_name='campaign_setting_6')
 
 
+class HomePageContent(DateTimeModel):
+    youtube_link = models.CharField(max_length=300, blank=True, null=True)
+    first_title = models.CharField("1 Title",max_length=300, blank=True, null=True)
+    first_icon = models.ImageField("1 Icon",max_length=300, blank=True, null=True)
+    first_number = models.CharField("1 Number",max_length=300, blank=True, null=True)
+    second_title = models.CharField("2 Title",max_length=300, blank=True, null=True)
+    second_icon = models.ImageField("2 Icon",max_length=300, blank=True, null=True)
+    second_number = models.CharField("2 Number",max_length=300, blank=True, null=True)
+    third_title = models.CharField("3 Title",max_length=300, blank=True, null=True)
+    third_icon = models.ImageField("3 Icon",max_length=300, blank=True, null=True)
+    third_number = models.CharField("3 Number",max_length=300, blank=True, null=True)
+    fourth_title = models.CharField("4 Title",max_length=300, blank=True, null=True)
+    fourth_icon = models.ImageField("4 Icon",max_length=300, blank=True, null=True)
+    fourth_number = models.CharField("4 Number",max_length=300, blank=True, null=True)
+    five_title = models.CharField("5 Title",max_length=300, blank=True, null=True)
+    five_icon = models.ImageField("5 Icon",max_length=300, blank=True, null=True)
+    five_number = models.CharField("5 Number",max_length=300, blank=True, null=True)
+    six_title = models.CharField("6 Title",max_length=300, blank=True, null=True)
+    six_icon = models.ImageField("6 Icon",max_length=300, blank=True, null=True)
+    six_number = models.CharField("6 Number",max_length=300, blank=True, null=True)
+
+
+
 class Order(DateTimeModel):
     STATUS_CHOICES = [
         ('pending', 'Pending'),

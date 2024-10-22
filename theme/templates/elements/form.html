@@ -1,4 +1,4 @@
-{% load widget_tweaks %}
+{% load widget_tweaks mytags %}
 
 {% csrf_token %}
 
@@ -7,29 +7,37 @@
 {% endfor %}
 
 {% for field in form.visible_fields %}
-    <div id="div_id_{{field.name}}" class="form-group row  {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
-    <label for="{{ field.name }}" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
-    <div class="col-sm-10">
-	    {% if field.name == 'date' %}
-	     <input type="date" name="date" class="form-control" {% if field.value %} value="{{field.value|date:'Y-m-d'}}{%endif%}">
-        {% elif field.field.widget.input_type == 'checkbox' %}
-          <label class="switch">
-            <input type="checkbox" name="{{field.name}}" {% if field.value %} checked {%endif%}>
-            <span class="slider round"></span>
-          </label>
-        {% else %}
-          {% render_field field class="form-control" %}
-        {% endif %}
+    <div id="div_id_{{ field.name }}" class="form-group row {% if form.is_bound %} {% if field.errors %}has-danger{% else %}has-success{% endif %}{% endif %}">
+        <label for="{{ field.name }}" class="col-sm-2 col-form-label">{{ field.label_tag }}</label>
+        <div class="col-sm-10">
+            {% if field.name == 'date' %}
+                <input type="date" name="date" class="form-control" {% if field.value %} value="{{ field.value|date:'Y-m-d' }}"{% endif %}>
+            {% elif field.field.widget.input_type == 'checkbox' %}
+                <label class="switch">
+                    <input type="checkbox" name="{{ field.name }}" {% if field.value %} checked {% endif %}>
+                    <span class="slider round"></span>
+                </label>
+            {% elif field.field.widget.input_type == 'file' and field.value %}
+                {% if field.value.url|is_image %}
+                    <!-- Display uploaded image -->
+                    <img src="{{ field.value.url }}" alt="Image" class="img-thumbnail" style="max-width: 200px;">
+                {% else %}
+                    <p>Uploaded file is not an image.</p>
+                {% endif %}
+                <!-- Render the file input field for new upload -->
+                {% render_field field class="form-control-file" %}
+            {% else %}
+                {% render_field field class="form-control" %}
+            {% endif %}
 
-        {% if field.help_text %}
-          <small class="form-text text-muted">{{ field.help_text|safe }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <div class="form-control-feedback">
-              {{ error }}
-          </div>
-        {% endfor %}
-    </div>
-
+            {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <div class="form-control-feedback">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endfor %}

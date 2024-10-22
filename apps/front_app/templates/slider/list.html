@@ -27,6 +27,31 @@
                         </div>
                         <!-- end page-title -->
 
+                        <div class="row align-items-center">
+						    <form autocomplete="off" id="slider_form" class="" action="" method="get" enctype="multipart/form-data">
+
+						       <ul class="let-us-form">
+						          <li>
+						            <div class="form-group">
+						              <label>Select slider</label>
+                                        <select name="slider_type" class="form-control">
+                                            <option value="">Choose</option>
+                                            {% for single in slider %}
+                                            <option id="{{single.0}}">{{single.1}}</option>
+                                            {% endfor %}
+                                        </select>
+						            </div>
+						            </li>
+
+
+						            <li>
+						              <div class="form-group">
+						                <button id="apply_slider" type="button" class="btn btn-primary submit">Apply</button>
+						              </div>
+						            </li>
+						        </ul>
+						  </form>
+						</div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card m-b-30">
@@ -68,5 +93,6 @@
 		var data_id = $(this).data('id')
 		console.log(data_id)
 	})
+
 </script>
 {% endblock %}

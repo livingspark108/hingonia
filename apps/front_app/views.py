@@ -16,10 +16,12 @@ from django.views.generic import CreateView, ListView, UpdateView, TemplateView,
 from application.email_helper import WhatsAppThread
 from apps.cms.models import Page
 from application.custom_classes import AdminRequiredMixin, AjayDatatableView
+from apps.front_app.constants import SLIDER_TYPE
 from apps.front_app.forms import CreateDistributionForm, CreateCampaignForm, \
     CampaignImageFormset, HomePageCampaignForm, CreateTestimonialForm, CreateTrusteeForm, CreateOurSupporterForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, Setting, AbandonCart, Product, \
-    CampaignProduct, UploadedFile, HomePageCampaign, Order, Testimonial, HomeSlider, Trustee, OurSupporter
+    CampaignProduct, UploadedFile, HomePageCampaign, Order, Testimonial, HomeSlider, Trustee, OurSupporter, \
+    HomePageContent
 from django.contrib import messages
 
 from apps.user.forms import CreateSubscriberForm
@@ -398,6 +400,19 @@ class UpdateSettingView(CreateView,SuccessMessageMixin, UpdateView):
     def get_object(self, queryset=None):
         # If an object already exists, it's an update; otherwise, it's a create
         return Setting.objects.first()
+
+
+class UpdateHomePageSettingView(CreateView,SuccessMessageMixin, UpdateView):
+    model = HomePageContent
+    fields = '__all__'
+    template_name = 'setting/form.html'  # Provide the path to your template
+    success_url = reverse_lazy('home-page-setting')  # Specify the URL to redirect after successful creation or update
+    success_message = "Home Setting has been updated successfully"
+
+    def get_object(self, queryset=None):
+        # If an object already exists, it's an update; otherwise, it's a create
+        return HomePageContent.objects.first()
+
 
 class UpdateAboutUsView(CreateView,SuccessMessageMixin, UpdateView):
     model = AboutUs
@@ -1255,11 +1270,27 @@ class ListSliderView(AdminRequiredMixin, TemplateView):
     model = HomeSlider
     template_name = 'slider/list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(ListSliderView, self).get_context_data(**kwargs)
+        context['slider'] = SLIDER_TYPE
+        return context
+
 
 class ListSliderViewJson(AjayDatatableView):
     model = HomeSlider
     columns = ['title','type', 'actions']
     exclude_from_search_cloumn = ['actions']
+
+    def get_initial_queryset(self):
+        print(self.request.GET)
+        slider_type = self.request.GET.getlist('slider_type[]')[0]
+
+        filters_fileds = Q()
+        if slider_type:
+
+            filters_fileds.add(Q(type=slider_type), Q.AND)
+
+        return self.model.objects.filter(filters_fileds).order_by('-created_at')
 
     def render_column(self, row, column):
         if column == 'actions':
