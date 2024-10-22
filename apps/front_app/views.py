@@ -1283,11 +1283,12 @@ class ListSliderViewJson(AjayDatatableView):
 
     def get_initial_queryset(self):
         print(self.request.GET)
-        slider_type = self.request.GET.getlist('slider_type[]')[0]
+
+        slider_type = self.request.GET.getlist('slider_type[]')
 
         filters_fileds = Q()
         if slider_type:
-
+            slider_type = slider_type[0]
             filters_fileds.add(Q(type=slider_type), Q.AND)
 
         return self.model.objects.filter(filters_fileds).order_by('-created_at')
