@@ -16,7 +16,7 @@ from django.views.generic import CreateView, ListView, UpdateView, TemplateView,
 from application.email_helper import WhatsAppThread
 from apps.cms.models import Page
 from application.custom_classes import AdminRequiredMixin, AjayDatatableView
-from apps.front_app.constants import SLIDER_TYPE
+from apps.front_app.constants import SLIDER_TYPE, CAMPAIGN_TYPE, MODE_TYPE
 from apps.front_app.forms import CreateDistributionForm, CreateCampaignForm, \
     CampaignImageFormset, HomePageCampaignForm, CreateTestimonialForm, CreateTrusteeForm, CreateOurSupporterForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, Setting, AbandonCart, Product, \
@@ -67,11 +67,38 @@ class ListCampaignView(AdminRequiredMixin, TemplateView):
     model = Campaign
     template_name = 'campaign/list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(ListCampaignView, self).get_context_data(**kwargs)
+        context['campaign_type'] = CAMPAIGN_TYPE
+        context['mode_type'] = MODE_TYPE
+        return context
+
 
 class ListCampaignViewJson(AjayDatatableView):
     model = Campaign
-    columns = ['title','type','is_home','price', 'actions']
+    columns = ['title','type','mode','is_home','price', 'actions']
     exclude_from_search_cloumn = ['actions']
+
+    def get_initial_queryset(self):
+        print(self.request.GET)
+
+        campaign_type = self.request.GET.getlist('campaign_type[]')
+        mode_type = self.request.GET.getlist('mode_type[]')
+
+        filters_fileds = Q()
+        if campaign_type:
+            campaign_type = campaign_type[0]
+            if campaign_type:
+                filters_fileds.add(Q(type=campaign_type), Q.AND)
+
+        if mode_type:
+            mode_type = mode_type[0]
+            if mode_type:
+                filters_fileds.add(Q(mode=mode_type), Q.AND)
+
+
+        return self.model.objects.filter(filters_fileds).order_by('-created_at')
+
 
     def render_column(self, row, column):
         if column == 'is_home':

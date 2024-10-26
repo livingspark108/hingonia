@@ -178,13 +178,14 @@
               <div class="sevaWr text-white">
                 <h6 class="f-30 mb-1 fw-semibold ff-Rubik">{{single.title}}</h6>
                 <div class="d-flex justify-content-xxl-between justify-content-center gap-2">
-                  <div class="amount_box text-white bg-white24 ff-Rubik">₹<span class="text-white">{{single.price}}</span>/MONTH</div>
+                  <div class="amount_box text-white bg-white24 ff-Rubik">₹<span class="text-white">{{single.price}}</span></div>
+
                   <div class="pcount text-white d-flex gap-1">
-                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="minus-item text-white bg-white24 ff-Rubik">
+                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="minus-item text-white bg-white24 ff-Rubik minusBtn">
                       <img src="{% static 'frontend/assets/images/minus-white.svg' %}" class="img-fluid" alt="">
                     </span>
-                      <input style="width: 33px;" type="number" data-maxlength="100" class="item-count" data-id="{{single.id}}" data-name="{{single.title}}" value="1">
-                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="plus-item text-white bg-white24 ff-Rubik">
+                      <input style="width: 33px;" type="number" data-maxlength="100" class="item-count quantityInput text-center" data-id="{{single.id}}" data-name="{{single.title}}" value="1">
+                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="plus-item text-white bg-white24 ff-Rubik plusBtn">
                       <img src="{% static 'frontend/assets/images/plus-white.svg' %}" class="img-fluid" alt="">
                     </span>
                   </div>
@@ -360,25 +361,26 @@
                           By supporting <span class="color-26 fw-bold">Hingonia</span>, you are helping us reach out to
                           more campaigns like this and scale our impact. <a href="#" class="color-26 text-decoration-underline fw-bold">Learn More.</a>
                         </p>
-                        <div class="d-flex justify-content-between">
-                          <span class="f-12 fw-bold">Support us by :</span>
-                          <span class="supportPer f-12 fw-bold px-1" style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">
-                            <select class="h-100">
-                              <option value="IN">16% (₹160)</option>
-                              <option value="US">22% (₹200)</option>
-                            </select>
-                          </span>
-                        </div>
+<!--                        <div class="d-flex justify-content-between">-->
+<!--                          <span class="f-12 fw-bold">Support us by :</span>-->
+<!--                          <span class="supportPer f-12 fw-bold px-1" style="background:#F5F5F5; border:2px inset #0000001c; border-radius: 5px">-->
+<!--                            <select class="h-100">-->
+<!--                              <option value="IN">16% (₹160)</option>-->
+<!--                              <option value="US">22% (₹200)</option>-->
+<!--                            </select>-->
+<!--                          </span>-->
+<!--                        </div>-->
                       </div>
-                      <form id="subscriptionForm" >
+                      <form action="/razor-pay" method="post" >
                           {% csrf_token %}
                       <div class="donateForm_wr pt-3 pb-1">
 
                           <input type="hidden" id="campaign_id" name="campaign_id" value="">
                           <input type="hidden" id="plan_id" name="plan_id" value="">
+                          <input type="hidden" id="title" name="title" value="Seva">
                           <div class="mb-3 position-relative">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                            <input required type="text" name="name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
+                            <input required type="text" name="first_name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
                           </div>
                           <div class="mb-3 position-relative">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Preferred date</label>
@@ -1264,7 +1266,7 @@
 
           <div class="tab-pane steptabs fade" id="nav-inmemory" role="tabpanel" aria-labelledby="nav-inmemory-tab">
             <div class="donateForm_wr py-3" id="donateForm">
-              <form onsubmit="return false">
+              <form onsubmit="return false" >
                 <div class="mb-3 position-relative">
                   <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
                     here</label>
@@ -1272,11 +1274,11 @@
                 </div>
                 <div class="mb-3 position-relative">
                   <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                  <input type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
+                  <input required type="text" name="name" class="form-control" placeholder="Enter Name" id="nameInput" aria-describedby="nameHelp">
                 </div>
                 <div class="mb-3 position-relative">
                   <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                  <input type="text" class="form-control" name="email" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" name="email" placeholder="Enter Email" id="emailInput" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3 position-relative">
                   <div class="position-absolute country_code h-100">
@@ -1287,13 +1289,13 @@
                     </select>
                   </div>
                   <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                  <input type="text" name="mobile_no" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                  <input  required type="text" name="mobile_no" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
                   <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
                 </div>
                 <div class="mb-3 position-relative">
                   <label name="schedule_date" for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
                     Date</label>
-                  <input type="date" class="form-control" placeholder="23/04/2024" id="emailInput" aria-describedby="emailHelp">
+                  <input required type="date" class="form-control" placeholder="23/04/2024" id="emailInput" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3 position-relative">
                   <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">
@@ -1322,10 +1324,11 @@
       </section>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<!--<button class="clear-cart">Clear</button>-->
+<button class="clear-cart">Clear</button>
 {% endblock %}
 {% block script%}
 <script>
+
 var minimum_value = $('.minimum_value').val()
  function final_amt(){
     var donate_amt = $('.donate_amt_1').val()
@@ -1435,6 +1438,10 @@ $(document).on("click",".check_amount",function() {
   }else{
     nextStep(2)
   }
+})
+$( window ).on("load", function() {
+  console.log("Clear method")
+  shoppingCart.clearCart();
 })
 </script>
 <script>

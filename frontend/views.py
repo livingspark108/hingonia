@@ -60,7 +60,7 @@ razorpay_client = razorpay.Client(auth=(settings.RAZOR_PAY_ID, settings.RAZOR_PA
 class FrontendHomeView(View):
     def get(self, request):
         campaign_obj = Campaign.objects.all()
-        monthly_campaign_obj = Campaign.objects.filter(type='Seva')
+        monthly_campaign_obj = Campaign.objects.filter(type='Seva',mode='One Time')
         home_campaign_obj = Campaign.objects.filter(is_home=True)
         testimonial_obj = Testimonial.objects.all()
         gallery_obj = Distribution.objects.all()
@@ -419,7 +419,7 @@ class GetCampaignProductView(View):
 
 class OngoingDevotionView(ListView):
     def get(self, request, id):
-        compaign = Campaign.objects.get(slug=id)
+        campaign_obj = Campaign.objects.get(slug=id)
         transaction_obj = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).order_by('-created_at')
 
         # Pagination
@@ -435,7 +435,7 @@ class OngoingDevotionView(ListView):
             # If page is out of range (e.g. 9999), deliver last page of results.
             transaction_obj_paginated = paginator.page(paginator.num_pages)
 
-        context = {'compaign': compaign, 'transaction_obj_paginated': transaction_obj_paginated}
+        context = {'campaign': campaign_obj, 'transaction_obj_paginated': transaction_obj_paginated}
         return render(request, 'frontend/ongoing_devotion.html', context)
 
 

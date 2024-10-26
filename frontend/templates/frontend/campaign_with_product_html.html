@@ -20,6 +20,7 @@
                                       <div>
                                         <h5 class="card-title fw-bold">{{single.title}}</h5>
                                       </div>
+
                                       <div class="d-flex gap-2 justify-content-between flex-wrap">
                                         <span class="card-text priceWr f-18 mb-0">{{single.price}}</span>
                                         <div class="add_button add-to-cart" data-max="1000" data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}">
@@ -91,18 +92,24 @@
                               <input type="hidden" value="" name="amount_11" class="donate_amt_1">
                               <div class="col-md-6 pt-1">
                                 <div class=" messageBox">
-<!--                                  <div class="d-flex align-items-center gap-2 mb-2">-->
-<!--                                    <input type="checkbox" class="donationMessage gap-2 position-relative" id="request2">-->
-<!--                                    <label class="f-14 m-0 py-1 form-check-label" for="request2">-->
-<!--                                      Request 80 G-->
-<!--                                    </label>-->
-<!--                                  </div>-->
+                                  <div class="d-flex align-items-center gap-2 mb-2">
+                                    <input type="checkbox" class="donationMessage gap-2 position-relative" id="request2">
+                                    <label class="f-14 m-0 py-1 form-check-label" for="request2">
+                                      Request 80 G
+                                    </label>
+                                  </div>
                                   <div class="monthly_donate d-flex align-items-center">
                                     <div class="monthly d-flex align-items-center justify-content-between">
                                       <div class="DBtnWr">
                                         <button class="btn messageBox flexBoxCenter gap-2 fw-bold">
+                                                                                                                                <input type="checkbox" class="md_btn donationMessage position-relative" id="donateMOnthly">
+
                                           <label class="f-14 m-0 py-1 form-check-label" for="donateMOnthly">
+                                          Donate Monthly
                                           </label>
+
+
+
                                         </button>
                                       </div>
                                       <div class="d-flex flex-column align-items-end pe-lg-3 pe-2">

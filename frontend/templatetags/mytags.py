@@ -106,8 +106,6 @@ def calculate_percentage(target, achieved):
 
 @register.simple_tag()
 def divide(value, arg):
-    print(value)
-    print(arg)
     if value and arg:
         try:
             return round(value / arg)
@@ -128,8 +126,7 @@ def get_campaign_data(campaign_id):
     pr = calculate_percentage(campaign_obj.goal,total_sum)
     if campaign_obj.youtube_link:
         try:
-            parsed_url = urlparse(campaign_obj.youtube_link)
-            video_id = parse_qs(parsed_url.query).get('v')[0]
+            video_id = get_youtube_embed(campaign_obj.youtube_link)
         except:
             video_id = ""
 
@@ -222,6 +219,17 @@ def handle_image_url(img):
         return img.url
     else:
         return ""
+
+@register.simple_tag()
+def get_youtube_embed(link):
+    # Extract the video ID from the URL
+    video_id_match = re.search(r'(?:v=|\/)([0-9A-Za-z_-]{11}).*', link)
+    if video_id_match:
+        video_id = video_id_match.group(1)
+        # Generate the embed URL
+        embed_url = f'https://www.youtube.com/embed/{video_id}'
+        return embed_url
+    return ''
 
 @register.filter(name='generate_tag')
 def generate_tag(txt):

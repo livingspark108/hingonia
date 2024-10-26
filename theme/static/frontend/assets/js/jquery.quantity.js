@@ -38,9 +38,6 @@ var shoppingCart = (function() {
 
   // Add to cart
   obj.addItemToCart = function(name, id,img, price, count, max_qty) {
-    console.log("Img", img)
-    console.log("Name", name)
-    console.log("Price", price)
 
     for(var item in cart) {
       if(cart[item].id === id) {
@@ -49,9 +46,7 @@ var shoppingCart = (function() {
         return;
       }
     }
-    console.log(img)
     var item = new Item(name, id, img,price,count,max_qty);
-    console.log(item)
     cart.push(item);
     saveCart();
   }
@@ -121,15 +116,10 @@ var shoppingCart = (function() {
   // Total cart
   obj.totalCart = function() {
     var totalCart = 0;
-    console.log(cart)
     for(var item in cart) {
-      console.log("here")
-      console.log(cart[item].price)
       totalCart += Number(cart[item].price) * cart[item].count;
 
     }
-    console.log("Here")
-    console.log(totalCart)
     return Number(totalCart.toFixed(2));
   }
 
@@ -199,7 +189,6 @@ var shoppingCartOld = (function() {
 
   // Add to cart
   obj_old.addItemToCartOld = function(name, id, plate,qty) {
-    console.log("Old item"+ cart_old)
     for(var item in cart_old) {
       if(cart_old[item].id === id && cart_old[item].plate === plate) {
         cart_old[item].count =  Number(cart_old[item].count) + Number(qty);
@@ -208,7 +197,6 @@ var shoppingCartOld = (function() {
       }
     }
     var item = new ItemOld(name, id, plate,qty);
-    console.log(item)
     cart_old.push(item);
     saveCartOld();
   }
@@ -249,7 +237,6 @@ $(document).on("click keypress", ".add-to-cart", function(event) {
     var name = $(this).data('name');
     var plate = $(this).data('plate');
     var img = $(this).data('img');
-    console.log(img)
     var price = Number($(this).data('price'));
     var half_price = Number($(this).data('half-price'));
     var full_price = Number($(this).data('full-price'));
@@ -257,8 +244,6 @@ $(document).on("click keypress", ".add-to-cart", function(event) {
     var id = $(this).data('id');
 
     var count = $("input.item-count[data-id='" + id + "']").val();
-    console.log(max_qty)
-    console.log(count)
     if (!isNaN(max_qty)) {
       if (typeof count === "undefined") {
       name, id, img,price,count,maxlength
@@ -307,11 +292,8 @@ function displayCart() {
   var cartArray = shoppingCart.listCart();
   var output = "";
   var output_tmp = "";
-  console.log(cartArray)
   for(var i in cartArray) {
     if(cartArray[i].plate == 'half'){
-        console.log("Hlaf")
-        console.log(cartArray[i].half_price)
         var plate_select = "<select data-id='" + cartArray[i].id + "'   class='form-control plateType'><option selected value='half' data-price='"+cartArray[i].half_price+"' >Half</option><option value='full' data-price='"+cartArray[i].full_price+"'>Full</option></select>"
     }else if(cartArray[i].plate == 'full'){
         var plate_select = "<select data-id='" + cartArray[i].id + "' class='form-control plateType'><option  value='half' data-price='"+cartArray[i].half_price+"' >Half</option><option selected value='full' data-price='"+cartArray[i].full_price+"'>Full</option></select>"
@@ -363,15 +345,14 @@ function displayCart() {
       }
 
   $('.show-cart').html(output);
-  console.log(shoppingCart.totalCart())
   if(shoppingCart.totalCart() > 0){
     $('.show-cart').show()
-    console.log("Calculation")
     $('.active_amt_html').html(shoppingCart.totalCart());
     $('.donate_amt_1').val(shoppingCart.totalCart());
     make_dropdown(shoppingCart.totalCart())
     $('.active_price').val(shoppingCart.totalCart());
     $('.tmp_amount').val(shoppingCart.totalCart());
+    $('.donationAmount_html').html(shoppingCart.totalCart());
     $('.all_ctm_amount').hide()
     $('.cart_item_html_tmp').show()
     $('.cart_item_html_tmp .ct_item_tmp').html(output_tmp)
@@ -416,12 +397,10 @@ function displayCartOld() {
 
 
   var output = "";
-  console.log(cartArray)
   for(var i in cartArray) {
         output += '<tr><td>' + cartArray[i].name + '</td><td>' + cartArray[i].count + '</td></tr>'
 
   }
-  console.log(output)
   $('.table_add_item').html('')
   $('.table_add_item').append(output)
 }
@@ -487,7 +466,6 @@ $(document).on("change", ".item-count", function(event) {
 $(document).on("change", ".plateType", function(event) {
    var id = $(this).data('id')
    var price = $(this).find(':selected').attr('data-price')
-   console.log(price)
   var plate = $(this).val()
   shoppingCart.setPlateForItem(id, plate,price);
   displayCart();
@@ -513,10 +491,6 @@ $(document).on("click keypress", ".add-to-cart-old", function(event) {
     half_price = 0
     full_price = 0
 
-    console.log(qty)
-    console.log(name)
-    console.log(id)
-    console.log(plate)
     if (!isNaN(qty)) {
         shoppingCartOld.addItemToCartOld(name, id, plate, qty);
         displayCartOld();

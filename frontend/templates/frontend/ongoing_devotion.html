@@ -3,27 +3,31 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-<meta property="og:title" content="{{compaign.title}}" />
-<meta property="og:url" content="{% url 'ongoing-devotion' compaign.slug %}" />
-<meta property="og:image" content="{% get_media_prefix %}{{compaign.campaign_backgroud}}" />
-{% get_campaign_data compaign.id as campaign_data %}
+<meta property="og:title" content="{{campaign.title}}" />
+<meta property="og:url" content="{% url 'ongoing-devotion' campaign.slug %}" />
+<meta property="og:image" content="{% get_media_prefix %}{{campaign.campaign_backgroud}}" />
+{% get_campaign_data campaign.id as campaign_data %}
 
 <input type="hidden" class="promo_id" value="{{promo_no}}">
-<input type="hidden" class="camp_id" value="{{compaign.id}}">
+<input type="hidden" class="camp_id" value="{{campaign.id}}">
 <section class="campaign_details_section mt-3 mb-5">
         <div class="container">
             <div class="row g-4">
 
                 <div class="col-lg-7 col-md-7">
                     <div class="mb-3">
-                        <a href="campaigns.php" class="text-muted fw-semibold f-18">Campaigns</a>
+                        <a href="{% url 'campaign' %}" class="text-muted fw-semibold f-18">Campaigns</a>
                         <i class="bi bi-chevron-right gray"></i>
                         <span class="pink f-18 fw-semibold">{{campaign.title}}</span>
                     </div>
                     <div>
                     {% if campaign_data.video_id %}
-                        <iframe height="315" style="width: 100%;border-radius: 20px;" src="https://www.youtube.com/embed/{{campaign_data.video_id}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+                        <iframe height="315" style="width: 100%;border-radius: 20px;" src="{{campaign_data.video_id}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                     {% elif campaign.campaign_image %}
+                        <img src="{{campaign.campaign_image.url}}">
                     {% endif %}
+
                     </div>
                     <div class="campaign_amt">
                         <div class="row pb-2">
@@ -33,7 +37,7 @@
                             </div>
                             <div class="col-6 text-end">
                                 <h6 class="mb-1 f-18 fw-bold">Goal</h6>
-                                <h3 class="mb-1 fw-bold"><i class="bi bi-currency-rupee"></i>{{compaign.goal|indian_number_format}}</h3>
+                                <h3 class="mb-1 fw-bold"><i class="bi bi-currency-rupee"></i>{{campaign.goal|indian_number_format}}</h3>
                             </div>
                         </div>
                         <div class="progress">
@@ -47,7 +51,7 @@
                         <div class="row align-items-center my-3">
                             <div class="col-7">
                                 <img src="{% static 'frontend/assets/images/campaign/calendar.svg' %}" class="img-fluid" alt="">
-                                <span class="date">{{compaign.created_at}}</span>
+                                <span class="date">{{campaign.created_at}}</span>
                             </div>
                             <div class="col-5 text-end">
                                 <a href="javascript:void(0)" id="leftCdsGalleryIcon">
@@ -61,7 +65,7 @@
 
                         <div class="swiper campaignGallerySwiper">
                             <div class="swiper-wrapper gallery-grid">
-                                {% get_gallery compaign.id 'gallery' as all_campaign_images %}
+                                {% get_gallery campaign.id 'gallery' as all_campaign_images %}
                                 {% for single in all_campaign_images %}
                                 {% if single.file %}
                                 <div class="swiper-slide gallery-col">
@@ -80,11 +84,11 @@
                     <!--Gallery slider end-->
 
                     <div class="pt-4">
-                        <h2 class="cds_title">{{compaign.title}}
+                        <h2 class="cds_title">{{campaign.title}}
                         </h2>
                     </div>
                     <div class="cds_ckeditor mt-4">
-                        {{compaign.description|safe}}
+                        {{campaign.description|safe}}
                     </div>
 
                     <div class="mt-4 cds_social_link">
@@ -119,8 +123,8 @@
                     <div class="sticky-top cds-pt-110 z-0">
                         <h2 class="cds_title mb-3">Payment Details</h2>
                         <form action="/razor-pay" method="post" class="cds_form">
-                            <input type="hidden" value="{{compaign.id}}" class="campaign_id" name="campaign_id">
-                            <input type="hidden" value="{{compaign.title}}" class="title" name="title">
+                            <input type="hidden" value="{{campaign.id}}" class="campaign_id" name="campaign_id">
+                            <input type="hidden" value="{{campaign.title}}" class="title" name="title">
                             <input type="hidden" value="" class="all_item_data" name="all_item_data">
 
                                 {% csrf_token %}
@@ -136,8 +140,8 @@
 
 
                             <div class="cds_product mb-3">
-                                {% for single in compaign.product.all %}
-		                        {% get_cam_item single.id compaign.id as all_cam_item %}
+                                {% for single in campaign.product.all %}
+		                        {% get_cam_item single.id campaign.id as all_cam_item %}
                                 <div class="cds_pbox">
                                     <div class="row  align-items-center position-relative">
                                         <div class="col-md-7 col-7 pe-0">

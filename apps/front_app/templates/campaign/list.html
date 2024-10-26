@@ -26,7 +26,42 @@
                             </div> <!-- end row -->
                         </div>
                         <!-- end page-title -->
+                        <div class="row align-items-center">
+						    <form autocomplete="off" id="slider_form" class="" action="" method="get" enctype="multipart/form-data">
 
+						       <ul class="let-us-form">
+						          <li>
+						            <div class="form-group">
+						              <label>Select Type</label>
+                                        <select name="campaign_type" class="form-control">
+                                            <option value="">Choose</option>
+                                            {% for single in campaign_type %}
+                                            <option id="{{single.0}}">{{single.1}}</option>
+                                            {% endfor %}
+                                        </select>
+						            </div>
+						            </li>
+                                   <li>
+						            <div class="form-group">
+						              <label>Select Mode</label>
+                                        <select name="mode_type" class="form-control">
+                                            <option value="">Choose</option>
+                                            {% for single in mode_type %}
+                                            <option id="{{single.0}}">{{single.1}}</option>
+                                            {% endfor %}
+                                        </select>
+						            </div>
+						            </li>
+
+
+						            <li>
+						              <div class="form-group">
+						                <button id="apply_slider" type="button" class="btn btn-primary submit">Apply</button>
+						              </div>
+						            </li>
+						        </ul>
+						  </form>
+						</div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="card m-b-30">
@@ -36,6 +71,7 @@
                                             <tr>
                                                 <th>Title</th>
                                                 <th>Type</th>
+                                                <th>Mode</th>
                                                 <th>Is Home</th>
                                                 <th>Price</th>
                                                 <th class="no-sort"></th>
