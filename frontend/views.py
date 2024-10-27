@@ -573,9 +573,10 @@ class FrontendPayView(View):
 class FrontendRazorPayView(View):
     def post(self, request):
         # Create payu instance:
-        if request.POST.get('custom_check') == 'custom_check':
+        if request.POST.get('ctm_amount'):
             amount = request.POST.get('ctm_amount')
         else:
+            print("Direct amt")
             amount = request.POST.get('amount')
         print("amount")
         print(amount)

@@ -347,12 +347,22 @@ function displayCart() {
   $('.show-cart').html(output);
   if(shoppingCart.totalCart() > 0){
     $('.show-cart').show()
-    $('.active_amt_html').html(shoppingCart.totalCart());
-    $('.donate_amt_1').val(shoppingCart.totalCart());
+
     make_dropdown(shoppingCart.totalCart())
-    $('.active_price').val(shoppingCart.totalCart());
-    $('.tmp_amount').val(shoppingCart.totalCart());
-    $('.donationAmount_html').html(shoppingCart.totalCart());
+    var tip_amt = $('.support_option').val()
+    var total = shoppingCart.totalCart()
+    var all_total = 0
+    all_total = parseFloat(total) + parseFloat(tip_amt)
+    $('.active_price').val(all_total);
+    $('.active_amt_html').html(all_total);
+    $('.donate_amt_1').val(total);
+    $('.active_amt').val(all_total);
+
+
+    $('.tmp_amount').val(tip_amt);
+
+
+    $('.donationAmount_html').html(all_total);
     $('.all_ctm_amount').hide()
     $('.cart_item_html_tmp').show()
     $('.cart_item_html_tmp .ct_item_tmp').html(output_tmp)

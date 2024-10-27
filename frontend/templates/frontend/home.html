@@ -1351,13 +1351,15 @@ var minimum_value = $('.minimum_value').val()
     console.log(support_amt)
 
     donate_amt = parseInt(donate_amt) + parseInt(support_amt);
-
+    console.log("Test")
+    console.log(donate_amt)
     $('.active_amt_html').html(donate_amt)
 	$('.active_amt').val('')
 	$('.active_amt').val(donate_amt)
 
  }
 $(document).on("click",".campaign-btn-single",function() {
+    console.log("Open model")
     shoppingCart.clearCart();
     var id = $(this).data('id')
     var amount = $(this).data('price')
@@ -1431,7 +1433,7 @@ $(document).on("click",".know_more",function() {
     })
 })
 $(document).on("click",".check_amount",function() {
-  var amt = $('.amount').val()
+  var amt = $('.active_price').val()
   if(amt < 300){
     alert("Amount should be greater than 300")
     return false;

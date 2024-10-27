@@ -1009,6 +1009,7 @@
 {% endblock %}
 {% block script%}
 <script>
+
 var minimum_value = $('.minimum_value').val()
  function final_amt(){
     var donate_amt = $('.donate_amt_1').val()
@@ -1031,13 +1032,32 @@ var minimum_value = $('.minimum_value').val()
     console.log(support_amt)
 
     donate_amt = parseInt(donate_amt) + parseInt(support_amt);
-
+    console.log("Test")
+    console.log(donate_amt)
     $('.active_amt_html').html(donate_amt)
 	$('.active_amt').val('')
 	$('.active_amt').val(donate_amt)
 
  }
-
+$(document).on("click",".campaign-btn-single",function() {
+    console.log("Open model")
+    shoppingCart.clearCart();
+    var id = $(this).data('id')
+    var amount = $(this).data('price')
+    var title = $(this).data('title')
+    $('.pop_up_title').html(title)
+    $('.single_amount').val(amount)
+    $('.actual_amount').val(amount)
+    $('.total_rs_html').html(amount)
+    $.ajax({        // initialize an AJAX request
+                        url: "{% url 'get_campaign_product' %}",
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}','id':id},
+                        method: 'POST',
+                        success: function (data) {
+                            $('.campaign_data').html(data.campaign_with_product_html)
+                        }
+              });
+})
 $(document).on("change",".support_option",function() {
 	var selected = $(this).val()
 	if(selected == 'other'){
@@ -1070,39 +1090,6 @@ $(document).on("keyup",".ctm_amt",function() {
 
   })
 
-$(document).on("click",".campaign-btn-single",function() {
-    shoppingCart.clearCart();
-    var id = $(this).data('id')
-    var amount = $(this).data('price')
-    var title = $(this).data('title')
-    $('.pop_up_title').html(title)
-    $('.single_amount').val(amount)
-    $('.actual_amount').val(amount)
-    $('.total_rs_html').html(amount)
-    $.ajax({        // initialize an AJAX request
-                        url: "{% url 'get_campaign_product' %}",
-                        data: {csrfmiddlewaretoken: '{{ csrf_token }}','id':id},
-                        method: 'POST',
-                        success: function (data) {
-                            $('.campaign_data').html(data.campaign_with_product_html)
-                        }
-              });
-})
-
-$(document).on("keyup",".custom_amt",function() {
-    var atm = $(this).val()
-    var actual_amt = $('.actual_amount').val()
-<!--    if(atm != ""){-->
-
-<!--      $('.single_amount').val(parseInt(actual_amt)+parseInt(atm))-->
-<!--      $('.total_rs_html').html(parseInt(actual_amt)+parseInt(atm))-->
-<!--    }else{-->
-      $('.amount').val(parseInt(atm))
-      $('.final_amount').val(parseInt(atm))
-      $('.active_amt_html').html(parseInt(atm))
-<!--    }-->
-
-})
 $(document).on("click",".campaign-btn",function() {
     var amount = $('#donationAmount').html()
     $('.amount').val(amount)
@@ -1127,13 +1114,17 @@ $(document).on("click",".know_more",function() {
     })
 })
 $(document).on("click",".check_amount",function() {
-  var amt = $('.amount').val()
+  var amt = $('.active_price').val()
   if(amt < 300){
     alert("Amount should be greater than 300")
     return false;
   }else{
     nextStep(2)
   }
+})
+$( window ).on("load", function() {
+  console.log("Clear method")
+  shoppingCart.clearCart();
 })
 </script>
 <script>

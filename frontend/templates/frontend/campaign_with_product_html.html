@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                               </div>
-                              <input type="hidden" value="" name="amount" class="active_amt">
+<!--                              <input type="hidden" value="" name="amount" class="active_amt">-->
                               <input type="hidden" value="" name="amount_11" class="donate_amt_1">
                               <div class="col-md-6 pt-1">
                                 <div class=" messageBox">
@@ -114,8 +114,6 @@
                                       </div>
                                       <div class="d-flex flex-column align-items-end pe-lg-3 pe-2">
                                         <span class="f-12 fw-bold text-white taText" {{single.price}}>TOTAL AMOUNT</span>
-                                        <input type="hidden" class="amount" >
-                                        <input type="hidden" class="actual_amount" >
                                         <span class="f-36 text-white fw-bold taRs active_amt_html" style="line-height:normal">{{single.price}}</span>
                                       </div>
                                     </div>
@@ -151,8 +149,10 @@
                             <form action="/razor-pay" method="post">
                             {% csrf_token %}
                             <div class="donateForm_wr pt-3 pb-1">
+                              <input type="hidden" class="active_amt"  name="amount">
                               <input type="hidden" value="" class="campaign_id" name="campaign_id">
                               <input type="hidden" value="" class="title" name="title">
+                              <input type="hidden" value="" class="tip" name="tip">
                               <input type="hidden" value="" class="all_item_data" name="all_item_data">
                                 <div class="mb-3 position-relative">
                                   <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
@@ -185,7 +185,6 @@
                             <!-- <button class="btn btn-secondary prev-btn" onclick="prevStep(1)">Previous</button> -->
                             <div class="col-12">
                               <div class="dSubmit pt-2">
-                                <input type="hidden" name="amount" class="final_amount">
 
                                 <button type="submit" class="btn btnPink fw-bold btnAnimation" >DONATE NOW</button>
                               </div>
