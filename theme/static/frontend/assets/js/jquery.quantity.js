@@ -246,11 +246,12 @@ $(document).on("click keypress", ".add-to-cart", function(event) {
     var count = $("input.item-count[data-id='" + id + "']").val();
     if (!isNaN(max_qty)) {
       if (typeof count === "undefined") {
-      name, id, img,price,count,maxlength
             shoppingCart.addItemToCart(name, id,img, price, 1, max_qty);
             displayCart();
       }
       if(max_qty > count){
+
+
             shoppingCart.addItemToCart(name, id,img, price, 1, max_qty);
             displayCart();
       }
@@ -343,7 +344,8 @@ function displayCart() {
       output_tmp += '<span class="badge bg-2 m-1">'+ cartArray[i].name +' Qty. '+ cartArray[i].count +' * <i class="bi bi-currency-rupee text-white"></i> '+ cartArray[i].total +'</span>'
 
       }
-
+  console.log("Total amount")
+  console.log(shoppingCart.totalCart())
   $('.show-cart').html(output);
   if(shoppingCart.totalCart() > 0){
     $('.show-cart').show()
@@ -352,8 +354,16 @@ function displayCart() {
     var tip_amt = $('.support_option').val()
     var total = shoppingCart.totalCart()
     var all_total = 0
+    console.log("Count all")
+    console.log(total)
+    if (typeof tip_amt == 'undefined' && tip_amt == null) {
+            tip_amt = 0
+    }
     all_total = parseFloat(total) + parseFloat(tip_amt)
+    console.log(all_total)
+    console.log("All total price")
     $('.active_price').val(all_total);
+    $('.active_amt').val(all_total);
     $('.active_amt_html').html(all_total);
     $('.donate_amt_1').val(total);
     $('.active_amt').val(all_total);
@@ -436,22 +446,28 @@ $(document).on("click", ".minus-item", function(event) {
 })
 // +1
 $(document).on("click", ".plus-item", function(event) {
+  console.log("Here")
   var id = $(this).data('id')
   var name = $(this).data('name')
   var img = $(this).data('img')
   var price = $(this).data('price')
   var count = $("input.item-count[data-id='" + id + "']").val();
 
+
+
   var inputElement = $("input.item-count[data-id='" + id + "']");
 
   var maxlength = inputElement.data("maxlength");
 
   if (!isNaN(maxlength)) {
+      console.log("--3--")
       if(maxlength > count){
+      console.log("--3!--")
       shoppingCart.addItemToCart(name, id, img,price,count,maxlength);
       displayCart();
       }
   }else{
+      console.log("--2--")
       shoppingCart.addItemToCart(name, id, img,price,count,maxlength);
       displayCart();
   }
@@ -506,4 +522,11 @@ $(document).on("click keypress", ".add-to-cart-old", function(event) {
         displayCartOld();
   }
   }
+});
+
+/****** campaign ****** */
+$('.qty-box-btn').click(function () {
+  var qtyBoxCmp = $(this).siblings('.qtyBoxCmp');
+  qtyBoxCmp.show(500);
+  $(this).hide('500');
 });

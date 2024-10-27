@@ -179,13 +179,15 @@
                 <h6 class="f-30 mb-1 fw-semibold ff-Rubik">{{single.title}}</h6>
                 <div class="d-flex justify-content-xxl-between justify-content-center gap-2">
                   <div class="amount_box text-white bg-white24 ff-Rubik">₹<span class="text-white">{{single.price}}</span></div>
+                  <a style="border: 1px solid;" href="javascript:void(0)" class="text-white btn btn-outline-secondary rounded-5 qty-box-btn add-to-cart" data-img="/media/product_image/1_-16-.png" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}">Add
+					                        </a>
+                  <div class="qtyBoxCmp text-white gap-1" style="display:none">
 
-                  <div class="pcount text-white d-flex gap-1">
-                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="minus-item text-white bg-white24 ff-Rubik minusBtn">
+                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="pminus minus-item text-white bg-white24 ff-Rubik minusBtn">
                       <img src="{% static 'frontend/assets/images/minus-white.svg' %}" class="img-fluid" alt="">
                     </span>
                       <input style="width: 33px;" type="number" data-maxlength="100" class="item-count quantityInput text-center" data-id="{{single.id}}" data-name="{{single.title}}" value="1">
-                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="plus-item text-white bg-white24 ff-Rubik plusBtn">
+                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="pplus plus-item text-white bg-white24 ff-Rubik plusBtn">
                       <img src="{% static 'frontend/assets/images/plus-white.svg' %}" class="img-fluid" alt="">
                     </span>
                   </div>
@@ -1322,7 +1324,9 @@
           </div>
         </div>
       </section>
+<form id="subscriptionForm">
 
+</form>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <button class="clear-cart">Clear</button>
 {% endblock %}
@@ -1349,6 +1353,11 @@ var minimum_value = $('.minimum_value').val()
     console.log("Support")
     $('.tip').val(support_amt)
     console.log(support_amt)
+    if (typeof shoppingCart == 'undefined' && shoppingCart == null) {
+        support_amt = 0
+    }
+    console.log("Donate amt")
+    console.log(donate_amt)
 
     donate_amt = parseInt(donate_amt) + parseInt(support_amt);
     console.log("Test")
@@ -1441,10 +1450,24 @@ $(document).on("click",".check_amount",function() {
     nextStep(2)
   }
 })
-$( window ).on("load", function() {
-  console.log("Clear method")
-  shoppingCart.clearCart();
-})
+$(window).on("load", function() {
+    console.log("Clear method");
+
+    // Check if shoppingCart exists
+    if (typeof shoppingCart !== 'undefined' && shoppingCart !== null) {
+        // Add your condition for clearing the cart
+        var shouldClearCart = true; // Replace this with your actual condition
+
+        if (shouldClearCart) {
+            shoppingCart.clearCart();
+            console.log("Cart cleared!");
+        } else {
+            console.log("Condition not met, cart not cleared.");
+        }
+    } else {
+        console.log("shoppingCart is not defined.");
+    }
+});
 </script>
 <script>
 document.getElementById('subscriptionForm').onsubmit = function(e){
