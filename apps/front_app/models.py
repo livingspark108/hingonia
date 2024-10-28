@@ -60,6 +60,7 @@ class Campaign(DateTimeModel):
     short_title = models.CharField(max_length=300, blank=False,null=True)
     place = models.CharField(max_length=300, blank=False,null=True)
     tag = models.CharField(max_length=1000, blank=False,null=True)
+    cow_id = models.CharField(max_length=1000, blank=True,null=True)
     price = models.FloatField(max_length=300, blank=False,null=True)
     goal = models.FloatField(max_length=300, blank=True,null=True)
     favourite = models.BooleanField(default=False)
@@ -77,7 +78,7 @@ class Campaign(DateTimeModel):
     mode = models.CharField(choices=MODE_TYPE,max_length=300, blank=False,null=True,default='Both Monthly and One Time')
 
     type = models.CharField(choices=CAMPAIGN_TYPE,max_length=300, blank=False,null=True,default='Other')
-    amt_1 = models.IntegerField(blank=False,null=True)
+    amt_1 = models.IntegerField(blank=True,null=True)
     amt_2 = models.IntegerField(blank=True,null=True)
     amt_3 = models.IntegerField(blank=True,null=True)
     backgroud_type = models.CharField(choices=BG_TYPE_CHOICES,max_length=300, blank=False,null=True,default='red')

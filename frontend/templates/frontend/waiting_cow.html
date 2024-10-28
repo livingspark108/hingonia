@@ -39,7 +39,7 @@
                       <img src="{{single.campaign_image.url}}" class="card-img-top" alt="...">
                       <div class="card-body">
                         <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">{{single.title}}</h5>
-                        <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
+                        <span class="card-text color-10 ff-Rubik f-12">Id No.: {% if single.cow_id %}{{single.cow_id}}{% else %}ID not available{% endif %}</span>
                         <div class="donatAmountM">
                           {% if single.mode == 'One Time' %}
                           <span class="fw-semibold color-10 ff-Rubik cardprice_title">{{single.price}}</span></span>

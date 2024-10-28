@@ -43,7 +43,9 @@
                       </div>
                       <div class="card-body pb-0 px-0">
                         <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">{{single.campaign.title}} - Adopted by {{single.user.first_name}}</h5>
-                        <span class="card-text color-10 ff-Rubik f-12">Id No.: {{single.id}}}</span>
+
+                          <span class="card-text color-10 ff-Rubik f-12">Id No.: {% if single.campaign.cow_id %}{{single.campaign.cow_id}}{% else %}ID not available{% endif %}</span>
+
                         <div class="donatAmountM">
                           <span class="fw-semibold color-10 ff-Rubik cardprice_title">Donating {{single.price}}<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
                         </div>

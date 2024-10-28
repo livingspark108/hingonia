@@ -29,7 +29,7 @@ class CreateCampaignForm(forms.ModelForm):
 
     class Meta:
         model = Campaign
-        fields = ['type','mode','is_home', 'title','slug','place', 'short_title', 'tag', 'last_date', 'price', 'goal', 'payment_type', 'amt_1', 'amt_2',
+        fields = ['type','mode','is_home', 'title','slug','cow_id','place', 'short_title', 'tag', 'last_date', 'price', 'goal', 'payment_type', 'amt_1', 'amt_2',
                   'amt_3', 'youtube_link', 'short_description','updates', 'description', 'backgroud_type', 'campaign_backgroud',
                   'campaign_image','product']
 
@@ -44,7 +44,7 @@ class UpdateCampaignForm(forms.ModelForm):
 
     class Meta:
         model = Campaign
-        fields = ['type','mode','is_home', 'title','slug','place', 'short_title','slug', 'tag', 'last_date', 'price', 'goal', 'payment_type', 'amt_1', 'amt_2',
+        fields = ['type','mode','is_home', 'title','slug','cow_id','place', 'short_title','slug', 'tag', 'last_date', 'price', 'goal', 'payment_type', 'amt_1', 'amt_2',
                   'amt_3', 'youtube_link', 'short_description','updates', 'description', 'backgroud_type', 'campaign_backgroud',
                   'campaign_image','product']
 
