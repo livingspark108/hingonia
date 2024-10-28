@@ -38,4 +38,4 @@ class CreateSubscriberForm(forms.ModelForm):
 
     class Meta:
         model = Subscription
-        fields = ['plan','start_date']
+        fields = ['start_date']

@@ -229,16 +229,15 @@ class GetCampaignView(DevoteeRequiredMixin, View):
 class AdoptedCowView(View):
     def get(self, request):
         campaign_ids = Campaign.objects.filter(type='Adopt a cow').values_list('id', flat=True)
-        adopted_ids = AdoptedCow.objects.values_list('campaign_id', flat=True)
-
+        subscription_obj = Subscription.objects.filter(is_active=True)
+        campaign_list = subscription_obj.values_list('campaign_id', flat=True)
         campaigns_data = []
-        adopted_cow = AdoptedCow.objects.filter(campaign_id__in=campaign_ids,is_active=True)
-        waiting_cow = Campaign.objects.filter(type='Adopt a cow').exclude(id__in=adopted_ids)
+        adopted_cow = Campaign.objects.filter(type='Adopt a cow',is_active=True).exclude(id__in=campaign_list)
 
         context = {
-            'waiting_cow_len':len(waiting_cow),
-            'adopted_cow_len': len(adopted_cow),
-            'adopted_cow':adopted_cow,
+            'waiting_cow_len': len(adopted_cow),
+            'adopted_cow_len': len(subscription_obj),
+            'subscription_obj':subscription_obj,
         }
         return render(request, 'frontend/adopted_cow.html', context)
 
@@ -251,7 +250,14 @@ class WaitingCowView(ListView):
 
         campaigns_data = []
         adopted_cow = AdoptedCow.objects.filter(campaign_id__in=campaign_ids, is_active=True)
-        waiting_cow_obj = Campaign.objects.filter(type='Adopt a cow').exclude(id__in=adopted_ids)
+
+        subscription_obj = Subscription.objects.filter(is_active=True)
+
+        campaign_list = subscription_obj.values_list('campaign_id', flat=True)
+        campaigns_data = []
+        adopted_cow = Campaign.objects.filter(type='Adopt a cow', is_active=True).exclude(id__in=campaign_list)
+
+        waiting_cow_obj = Campaign.objects.filter(type='Adopt a cow').exclude(id__in=campaign_list)
 
 
         # Pagination
@@ -267,9 +273,10 @@ class WaitingCowView(ListView):
             # If page is out of range (e.g. 9999), deliver last page of results.
             waiting_cow_paginated = paginator.page(paginator.num_pages)
 
+
         context = {
-            'waiting_cow_len': len(waiting_cow_obj),
-            'adopted_cow_len': len(adopted_cow),
+            'waiting_cow_len': len(adopted_cow),
+            'adopted_cow_len': len(subscription_obj),
             'adopted_cow': adopted_cow,
             'waiting_cow_paginated':waiting_cow_obj
         }
@@ -521,8 +528,14 @@ class FrontendRazorThankYouView(View):
 # Donate Monthly
 class DonateMontlyView(ListView):
     def get(self, request, id):
-        compaign = Campaign.objects.get(slug=id)
+        campaign = Campaign.objects.get(slug=id)
         subscription_plan = SubscriptionPlan.objects.filter(is_active=True)
+        if campaign.type == 'Adopt a cow':
+            adopt_a_cow = True
+            plan_id = "plan_OpIeG90yIMyKEI"
+        else:
+            adopt_a_cow = False
+            plan_id = ""
 
         order_data = {
             "amount": 50000,  # Amount in paise
@@ -534,7 +547,7 @@ class DonateMontlyView(ListView):
         order = razorpay_client.order.create(data=order_data)
 
 
-        context = { 'razorpay_key_id': settings.RAZOR_PAY_ID,'order': order,'compaign': compaign,'subscription_plan':subscription_plan }
+        context = {'plan_id':plan_id,'adopt_a_cow':adopt_a_cow, 'razorpay_key_id': settings.RAZOR_PAY_ID,'order': order,'campaign': campaign,'subscription_plan':subscription_plan }
         return render(request, 'frontend/donate_monthly.html', context)
 
 
@@ -944,6 +957,15 @@ def payment_success(request):
     plan_id = request.POST.get('plan_id', '')
     campaign_id = request.POST.get('campaign_id', '')
     params_dict_dd = request.POST.dict()
+    subscription_data = razorpay_client.subscription.fetch(razorpay_subscription_id)
+    print("This")
+    print(subscription_data)
+    addons = subscription_data.get('notes', [])
+    product_info = addons['for']
+    price =addons['amount']
+    price = float(price) / 100
+
+    print(params_dict_dd)
     params_dict = {
         'razorpay_payment_id': razorpay_payment_id,
         'razorpay_subscription_id': razorpay_subscription_id,
@@ -963,20 +985,60 @@ def payment_success(request):
         else:
             plan = SubscriptionPlan.objects.filter(is_active=True).first()
 
-        compaign = Campaign.objects.get(id=campaign_id)
+        campaign = Campaign.objects.get(id=campaign_id)
         # Create the subscription for the user
         subscription = Subscription.objects.create(
             user=user_obj,
             plan=plan,
-            compaign=compaign,
+            campaign=campaign,
+            price=price,
             start_date=timezone.now(),
             is_active=True,
             razorpay_subscription_id=razorpay_subscription_id,
             razorpay_payment_id=razorpay_payment_id
         )
 
+        tran_obj = TransactionDetails()
+        tran_obj.mihpayid = razorpay_subscription_id
+        tran_obj.order_id = razorpay_subscription_id
+        tran_obj.campaign_id = campaign_id
+        tran_obj.firstname = name
+        tran_obj.productinfo = product_info
+        tran_obj.email = email
+        tran_obj.phone = phone_no
+        tran_obj.status = 'captured'
+        tran_obj.payment_source = 'Online'
+        tran_obj.mode = 'Online'
+        tran_obj.amount = price
+        tran_obj.save()
+
+
         login(request, user_obj)
-        return HttpResponseRedirect(reverse('thank-you'))
+
+        receipt_url = settings.BASE_URL + "/receipt/" + str(tran_obj.id)
+        send_donation_thank_you_email(name, email, float(price), receipt_url)
+        write_log("Message send for ", email)
+        # login(request, user_obj)
+
+        invoice_link = settings.BASE_URL + str(tran_obj.id)
+        message = (
+            f"🕉️ *Hingonia* 🕉️\n\n"
+            f"Dear {name},\n\n"
+            "🙏 *Thank you for your generous donation!* 🙏\n\n"
+            "We are truly grateful for your support towards our mission. "
+            f"Your contribution of ₹{price} will go a long way in supporting our cause and making a positive impact.\n\n"
+            "You can download your invoice from the following link:\n"
+            f"{invoice_link}\n\n"  # Add the invoice link dynamically
+            "If you have any queries or would like to stay updated on our activities, "
+            "feel free to contact us at +91 9112524911 or visit our website.\n\n"
+            "May Lord Shiva's blessings be with you always.\n\n"
+            "*Om Namah Shivaya* 🙏\n\n"
+            "Hingonia"
+        )
+
+        send_whatsapp_message(phone_no, message)
+
+        return HttpResponseRedirect(reverse('thank-you-rj', args=[tran_obj.id]))
 
         # Payment is successful
     except razorpay.errors.SignatureVerificationError:
@@ -1086,7 +1148,7 @@ def create_subscription(request):
         # Convert the preferred date to a timestamp
         preferred_date_obj = datetime.strptime(preferred_date, '%Y-%m-%d')
         current_date = datetime.now()
-
+        campaign_obj = Campaign.objects.get(id=campaign_id)
         # If the preferred date is in the past, schedule for the next month
         if preferred_date_obj < current_date:
             preferred_date_obj = preferred_date_obj.replace(year=current_date.year,
@@ -1094,9 +1156,12 @@ def create_subscription(request):
 
         # Convert preferred date to a UNIX timestamp
         start_at = int(preferred_date_obj.timestamp())
-
-        if request.POST['plan_id']:
+        if not request.POST['plan_id']:
+            plan_id = 'plan_P7fZefpGT4WdAp'
+        else:
             plan_id = request.POST['plan_id']
+
+        if plan_id:
             print("Plan id")
             print(plan_id)
             plan = SubscriptionPlan.objects.filter(plan_id=plan_id).first()
@@ -1116,7 +1181,9 @@ def create_subscription(request):
                     }
                 }],
                 "notes": {
+                    "amount": amount,
                     "name": name,
+                    "for": campaign_obj.title,
                     "email": email,
                     "phone_no": phone_no,
                     "campaign_id": campaign_id
@@ -1144,6 +1211,8 @@ def create_subscription(request):
                     }
                 }],
                 "notes": {
+                    "amount": amount,
+                    "for": campaign_obj.title,
                     "name": name,
                     "email": email,
                     "phone_no": phone_no,

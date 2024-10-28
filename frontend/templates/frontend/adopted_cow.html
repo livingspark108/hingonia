@@ -31,21 +31,21 @@
                 </div>
             </div>
             <div class="row pt-4">
-              {% for single in adopted_cow %}
+              {% for single in subscription_obj %}
               <div class="col-lg-4 col-sm-6 mb-4">
                   <div class="boxCard">
                     <div class="card p-30 p-md-20 bg-5 borderR-40 ">
                       <div class="position-relative">
-                      <img src="assets/images/adopt-cow/ac1.svg" class="card-img-top" alt="...">
+                      <img src="{{single.campaign.campaign_image.url}}" class="card-img-top" alt="...">
                         <div class="adopter_img position-absolute">
                           <img src="assets/images/adopt-cow/adopter.svg" alt="" style="max-width:100px;width:100%">
                         </div>
                       </div>
                       <div class="card-body pb-0 px-0">
-                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">Laxmi - Adopted by Rakesh Patidar</h5>
-                        <span class="card-text color-10 ff-Rubik f-12">Id No.: HG145</span>
+                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">{{single.campaign.title}} - Adopted by {{single.user.first_name}}</h5>
+                        <span class="card-text color-10 ff-Rubik f-12">Id No.: {{single.id}}}</span>
                         <div class="donatAmountM">
-                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">Donating $20<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">Donating {{single.price}}<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
                         </div>
                       </div>
                     </div>
@@ -53,29 +53,29 @@
               </div>
               {% endfor %}
             </div>
-            <div class="row aw_cow_pagination">
-              <div class="col-12">
-                <nav aria-label="Page navigation">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                      <a class="page-link border-0" href="#" aria-label="Previous">
-                        <span aria-hidden="true">	&lt;</span>
-                      </a>
-                    </li>
-                    <li class="page-item border-0 active" aria-current="page">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item"><a class="page-link border-0" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link border-0" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link border-0" href="#" aria-label="Next">
-                        <span aria-hidden="true">&gt;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
+<!--            <div class="row aw_cow_pagination">-->
+<!--              <div class="col-12">-->
+<!--                <nav aria-label="Page navigation">-->
+<!--                  <ul class="pagination justify-content-center">-->
+<!--                    <li class="page-item">-->
+<!--                      <a class="page-link border-0" href="#" aria-label="Previous">-->
+<!--                        <span aria-hidden="true">	&lt;</span>-->
+<!--                      </a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item border-0 active" aria-current="page">-->
+<!--                      <a class="page-link" href="#">1</a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item"><a class="page-link border-0" href="#">2</a></li>-->
+<!--                    <li class="page-item"><a class="page-link border-0" href="#">3</a></li>-->
+<!--                    <li class="page-item">-->
+<!--                      <a class="page-link border-0" href="#" aria-label="Next">-->
+<!--                        <span aria-hidden="true">&gt;</span>-->
+<!--                      </a>-->
+<!--                    </li>-->
+<!--                  </ul>-->
+<!--                </nav>-->
+<!--              </div>-->
+<!--            </div>-->
         </div>
       </section>
 {% endblock %}

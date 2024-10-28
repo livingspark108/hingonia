@@ -356,7 +356,7 @@ class ListDonationViewJson(AjayDatatableView):
 
             filters_fileds.add(Q(created_at__date__lte=end_date), Q.AND)
 
-        return self.model.objects.filter(filters_fileds).order_by('-created_at')
+        return self.model.objects.filter(filters_fileds).exclude(status='pending').order_by('-created_at')
 
     def render_column(self, row, column):
         if column == 'created_at':
@@ -1212,8 +1212,12 @@ class ListSubscriberView(AdminRequiredMixin, TemplateView):
 
 class ListSubscriberViewJson(AjayDatatableView):
     model = Subscription
-    columns = ['name','phone_no','email','plan','is_active', 'actions']
+    columns = ['name','phone_no','price','email','plan','is_active', 'actions']
     exclude_from_search_cloumn = ['actions']
+
+    def get_initial_queryset(self):
+
+        return self.model.objects.order_by('-created_at')
 
     def render_column(self, row, column):
         if column == 'name':

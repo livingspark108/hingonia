@@ -6,6 +6,29 @@
 <!-- Section Banner -->
 {% get_slider as all_slider %}
 {% get_home_setting_data as home_page_setting_data %}
+<style>
+ .qtyBoxCmp{
+     display: flex;
+}
+.qtyBoxCmp  span{
+    padding: 11px;
+    display: inline-block;
+    width: 36px;
+    height: 38px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+.qtyBoxCmp .quantityInput {
+    background-color: #FFFFFF25;
+    border: 0;
+    text-align: center;
+    color: #fff;
+outline: 0 ;
+}
+</style>
 
 <section class="bg-9 mx-2 section-banner" xmlns="http://www.w3.org/1999/html">
         <div class="container-fluid ps-lg-5">
@@ -202,7 +225,7 @@
             <div class="d-flex justify-content-sm-between justify-content-center align-items-center flex-wrap gap-2">
               <div class="f-24 fw-semibold text-white ff-Rubik title order-md-1 order-1 all_item_html"></div>
               <div class="text-white d-flex align-items-center gap-4 order-md-2 order-3">
-                <a data-bs-toggle="modal" data-bs-target="#donate2" href="#" class="campaign-btn text-dark ff-Rubik">Donate Now</a>
+                <a href="#" class="check_seva_amt campaign-btn text-dark ff-Rubik">Donate Now</a>
                 <input type="hidden" value="" name="donationAmount" class="donationAmount">
                 <div class="amount text-white">RS. <span id="donationAmount" class="donationAmount_html text-white ff-Rubik"></span></div>
               </div>
@@ -1442,14 +1465,31 @@ $(document).on("click",".know_more",function() {
     })
 })
 $(document).on("click",".check_amount",function() {
-  var amt = $('.active_price').val()
-  if(amt < 300){
-    alert("Amount should be greater than 300")
+
+  var amt = $('.active_amt').val()
+  if(amt == ''){
+    amt = 0
+  }
+  if(amt <= minimum_value){
+    alert("Amount should be greater than "+minimum_value)
     return false;
   }else{
     nextStep(2)
   }
 })
+$(document).on("click", ".check_seva_amt", function(e) {
+  var amt = parseFloat($('.donationAmount_html').text());
+
+  if (amt < minimum_value) {
+    alert("Amount should be greater than " + minimum_value);
+    e.preventDefault(); // Prevents the modal from opening
+    $('#donate2').hide()
+  }else{
+    var donateModal = new bootstrap.Modal(document.getElementById('donate2'));
+    donateModal.show();
+  }
+});
+
 $(window).on("load", function() {
     console.log("Clear method");
 

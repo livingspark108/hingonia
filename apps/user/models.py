@@ -114,23 +114,15 @@ class SubscriptionPlan(models.Model):
     def __str__(self):
         return self.name
 
-class Subscription(models.Model):
+class Subscription(DateTimeModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriptions')
     plan = models.ForeignKey(SubscriptionPlan, on_delete=models.SET_NULL, null=True, related_name='subscriptions')
-    compaign = models.ForeignKey(Campaign, on_delete=models.SET_NULL, null=True, related_name='compaign_subscription')
+    campaign = models.ForeignKey(Campaign, on_delete=models.SET_NULL, null=True, related_name='compaign_subscription')
     start_date = models.DateTimeField(default=timezone.now)
-    is_active = models.BooleanField(default=True)
     razorpay_subscription_id = models.CharField(max_length=255, blank=True, null=True)
+    price = models.FloatField(max_length=255, blank=True, null=True)
     razorpay_payment_id = models.CharField(max_length=255, blank=True, null=True)
 
-    # def save(self, *args, **kwargs):
-    #     if not self.end_date:
-    #         self.end_date = self.start_date + timezone.timedelta(days=self.plan.duration_in_days)
-    #     super(Subscription, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user.username} - {self.plan.name} (Active: {self.is_active})"
-
-    # @property
-    # def is_expired(self):
-    #     return timezone.now() > self.end_date
