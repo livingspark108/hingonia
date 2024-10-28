@@ -137,7 +137,11 @@ class FrontendOurMotherView(View):
 
 class FrontendCampaignView(View):
     def get(self, request):
-        adopt_a_cow_obj = Campaign.objects.filter(type='Adopt a cow').order_by('-created_at')
+        subscription_obj = Subscription.objects.filter(is_active=True)
+
+        campaign_list = subscription_obj.values_list('campaign_id', flat=True)
+
+        adopt_a_cow_obj = Campaign.objects.filter(type='Adopt a cow').exclude(id__in=campaign_list).order_by('-created_at')
         campaign_obj = Campaign.objects.exclude(type='Adopt a cow').order_by('-created_at')
 
         gallery_obj = Distribution.objects.all()
