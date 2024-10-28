@@ -61,7 +61,7 @@ class FrontendHomeView(View):
     def get(self, request):
         campaign_obj = Campaign.objects.all()
         monthly_campaign_obj = Campaign.objects.filter(type='Seva',mode='One Time')
-        home_campaign_obj = Campaign.objects.filter(is_home=True)
+        home_campaign_obj = Campaign.objects.filter(is_home=True).exclude(type='Seva')
         testimonial_obj = Testimonial.objects.all()
         gallery_obj = Distribution.objects.all()
         # if request.user.is_authenticated:
@@ -142,7 +142,7 @@ class FrontendCampaignView(View):
         campaign_list = subscription_obj.values_list('campaign_id', flat=True)
 
         adopt_a_cow_obj = Campaign.objects.filter(type='Adopt a cow').exclude(id__in=campaign_list).order_by('-created_at')
-        campaign_obj = Campaign.objects.exclude(type='Adopt a cow').order_by('-created_at')
+        campaign_obj = Campaign.objects.exclude(type='Adopt a cow').exclude(type='Seva').order_by('-created_at')
 
         gallery_obj = Distribution.objects.all()
         product_obj = Product.objects.all()

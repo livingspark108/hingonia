@@ -92,6 +92,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
                 'django_settings_export.settings_export',
+                'application.context_processor.device_type',
             ],
         },
     },
@@ -194,7 +195,8 @@ WEBPUSH_SETTINGS = {
     "VAPID_PRIVATE_KEY": "kdtfl4mj-nVi_trBGlH67XgUFvKrY0EhDKfIdwL8iI4",
     "VAPID_ADMIN_EMAIL": "nairsukumarandeepak@gmail.com"
 }
-USE_TZ = False
+USE_TZ = True
+
 TIME_ZONE = 'Asia/Kolkata'
 
 # added for user profile image resize/compress

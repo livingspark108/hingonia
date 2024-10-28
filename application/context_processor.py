@@ -1,9 +1,9 @@
 def device_type(request):
+    user_agent = request.META.get('HTTP_USER_AGENT', '').lower()
+    is_safari = 'safari' in user_agent and 'chrome' not in user_agent
+    is_pc = any(os in user_agent for os in ['windows', 'linux', 'macintosh'])
+
     return {
-        'is_mobile': request.user_agent.is_mobile,
-        'is_tablet': request.user_agent.is_tablet,
-        'is_touch_capable': request.user_agent.is_touch_capable,
-        'is_pc': request.user_agent.is_pc,
-        'is_bot': request.user_agent.is_bot,
-        'is_safari': 'Safari' in request.user_agent.browser.family,
+        'is_safari': is_safari,
+        'is_pc': is_pc,
     }
