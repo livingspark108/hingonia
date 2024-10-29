@@ -229,301 +229,131 @@
         </div>
     </section>
 
-<div class="modal fade" id="donationPayModal" tabindex="-1" aria-labelledby="donationPayModalLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+<div style="z-index:99999" class="modal fade " id="mobileCampaignModal" tabindex="-1" aria-labelledby="mobileCampaignModalLabel" aria-modal="true" role="dialog" style="display: block;">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+
             <div class="modal-content">
                 <div class="modal-header">
+                    <h1 class="modal-title pink f-18 fw-semibold" id="mobileCampaignModalLabel">Construction Seva
+                    </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-	            <form action="/razor-pay" method="post">
-					<input type="hidden" value="{{compaign.id}}" class="campaign_id" name="campaign_id">
-		            <input type="hidden" value="{{compaign.title}}" class="title" name="title">
-		            <input type="hidden" value="" class="all_item_data" name="all_item_data">
-                <div class="modal-body p-1">
+                <div class="modal-body">
+                    <form action="/razor-pay" method="post" class="cds_form">
+                            <input type="hidden" value="{{campaign.id}}" class="campaign_id" name="campaign_id">
+                            <input type="hidden" value="{{campaign.title}}" class="title" name="title">
+                            <input type="hidden" value="" class="all_item_data" name="all_item_data">
 
-                    <div class="container">
-	                                    <div class="col-md-5 d-md-block">
-                    <h3>{{compaign.title}}</h3>
-                    <div>
-	                    <span role="button" class="badge bg-success-subtle text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="80G Tax benefits available for INR donations">$
-                            Tax Benefit <i class="bi bi-info-circle ps-2"></i></span>
-                        <span role="button" class="badge bg-danger-subtle text-danger custom-tooltip" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" data-bs-title="
-                            <div class='bg-white'>
-                                <h5 class='f-14 fw-semibold mb-1 color-2'>Campaign Update</h4>
-                                <p class='mb-0 f-12'>100% Donation Update Guaranteed</p>
-                                <hr class='my-2'>
-                                <h5 class='f-14 fw-semibold mb-1 color-2'>Tax Benefits</h4>
-                                <p class='mb-0 f-12'>Donations Exempted Under Section 80G</p>
-                                <hr class='my-2'>
-                                <h5 class='f-14 fw-semibold mb-1 color-2'>Verified NGOs</h4>
-                                <p class='mb-0 f-12'>Charities Vetted With Due Diligence</p>
-                                <hr class='my-2'>
-                                <h5 class='f-14 fw-semibold mb-1 color-2'>Campaigner Connect</h4>
-                                <p class='mb-0 f-12'>Provision To Connect Directly With Campaigner</p>
+                                {% csrf_token %}
+                            <div class="mb-3">
+                                <input type="text" name="first_name" class="form-control" placeholder="Full Name" required>
                             </div>
-                            ">Assured <i class="bi bi-info-circle ps-2"></i>
-                        </span>
-                        <span role="button" class="badge bg-warning-subtle text-warning p-2">Hunger</span>
-                    </div>
-	                {% if compaign.short_description %}
-	                <p class="f-14 lh-sm mt-2">{{compaign.short_description}}</p>
-	                {% endif %}
-                    <div class="progress my-3">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-2" role="progressbar"
-                            style="width: {{campaign_data.percent}}%;" aria-valuenow="{{campaign_data.percent}}" aria-valuemin="0"
-                             aria-valuemax="100">{{campaign_data.percent}}%</div>
-                    </div>
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <h6 class="text-black mb-2">Raised</h6>
-                            <h4 class="color-2 mb-0 fw-bold f-16"><i
-		                            class="color-2 fw-bold bi bi-currency-rupee"></i>{{campaign_data.target|indian_number_format}}</h4>
-
-                        </div>
-                        <div class="col-6 text-md-end">
-                            <h6 class="text-black mb-2">Goal</h6>
-                            <h4 class="color-2 mb-0 fw-bold f-16"><i class="color-2 fw-bold bi bi-currency-rupee"></i>{{compaign.goal|indian_number_format}}</h4>
-<!--                            <p class="f-12 mb-0 text-muted">One Month Remaining</p>-->
-                        </div>
-                    </div>
-
-
-                    <div class="card card-body border-0 my-3" style="background-color: #FFFAF5;">
-	                    <div class="border border-secondary-subtle bg-white p-2 rounded mb-2">
-                                <p class="mb-0 f-12 fw-semibold lh-1">By supporting <span
-                                        class="color-2">Hingonia</span>,
-                                    you are helping us reach out to more campaigns like this and scale our
-                                    impact.
-                                    <a href="#" class="color-2">Learn More</a>.
-                                </p>
-                                <span class="f-12 fw-bold text-black">Support us by:</span>
-                                <span class="badge py-0 float-end">
-	                                {% calculate_support_amt compaign.amt_1 as all_supp_amt %}
-                                    <select class="form-control support_option">
-									    <option value="{{all_supp_amt.0}}">
-									        8%(<i class="bi bi-currency-rupee"></i><span class="suppo_pr_1">{{all_supp_amt.0}}</span>) ▼
-									    </option>
-									    <option value="{{all_supp_amt.1}}">
-									        12%(<i class="bi bi-currency-rupee"></i><span class="suppo_pr_2">{{all_supp_amt.1}}</span>) ▼
-									    </option>
-									    <option value="{{all_supp_amt.2}}">
-									        14%(<i class="bi bi-currency-rupee"></i><span class="suppo_pr_3">{{all_supp_amt.2}}</span>) ▼
-									    </option>
-									    <option value="{{all_supp_amt.3}}">
-									        16%(<i class="bi bi-currency-rupee"></i><span class="suppo_pr_4">{{all_supp_amt.3}}</span>) ▼
-									    </option>
-									    <option value="other">
-									        Other ▼
-									    </option>
-									</select>
-	                                <input style="display:none;" type="number" placeholder="Amount"
-	                                       class="ctm_support_amt form-control mt-1"
-	                                       value=""
-	                                       name="ctm_support_amt">
-                                </span>
+                            <div class="mb-3">
+                                <input type="email" name="email" class="form-control" placeholder="Email" required>
                             </div>
-                        <div class="row">
-                            <div class="col-4">
-                            <label class="text-black f-12 fw-semibold">Amount</label>
+                            <div class="mb-3">
+                                <input type="number" name="mobile_no" class="form-control" placeholder="Phone" required>
                             </div>
-                            <div class="col-8 text-end">
 
 
-	                            {% if compaign.payment_type == 'Product' %}
-                                <h3 class="color-2 f-16 mb-0 fw-bold"><i
-		                                class="fw-bold bi bi-currency-rupee"></i><span
-		                                class="active_amt_html">{{compaign.price|indian_number_format}}</span></h3>
-	                            <input type="hidden" value="{{compaign.price}}" name="amount" class="active_amt">
-	                            <input type="hidden" value="{{compaign.price}}" name="amount_11" class="donate_amt_1">
-<!--                                <p class="f-12 text-muted mb-0">one month remaining</p>-->
-	                            {% else %}
-	                            <h3 class="color-2 f-16 mb-0 fw-bold"><i
-		                                class="fw-bold bi bi-currency-rupee"></i><span
-		                                class="active_amt_html">{{compaign.amt_1}}</span></h3>
-	                            <input type="hidden" value="{{compaign.amt_1}}" name="amount" class="active_amt">
-	                            <input type="hidden" value="{{compaign.amt_1}}" name="amount_11" class="donate_amt_1">
-
-<!--                                <p class="f-12 text-muted mb-0">one month remaining</p>-->
-	                            {% endif %}
-                            </div>
-                        </div>
-                    </div>
-
-		                {% if compaign.payment_type == 'One Time' %}
-		                {% generate_price compaign.price as all_generated_price %}
-	                                <div class="row pb-3">
-		                                <div class="col-lg-4 col-md-6 col-6">
-                                        <div class="cps-amount-radio">
-                                            <label for="payOne" class="cps-active">₹ {{compaign.amt_1|indian_number_format}}</label>
-                                            <input selected type="radio" value="{{compaign.amt_1}}" name="amount_tt"
-                                                   id="payOne"
-                                                   class="cps-radio ct_donate_amt_1"
-                                                   checked>
+                            <div class="cds_product mb-3">
+                                {% for single in campaign.product.all %}
+		                        {% get_cam_item single.id campaign.id as all_cam_item %}
+                                <div class="cds_pbox">
+                                    <div class="row  align-items-center position-relative">
+                                        <div class="col-md-7 col-7 pe-0">
+                                            {% if single.image %}
+                                            <img src="{{single.image.url}}" class="cds_product_img">
+                                            {% endif %}
+                                            <span class="cds_product_title">{{single.title}}</span>
                                         </div>
-		                                </div>
-		                                {% if compaign.amt_2 %}
-	                                    <div class="col-lg-4 col-md-6 col-6">
-                                        <div class="cps-amount-radio">
-                                            <label for="payTwo">₹ {{compaign.amt_2|indian_number_format}}</label>
-                                            <input type="radio" value="{{compaign.amt_2}}" name="amount_tt"
-                                                   id="payTwo"
-                                                   class="cps-radio ct_donate_amt_2">
-                                        </div>
-	                                    </div>
-		                                {% endif %}
-		                                {% if compaign.amt_3 %}
-	                                    <div class="col-lg-4 col-md-6 col-6">
-                                        <div class="cps-amount-radio">
-                                            <label for="payThree">₹ {{compaign.amt_3|indian_number_format}}</label>
-                                            <input type="radio" value="{{compaign.amt_3}}" name="amount_tt"
-                                                   id="payThree"
-                                                   class="cps-radio ct_donate_amt_3">
-                                        </div>
-	                                    </div>
-		                                {% endif %}
-		                                <div class="col-md-12">
-				                                <div class="form-check">
-					                                <input class="form-check-input cps-amount-radio ctm_option cps-radio" type="radio"
-					                                       name="cps-pay" id="pay04">
-					                                <label class="form-check-label text-black f-16 fw-semibold" for="pay04">
-					                                    Choose Custom Amount:
-					                                </label>
-					                            </div>
-		                                    </div>
-	                                    </div>
-	                                    <div class="col-md-12 " id="customAmountBox" style="display: none;">
-				                            <div class="input-group">
-				                                <span class="input-group-text border-danger color-2" id="amount-addon">
-				                                    <i class="bi bi-currency-rupee color-2"></i>
-				                                </span>
-				                                <input type="number" value="0" name="sdfsf"
-				                                       class="ctm_amt form-control border-danger f-16 fw-bold" placeholder="----" aria-describedby="amount-addon" required="">
-				                            </div>
-				                        </div>
-<!--                                        <input id="" placeholder="Enter Amount" style="display:none;" type="number"-->
-<!--                                               class="form-control border-danger f-16 fw-bold ctm_amt"-->
-<!--                                               value=""><br>-->
-<!--                                        </div>-->
-                        {% endif %}
+                                        <div class="col-md-5 col-5 ps-0 text-end">
+                                            <span class="cds_product_price"><i
+                                                    class="bi bi-currency-rupee"></i>{{single.price}}</span>
 
-		                {% if compaign.payment_type == 'Product' %}
-		                <div class="card card-body mb-3 shadow show-cart">
-
-	                        <div class="row align-items-center g-2">
-	                            <div class="col-lg-8 col-md-12">
-	                                <h2 class="fw-semibold text-black mb-0 f-16">
-	                                    <span>Rice : 10 Kg</span>
-	                                    <span class="float-end fw-semibold color-2">$200</span>
-	                                </h2>
-	                            </div>
-	                            <div class="col-lg-4 col-md-12">
-	                                <div class="input-group">
-	                                    <button class="btn border minusBtn" type="button">-</button>
-	                                    <input type="text" class="form-control text-center quantityInput border" value="1" aria-label="Quantity">
-	                                    <button class="btn plusBtn border" type="button">+</button>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <hr>
-	                        <div class="row align-items-center g-2">
-                            <div class="col-lg-8 col-md-12">
-                                <h2 class="fw-semibold text-black mb-0 f-16">
-                                    <span>Rice : 10 Kg</span>
-                                    <span class="float-end fw-semibold color-2">$200</span>
-                                </h2>
-                            </div>
-                            <div class="col-lg-4 col-md-12">
-                                <div class="input-group">
-                                    <button class="btn border minusBtn" type="button">-</button>
-                                    <input type="text" class="form-control text-center quantityInput border" value="1" aria-label="Quantity">
-                                    <button class="btn plusBtn border" type="button">+</button>
+                                            <div class="cds_qty">
+                                                <input data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item f-14 decrement-btn qty-minus minusBtn" >
+                                                <input type="number" class="item-count qty quantityInput" data-maxlength='1000' data-id="{{single.id}}" data-name="{{single.title}}" value="1">
+                                                <input data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" type="button" value="" class="plus-item f-14 increment-btn qty-plus plusBtn">
+                                            </div>
+                                        </div>
+                                        <a href="javascript:void(0)" class="cds_info_icon">
+                                            <img src="assets/images/campaign/info.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div class="cds_product_info" style="display: none;">
+                                            <p class="f-12 fw-medium">
+                                                <img src="assets/images/campaign/steel.jpg" class="cds_product_img"
+                                                    alt="">
+                                                Welcome abandoned cows to a safe haven, with sturdy steel structures
+                                                offering shelter and care. Join us in creating their sanctuary.
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
+                                {% endfor %}
                             </div>
-                        </div>
 
-		                </div>
-		                {% endif %}
-		                <div class="sticky-top cm-top-15">
-
-                        <div class="mobile_view card card-body bg-9 mt-2">
-
-                            <div class="cm-input-box position-relative my-3">
-                                <label>Name</label>
-                                <input required type="text" value="{{request.user.first_name}}" name="first_name"
-                                       class="form-control first_name"
-                                       placeholder="Name">
+                            <div class="mb-3 cds_custom_amt position-relative">
+                                <span>Donate Custom Amount - <i class="bi bi-currency-rupee"></i></span>
+                                <input type="number" class="ctm_amt form-control" placeholder="_ _ _ _ _ _ _ _ _ _">
                             </div>
-                            <div class="cm-input-box position-relative my-3">
-                                <label>Email</label>
-                                <input required type="email" name="email" value="{{request.user.email}}"
-                                       class="form-control" placeholder="Email">
-                            </div>
-                            <div class="cm-input-box position-relative my-3">
-                                <label>Number</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <select class="form-control border-0">
-                                            <option>IN</option>
-                                            <option>USD</option>
+                            <div class="mb-3 border border-dark rounded-4 p-3">
+                                <p class="mb-0 f-16 fw-medium">By supporting <span class="color-1">Hingonia</span>, you
+                                    are
+                                    helping us reach out to more campaigns like this and scale our impact. <a
+                                        href="#">Learn More</a>.</p>
+                                <div class="row mt-2">
+                                    <div class="col-7">
+                                        <p class="mb-0 fw-bold f-14">Support us by :</p>
+                                    </div>
+                                    <div class="col-5 text-end">
+                                        <select class="rounded-2 w-100 support_option">
                                         </select>
-                                    </span>
-                                    <input name="mobile_no" value="{{ request.user.mobile_no }}" type="number"
-                                           required maxlength="10" class="form-control mobile_no" placeholder="+91 00000 00000" aria-label="Mobile Number" aria-describedby="basic-addon1">
-
+                                        <input style="display:none" type="number" placeholder="Amount" class="ctm_support_amt form-control mt-1" value="" name="ctm_support_amt">
+                                    </div>
                                 </div>
                             </div>
 
-
-                            <div class="my-2">
-                                <div class="form-check f-12">
-                                    <input name="identity" class="form-check-input" type="checkbox"
-                                           value=""
-                                           id="cpsCheckbox1" checked="">
-                                    <label class="form-check-label lh-sm" for="cpsCheckbox1">
-                                        Make my Donation Anonymous
-                                    </label>
-                                </div>
-
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="" id="updateWpCheck">
+                                <span class="checkmark"></span>
+                                <label class="form-check-label" for="updateWpCheck">
+                                    I want to receive transaction and donation updates on WhatsApp
+                                </label>
                             </div>
-                            <div>
-                                <!-- <a href="#" class="btn cm-btn w-100">Donate</a> -->
-<!--                                <button type="submit" class="footer-fixed-btn btn cm-btn w-100 donate_now">Donate-->
-<!--                                                                                                           Now</button>-->
+                            <div class="mb-4">
+                                <img src="assets/images/campaign/payment.svg" class="img-fluid" alt="">
                             </div>
-                        </div>
-		                <div class="mb-3 mt-3">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.hingonia.org/" class="cm-social-btn p-3 cm-fb-bg rounded-pill text-white"><i class="bi bi-facebook fs-2 text-white cm-icon"></i> Spread The World</a>
-                            <a href="whatsapp://send?text=https://www.hingonia.org/" class="cm-social-btn p-3 cm-wp-bg rounded-circle"><i class="bi bi-whatsapp fs-4 text-white cm-icon"></i></a>
-                        </div>
-		                </div>
-                </div>
-
-
-                    </div>
-
-                </div>
-                <div class="modal-footer p-0">
-                    <div class="container">
-                        <div class="row align-items-center g-0">
-                            <div class="col-12 text-center">
-
-                                <button type="submit" class="ctm_submit btn cm-btn w-100">
-                                    <p class="mb-0">
-                                        <span class="f-14 mb-0 text-white fw-bold active_amt_html"></span>
-                                    </p>
-                                    <hr class="m-0">
-                                    Donate Now
+                            <div class="mb-3">
+                                <button type="submit" class="cds_btn ">
+                                    Donate Here
+                                    <span class="text-white float-end"><i
+                                            class="bi bi-currency-rupee text-white"></i><span class="text-white active_amt_html"></span></span>
                                 </button>
+                                <input type="hidden" value="" name="amount" class="active_amt">
+                                <input type="hidden" value="" name="amount_11" class="donate_amt_1">
                             </div>
-                        </div>
-                    </div>
+                            <div class="cds_badge">
+                                <span style="background: #00CD300D;">*Tax Exemptions Available</span>
+                                <span style="background: #FF05050D;">*80G Receipt</span>
+                                <span style="background: #004BD70D;">*Protected Payment</span>
+                            </div>
+                             <input type="hidden" value="" class="tip" name="tip">
+                        </form>
+
                 </div>
-	            </form>
+                <div class="modal-footer p-1">
+                    <button type="submit" class="cds_btn ">
+                        Donate Here
+                        <span class="text-white float-end"><i class="bi bi-currency-rupee text-white"></i>500</span>
+                    </button>
+
+                </div>
             </div>
+
         </div>
     </div>
-<a href="javascript:void(0)" class="footer_sticky_btn d-md-none d-block" data-bs-toggle="modal" data-bs-target="#donationPayModal">Donate Now</a>
-{% endblock %}
+<a href="javascript:void(0)" class="footer_sticky_btn d-md-none d-block" data-bs-toggle="modal" data-bs-target="#mobileCampaignModal">Donate Now</a>{% endblock %}
 {% block script%}
 <script>
  shoppingCart.clearCart();
