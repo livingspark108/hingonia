@@ -246,10 +246,10 @@
 
                                 {% csrf_token %}
                             <div class="mb-3">
-                                <input type="text" name="first_name" class="form-control" placeholder="Full Name" required>
+                                <input type="text" name="first_name" class="first_name form-control" placeholder="Full Name" required>
                             </div>
                             <div class="mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                <input type="email" name="email" class="email form-control" placeholder="Email" required>
                             </div>
                             <div class="mb-3">
                                 <input type="number" name="mobile_no" class="form-control" placeholder="Phone" required>
@@ -257,6 +257,8 @@
 
 
                             <div class="cds_product mb-3">
+                                {% if campaign.product %}
+
                                 {% for single in campaign.product.all %}
 		                        {% get_cam_item single.id campaign.id as all_cam_item %}
                                 <div class="cds_pbox">
@@ -291,6 +293,10 @@
                                     </div>
                                 </div>
                                 {% endfor %}
+                                <input type="text" value="Product" name="payment_type" class="payment_type">
+                                {% else %}
+                                <input type="text" value="One Time" name="payment_type" class="payment_type">
+                                {% endif %}
                             </div>
 
                             <div class="mb-3 cds_custom_amt position-relative">
