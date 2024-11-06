@@ -16,6 +16,33 @@ from apps.user.models import SubscriptionPlan
 
 
 logger = logging.getLogger('custom_logger')
+import time
+
+
+# Background thread class
+class WhatsAppSenderThread(threading.Thread):
+    def __init__(self, contacts, message, api_key):
+        super().__init__()
+        self.contacts = contacts
+        self.message = message
+        self.api_key = api_key
+
+    def run(self):
+        for single in self.contacts:
+            # Construct the URL for each message
+            ssss_url = f"https://web.cloudwhatsapp.com/wapp/api/send?apikey={self.api_key}&mobile={single}&msg={self.message}"
+            try:
+                WhatsAppThread(ssss_url).start()
+                write_log("whatsapp success:",single)
+                # Simulate sending the message (replace with actual HTTP request code)
+                print(f"Sending message to: {ssss_url}")  # Replace this with an actual HTTP request if needed
+            except Exception as e:
+                write_log("whatsapp failed:",single)
+
+                print(f"Failed to send message to {single}: {e}")
+
+            # Wait for 1 second before sending the next message
+            time.sleep(1)
 
 def write_log(subject, message):
     logger.debug(f"{subject} | Context: {message}")  # Include context if provided

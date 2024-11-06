@@ -61,7 +61,7 @@ class FrontendHomeView(View):
     def get(self, request):
         campaign_obj = Campaign.objects.all()
         monthly_campaign_obj = Campaign.objects.filter(type='Seva',mode='One Time')
-        home_campaign_obj = Campaign.objects.filter(is_home=True).exclude(type='Seva')
+        home_campaign_obj = Campaign.objects.filter(is_home=True).exclude(Q(type='Seva') | Q(type='Adopt a cow'))
         testimonial_obj = Testimonial.objects.all()
         gallery_obj = Distribution.objects.all()
         # if request.user.is_authenticated:
@@ -420,7 +420,7 @@ class GetCampaignProductView(View):
         campaign_product = Campaign.objects.get(id=id)
         if campaign_product.product:
             campaign_with_product_html = render_to_string('frontend/campaign_with_product_html.html',
-                                                 {'campaign_product': campaign_product})
+                                                 {'campaign': campaign_product,'campaign_product': campaign_product})
         else:
             campaign_with_product_html = ""
         payload = {

@@ -3743,3 +3743,37 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* Animation */
+
+.cps-amount-radio {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.cps-amount-radio label {
+  display: block;
+  border-radius: 20px;
+  padding: 5px 20px;
+  color: #000;
+  font-weight: bold;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.cps-amount-radio .cps-radio {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+}
+
+.cps-active {
+  background-color: #000;
+  color: #fff !important;
+}
+
+.cps-active i{
+    color: #fff;
+}
+
+.custom_amt_input .input-group-text, .custom_amt_input .form-control{
+    border-color: #000;
+}

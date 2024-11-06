@@ -6,6 +6,49 @@
 
                           <div class="step w-100" id="step-1">
                             <div class="row pt-5 pb-4">
+                              {% if campaign.payment_type == 'One Time' %}
+                              {% generate_price campaign.price as all_generated_price %}
+                                    <input value="{{campaign.amt_1|indian_number_format}}" type="hidden" class="donate_amt_1">
+	                                <div class="row pb-3">
+		                                <div class="col-lg-4 col-md-6 col-6">
+                                        <div class="cps-amount-radio">
+                                            <label for="payOne" class="cps-active">₹ {{campaign.amt_1|indian_number_format}}</label>
+                                            <input selected type="radio" value="{{campaign.amt_1}}" name="amount_tt"
+                                                   id="payOne"
+                                                   class="cps-radio ct_donate_amt_1"
+                                                   checked>
+                                        </div>
+		                                </div>
+		                                {% if campaign.amt_2 %}
+	                                    <div class="col-lg-4 col-md-6 col-6">
+                                        <div class="cps-amount-radio">
+                                            <label for="payTwo">₹ {{campaign.amt_2|indian_number_format}}</label>
+                                            <input type="radio" value="{{campaign.amt_2}}" name="amount_tt"
+                                                   id="payTwo"
+                                                   class="cps-radio ct_donate_amt_2">
+                                        </div>
+	                                    </div>
+		                                {% endif %}
+		                                {% if campaign.amt_3 %}
+	                                    <div class="col-lg-4 col-md-6 col-6">
+                                        <div class="cps-amount-radio">
+                                            <label for="payThree">₹ {{campaign.amt_3|indian_number_format}}</label>
+                                            <input type="radio" value="{{campaign.amt_3}}" name="amount_tt"
+                                                   id="payThree"
+                                                   class="cps-radio ct_donate_amt_3">
+                                        </div>
+	                                    </div>
+		                                {% endif %}
+	                                    <div class="col-md-12 " id="customAmountBox" style="display: none;">
+				                            <div class="input-group">
+				                                <span class="input-group-text border-danger color-2" id="amount-addon">
+				                                    <i class="bi bi-currency-rupee color-2"></i>
+				                                </span>
+				                                <input type="number" value="0" name="sdfsf"
+				                                       class="ctm_amt form-control border-danger f-16 fw-bold" placeholder="----" aria-describedby="amount-addon" required="">
+				                            </div>
+				                        </div>
+                                {% endif %}
                               <div class="product_row row">
                               {% for single in campaign_product.product.all %}
                               <div class="col-lg-4 col-md-6">
@@ -82,6 +125,24 @@
                                     </div>
                                     <div class="col-5 text-end">
                                         <select class="rounded-2 w-100 support_option">
+                                            {% if campaign.payment_type == 'One Time' %}
+                                            {% calculate_support_amt campaign.amt_1 as all_supp_amt %}
+                                            <option value="{{all_supp_amt.0}}">
+                                                8%(<i class="bi bi-currency-rupee"></i><span class="suppo_pr_1">{{all_supp_amt.0}}</span>) ▼
+                                            </option>
+                                            <option value="{{all_supp_amt.1}}">
+                                                12%(<i class="bi bi-currency-rupee"></i><span class="suppo_pr_2">{{all_supp_amt.1}}</span>) ▼
+                                            </option>
+                                            <option value="{{all_supp_amt.2}}">
+                                                14%(<i class="bi bi-currency-rupee"></i><span class="suppo_pr_3">{{all_supp_amt.2}}</span>) ▼
+                                            </option>
+                                            <option value="{{all_supp_amt.3}}">
+                                                16%(<i class="bi bi-currency-rupee"></i><span class="suppo_pr_4">{{all_supp_amt.3}}</span>) ▼
+                                            </option>
+                                            <option value="other">
+                                                Other ▼
+                                            </option>
+                                            {% endif  %}
                                         </select>
                                         <input style="display:none" type="number" placeholder="Amount" class="ctm_support_amt form-control mt-1" value="" name="ctm_support_amt">
                                     </div>
@@ -121,15 +182,16 @@
                                 </div>
                               </div>
                             </div>
-                            <input type="hidden" class="single_amount" value="1.0">
-                            <input type="hidden" class="actual_amount" value="1.0">
+                                    <input type="hidden" class="single_amount" value="1.0">
+                                    <input type="hidden" class="actual_amount" value="1.0">
                             <div class="col-12">
                               <div class="dSubmit pt-2">
                                 <button class="btn btnPink fw-bold btnAnimation check_amount">DONATE NOW</button>
                               </div>
                             </div>
                           </div>
-                          </form>
+                          </div>
+
                           <div class="step d-none" id="step-2">
                             <div class="card_donate fw-medium zIndex-3 position-relative">
                               <p class="mb-1 f-14">

@@ -291,6 +291,13 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+$(document).on("change",".cps-radio",function() {
+  console.log("Test Test")
+  $('.cps-amount-radio label').removeClass('cps-active');
+  $(this).siblings('.cps-amount-radio label').addClass('cps-active');
+});
+
+
 function selectEvent(selectedCheckbox) {
   const checkboxes = document.querySelectorAll('.eventCheckbox');
 
@@ -360,10 +367,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const indianBtn = document.getElementById('indian-btn');
     const nonIndianBtn = document.getElementById('non-indian-btn');
-    
+
     const buttons = document.querySelectorAll('.countryBtn');
 
     buttons.forEach(button => {
@@ -373,8 +380,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Set initial active button
-    indianBtn.classList.add('active');
+    // Set initial active button if it exists
+    if (indianBtn) {
+        indianBtn.classList.add('active');
+    }
 });
 
 

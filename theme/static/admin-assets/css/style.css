@@ -185,7 +185,7 @@ b, strong {
 }
 
 .bg-primary {
-  background-color: #30419b !important;
+  background-color: #1a6d98 !important;
 }
 
 .bg-success {
@@ -811,7 +811,7 @@ dt {
 }
 
 .topbar .topbar-left {
-  background-color: #30419b;
+  background-color: #1a6d98;
   float: left;
   text-align: center;
   height: 70px;
@@ -1010,7 +1010,7 @@ dt {
 .side-menu {
   width: 240px;
   z-index: 10;
-  background: #30419b;
+  background: #1a6d98;
   bottom: 0;
   margin-top: 0;
   padding-bottom: 30px;
@@ -1032,7 +1032,7 @@ dt {
 }
 
 #sidebar-menu > ul > li > a {
-  color: #7e8cda;
+  color: #e7e8eb;
   display: block;
   padding: 13px 20px;
   font-size: 14px;
@@ -1064,7 +1064,7 @@ dt {
 
 #sidebar-menu > ul > li > a.mm-active {
   color: #ffffff !important;
-  background-color: #3345a5;
+  background-color: #0e374c;
 }
 
 #sidebar-menu .menu-title {
@@ -1078,12 +1078,12 @@ dt {
 
 #sidebar-menu .submenu li.mm-active > a {
   color: #ffffff;
-  background-color: #30419b;
+  background-color: #072c3f;
 }
 
 #sidebar-menu .submenu li a {
   padding: 8px 20px 8px 10px;
-  color: #7e8cda;
+  color: #e7e8eb;
   display: block;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -1094,7 +1094,7 @@ dt {
 }
 
 #sidebar-menu .submenu li a:hover {
-  background-color: #30419b;
+  background-color: #0e374c;
   color: rgba(255, 255, 255, 0.8);
 }
 

@@ -1,3 +1,5 @@
+import logging
+
 from django.utils import timezone
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -14,6 +16,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 
 from application.email_helper import WhatsAppThread
+from application.helper import WhatsAppSenderThread
 from apps.cms.models import Page
 from application.custom_classes import AdminRequiredMixin, AjayDatatableView
 from apps.front_app.constants import SLIDER_TYPE, CAMPAIGN_TYPE, MODE_TYPE
@@ -27,6 +30,7 @@ from django.contrib import messages
 from apps.user.forms import CreateSubscriberForm
 from apps.user.models import TransactionDetails, SubscriptionPlan, Subscription
 
+logger = logging.getLogger('custom_logger')
 
 class CreateCampaignView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
 
@@ -560,8 +564,9 @@ class DeleteDistributionView(AdminRequiredMixin, DeleteView):
 class WhatsAppDashboardView(AdminRequiredMixin, View):
     def get(self, request):
         customer_number = TransactionDetails.objects.values_list('phone',flat=True).distinct()
-
-        customer_number = [string for string in customer_number if len(string) >= 10 and string.isdigit()]
+        print(customer_number)
+        customer_number = [string for string in customer_number if
+                           string is not None and len(string) >= 10 and string.isdigit()]
 
         all_number = set(customer_number)
         context = {
@@ -574,17 +579,12 @@ class WhatsAppDashboardView(AdminRequiredMixin, View):
         message = request.POST.get('message')
         setting_obj = Setting.objects.first()
 
-        if setting_obj.whatsapp_key:
+        if setting_obj and setting_obj.whatsapp_key:
             key = setting_obj.whatsapp_key
-            for single in all_contact:
-                msg = message
-                sssss_url = "https://web.cloudwhatsapp.com/wapp/api/send?apikey=" + str(key) + "&mobile=" + str(
-                    single) + "&msg=" + msg
-                try:
-                    WhatsAppThread(sssss_url).start()
-                except:
-                    pass
+            # Start the background thread to handle messaging
+            WhatsAppSenderThread(all_contact, message, key).start()
 
+        messages.success(request, "Message queue has started successfully.")
 
         return HttpResponseRedirect(reverse('whatsapp'))
 
