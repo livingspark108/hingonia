@@ -1175,5 +1175,26 @@ function Input(type, name, value) {
     input.value = value;
     return input;
 }
+
+$(document).on("click",".campaign-btn-single",function() {
+    console.log("Open model")
+    shoppingCart.clearCart();
+    var id = $(this).data('id')
+    var amount = $(this).data('price')
+    var title = $(this).data('title')
+    $('.pop_up_title').html(title)
+    $('.single_amount').val(amount)
+    $('.actual_amount').val(amount)
+    $('.total_rs_html').html(amount)
+    $.ajax({        // initialize an AJAX request
+                        url: "{% url 'get_campaign_product' %}",
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}','id':id},
+                        method: 'POST',
+                        success: function (data) {
+                            $('.campaign_data').html(data.campaign_with_product_html)
+                            final_amt()
+                        }
+              });
+})
 </script>
 {% endblock %}
