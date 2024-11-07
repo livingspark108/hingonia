@@ -1,6 +1,6 @@
 {% load static %}
 {% load mytags %}
-<footer class="footer">
+<footer class="footer" id="footer">
     <div class="container-fluid px-md-5">
         <div class="row justify-content-center mb-5">
             <div class="col-lg-4 col-md-6 text-center ">
@@ -93,8 +93,42 @@
 <script type="text/javascript" src="{% static 'frontend/assets/js/custom.js' %}"></script>
 <script type="text/javascript" src="{% static 'frontend/assets/js/gallery.js' %}"></script>
 <script>
+$(document).on("click", "#donateMOnthly", function(e) {
+    var isChecked = $(this).is(':checked'); // true if checked, false if unchecked
+    var value = $(this).val(); // get the value of the checkbox
+
+    if (isChecked) {
+        $('.donate_monthly').val('yes')
+        $('#donationForm').attr('action', '{% url "donate-monthly-ctm" %}');
+        $('#donationForm').attr('method', 'get');
+        $('.preffered_date_div').show()
+    } else {
+        $('#donationForm').attr('action', '/razor-pay');
+        $('#donationForm').attr('method', 'post');
+        $('.donate_monthly').val('no')
+        $('.preffered_date_div').hide()
+    }
+});
+$(document).on("click", ".schedule_now", function(e) {
+    var isChecked = $('.eventCheckbox').is(':checked');
+    if (!isChecked) {
+        alert('Please check the box to proceed');
+        e.preventDefault(); // Prevents the modal from opening
+    }else {
+        // Manually open the modal if the checkbox is checked
+        $('#eventsModel').modal('show');
+    }
+});
+
+$(document).on("click",".eventCheckbox",function() {
+    var dd = $(this).val()
+    $('.for').val(dd)
+    console.log(dd)
+})
 
 </script>
+{% include "elements/message-block.html" %}
+
 </body>
 
 </html>

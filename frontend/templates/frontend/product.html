@@ -46,14 +46,14 @@
                     <div class="productImgSlider">
                       <div class="swiper productslide1 pb-30 swiper-initialized swiper-horizontal swiper-backface-hidden">
                         <div class="swiper-wrapper" id="swiper-wrapper-69152611459acc11" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-774px, 0px, 0px); transition-delay: 0ms;">
-                          <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="{{single.image.url}}" alt="">
-                          </div>
-                          <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="width: 258px;">
-                            <img class="img-fluid" src="{{single.image.url}}" alt="">
-                          </div>
-
-
+                          {% get_gallery single.id 'product' as all_campaign_images %}
+                            {% for single_image in all_campaign_images %}
+                                {% if single_image.file %}
+                                    <div class="swiper-slide" role="group" aria-label="{{ forloop.counter }} / {{ all_campaign_images|length }}">
+                                        <img class="img-fluid" src="{{ single_image.file.url }}" alt="">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                         <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span></div>
                       <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
@@ -62,7 +62,7 @@
                         <p class="f-12 color-10 fw-semibold">{{single.short_description}}</p>
                         <div class="d-flex align-items-center justify-content-center gap-3">
                           <span class="f-24 ff-rubik">₹ {{single.price}}</span>
-                          <a href="" class="buyBtn color-5 ff-rubik">Buy</a>
+                          <a href="https://play.google.com/store/search?q=SKBT&c=apps&hl=en&gl=US" class="buyBtn color-5 ff-rubik">Buy</a>
                         </div>
                       </div>
                     </div>

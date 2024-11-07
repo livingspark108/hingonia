@@ -489,37 +489,7 @@ outline: 0 ;
         </div>
       </section>
 
-      <section class="bg-black py-3 mx-2 home-section-2">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <span class="color-11 fw-bold fs-4">
-                Green Fodder Seva
-              </span>
-              <i class="bi bi-dot color-11 px-lg-3">
-              </i>
-              <span class="color-11 fw-bold fs-4">
-                Jaggery Seva
-              </span>
-              <i class="bi bi-dot color-11 px-lg-3">
-              </i>
-              <span class="color-11 fw-bold fs-4">
-                Adopt a calf
-              </span>
-              <i class="bi bi-dot color-11 px-lg-3">
-              </i>
-              <span class="color-11 fw-bold fs-4">
-                Adopt a cow
-              </span>
-              <i class="bi bi-dot color-11 px-lg-3">
-              </i>
-              <span class="color-11 fw-bold fs-4">
-                Medicine Kit Seva
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
+
       <section class="mx-2 bg-6 py-5 home-section-3 position-relative">
         <div class="container-fluid">
         <img class="vector_left position-absolute img-fluid" src="{% static 'frontend/assets/images/about/vector-right.png' %}" alt="vector">
@@ -561,7 +531,9 @@ outline: 0 ;
               </p>
               <h6 class="fw-bold">
                 <span class="text-decoration-underline">
+                  <a class="text-dark" href="{% url 'about-us' %}">
                   More about Sri Krishna Balram Seva Trust
+                    </a>
                 </span>
                 <a href="{% url 'about-us' %}" class="ps-2">
                   <i class="bi bi-box-arrow-up-right">
@@ -782,7 +754,7 @@ outline: 0 ;
                     </li>
                   </ol>
                   <div class="mt-4">
-                    <a href="#" class="cm-btn bg-7 d-block text-center color-10">
+                    <a href="{% url 'csr' %}" class="cm-btn bg-7 d-block text-center color-10">
                       <i class="bi bi-share color-10">
                       </i>
                       Spread the Cause
@@ -972,14 +944,16 @@ outline: 0 ;
                         <a href="{% url 'csr' %}" class="text-dark">Become a CSR Partner</a>
                         <img class="ms-1" style="width:12px" src="{% static 'frontend/assets/images/home/arrow-black-45.png' %}" alt="Become CSR partner">
                       </button>
-                      <span class="ps-2 pe-1 fw-medium ff-epilogue">Know More</span>
+                      <span class="ps-2 pe-1 fw-medium ff-epilogue"><a class="text-dark" href="{% url 'csr' %}">Know More</a></span>
                     </div>
                     <span style="opacity:.5" class="fw-bold">Join Our CSR Initiatives</span>
                   </div>
                   <div class="view_testimonial_btnWr text-center mt-2">
                     <div class="btn text-white fw-semibold view_testimonialBtn btnAnimation ff-epilogue">
+                      <a class="text-white" href="{% url 'trustee' %}">
                       View Testimonial
                       <img class="ms-1" style="width:12px" src="{% static 'frontend/assets/images/home/arrow-45.png' %}" alt="view testimonials">
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -1078,8 +1052,8 @@ outline: 0 ;
                 </div>
               </div>
                 </div>
-                <button class="btn donate_nowBtn mt-2 text-white fw-bold" data-bs-toggle="modal" data-bs-target="#eventsModel">
-                  Schedule Now
+                <button class="schedule_now btn donate_nowBtn mt-2 text-white fw-bold">
+                    Schedule Now
                 </button>
               </div>
             </div>
@@ -1114,52 +1088,7 @@ outline: 0 ;
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                        <div class="donat_event_wr">
-                          <div class="event_Wr p-4 text-center">
-                            <h5 class="text-white fw-bold">Make Your Own Day Of Charity</h5>
-                            <p class="text-white" style="font-size:11px">
-                              Add goodwill to your special occations by spreading joy among those who
-                              need your and support the most
-                            </p>
-                            <div class="nav nav-tabs border-0 flex-wrap event_type" id="nav-tab" role="tablist">
-                              <button class="nav-link position-relative active"  type="button" role="tab" aria-controls="nav-anniversary" aria-selected="true">
-                                <div class="eventBox flexBoxCenter flex-column">
-                                  <img src="{% static 'frontend/assets/images/home/anniversary.png' %}" alt="">
-                                  <div>
-                                        <input type="checkbox" name="event" value="anniversary" class="eventCheckbox" checked>                    <span class="f-12 fw-bold">Anniversary</span>
-                                  </div>
-                                </div>
-                              </button>
-                              <button class="nav-link position-relative"  type="button" role="tab" aria-controls="nav-birthday" aria-selected="false" tabindex="-1">
-                                <div class="eventBox flexBoxCenter flex-column">
-                                  <img src="{% static 'frontend/assets/images/home/birthday.png' %}" alt="">
-                                  <div>
-                                         <input type="checkbox" name="event"  value="birthday" class="eventCheckbox">
-                                    <span class="f-12 fw-bold">Birthday</span>
-                                  </div>
-                                </div>
-                              </button>
-                              <button class="nav-link position-relative" type="button" role="tab" aria-controls="nav-inhonour" aria-selected="false" tabindex="-1">
-                                <div class="eventBox flexBoxCenter flex-column">
-                                  <img src="{% static 'frontend/assets/images/home/honour-of.png' %}" alt="">
-                                  <div>
-                                          <input type="checkbox" name="event"  value="honour of" class="eventCheckbox">
-                                    <span class="f-12 fw-bold">In Honour Of</span>
-                                  </div>
-                                </div>
-                              </button>
-                              <button class="nav-link position-relative" type="button" role="tab" aria-controls="nav-inmemory" aria-selected="false" tabindex="-1">
-                                <div class="eventBox flexBoxCenter flex-column">
-                                  <img src="{% static 'frontend/assets/images/home/memory-of.png' %}" alt="">
-                                  <div>
-                                          <input type="checkbox" name="event"  value="Memory of" class="eventCheckbox">
-                                    <span class="f-12 fw-bold">In Memory Of</span>
-                                  </div>
-                                </div>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
+
                         <div class="tab-content" id="nav-tabContent">
                           <div class="tab-pane steptabs fade active show" id="nav-anniversary" role="tabpanel" aria-labelledby="nav-anniversary-tab">
                             <div class="donateForm_wr py-3" id="donateForm">
@@ -1173,11 +1102,11 @@ outline: 0 ;
                                 </div>
                                 <div class="mb-3 position-relative">
                                   <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                                  <input required type="text" name="name" class="form-control" placeholder="Srimaan Nivas" id="nameInput" aria-describedby="nameHelp">
+                                  <input required type="text" name="name" class="form-control"  id="nameInput" aria-describedby="nameHelp">
                                 </div>
                                 <div class="mb-3 position-relative">
                                   <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                                  <input required type="email" name="email" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput" aria-describedby="emailHelp">
+                                  <input required type="email" name="email" class="form-control"  id="emailInput" aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3 position-relative">
                                   <div class="position-absolute country_code h-100">
@@ -1374,11 +1303,7 @@ $(document).on("click",".campaign-btn",function() {
     var amount = $('#donationAmount').html()
     $('.amount').val(amount)
 })
-$(document).on("click",".eventCheckbox",function() {
-    var dd = $(this).val()
-    $('.for').val(dd)
-    console.log(dd)
-})
+
 
 $(document).on("click",".know_more",function() {
     var id = $(this).data('id')
@@ -1399,13 +1324,14 @@ $(document).on("click",".check_amount",function() {
   if(amt == ''){
     amt = 0
   }
-  if(amt <= minimum_value){
+  if(amt <= minimum_value || amt == 'NaN'){
     alert("Amount should be greater than "+minimum_value)
     return false;
   }else{
     nextStep(2)
   }
 })
+
 $(document).on("click", ".check_seva_amt", function(e) {
   var amt = parseFloat($('.donationAmount_html').text());
 
@@ -1437,6 +1363,9 @@ $(window).on("load", function() {
         console.log("shoppingCart is not defined.");
     }
 });
+
+
+
 </script>
 <script>
 document.getElementById('subscriptionForm').onsubmit = function(e){

@@ -98,8 +98,8 @@
               >Pledge Monthly</a>
             <div
               class="d-flex align-items-center messageBox campaingWrBtn gap-2 text-white justify-content-center mt-3">
-              <input type="checkbox" class="position-relative" id="mg-1">
-              <label class="f-14 m-0 py-1 form-check-label text-white  ff-Rubik" for="mg-1">Receive monthly gifts
+              <input type="checkbox" class="position-relative" id="mg-{{single.id}}">
+              <label class="f-14 m-0 py-1 form-check-label text-white  ff-Rubik" for="mg-{{single.id}}">Receive monthly gifts
                 from your cow?</label>
             </div>
           </div>
@@ -109,38 +109,7 @@
 
     </div>
   </section>
-  <section class="bg-black py-3 mx-2 home-section-2">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <span class="color-11 fw-bold fs-4">
-            Green Fodder Seva
-          </span>
-          <i class="bi bi-dot color-11 px-lg-3">
-          </i>
-          <span class="color-11 fw-bold fs-4">
-            Jaggery Seva
-          </span>
-          <i class="bi bi-dot color-11 px-lg-3">
-          </i>
-          <span class="color-11 fw-bold fs-4">
-            Adopt a calf
-          </span>
-          <i class="bi bi-dot color-11 px-lg-3">
-          </i>
-          <span class="color-11 fw-bold fs-4">
-            Adopt a cow
-          </span>
-          <i class="bi bi-dot color-11 px-lg-3">
-          </i>
-          <span class="color-11 fw-bold fs-4">
-            Medicine Kit Seva
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="mx-2 py-2 campaign-section">
+<section class="mx-2 py-2 campaign-section">
     <div class="container-fluid">
 
       <div class="row">
@@ -441,9 +410,14 @@
             <div class="productImgSlider">
               <div class="swiper productslide1 pb-30">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide ">
-                    <img class="img-fluid" src="{{single.image.url}}" alt="">
-                  </div>
+                  {% get_gallery single.id 'product' as all_campaign_images %}
+                            {% for single_image in all_campaign_images %}
+                                {% if single_image.file %}
+                                    <div class="swiper-slide" role="group" aria-label="{{ forloop.counter }} / {{ all_campaign_images|length }}">
+                                        <img class="img-fluid" src="{{ single_image.file.url }}" alt="">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                 </div>
                 <div class="swiper-pagination"></div>
               </div>
@@ -452,7 +426,7 @@
                 <p class="f-12 color-10 fw-semibold">{{single.description}}</p>
                 <div class="d-flex align-items-center justify-content-center gap-3">
                   <span class="f-24 ff-rubik">₹ {{single.price}}</span>
-                  <a href="" class="buyBtn color-5 ff-rubik">Buy</a>
+                  <a href="https://play.google.com/store/search?q=SKBT&c=apps&hl=en&gl=US" class="buyBtn color-5 ff-rubik">Buy</a>
                 </div>
               </div>
             </div>
@@ -462,334 +436,156 @@
       </div>
     </div>
   </section>
-  <section class="donor_privilages-section mx-2 mb-0 mb-md-5 pb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-5 col-lg-6 offset-xl-1">
-          <div class="donat_event_wr">
-            <div class="event_Wr p-4 text-center">
-              <h5 class="text-white fw-bold">
-                Make Your Own Day Of Charity
-              </h5>
-              <p class="text-white" style="font-size:11px">
-                Add goodwill to your special occations by spreading joy among those who
-                need your and support the most
-              </p>
-              <div class="event_type row">
+   <section class="donor_privilages-section mx-2 mb-0 mb-md-5 py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 offset-xl-1">
+              <div class="donat_event_wr">
+                <div class="event_Wr p-4 text-center">
+                  <h5 class="text-white fw-bold">
+                    Make Your Own Day Of Charity
+                  </h5>
+                  <p class="text-white" style="font-size:11px">
+                    Add goodwill to your special occations by spreading joy among those who
+                    need your and support the most
+                  </p>
+                    <div class="event_type row">
                 <div class="col-sm-3 col-6 mb-4 mb-md-0">
                   <div class="eventBox flexBoxCenter flex-column">
-                    <img src="/static/frontend/assets/images/home/anniversary.png" alt="">
+                    <img src="{% static 'frontend/assets/images/home/anniversary.png' %}" alt="">
                     <div>
-                      <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <input value="Anniversary"  type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
                       <span class="f-12 fw-bold">Anniversary</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-3 col-6 mb-4 mb-md-0">
                   <div class="eventBox flexBoxCenter flex-column">
-                    <img src="/static/frontend/assets/images/home/birthday.png" alt="">
+                    <img src="{% static 'frontend/assets/images/home/birthday.png' %}" alt="">
                     <div>
-                      <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <input value="Birthday"  type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
                       <span class="f-12 fw-bold">Birthday</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-3 col-6 mb-4 mb-md-0">
                   <div class="eventBox flexBoxCenter flex-column">
-                    <img src="/static/frontend/assets/images/home/honour-of.png" alt="">
+                    <img src="{% static 'frontend/assets/images/home/honour-of.png' %}" alt="">
                     <div>
-                      <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <input value="In Honour Of" type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
                       <span class="f-12 fw-bold">In Honour Of</span>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-3 col-6 mb-4 mb-md-0">
                   <div class="eventBox flexBoxCenter flex-column">
-                    <img src="/static/frontend/assets/images/home/memory-of.png" alt="">
+                    <img src="{% static 'frontend/assets/images/home/memory-of.png' %}" alt="">
                     <div>
-                      <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
+                      <input value="In Memory Of" type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
                       <span class="f-12 fw-bold">In Memory Of</span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <button class="btn donate_nowBtn mt-2 text-white fw-bold" data-bs-toggle="modal"
-              data-bs-target="#eventsModel">
-              Schedule Now
-            </button>
-          </div>
-        </div>
-        <div class="col-xl-4 col-lg-6">
-          <div class="donarPrivilages_point pt-3 pt-lg-0">
-            <h3 class="color-17 fw-bold">
-              Donor Privileges
-            </h3>
-            <ol class="f-14 fw-medium lh-lg">
-              <li class="color-17">
-                Gau Puja on your name 
-              </li>
-              <li class="color-17">
-                Digital Certificate of Your Goseva Contribution
-              </li>
-              <li class="color-17">
-                80G Tax Exemption Certificate
-              </li>
-              <li class="color-17">
-                On donating 11000 & above you will get 100% Pure Products from our gaushala.
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
-      <!-- Model -->
-      <div class="eventsModelBoxWr">
-        <div class="modal fade" id="eventsModel" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="eventsModelLabel2" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="donat_event_wr">
-                  <div class="event_Wr p-4 text-center">
-                    <h5 class="text-white fw-bold">Make Your Own Day Of Charity</h5>
-                    <p class="text-white" style="font-size:11px">
-                      Add goodwill to your special occations by spreading joy among those who
-                      need your and support the most
-                    </p>
-                    <div class="nav nav-tabs border-0 flex-wrap event_type" id="nav-tab" role="tablist">
-                      <button class="nav-link position-relative active" id="nav-anniversary-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-anniversary" type="button" role="tab" aria-controls="nav-anniversary"
-                        aria-selected="true">
-                        <div class="eventBox flexBoxCenter flex-column">
-                          <img src="./assets/images/home/anniversary.png" alt="">
-                          <div>
-                            <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
-                            <span class="f-12 fw-bold">Anniversary</span>
-                          </div>
-                        </div>
-                      </button>
-                      <button class="nav-link position-relative" id="nav-birthday-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-birthday" type="button" role="tab" aria-controls="nav-birthday"
-                        aria-selected="false">
-                        <div class="eventBox flexBoxCenter flex-column">
-                          <img src="./assets/images/home/birthday.png" alt="">
-                          <div>
-                            <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
-                            <span class="f-12 fw-bold">Birthday</span>
-                          </div>
-                        </div>
-                      </button>
-                      <button class="nav-link position-relative" id="nav-inhonour-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-inhonour" type="button" role="tab" aria-controls="nav-inhonour"
-                        aria-selected="false">
-                        <div class="eventBox flexBoxCenter flex-column">
-                          <img src="./assets/images/home/honour-of.png" alt="">
-                          <div>
-                            <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
-                            <span class="f-12 fw-bold">In Honour Of</span>
-                          </div>
-                        </div>
-                      </button>
-                      <button class="nav-link position-relative" id="nav-inmemory-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-inmemory" type="button" role="tab" aria-controls="nav-inmemory"
-                        aria-selected="false">
-                        <div class="eventBox flexBoxCenter flex-column">
-                          <img src="./assets/images/home/memory-of.png" alt="">
-                          <div>
-                            <input type="checkbox" class="eventCheckbox" onclick="selectEvent(this)">
-                            <span class="f-12 fw-bold">In Memory Of</span>
-                          </div>
-                        </div>
-                      </button>
-                    </div>
-                  </div>
                 </div>
-                <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane steptabs fade active show" id="nav-anniversary" role="tabpanel"
-                    aria-labelledby="nav-anniversary-tab">
-                    <div class="donateForm_wr py-3" id="donateForm">
-                      <form onsubmit="return false">
-                        <div class="mb-3 position-relative">
-                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
-                            here</label>
-                          <input type="textarea" class="form-control" id="nameInput" aria-describedby="nameHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                          <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
-                            aria-describedby="nameHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                          <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
-                            aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <div class="position-absolute country_code h-100">
-                            <select class="h-100">
-                              <option value="IN">IN</option>
-                              <option value="US">US</option>
-                              <option value="UK">UK</option>
-                            </select>
-                          </div>
-                          <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                          <input type="text" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
-                          <div class="help-icon position-absolute flexBoxCenter"
-                            title="Enter your mobile number including the country code.">?</div>
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
-                            Date</label>
-                          <input type="text" class="form-control" placeholder="23/04/2024" id="emailInput"
-                            aria-describedby="emailHelp">
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-
-                  <div class="tab-pane steptabs fade" id="nav-birthday" role="tabpanel"
-                    aria-labelledby="nav-birthday-tab">
-                    <div class="donateForm_wr py-3" id="donateForm">
-                      <form onsubmit="return false">
-                        <div class="mb-3 position-relative">
-                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
-                            here</label>
-                          <input type="textarea" class="form-control" id="nameInput" aria-describedby="nameHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                          <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
-                            aria-describedby="nameHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                          <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
-                            aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <div class="position-absolute country_code h-100">
-                            <select class="h-100">
-                              <option value="IN">IN</option>
-                              <option value="US">US</option>
-                              <option value="UK">UK</option>
-                            </select>
-                          </div>
-                          <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                          <input type="text" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
-                          <div class="help-icon position-absolute flexBoxCenter"
-                            title="Enter your mobile number including the country code.">?</div>
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
-                            Date</label>
-                          <input type="text" class="form-control" placeholder="23/04/2024" id="emailInput"
-                            aria-describedby="emailHelp">
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-
-                  <div class="tab-pane steptabs fade" id="nav-inhonour" role="tabpanel"
-                    aria-labelledby="nav-inhonour-tab">
-                    <div class="donateForm_wr py-3" id="donateForm">
-                      <form onsubmit="return false">
-                        <div class="mb-3 position-relative">
-                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
-                            here</label>
-                          <input type="textarea" class="form-control" id="nameInput" aria-describedby="nameHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                          <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
-                            aria-describedby="nameHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                          <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
-                            aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <div class="position-absolute country_code h-100">
-                            <select class="h-100">
-                              <option value="IN">IN</option>
-                              <option value="US">US</option>
-                              <option value="UK">UK</option>
-                            </select>
-                          </div>
-                          <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                          <input type="text" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
-                          <div class="help-icon position-absolute flexBoxCenter"
-                            title="Enter your mobile number including the country code.">?</div>
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
-                            Date</label>
-                          <input type="text" class="form-control" placeholder="23/04/2024" id="emailInput"
-                            aria-describedby="emailHelp">
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-
-                  <div class="tab-pane steptabs fade" id="nav-inmemory" role="tabpanel"
-                    aria-labelledby="nav-inmemory-tab">
-                    <div class="donateForm_wr py-3" id="donateForm">
-                      <form onsubmit="return false">
-                        <div class="mb-3 position-relative">
-                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
-                            here</label>
-                          <input type="textarea" class="form-control" id="nameInput" aria-describedby="nameHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
-                          <input type="text" class="form-control" placeholder="Srimaan Nivas" id="nameInput"
-                            aria-describedby="nameHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
-                          <input type="text" class="form-control" placeholder="nivaashri@gmail.com" id="emailInput"
-                            aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <div class="position-absolute country_code h-100">
-                            <select class="h-100">
-                              <option value="IN">IN</option>
-                              <option value="US">US</option>
-                              <option value="UK">UK</option>
-                            </select>
-                          </div>
-                          <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                          <input type="text" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
-                          <div class="help-icon position-absolute flexBoxCenter"
-                            title="Enter your mobile number including the country code.">?</div>
-                        </div>
-                        <div class="mb-3 position-relative">
-                          <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
-                            Date</label>
-                          <input type="text" class="form-control" placeholder="23/04/2024" id="emailInput"
-                            aria-describedby="emailHelp">
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="modal-footer border-0 modelBtns_wr">
-                <button class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">
-                  Send
+                <button class="schedule_now btn donate_nowBtn mt-2 text-white fw-bold">
+                    Schedule Now
                 </button>
               </div>
             </div>
+            <div class="col-xl-4 col-lg-6">
+              <div class="donarPrivilages_point pt-3 pt-lg-0">
+                <h3 class="color-17 fw-bold">
+                  Donor Privileges
+                </h3>
+                <ol class="f-14 fw-medium lh-lg">
+                  <li class="color-17">
+                     Gau Puja on your name 
+                  </li>
+                  <li class="color-17">
+                    Digital Certificate of Your Goseva Contribution
+                  </li>
+                  <li class="color-17">
+                    80G Tax Exemption Certificate
+                  </li>
+                  <li class="color-17">
+                    On donating 11000 & above you will get 100% Pure Products from our gaushala.
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <!--Event Model-->
+                <div class="eventsModelBoxWr">
+                <div class="modal fade" id="eventsModel" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eventsModelLabel2" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+                        <div class="tab-content" id="nav-tabContent">
+                          <div class="tab-pane steptabs fade active show" id="nav-anniversary" role="tabpanel" aria-labelledby="nav-anniversary-tab">
+                            <div class="donateForm_wr py-3" id="donateForm">
+                              <form action="send-csr" method="post">
+                                <input type="hidden" name="for" class="for">
+                                {% csrf_token %}
+                                <div class="mb-3 position-relative">
+                                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Write your message
+                                    here</label>
+                                  <input required type="textarea" name="message" class="form-control" id="nameInput" aria-describedby="nameHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
+                                  <input required type="text" name="name" class="form-control"  id="nameInput" aria-describedby="nameHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
+                                  <input required type="email" name="email" class="form-control"  id="emailInput" aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <div class="position-absolute country_code h-100">
+                                    <select class="h-100">
+                                      <option value="IN">IN</option>
+                                      <option value="US">US</option>
+                                      <option value="UK">UK</option>
+                                    </select>
+                                  </div>
+                                  <label for="numberInput" class="form-label position-absolute f-12 fw-medium">Number</label>
+                                  <input required type="number" name="mobile_no" class="phone-number w-100" placeholder="+91 00000-00000" id="numberInput">
+                                  <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Schedule
+                                    Date</label>
+                                  <input required type="date" name="schedule_date" class="form-control" placeholder="23/04/2024" id="emailInput" aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                  <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">
+                                    Send
+                                  </button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer border-0 modelBtns_wr">
+                <!--        <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">-->
+                <!--          Send-->
+                <!--        </button>-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            <!--End-->
           </div>
         </div>
-      </div>
-      <!-- Model -->
-    </div>
-  </section>
+      </section>
+
   <section class="mx-2 py-3 px-lg-5 home-section-4">
         <div class="container-fluid ">
           <div class="row justify-content-between align-items-center g-3">
@@ -814,7 +610,9 @@
               </p>
               <h6 class="fw-bold">
                 <span class="text-decoration-underline">
+                  <a class="text-dark" href="{% url 'about-us' %}">
                   More about Sri Krishna Balram Seva Trust
+                    </a>
                 </span>
                 <a href="#" class="ps-2">
                   <i class="bi bi-box-arrow-up-right">
@@ -1115,7 +913,7 @@ $(document).on("click",".know_more",function() {
 })
 $(document).on("click",".check_amount",function() {
   var amt = $('.active_price').val()
-  if(amt < 300){
+  if(amt <= minimum_value || amt == 'NaN'){
     alert("Amount should be greater than 300")
     return false;
   }else{

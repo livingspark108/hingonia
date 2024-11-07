@@ -5,6 +5,7 @@
 {% block body %}
 {% get_setting_data as setting_data %}
 {% get_slider as all_slider %}
+
 <section class="csr_banner mx-2 px-lg-5 pb-xl-2 pb-lg-4 position-relative">
             <div class="container-fluid">
                 <div class="banner_contentWr">
@@ -27,13 +28,14 @@
                             </p>
                         </div>
                         <div class="become_csrPartner">
-                            <button class="btn csrPartnerBtn bg-1 py-2 px-3 rounded-5 fw-bold">
+                            <a href="{% url 'trustee' %}" class="btn csrPartnerBtn bg-1 py-2 px-3 rounded-5 fw-bold">
                                 Contact Us
                                 <img class="ms-1" style="width:12px" src="static/frontend/assets/images/home/arrow-black-45.png"
                                 alt="Become CSR partner">
-                            </button>
+                            </a>
                             <span class="ps-2 pe-1 fw-medium ff-epilogue">
-                            Trustees
+                                <a class="text-dark" href="{% url 'trustee' %}">
+                            Trustees</a>
                             </span>
                         </div>
                     </div>
@@ -64,7 +66,7 @@
                                     <img class="img-fluid" src="static/frontend/assets/images/csr/certificate.png" alt="certificate">
                                     <div class="csr-certificate btnAnimation text-white fw-bold">
                                         <img class="img-fluid" style="width:28px" src="static/frontend/assets/images/csr/visibility.png" alt="view">
-                                        View CSR Certificate
+                                        <a class="text-white" href="{{setting_data.csr_certificate.url}}"> View CSR Certificate </a>
                                     </div>
                                 </div>
                             </div>
@@ -111,47 +113,48 @@
                                 </div>
                                 <h6 class="text-center fw-bold f-18">Fill Information for CSR Opportunities</h6>
                                 <form action="{% url 'csr' %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="row">
-                                        <div class="col-md-4 px-2">
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label f-12 fw-semibold">Name*</label>
-                                                <input type="text" name="name" class="form-control f-14 fw-medium" id="name" placeholder="Enter your name" aria-describedby="nameHelp">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 px-2">
-                                            <div class="mb-3">
-                                                <label for="Number" class="form-label f-12 fw-semibold">Number*</label>
-                                                <input type="text" name="mobile_no" class="form-control f-14 fw-medium" id="Number" placeholder="+00 | 00000-00000" aria-describedby="numberlHelp">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 px-2">
-                                            <div class="mb-3">
-                                                <label for="Designation" class="form-label f-12 fw-semibold">Designation*</label>
-                                                <input type="text" name="designation" class="form-control f-14 fw-medium" id="Designation" placeholder="Your Designation in te company" aria-describedby="designationHelp">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 px-2">
-                                            <div class="mb-3">
-                                                <label for="CompanyName" class="form-label f-12 fw-semibold">Company Name</label>
-                                                <input type="text" name="company_name"class="form-control f-14 fw-medium" id="CompanyName" placeholder="Your Company Registered Name" aria-describedby="designationHelp">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 px-2">
-                                            <div class="mb-3">
-                                                <label for="Registered" class="form-label f-12 fw-semibold">Full Address</label>
-                                                <input type="text" name="full_address" class="form-control f-14 fw-medium" id="Registered" placeholder="Your Company Registered Address" aria-describedby="designationHelp">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 px-2 mt-2">
-                                            <div class="mb-3 position-relative subscribe">
-                                                <input type="email" name="email" class="form-control f-14 fw-medium" id="Registered" placeholder="Enter your email" aria-describedby="button-addon2">
-                                                <button class="btn f-14 fw-bold sendBtn position-absolute" type="submit" id="button-addon2">Send</button>
-                                            </div>
-                                        </div>
-                                        <p class="f-14 text-center">Our Team will reach out to you soon</p>
-                                    </div>
-                                </form>
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-4 px-2">
+            <div class="mb-3">
+                <label for="name" class="form-label f-12 fw-semibold">Name*</label>
+                <input type="text" name="name" class="form-control f-14 fw-medium" id="name" placeholder="Enter your name" aria-describedby="nameHelp" required>
+            </div>
+        </div>
+        <div class="col-md-4 px-2">
+            <div class="mb-3">
+                <label for="Number" class="form-label f-12 fw-semibold">Number*</label>
+                <input type="text" name="mobile_no" class="form-control f-14 fw-medium" id="Number" placeholder="+00 | 00000-00000" aria-describedby="numberHelp" required>
+            </div>
+        </div>
+        <div class="col-md-4 px-2">
+            <div class="mb-3">
+                <label for="Designation" class="form-label f-12 fw-semibold">Designation*</label>
+                <input type="text" name="designation" class="form-control f-14 fw-medium" id="Designation" placeholder="Your Designation in the company" aria-describedby="designationHelp" required>
+            </div>
+        </div>
+        <div class="col-md-6 px-2">
+            <div class="mb-3">
+                <label for="CompanyName" class="form-label f-12 fw-semibold">Company Name</label>
+                <input type="text" name="company_name" class="form-control f-14 fw-medium" id="CompanyName" placeholder="Your Company Registered Name" aria-describedby="companyHelp" required>
+            </div>
+        </div>
+        <div class="col-md-6 px-2">
+            <div class="mb-3">
+                <label for="Registered" class="form-label f-12 fw-semibold">Full Address</label>
+                <input type="text" name="full_address" class="form-control f-14 fw-medium" id="Registered" placeholder="Your Company Registered Address" aria-describedby="addressHelp" required>
+            </div>
+        </div>
+        <div class="col-md-12 px-2 mt-2">
+            <div class="mb-3 position-relative subscribe">
+                <input type="email" name="email" class="form-control f-14 fw-medium" id="email" placeholder="Enter your email" aria-describedby="button-addon2" required>
+                <button class="btn f-14 fw-bold sendBtn position-absolute" type="submit" id="button-addon2">Send</button>
+            </div>
+        </div>
+        <p class="f-14 text-center">Our Team will reach out to you soon</p>
+    </div>
+</form>
+
                             </div>
                             <div class="help text-center mt-4">
                                 <p class="color-25 fw-bold mb-0">For more details, please contact us at <a class="text-dark" href="mailto:infodesk@hingonia.org">infodesk@hingonia.org</a></p>
@@ -283,7 +286,8 @@
                                 alt="Become CSR partner">
                             </a>
                             <span class="ps-2 pe-1 fw-medium ff-epilogue">
-                            Trustees
+                                <a class="text-dark" href="{% url 'trustee' %}">
+                            Trustees</a>
                             </span>
                         </div>
                     </div>

@@ -333,10 +333,14 @@ class CsrView(View):
         context = {
             'name':full_name,
             'mobile_no': mobile_no,
-            'email': email
+            'email': email,
+            'designation':designation,
+            'company_name':company_name,
+            'full_address':full_address,
+
         }
         send_email_background(request, ADMIN_EMAIL, template, context, subject='CSR Request')
-        #messages.success(self.request, "Thanks you, we will get back to you")
+        messages.success(self.request, "Thanks you, we will get back to you")
 
         return redirect('csr')
 
@@ -554,6 +558,40 @@ class DonateMontlyView(ListView):
 
 
         context = {'plan_id':plan_id,'adopt_a_cow':adopt_a_cow, 'razorpay_key_id': settings.RAZOR_PAY_ID,'order': order,'campaign': campaign,'subscription_plan':subscription_plan }
+        return render(request, 'frontend/donate_monthly.html', context)
+
+
+class DonateMontlyCtmView(ListView):
+    def get(self, request):
+        campaign_slug = request.GET.get('campaign_slug')
+        campaign = Campaign.objects.filter(slug=campaign_slug).first()
+        price = request.GET.get('amount')
+        preferred_date = request.GET.get('preferred_date')
+        first_name = request.GET.get('first_name')
+        email = request.GET.get('email')
+        phone_no = request.GET.get('phone_no')
+        subscription_plan = SubscriptionPlan.objects.filter(is_active=True)
+        if campaign.type == 'Adopt a cow':
+            adopt_a_cow = True
+            plan_id = "plan_OpIeG90yIMyKEI"
+        else:
+            adopt_a_cow = False
+            plan_id = ""
+
+        if price:
+            plan_id = "plan_OpIeG90yIMyKEI"
+
+        order_data = {
+            "amount": 50000,  # Amount in paise
+            "currency": "INR",
+            "receipt": "receipt#1",
+            "payment_capture": 1  # Auto-capture the payment
+        }
+
+        order = razorpay_client.order.create(data=order_data)
+
+        print(price)
+        context = {'phone_no':phone_no,'first_name':first_name,'email': email,'preferred_date':preferred_date,'price':price,'plan_id':plan_id,'adopt_a_cow':adopt_a_cow, 'razorpay_key_id': settings.RAZOR_PAY_ID,'order': order,'campaign': campaign,'subscription_plan':subscription_plan }
         return render(request, 'frontend/donate_monthly.html', context)
 
 

@@ -36,7 +36,59 @@
 <script src="{% static 'plugins/tinymce/tinymce.min.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<!--<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
+<script>
+    $('.open_uploader').click(function(){
+        var type = $(this).data('type')
+        $('.file_type').val(type)
+    })
+        Dropzone.options.myDropzone = {
+            init: function() {
+                this.on("complete", function(file) {
+                    loadFileList();
+                });
+            }
+        };
 
+        function loadFileList() {
+            var types = ['campaign', 'gallery','product'];
+
+            var id = $('.form_instance_id').val()
+            types.forEach(type => {
+                fetch(`{% url 'file_list' %}?type=${type}&id=${id}`)
+                .then(response => response.text())
+                .then(data => {
+
+                    document.getElementById(`${type}FileList`).innerHTML = data;
+                });
+            });
+        }
+
+        function deleteFile(fileId) {
+            const formData = new FormData();
+            formData.append('id', fileId);
+            fetch("{% url 'file_delete' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    loadFileList();
+                } else {
+                    alert('Error deleting file');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFileList();
+        });
+</script>
 <script>
 $(document).on('click','.download-pdf', function(){
 

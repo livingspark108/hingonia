@@ -664,7 +664,7 @@ class ListSubscriberViewJson(AjayDatatableView):
 class CreateProductView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
 
     model = Product
-    fields = ['title','price','image','short_description','description']
+    fields = ['title','price','short_description','description']
     template_name = 'product/form.html'
     success_message = "%(title)s has been created successfully"
     success_url = reverse_lazy('product-list')
@@ -696,7 +696,7 @@ class ListProductViewJson(AjayDatatableView):
 class UpdateProductView(AdminRequiredMixin, SuccessMessageMixin, UpdateView):
 
     model = Product
-    fields = ['title','price','image','short_description','description']
+    fields = ['title','price','short_description','description']
     template_name = 'product/form.html'
     success_message = "%(title)s has been updated successfully"
     success_url = reverse_lazy('product-list')

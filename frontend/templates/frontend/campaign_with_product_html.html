@@ -163,7 +163,7 @@
                                     <div class="monthly d-flex align-items-center justify-content-between">
                                       <div class="DBtnWr">
                                         <button class="btn messageBox flexBoxCenter gap-2 fw-bold">
-                                                                                                                                <input type="checkbox" class="md_btn donationMessage position-relative" id="donateMOnthly">
+                                                                                                                                <input type="checkbox" name="donate_monthly" class="md_btn donationMessage position-relative" id="donateMOnthly">
 
                                           <label class="f-14 m-0 py-1 form-check-label" for="donateMOnthly">
                                           Donate Monthly
@@ -208,11 +208,13 @@
 <!--                                </span>-->
 <!--                              </div>-->
                             </div>
-                            <form action="/razor-pay" method="post">
+                            <form action="/razor-pay" method="post"  id="donationForm">
                             {% csrf_token %}
                             <div class="donateForm_wr pt-3 pb-1">
+                              <input type="hidden" class="donate_monthly" name="donate_monthly" value="">
                               <input type="hidden" class="active_amt"  name="amount">
-                              <input type="hidden" value="" class="campaign_id" name="campaign_id">
+                              <input type="hidden" value="{{campaign.id}}" class="campaign_id" name="campaign_id">
+                              <input type="hidden" value="{{campaign.slug}}" class="campaign_slug" name="campaign_slug">
                               <input type="hidden" value="" class="title" name="title">
                               <input type="hidden" value="" class="tip" name="tip">
                               <input type="hidden" value="" class="all_item_data" name="all_item_data">
@@ -223,6 +225,10 @@
                                 <div class="mb-3 position-relative">
                                   <label for="emailInput" class="form-label position-absolute f-12 fw-medium">Email</label>
                                   <input required type="email" name="email" class="form-control" placeholder="Enter you email" id="emailInput" aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3 position-relative preffered_date_div" style="display:none;">
+                                  <label for="PreferredInput" class="form-label position-absolute f-12 fw-medium">Preferred Date:</label>
+                                <input type="date" class="form-control" id="PreferredInput" name="preferred_date" required>
                                 </div>
                                 <div class="mb-3 position-relative">
                                   <div class="position-absolute country_code h-100">

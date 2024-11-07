@@ -69,6 +69,7 @@ urlpatterns = [
     path('pay-razor-pay/', initiate_payment, name='pay-razor-pay'),
     path('handle-payment-webhook/', handle_payment_webhook, name='handle-payment-webhook'),
     path('donate-monthly/<str:id>', DonateMontlyView.as_view(), name='donate-monthly'),
+    path('donate-monthly-ctm/', DonateMontlyCtmView.as_view(), name='donate-monthly-ctm'),
 
     path('subscribe', subscribe_page, name='subscribe_page'),
     path('create_subscription/', create_subscription, name='create_subscription'),

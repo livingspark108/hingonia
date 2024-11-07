@@ -21,6 +21,7 @@
                 <div class="card m-b-30">
                     <div class="card-body">
                         <!-- Modal -->
+                        {% if form.instance.id %}
                         <div aria-hidden="true" aria-labelledby="uploadModalLabel" class="modal fade" id="uploadModal" role="dialog" tabindex="-1">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -51,6 +52,7 @@
                         </button>
                         <div id="uploadStatus"></div>
                         <div id="campaignFileList"></div>
+
                         <button class="open_uploader btn btn-primary" data-target="#uploadModal"
                                 data-toggle="modal"
                                 data-type="gallery"
@@ -59,15 +61,11 @@
                         </button>
                         <div id="uploadStatus_gallery"></div>
                         <div id="galleryFileList"></div>
-
-
+                        <input type="hidden" value="{{form.instance.id}}" class="form_instance_id">
+                        {% endif %}
                         <form class="form-horizontal m-t-30" enctype='multipart/form-data' method="POST">
                             {{ form.media }}
                             {% include "elements/form.html" with form=form %}
-
-
-
-
                             <button class="btn btn-primary" type="submit">Submit</button>
                             <button class="btn btn-secondary" type="reset">Reset</button>
                             <button class="btn btn-danger" type="cancel"><a class="text-white" href="{% url 'campaign-list' %}">Cancel</a></button>
@@ -85,57 +83,7 @@
 </div>
 {% endblock %}
 {% block script%}
-<!--<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
-<script>
-    $('.open_uploader').click(function(){
-        var type = $(this).data('type')
-        $('.file_type').val(type)
-    })
-        Dropzone.options.myDropzone = {
-            init: function() {
-                this.on("complete", function(file) {
-                    loadFileList();
-                });
-            }
-        };
 
-        function loadFileList() {
-            var types = ['campaign', 'gallery'];
-            var id = "{{form.instance.id}}"
-            types.forEach(type => {
-                fetch(`{% url 'file_list' %}?type=${type}&id=${id}`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(`${type}FileList`).innerHTML = data;
-                });
-            });
-        }
-
-        function deleteFile(fileId) {
-            const formData = new FormData();
-            formData.append('id', fileId);
-            fetch("{% url 'file_delete' %}", {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRFToken': '{{ csrf_token }}'
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    loadFileList();
-                } else {
-                    alert('Error deleting file');
-                }
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            loadFileList();
-        });
-</script>
 <script>
     $("#id_product").select2()
     $('#id_last_date').datetimepicker({

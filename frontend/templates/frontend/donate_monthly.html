@@ -25,24 +25,28 @@
                             <div class="col-md-12">
                             </div>
                         </div>
-                        {% if adopt_a_cow %}
-                                <input type="hidden" name="plan_id" value="{{plan_id}}">
+                        {% if not price %}
+                            {% if adopt_a_cow %}
+                                    <input type="hidden" name="plan_id" value="{{plan_id}}">
+                            {% else %}
+                            <div class="row mt-1 g-3 align-items-center">
+                                <div class="col-md-8">
+                                    <h6 class="fw-semibold mb-0">Select a Cause:</h6>
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <select name="plan_id" class="plan_choice form-control form-select">
+                                        {% for single in subscription_plan %}
+                                        <option data-price="{{single.price}}" value="{{single.plan_id}}">{{single.name}}</option>
+                                        {% endfor %}
+                                        <option value="">Custom</option>
+                                    </select>
+                                </div>
+                            </div>
+                            {% endif %}
                         {% else %}
-                        <div class="row mt-1 g-3 align-items-center">
-                            <div class="col-md-8">
-                                <h6 class="fw-semibold mb-0">Select a Cause:</h6>
-                            </div>
-
-                            <div class="col-md-4">
-
-                                <select name="plan_id" class="plan_choice form-control form-select">
-                                    {% for single in subscription_plan %}
-                                    <option data-price="{{single.price}}" value="{{single.plan_id}}">{{single.name}}</option>
-                                    {% endfor %}
-                                    <option value="">Custom</option>
-                                </select>
-                            </div>
-                        </div>
+                            <input type="hidden" name="plan_id" value="{{plan_id}}">
                         {% endif %}
                         <div class="row mt-1 g-3 align-items-center monthly_div">
                             <div class="col-md-8">
@@ -51,10 +55,14 @@
                             <div class="col-md-4">
                                 <div class="input-group mb-1">
                                     <span class="input-group-text pb-2 pt-1" id="amt-addon"><i class="bi bi-currency-rupee color-2"></i></span>
-                                    {% if adopt_a_cow %}
-                                    <input readonly type="number" name="amount" id="amount" class="form-control price" placeholder="0" aria-describedby="amt-addon" value="{{campaign.price}}" required="">
+                                    {% if not price %}
+                                        {% if adopt_a_cow %}
+                                        <input readonly type="number" name="amount" id="amount" class="form-control price" placeholder="0" aria-describedby="amt-addon" value="{{campaign.price}}" required="">
+                                        {% else %}
+                                        <input readonly type="number" name="amount" id="amount" class="form-control price" placeholder="0" aria-describedby="amt-addon" value="{{subscription_plan.first.price}}" required="">
+                                        {% endif %}
                                     {% else %}
-                                    <input readonly type="number" name="amount" id="amount" class="form-control price" placeholder="0" aria-describedby="amt-addon" value="{{subscription_plan.first.price}}" required="">
+                                        <input readonly type="number" name="amount" id="amount" class="form-control price" placeholder="0" aria-describedby="amt-addon" value="{{price}}" required="">
                                     {% endif %}
                                 </div>
                             </div>
@@ -77,7 +85,7 @@
                                 <h6 class="fw-semibold mb-0">Preferred Date:</h6>
                             </div>
                             <div class="col-md-4">
-                                <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
+                                <input type="date" value="{{preferred_date}}" class="form-control" id="preferred_date" name="preferred_date" required>
 
                             </div>
                         </div>
@@ -86,17 +94,17 @@
                         <div class="row  g-3 align-items-center">
                             <div class="col-md-6">
                                 <label for="">Name</label>
-                                <input type="text" class="form-control" name="name" placeholder="Name" required="">
+                                <input type="text" value="{{first_name}}" class="form-control" name="name" placeholder="Name" required="">
                             </div>
                             <div class="col-md-6">
                                 <label for="">Email</label>
-                                <input type="text" class="form-control" name="email" placeholder="Email" required="">
+                                <input type="email" value="{{email}}" class="form-control" name="email" placeholder="Email" required="">
                             </div>
                             <div class="col-md-6">
                                 <label for="">Mobile Number</label>
                                 <div class="input-group mb-1">
                                     <span class="input-group-text" id="phn-addon">IN</span>
-                                    <input type="number" name="phone_no" id="phone_no" class="form-control" placeholder="Mobile number" aria-describedby="phn-addon" required="">
+                                    <input type="number" value="{{phone_no}}" name="phone_no" id="phone_no" class="form-control" placeholder="Mobile number" aria-describedby="phn-addon" required="">
                                 </div>
                                 <input type="hidden" id="campaign_id" name="campaign_id" value="{{campaign.id}}">
                             </div>
@@ -111,13 +119,19 @@
                         </div>
 
                         <div class="mt-3 md-btn-box p-3 text-center rounded-4 shadow bg-1">
-                            {% if adopt_a_cow %}
-                                    <span class="text-white fw-semibold pe-md-3">
-                                        <i class="bi bi-currency-rupee text-white"></i><span class="html_amt text-white">{{campaign.price}}</span> / month
-                                    </span>
+                            {% if not price %}
+                                {% if adopt_a_cow %}
+                                        <span class="text-white fw-semibold pe-md-3">
+                                            <i class="bi bi-currency-rupee text-white"></i><span class="html_amt text-white">{{campaign.price}}</span> / month
+                                        </span>
+                                {% else %}
+                                <span class="text-white fw-semibold pe-md-3">
+                                    <i class="bi bi-currency-rupee text-white"></i><span class="html_amt text-white">{{subscription_plan.first.price}}</span> / month
+                                </span>
+                                {% endif %}
                             {% else %}
                             <span class="text-white fw-semibold pe-md-3">
-                                <i class="bi bi-currency-rupee text-white"></i><span class="html_amt text-white">{{subscription_plan.first.price}}</span> / month
+                                <i class="bi bi-currency-rupee text-white"></i><span class="html_amt text-white">{{price}}</span> / month
                             </span>
                             {% endif %}
                             <input type="submit" class="btn btn-light continue" id="rzp-button" value="Continue">
