@@ -93,6 +93,7 @@
 <script type="text/javascript" src="{% static 'frontend/assets/js/custom.js' %}"></script>
 <script type="text/javascript" src="{% static 'frontend/assets/js/gallery.js' %}"></script>
 <script>
+
 $(document).on("click", "#donateMOnthly", function(e) {
     var isChecked = $(this).is(':checked'); // true if checked, false if unchecked
     var value = $(this).val(); // get the value of the checkbox
@@ -102,11 +103,16 @@ $(document).on("click", "#donateMOnthly", function(e) {
         $('#donationForm').attr('action', '{% url "donate-monthly-ctm" %}');
         $('#donationForm').attr('method', 'get');
         $('.preffered_date_div').show()
+        $('.preffered_date_div input').prop('disabled', false).prop('required', true); // Enable and make required
+
     } else {
         $('#donationForm').attr('action', '/razor-pay');
         $('#donationForm').attr('method', 'post');
         $('.donate_monthly').val('no')
         $('.preffered_date_div').hide()
+        $('.preffered_date_div input').prop('disabled', true).prop('required', false);
+
+
     }
 });
 $(document).on("click", ".schedule_now", function(e) {
