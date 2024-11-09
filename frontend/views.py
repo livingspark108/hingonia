@@ -564,7 +564,10 @@ class DonateMontlyView(ListView):
 class DonateMontlyCtmView(ListView):
     def get(self, request):
         campaign_slug = request.GET.get('campaign_slug')
-        campaign = Campaign.objects.filter(slug=campaign_slug).first()
+        if campaign_slug:
+            campaign = Campaign.objects.filter(slug=campaign_slug).first()
+        else:
+            campaign = Campaign.objects.filter(type='Seva').first()
         price = request.GET.get('amount')
         preferred_date = request.GET.get('preferred_date')
         first_name = request.GET.get('first_name')

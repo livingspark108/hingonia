@@ -48,7 +48,7 @@
 				                                       class="ctm_amt form-control border-danger f-16 fw-bold" placeholder="----" aria-describedby="amount-addon" required="">
 				                            </div>
 				                        </div>
-                                {% endif %}
+                              {% else %}
                               <div class="product_row row">
                               {% for single in campaign_product.product.all %}
                               <div class="col-lg-4 col-md-6">
@@ -163,8 +163,7 @@
                                     <div class="monthly d-flex align-items-center justify-content-between">
                                       <div class="DBtnWr">
                                         <button class="btn messageBox flexBoxCenter gap-2 fw-bold">
-                                                                                                                                <input type="checkbox" name="donate_monthly" class="md_btn donationMessage position-relative" id="donateMOnthly">
-
+                                          <input type="checkbox" name="donate_monthly" class="md_btn donationMessage position-relative" id="donateMOnthly">
                                           <label class="f-14 m-0 py-1 form-check-label" for="donateMOnthly">
                                           Donate Monthly
                                           </label>
@@ -211,7 +210,7 @@
                             <form action="/razor-pay" method="post"  id="donationForm">
                             {% csrf_token %}
                             <div class="donateForm_wr pt-3 pb-1">
-                              <input type="hidden" class="donate_monthly" name="donate_monthly" value="">
+
                               <input type="hidden" class="active_amt"  name="amount">
                               <input type="hidden" value="{{campaign.id}}" class="campaign_id" name="campaign_id">
                               <input type="hidden" value="{{campaign.slug}}" class="campaign_slug" name="campaign_slug">

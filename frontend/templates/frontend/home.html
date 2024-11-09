@@ -230,12 +230,9 @@ outline: 0 ;
                 <div class="amount text-white">RS. <span id="donationAmount" class="donationAmount_html text-white ff-Rubik"></span></div>
               </div>
               <div class="d-flex gap-4 order-md-3 order-2">
-                <div class="d-flex align-items-center messageBox gap-2 text-white">
-                  <input type="checkbox" class="position-relative" id="r-80g">
-                  <label class="f-14 m-0 py-1 form-check-label text-white ff-Rubik" for="r-80g">REQUEST 80G</label>
-                </div>
+
                 <div class="d-flex align-items-center messageBox gap-2 text-white donate_monthly">
-                  <input type="checkbox" class="position-relative" id="dm-1">
+                  <input type="checkbox" name="donate_monthly" class="md_btn donationMessage position-relative" id="dm-1">
                   <label class="f-14 m-0 py-1 form-check-label text-white ff-Rubik" for="dm-1">Donate
                     Monthly</label>
                 </div>
@@ -346,7 +343,7 @@ outline: 0 ;
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title fw-bold w-100 f-24 pop_up_title">Cow Shed</h5>
+                      <h5 class="modal-title fw-bold w-100 f-24 pop_up_title">Seva</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body campaign_data description">
@@ -361,7 +358,7 @@ outline: 0 ;
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title fw-bold w-100 f-24 pop_up_title">Cow Shed</h5>
+                      <h5 class="modal-title fw-bold w-100 f-24 pop_up_title">Seva</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -396,10 +393,10 @@ outline: 0 ;
 <!--                          </span>-->
 <!--                        </div>-->
                       </div>
-                      <form action="/razor-pay" method="post" >
+                      <form action="/razor-pay" method="post" id="monthlyForm">
                           {% csrf_token %}
                       <div class="donateForm_wr pt-3 pb-1">
-
+                          <input type="hidden" class="donate_monthly" name="donate_monthly" value="">
                           <input type="hidden" id="campaign_id" name="campaign_id" value="">
                           <input type="hidden" id="plan_id" name="plan_id" value="">
                           <input type="hidden" id="title" name="title" value="Seva">
@@ -407,9 +404,9 @@ outline: 0 ;
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
                             <input required type="text" name="first_name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
                           </div>
-                          <div class="mb-3 position-relative">
-                            <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Preferred date</label>
-                          <input type="date" class="form-control" id="preferred_date" name="preferred_date" required>
+                          <div class="mb-3 position-relative preffered_date_div" style="display:none;">
+                                <label for="PreferredInput" class="form-label position-absolute f-12 fw-medium">Preferred Date:</label>
+                              <input disabled type="date" class="form-control" id="PreferredInput" name="preferred_date" required>
                           </div>
 
                           <div class="mb-3 position-relative">
@@ -426,7 +423,7 @@ outline: 0 ;
                             </div>
                             <input type="hidden" name="amount" class="amount">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Number</label>
-                            <input required name="mobile_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
+                            <input required name="phone_no" type="text" class="phone-number w-100" placeholder="+91 00000-00000">
                             <div class="help-icon position-absolute flexBoxCenter" title="Enter your mobile number including the country code.">?</div>
                           </div>
 

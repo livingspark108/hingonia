@@ -115,6 +115,29 @@ $(document).on("click", "#donateMOnthly", function(e) {
 
     }
 });
+
+$(document).on("click", "#dm-1", function(e) {
+    var isChecked = $(this).is(':checked'); // true if checked, false if unchecked
+    var value = $(this).val(); // get the value of the checkbox
+
+    if (isChecked) {
+        $('#monthlyForm .donate_monthly').val('yes')
+        $('#monthlyForm').attr('action', '{% url "donate-monthly-ctm" %}');
+        $('#monthlyForm').attr('method', 'get');
+        $('#monthlyForm .preffered_date_div').show()
+        $('#monthlyForm .preffered_date_div input').prop('disabled', false).prop('required', true); // Enable and make required
+
+    } else {
+        $('#monthlyForm').attr('action', '/razor-pay');
+        $('#monthlyForm').attr('method', 'post');
+        $('#monthlyForm .donate_monthly').val('no')
+        $('#monthlyForm .preffered_date_div').hide()
+        $('#monthlyForm .preffered_date_div input').prop('disabled', true).prop('required', false);
+
+
+    }
+});
+
 $(document).on("click", ".schedule_now", function(e) {
     var isChecked = $('.eventCheckbox').is(':checked');
     if (!isChecked) {
