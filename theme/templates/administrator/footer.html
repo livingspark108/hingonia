@@ -222,6 +222,19 @@ var oTable = $('#datatable').DataTable({
 					"order": [[0, "desc"]],
 					"ajax": { "url": ajaxUrl ,"data": getAllInputValuesInForm('search_form')
 					},
+					"drawCallback": function (settings) {
+                        var json = settings.json;
+                        if(json.total_amount){
+                            $(".amount").html(json.total_amount);
+                        } else {
+                            $(".amount").html(0);
+                        }
+                        if(json.total_tip){
+                            $(".tip_amt").html(json.total_tip);
+                        } else {
+                            $(".tip_amt").html(0);
+                        }
+                    },
 					"scrollX": true,
 					"initComplete": function(settings, json) {
 					    $('#id_count').html(settings.json.recordsTotal);

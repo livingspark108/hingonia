@@ -18,11 +18,56 @@
                                 </div>
                             </div> <!-- end row -->
                         </div>
+                        <div class="row mt-4">
+                            <div class="col-md-8 col-lg-5">
+                                <div class="card shadow rounded-4">
+                                    <div class="card-body">
+                                        <div class="row align-items-center g-3">
+                                            <div class="col-md-2 col-4">
+                                                <i class="h1 fas fa-rupee-sign"></i>
+                                            </div>
+                                            <div class="col-md-4 col-8">
+                                                <h5 class="text-muted ">Total Amount</h5>
+                                                <h4 class="text-black mb-0 amount">{{total_amount}}</h4>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-5">
+                                <div class="card shadow rounded-4">
+                                    <div class="card-body">
+                                        <div class="row align-items-center g-3">
+                                            <div class="col-md-2 col-4">
+                                                <i class="h1 fas fa-rupee-sign"></i>
+                                            </div>
+                                            <div class="col-md-4 col-8">
+                                                <h5 class="text-muted ">Total Tip</h5>
+                                                <h4 class="text-black mb-0 tip_amt">{{total_tip}}</h4>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- end page-title -->
 						<div class="row align-items-center">
 						    <form autocomplete="off" id="search_form" class="" action="" method="get" enctype="multipart/form-data">
 						
 						       <ul class="let-us-form">
+                                   <li>
+						            <div class="form-group">
+						              <label>Campaigns</label>
+                                        <select name="campaign" class="form-control">
+                                            <option value="">All</option>
+                                            {% for single in campaign %}
+                                            <option value="{{single.title}}">{{single.title}}</option>
+                                            {% endfor %}
+                                        </select>
+						            </div>
+						            </li>
 						          <li>
 						            <div class="form-group">
 						              <label>Start Date</label>
@@ -52,6 +97,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>T.ID</th>
                                                 <th>Phone</th>
                                                 <th>Amount</th>
                                                 <th>Mode</th>

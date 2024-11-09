@@ -1,6 +1,8 @@
 import logging
 
 from django.utils import timezone
+from django.db.models import Sum
+from datetime import datetime,time
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -337,49 +339,85 @@ class ListOurTeamView(AdminRequiredMixin, TemplateView):
     model = OurTeam
     template_name = 'ourteam/list.html'
 
+
 class ListDonationView(AdminRequiredMixin, TemplateView):
     model = TransactionDetails
     template_name = 'donation/list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Fetch one object, for example, the first one
+        context['campaign'] = Campaign.objects.all()
+        total_amount = Campaign.objects.aggregate(Sum('price'))['price__sum'] or 0
+        context['total_amount'] = total_amount
+        return context
+
 class ListDonationViewJson(AjayDatatableView):
     model = TransactionDetails
-    columns = ['firstname','phone','amount','mode','status','productinfo','created_at', 'actions']
+    columns = ['firstname','mihpayid','phone','amount','mode','status','productinfo','created_at', 'actions']
     exclude_from_search_cloumn = ['actions']
 
     def get_initial_queryset(self):
         start_date = self.request.GET.getlist('start_date[]')[0]
         end_date = self.request.GET.getlist('end_date[]')[0]
+        campaign = self.request.GET.getlist('campaign[]')[0]
+        print(start_date)
+        print(end_date)
 
-        filters_fileds = Q()
+        # Calculate total amount based on campaign filter
+
+        filters_fields = Q()
+
+        # Handle start_date (start from 12:00 AM)
         if start_date:
-            start_date = timezone.datetime.strptime(start_date, '%d-%m-%Y').date()
+            start_date = datetime.strptime(start_date, '%d-%m-%Y')  # Parse the date
+            start_datetime = datetime.combine(start_date, time.min)  # Set to 12:00 AM
+            filters_fields &= Q(created_at__gte=start_datetime)  # Greater than or equal to start_datetime
 
-            filters_fileds.add(Q(created_at__date__gte=start_date), Q.AND)
+        # Handle end_date (end at 11:59 PM)
         if end_date:
-            end_date = timezone.datetime.strptime(end_date, '%d-%m-%Y').date()
-
-            filters_fileds.add(Q(created_at__date__lte=end_date), Q.AND)
-
-        return self.model.objects.filter(filters_fileds).exclude(status='pending').order_by('-created_at')
-
-    def render_column(self, row, column):
-        if column == 'created_at':
-            created_at = row.created_at
-            return created_at.strftime("%d-%b-%Y %H:%M:%p")
-
-        if column == 'status':
-            if row.status == 'captured':
-                return "Success"
-            else:
-                return row.status
-        if column == 'actions':
-            if row.is_80g_request:
-                eight_g_button = '<a href={} target="_blank" role="button" class="btn btn-primary btn-sm mr-1">80G Download</a>'.format(
-                    reverse('download-80g', kwargs={'id': row.pk}))
-                return eight_g_button
+            end_date = datetime.strptime(end_date, '%d-%m-%Y')  # Parse the date
+            end_datetime = datetime.combine(end_date, time.max)  # Set to 11:59 PM
+            filters_fields &= Q(created_at__lte=end_datetime)  # Less than or equal to end_datetime
+        print(filters_fields)
+        if campaign:
+            # Apply campaign filter and calculate total amount
+            self.total_amount = (
+                    self.model.objects.filter(productinfo__icontains=campaign)
+                    .filter(Q(status='captured') | Q(status='success'))
+                    .filter(filters_fields)
+                    .aggregate(Sum('amount'))['amount__sum'] or 0
+            )
+            self.total_tip = (
+                    self.model.objects.filter(productinfo__icontains=campaign)
+                    .filter(Q(status='captured') | Q(status='success'))
+                    .filter(filters_fields)
+                    .aggregate(Sum('tip'))['tip__sum'] or 0
+            )
+            # Return filtered queryset ordered by creation date
+            return self.model.objects.filter(filters_fields) \
+                .filter(productinfo__icontains=campaign) \
+                .filter(Q(status='captured') | Q(status='success')) \
+                .order_by('-created_at')
         else:
-            return super(ListDonationViewJson, self).render_column(row, column)
+            print("Full data")
+            # Calculate total amount without campaign filter
+            self.total_amount = (
+                    self.model.objects.filter(Q(status='captured') | Q(status='success')).filter(filters_fields).aggregate(Sum('amount'))['amount__sum'] or 0
+            )
+            self.total_tip = (
+                    self.model.objects.filter(Q(status='captured') | Q(status='success')).filter(
+                        filters_fields).aggregate(Sum('tip'))['tip__sum'] or 0
+            )
+            # Return filtered queryset ordered by creation date
+            return self.model.objects.filter(Q(status='captured') | Q(status='success')).filter(filters_fields).order_by('-created_at')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add total_amount to the context
+        context['total_amount'] = self.total_amount
+        context['total_tip'] = round(self.total_tip, 2)
+        return context
 class ListOurTeamViewJson(AjayDatatableView):
     model = OurTeam
     columns = ['title', 'actions']
