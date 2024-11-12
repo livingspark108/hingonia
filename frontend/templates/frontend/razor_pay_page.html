@@ -49,7 +49,14 @@
 					           "notes":{
 					               "custom_campaign_id": "{{custom_campaign_id}}",
 					               "custom_promoter_id": "{{custom_promoter_id}}",
-					           }
+					           },
+					           "modal": {
+                                    "ondismiss": function() {
+                                        // This will redirect to the home page if the modal is closed
+                                        window.location.href = "/";
+                                    }
+                                }
+
 					       };
 					       var rzp = new Razorpay(options);
 					       rzp.open();
