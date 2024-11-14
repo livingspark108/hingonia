@@ -5,7 +5,9 @@ import json
 import random
 import datetime
 import time
+import uuid
 from datetime import datetime, timedelta
+from django.utils.html import strip_tags  # For generating plain text fallback
 
 import razorpay as razorpay
 import requests
@@ -13,7 +15,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.tokens import default_token_generator, PasswordResetTokenGenerator
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
 from django.db.models import Q
@@ -32,7 +34,7 @@ from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, DeleteView, UpdateView, TemplateView
 from application.custom_classes import DevoteeRequiredMixin, AdminRequiredMixin, AjayDatatableView
-from application.email_helper import send_email_background
+from application.email_helper import send_email_background, send_email
 from application.helper import send_contact_us, write_log, send_whatsapp_message, send_donation_thank_you_email
 from application.settings.common import PAYU_CONFIG, RAZOR_PAY_ID, RAZOR_PAY_SECRET, ADMIN_EMAIL
 from apps.front_app.forms import CreateTestimonialForm
@@ -467,10 +469,11 @@ class FrontendLoginView(View):
         return render(request, 'frontend/login.html', context)
 
     def post(self, request):
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
         print("Password", password)
-        kwargs = {'username__iexact': username}
+
+        kwargs = {'email__iexact': email}
         try:
             user = get_user_model().objects.get(**kwargs)
             print(user)
@@ -482,8 +485,10 @@ class FrontendLoginView(View):
             messages.error(request, self.failure_message)
             return HttpResponseRedirect(reverse(self.login_url))
 
-        user = authenticate(request, username=username,
+        user = authenticate(request, username=email,
                             password=password)
+        print("User")
+        print(user)
         login(request, user)
         if user:
             return HttpResponseRedirect(reverse('home', kwargs={}))
@@ -808,6 +813,32 @@ class PayuFailureAPiView(GenericAPIView):
 
         return HttpResponseRedirect(reverse('home', kwargs={}))
 
+
+def create_user(name,email,password,phone='',type='devotee',city=''):
+    additional_data = {
+        'first_name': name,
+        'last_name': '',
+        'mobile_no': phone,
+        'city': city,
+        'plain_password': password,  # Store plaintext for initial email; avoid this for security-sensitive use
+    }
+
+    # Create or get the user with the specified parameters
+    user_obj, created = User.objects.get_or_create(
+        email=email,
+        defaults={
+            **additional_data,
+            'type': type,
+        }
+    )
+
+    # If created, set the password securely
+    if created:
+        user_obj.set_password(password)
+        user_obj.save()
+
+    return user_obj
+
 def initiate_payment(amt,name,email,phone,tip,city):
     client = razorpay.Client(auth=(RAZOR_PAY_ID, RAZOR_PAY_SECRET))
     print(client)
@@ -855,23 +886,8 @@ def payment_success_view(request):
            phone = dic_data['contact']
            phone = phone.replace("+91", "")
            write_log("Order notes",dic_data['notes'])
-           user_obj = User.objects.filter(Q(username=phone) | Q(email=email)).first()
-
-           if not user_obj:
-               # Create a new user if not found
-               user_obj = User.objects.create_user(
-                   first_name=first_name,
-                   username=phone,  # Use phone as the username
-                   email=email,
-                   city=city,
-                   password=phone  # Ensure password is hashed by Django
-               )
-           else:
-               # Update the first_name if it is not set
-               if not user_obj.first_name:
-                   user_obj.first_name = first_name
-                   user_obj.city = city
-                   user_obj.save()
+           password = uuid.uuid4()
+           user_obj = create_user(first_name,email,password,phone,'devotee', city)
 
            write_log("User create for ", email)
 
@@ -1021,12 +1037,9 @@ def payment_success(request):
     try:
         # Verify the payment signature
         result = razorpay_client.utility.verify_subscription_payment_signature(params_dict)
-        user_obj = User.objects.filter(username=phone_no).first()
-        if not user_obj:
-            user_obj = User.objects.create_user(first_name=name, type='devotee',
-                                                username=phone_no, email=email,
-                                                password=phone_no)
-            user_obj.save()
+        password = uuid.uuid4()
+        user_obj = create_user(name,email,password,phone_no, 'Devotee','')
+
         if plan_id:
             plan = SubscriptionPlan.objects.get(plan_id=plan_id)
         else:
@@ -1146,25 +1159,80 @@ class ForgotPasswordView(View):
     def get(self, request, token=''):
         return render(request, 'frontend/forgot_password.html')
 
-    def post(self, request, token=''):
+    def post(self, request):
+        # Retrieve the email from the POST data
+        email = request.POST.get("email")
 
-        phone = request.POST.get('phone_no')
-        user = User.objects.filter(username=phone).first()
+        try:
+            # Try to get the user with the provided email
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request, 'User with this email does not exist.')
 
-        if user:
-            otp_code = get_random_string(length=6, allowed_chars='1234567890')
-            OTP.objects.create(user=user, otp=otp_code, expiration=timezone.now() + timezone.timedelta(minutes=5))
+            # If the user does not exist, render the form with an error message
+            return render(request, 'frontend/forgot_password.html', {'error': 'User with this email does not exist.'})
 
-            url_ii = "http://sms.bulksmsind.in/v2/sendSMS?username=bhavanshusms&message=Hello " + str(
-                phone) + ", OTP for accessing your admin panel is Underline" + str(
-                otp_code) + ". DO NOT share OTP with anyone Powered by LivingMenu Not You? Report https://livingmenu.in&sendername=LVGMNU&smstype=TRANS&numbers=" + str(
-                phone) + "&apikey=7860f2e1-aec5-47c4-b302-690141476033&peid=1501667600000043918&templateid=1507165987197165117"
-            response_otp = requests.request("GET", url_ii)
-            print(response_otp)
-            return redirect(reverse('verify_otp', kwargs={'user_id': user.id}))
-        else:
+        # Generate a password reset token for the user
+        token_generator = PasswordResetTokenGenerator()
+        token = token_generator.make_token(user)
 
-            return render(request, 'frontend/forgot_password.html',{'error': 'User not exists'})
+        # Generate the password reset link
+        reset_link = f"{settings.BASE_URL}/reset-password/{user.pk}/{token}/"
+
+        # Prepare the email context and send the email
+        context = {
+            'username': user.first_name or user.username,  # Use first name or fallback to username
+            'reset_link': reset_link,
+        }
+        subject = "Password Reset Request"
+        send_email(request,email,'email/password_reset_email.html',context, subject)
+        messages.success(request, 'Password reset link has been sent to your email.')
+        # Render the form with a success message
+        return render(request, 'frontend/forgot_password.html', {'message': 'Password reset link has been sent to your email.'})
+
+
+class ResetPasswordView(View):
+    template_name = 'frontend/reset-forgot-password.html'
+
+    def get(self, request, uidb64, token):
+        # Render the form for entering a new password
+        context = {'uidb64': uidb64, 'token': token}
+        return render(request, self.template_name, context)
+
+    def post(self, request, uidb64, token):
+        # Decode the user ID from the uidb64 parameter
+        try:
+            uid = uidb64
+            user = get_user_model().objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
+            return render(request, self.template_name, {'error': "Invalid link or expired."})
+
+        # Verify the token
+        token_generator = PasswordResetTokenGenerator()
+        if not token_generator.check_token(user, token):
+            return render(request, self.template_name, {'error': "Invalid token."})
+
+        # Get the new password from the form
+        new_password = request.POST.get('new_password')
+        if not new_password:
+            return render(request, self.template_name, {'error': "New password is required."})
+
+        # Set the new password and save the user
+        user.set_password(new_password)
+        user.save()
+
+        messages.success(request, "Password has been successfully reset.")
+        return redirect('thank-you-reset')  # Redirect to the login page or another desired page
+
+
+class ThankYouResetView(View):
+    template_name = 'frontend/thank_you_reset.html'
+
+    def get(self, request):
+        # Render the form for entering a new password
+        context = {'FRONT_URL': reverse('user-login')}
+        return render(request, self.template_name, context)
+
 
 def reset_password(request, token):
     # Handle password reset logic here

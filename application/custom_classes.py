@@ -8,7 +8,8 @@ from django.urls import reverse_lazy
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.db import models
 from django.http import Http404, HttpResponseRedirect
-
+from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth import get_user_model
 from django.contrib.auth.views import redirect_to_login
 
 
@@ -149,6 +150,30 @@ class ParentRequiredMixin(AccessMixin):
         elif request.user.type != 'parent':
             raise Http404
         return super().dispatch(request, *args, **kwargs)
+
+
+class EmailOrUsernameBackend(ModelBackend):
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        UserModel = get_user_model()
+
+        # Determine if username is actually an email
+        if '@' in username:
+            # Authenticate by email
+            try:
+                user = UserModel.objects.get(email=username)
+            except UserModel.DoesNotExist:
+                return None
+        else:
+            # Authenticate by username
+            try:
+                user = UserModel.objects.get(username=username)
+            except UserModel.DoesNotExist:
+                return None
+
+        # Check the password and user authentication
+        if user.check_password(password) and self.user_can_authenticate(user):
+            return user
+        return None
 
 
 

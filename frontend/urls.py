@@ -61,8 +61,11 @@ urlpatterns = [
     path('request-80g', Request80GView.as_view(), name="request-80g"),
     path('send-csr', SendCSRView.as_view(), name="send-csr"),
     path('forgot-password/', ForgotPasswordView.as_view(), name='forgot_password'),
+    path('reset-password/<uidb64>/<token>/', ResetPasswordView.as_view(), name='reset-password'),
+    path('thank-you-reset/', ThankYouResetView.as_view(), name='thank-you-reset'),
+
     path('verify-otp/<str:user_id>', VerifyOTPView.as_view(), name='verify_otp'),
-    path('reset-password/<str:token>/', reset_password, name='reset_password'),
+    # path('reset-password/<str:token>/', reset_password, name='reset_password'),
 
     path('ongoing-devotion/<str:id>', OngoingDevotionView.as_view(), name='ongoing-devotion'),
     path('ongoing-devotion/<str:id>/<str:promo_no>', OngoingDevotionPromoView.as_view(), name='ongoing-devotion-promo'),

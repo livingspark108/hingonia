@@ -50,6 +50,10 @@ class EmailThread(threading.Thread):
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
+def send_welcome_user(request, to, context={}):
+    template = 'email/welcome_user_template.html'
+
+    send_email_background(request, to, template, context, subject='Welcome to Hingonia')
 
 class WhatsAppThread(threading.Thread):
     def __init__(self, sssss_url):

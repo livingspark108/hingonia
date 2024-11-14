@@ -98,6 +98,13 @@ TEMPLATES = [
     },
 ]
 
+
+AUTHENTICATION_BACKENDS = [
+    'application.custom_classes.EmailOrUsernameBackend',  # Custom email or username backend
+    'django.contrib.auth.backends.ModelBackend',      # Default backend
+]
+
+
 # Internationalization
 USE_I18N = False
 
@@ -256,11 +263,11 @@ GOOGLE_ANALYTICS = {
     'google_analytics_id': 'UA-165462357-1',
 }
 
-# RAZOR_PAY_ID = "rzp_test_AhOuknmPQlm0es"
-# RAZOR_PAY_SECRET = "94cAr5eXW4pJ9f0ZEjkmo2gG"
+RAZOR_PAY_ID = "rzp_test_AhOuknmPQlm0es"
+RAZOR_PAY_SECRET = "94cAr5eXW4pJ9f0ZEjkmo2gG"
 
-RAZOR_PAY_ID = "rzp_live_72nKopHGn9HWKB"
-RAZOR_PAY_SECRET = "Sw8goe5ZkOeFcElzJn96MB8A"
+# RAZOR_PAY_ID = "rzp_live_72nKopHGn9HWKB"
+# RAZOR_PAY_SECRET = "Sw8goe5ZkOeFcElzJn96MB8A"
 
 #Live
 SMS_AUTH_KEY = '4b358371ef203b2a4c3c7c0e1f56197'
@@ -274,6 +281,7 @@ AUTH_USER_MODEL = 'user.User'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Logging configuration
+
 
 LOGGING = {
     'version': 1,

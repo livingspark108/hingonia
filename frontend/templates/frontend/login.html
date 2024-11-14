@@ -3,86 +3,55 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
-<section xmlns="http://www.w3.org/1999/html">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4 ps-0">
-                    <div class="login-img-box">
-	                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
-	                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
-	                    <img src="{% static 'frontend/assets/images/login/3.png' %}" class="img-fluid" alt="">
-	                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
-	                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
-	                    <img src="{% static 'frontend/assets/images/login/3.png' %}" class="img-fluid" alt="">
-	                    <img src="{% static 'frontend/assets/images/login/1.jpg' %}" class="img-fluid" alt="">
-	                    <img src="{% static 'frontend/assets/images/login/2.png' %}" class="img-fluid" alt="">
-	                </div>
+<section class="py-5">
+        <div class="container">
+            <div class="row g-5 ">
+                <div class="col-md-6">
+                    <div class="row g-3 form-left-div">
+                        <div class="col-6">
+                            <img src="assets/images/gallery/mataji-1.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-6">
+                            <img src="assets/images/gallery/mataji-2.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-6">
+                            <img src="assets/images/gallery/mataji-3.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-6">
+                            <img src="assets/images/gallery/mataji-4.jpg" class="img-fluid" alt="">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8">
-	                 <form action="{% url 'user-login' %}" method="post">
-		                 {% csrf_token %}
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6 col-md-12 pt-lg-5">
-                           <div class="login-form pt-md-5 pt-4">
-                                <div class="mb-2">
-                                    <label class="form-label">Phone number <span class="text-error">*</span></label>
-                                    <div class="input-group mb-1">
-                                        <span class="input-group-text" id="basic-addon1">IN</span>
-                                        <input type="number" name="username" class="form-control"
-                                               placeholder="+91 00000-00000"
-                                               aria-describedby="basic-addon1">
-                                    </div>
-                                    <p class="text-error mb-0"></p>
-                                </div>
-                                <div class="">
-                                    <label class="form-label">Password <span class="text-error">*</span></label>
-                                    <input type="password" name="password" class="form-control" value=""
-                                           placeholder="*******"
-                                           required="">
-                                </div>
-                           </div>
-                           
+                <div class="col-md-6">
+                    <form action="{% url 'user-login' %}" method="post" class="">
+                        {% csrf_token %}
+
+                        <div class="mb-2 text-center">
+                            <h2 class="fw-bold">Welcome Back</h2>
+                            <p>We've missed you! Please sign in to catch up on what you've missed</p>
                         </div>
-                        <div class="col-lg-6 col-md-12 pt-4 pt-md-5 text-center">
-                            <div class="btn-box">
-                                <input style="background: none;border: none;" type="submit" value="Login" href="#" class="login-text"></input>
-                                <a href="{% url 'forgot_password' %}" class="forgot-text">Forgot Password</a>
+
+                        <div class="mb-3">
+                            <label for="Email">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required="">
+                        </div>
+                        <div class="mb-3">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Enter your password" required="">
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-check d-inline-block">
+                                <input class="form-check-input" type="checkbox" value="" id="rememberMeCheck">
+                                <label class="form-check-label" for="rememberMeCheck">
+                                    Remember Me
+                                </label>
                             </div>
+                            <a href="{% url 'forgot_password' %}" class="float-end fw-semibold f-14 text-decoration-underline">Forgot Password</a>
                         </div>
-                    </div>
-	                    </form>
-                        <div class="col-lg-7 col-md-12 text-center pt-5">
-                            <h2 class="login-title">A Help to those who need it.</h2>
-                            <img src="assets/images/our-mothers/flower.png" class="img-fluid" alt="">
-                            <h3 class="login-subtitle pt-3">Each donation is an essential help which improves everyone's
-                                life</h3>
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-dark w-100 fw-semibold">Log in</button>
                         </div>
-                    </div>
-                    <div class="row login-info ">
-                        <div class="col-md-4 py-4">
-		                    <div class="about-title position-relative text-center">
-		                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
-		                        <h2>10000+</h2>
-		                        <h3>Grocery Kits</h3>
-		                    </div>
-		                </div>
-		                <div class="col-md-4 py-4">
-		                    <div class="about-title position-relative text-center">
-		                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
-		                        <h2>30000+</h2>
-		                        <h3>Blankets</h3>
-		                    </div>
-		                </div>
-		                <div class="col-md-4 py-4">
-		                    <div class="about-title position-relative text-center">
-		                        <img src="{% static 'frontend/assets/images/about-us/foot.png' %}" alt="">
-		                        <h2>10000+</h2>
-		                        <h3>Widows Impacted</h3>
-		                    </div>
-		                </div>
-                    </div>
-	                </form>
-	                
+                    </form>
                 </div>
             </div>
         </div>
