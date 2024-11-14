@@ -9,16 +9,16 @@
                 <div class="col-md-5">
                     <div class="row g-3 form-left-div">
                         <div class="col-6">
-                            <img src="assets/images/gallery/mataji-1.jpg" class="img-fluid" alt="">
+                            <img src="{% static 'frontend/assets/images/place-holder.png' %}" class="img-fluid" alt="">
                         </div>
                         <div class="col-6">
-                            <img src="assets/images/gallery/mataji-2.jpg" class="img-fluid" alt="">
+                            <img src="{% static 'frontend/assets/images/place-holder.png' %}" class="img-fluid" alt="">
                         </div>
                         <div class="col-6">
-                            <img src="assets/images/gallery/mataji-3.jpg" class="img-fluid" alt="">
+                            <img src="{% static 'frontend/assets/images/place-holder.png' %}" class="img-fluid" alt="">
                         </div>
                         <div class="col-6">
-                            <img src="assets/images/gallery/mataji-4.jpg" class="img-fluid" alt="">
+                            <img src="{% static 'frontend/assets/images/place-holder.png' %}" class="img-fluid" alt="">
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                                         <tr style="vertical-align: top;">
                                             {% get_campaign_data i.campaign_id as campaign %}
                                             <td>
-                                                <img src="{{campaign.campaign_obj.campaign_image.url}}" class="mdt_img" alt="">
+                                                <img src="{{campaign.campaign_obj.campaign_image|handle_image_url}}" class="mdt_img" alt="">
                                             </td>
                                             <td>
                                                 <div class="row py-3 px-2 mx-1 border rounded-4">

@@ -223,7 +223,7 @@ def handle_image_url(img):
     if img:
         return img.url
     else:
-        return ""
+        return "/static/frontend/assets/images/place-holder.png"
 
 @register.simple_tag()
 def get_youtube_embed(link):
