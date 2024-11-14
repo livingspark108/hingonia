@@ -519,7 +519,7 @@ class FrontendProfileView(DevoteeRequiredMixin,View):
 
 class FrontendDonationView(DevoteeRequiredMixin,View):
     def get(self, request):
-        transaction_obj = TransactionDetails.objects.filter(phone=request.user.username)
+        transaction_obj = TransactionDetails.objects.filter(Q(phone=request.user.username) | Q(email=request.user.email))
         context = {'transaction_obj':transaction_obj}
         return render(request, 'frontend/donation.html', context)
 

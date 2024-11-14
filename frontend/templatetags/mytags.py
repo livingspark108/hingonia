@@ -117,30 +117,35 @@ def divide(value, arg):
 
 @register.simple_tag()
 def get_campaign_data(campaign_id):
-    campaign_obj = Campaign.objects.get(id=campaign_id)
-    tran_count = TransactionDetails.objects.filter(campaign_id=campaign_id)
-    if tran_count:
-        total_sum = sum(item.amount for item in tran_count)
-    else:
-        total_sum = 0
-    pr = calculate_percentage(campaign_obj.goal,total_sum)
-    if campaign_obj.youtube_link:
-        try:
-            video_id = get_youtube_embed(campaign_obj.youtube_link)
-        except:
+    print(campaign_id)
+    campaign_obj = Campaign.objects.filter(id=campaign_id).first()
+    if campaign_obj:
+        tran_count = TransactionDetails.objects.filter(campaign_id=campaign_id)
+        if tran_count:
+            total_sum = sum(item.amount for item in tran_count)
+        else:
+            total_sum = 0
+        pr = calculate_percentage(campaign_obj.goal,total_sum)
+        if campaign_obj.youtube_link:
+            try:
+                video_id = get_youtube_embed(campaign_obj.youtube_link)
+            except:
+                video_id = ""
+
+        else:
             video_id = ""
 
+
+        context = {
+            'campaign_obj':campaign_obj,
+            'target': total_sum,
+            'percent': pr,
+            'video_id':video_id,
+            'date': datetime.now()
+        }
+        return context
     else:
-        video_id = ""
-
-
-    context = {
-        'target': total_sum,
-        'percent': pr,
-        'video_id':video_id,
-        'date': datetime.now()
-    }
-    return context
+        return False
 
 @register.simple_tag()
 def generate_price(price):
