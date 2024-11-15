@@ -670,6 +670,7 @@ class FrontendRazorPayView(View):
             address = request.POST['address']
             comment = request.POST.get('comment', '')
             product_name = request.POST.get('product_name', '')
+            multiple_campaign = request.POST.get('multiple_campaign', '')
             product_id = request.POST.get('product_id', None)
             quantity = request.POST.get('quantity', 1)
 
@@ -738,7 +739,7 @@ class FrontendRazorPayView(View):
             "phone": request.POST.get('mobile_no'),
             'custom_campaign_id': campaign_id,
             'tip': tip,
-            'all_item_data':all_item_data,
+            'multiple_campaign':multiple_campaign,
             "productinfo": request.POST.get('title'),
             "txnid": "OR_"+str(random.random()),
             "furl": PAYU_CONFIG['RESPONSE_URL_FAILURE'],
@@ -891,6 +892,7 @@ def payment_success_view(request):
            write_log("Order details single", dic_data)
            first_name = dic_data['notes']['firstname']
            city = dic_data['notes']['city']
+
            email = dic_data['email']
            phone = dic_data['contact']
            phone = phone.replace("+91", "")
@@ -910,6 +912,12 @@ def payment_success_view(request):
            tran_detail_obj = TransactionDetails.objects.filter(order_id=order_id).first()
            if not tran_detail_obj:
                tran_detail_obj = TransactionDetails()
+
+           try:
+               multiple_campaign = dic_data['notes']['multiple_campaign']
+               tran_detail_obj.field1 = multiple_campaign
+           except Exception as e:
+               pass
 
            tran_detail_obj.mihpayid = pay_id
            tran_detail_obj.order_id = order_id
@@ -949,7 +957,7 @@ def payment_success_view(request):
                "Hingonia"
            )
 
-           send_whatsapp_message(phone,message)
+           #send_whatsapp_message(phone,message)
 
            return HttpResponseRedirect(reverse('thank-you-rj', args=[tran_detail_obj.id]))
 

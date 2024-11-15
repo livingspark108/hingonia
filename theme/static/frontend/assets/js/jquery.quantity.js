@@ -152,7 +152,28 @@ var shoppingCart = (function() {
   // loadCart : Function
   return obj;
 })();
-
+function set_multiple_campaign(){
+    var cartArray = shoppingCart.listCart();
+    var cartItemIds = "";
+    for (var i in cartArray) {
+        if (cartArray.hasOwnProperty(i)) {
+            cartItemIds += cartArray[i].id + ",";
+        }
+    }
+    // Remove the trailing comma
+    cartItemIds = cartItemIds.slice(0, -1);
+    $('.multiple_campaign').val(cartItemIds)
+}
+var cartArray = shoppingCart.listCart();
+        var cartItemIds = "";
+        for (var i in cartArray) {
+            if (cartArray.hasOwnProperty(i)) {
+                cartItemIds += cartArray[i].id + ",";
+            }
+        }
+        // Remove the trailing comma
+        cartItemIds = cartItemIds.slice(0, -1);
+        console.log(cartItemIds)
 // Start Old UI
 var shoppingCartOld = (function() {
   // =============================
@@ -237,6 +258,7 @@ $(document).on("click keypress", ".add-to-cart", function(event) {
     var name = $(this).data('name');
     var plate = $(this).data('plate');
     var img = $(this).data('img');
+    var type = $(this).data('type');
     var price = Number($(this).data('price'));
     var half_price = Number($(this).data('half-price'));
     var full_price = Number($(this).data('full-price'));
@@ -258,6 +280,10 @@ $(document).on("click keypress", ".add-to-cart", function(event) {
     }else{
       shoppingCart.addItemToCart(name, id,img, price, 1, max_qty);
       displayCart();
+    }
+    if (!isNaN(type) || type !== '') {
+
+        set_multiple_campaign()
     }
   }
 });
@@ -443,22 +469,24 @@ $(document).on("click", ".minus-item", function(event) {
   var id = $(this).data('id')
   shoppingCart.removeItemFromCart(id);
   displayCart();
+  set_multiple_campaign()
 })
 // +1
 $(document).on("click", ".plus-item", function(event) {
   console.log("Here")
   var id = $(this).data('id')
   var name = $(this).data('name')
+  var type = $(this).data('type')
   var img = $(this).data('img')
   var price = $(this).data('price')
   var count = $("input.item-count[data-id='" + id + "']").val();
 
-
-
+  console.log(type)
+  console.log("Test")
   var inputElement = $("input.item-count[data-id='" + id + "']");
 
   var maxlength = inputElement.data("maxlength");
-
+  console.log("HERE came")
   if (!isNaN(maxlength)) {
       console.log("--3--")
       if(maxlength > count){
@@ -469,7 +497,13 @@ $(document).on("click", ".plus-item", function(event) {
   }else{
       console.log("--2--")
       shoppingCart.addItemToCart(name, id, img,price,count,maxlength);
+
       displayCart();
+  }
+  if (!isNaN(type) || type !== '') {
+        set_multiple_campaign()
+    }else{
+        console.log("Blank")
   }
 })
 

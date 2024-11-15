@@ -202,15 +202,15 @@ outline: 0 ;
                 <h6 class="f-30 mb-1 fw-semibold ff-Rubik">{{single.title}}</h6>
                 <div class="d-flex justify-content-xxl-between justify-content-center gap-2">
                   <div class="amount_box text-white bg-white24 ff-Rubik">₹<span class="text-white">{{single.price}}</span></div>
-                  <a style="border: 1px solid;" href="javascript:void(0)" class="text-white btn btn-outline-secondary rounded-5 qty-box-btn add-to-cart" data-img="/media/product_image/1_-16-.png" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}">Add
+                  <a style="border: 1px solid;" href="javascript:void(0)" data-type="seva" class="text-white btn btn-outline-secondary rounded-5 qty-box-btn add-to-cart" data-img="/media/product_image/1_-16-.png" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}">Add
 					                        </a>
                   <div class="qtyBoxCmp text-white gap-1" style="display:none">
 
-                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="pminus minus-item text-white bg-white24 ff-Rubik minusBtn">
+                    <span data-type="seva" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="pminus minus-item text-white bg-white24 ff-Rubik minusBtn">
                       <img src="{% static 'frontend/assets/images/minus-white.svg' %}" class="img-fluid" alt="">
                     </span>
-                      <input style="width: 33px;" type="number" data-maxlength="100" class="item-count quantityInput text-center" data-id="{{single.id}}" data-name="{{single.title}}" value="1">
-                    <span data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="pplus plus-item text-white bg-white24 ff-Rubik plusBtn">
+                      <input  style="width: 33px;" type="number" data-maxlength="100" class="item-count quantityInput text-center" data-id="{{single.id}}" data-name="{{single.title}}" value="1">
+                    <span data-type="seva" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="pplus plus-item text-white bg-white24 ff-Rubik plusBtn">
                       <img src="{% static 'frontend/assets/images/plus-white.svg' %}" class="img-fluid" alt="">
                     </span>
                   </div>
@@ -400,6 +400,8 @@ outline: 0 ;
                           <input type="hidden" id="campaign_id" name="campaign_id" value="">
                           <input type="hidden" id="plan_id" name="plan_id" value="">
                           <input type="hidden" id="title" name="title" value="Seva">
+                          <input type="hidden" value="" class="multiple_campaign" name="multiple_campaign">
+
                           <div class="mb-3 position-relative">
                             <label for="nameInput" class="form-label position-absolute f-12 fw-medium">Name</label>
                             <input required type="text" name="first_name" class="form-control" placeholder="Enter your name" id="nameInput" aria-describedby="nameHelp">
