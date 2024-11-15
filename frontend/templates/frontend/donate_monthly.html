@@ -94,17 +94,17 @@
                         <div class="row  g-3 align-items-center">
                             <div class="col-md-6">
                                 <label for="">Name</label>
-                                <input type="text" value="{{first_name}}" class="form-control" name="name" placeholder="Name" required="">
+                                <input type="text" value="{{request.user.first_name}}" class="form-control" name="name" placeholder="Name" required="">
                             </div>
                             <div class="col-md-6">
                                 <label for="">Email</label>
-                                <input type="email" value="{{email}}" class="form-control" name="email" placeholder="Email" required="">
+                                <input type="email" value="{{request.user.email}}" class="form-control" name="email" placeholder="Email" required="">
                             </div>
                             <div class="col-md-6">
                                 <label for="">Mobile Number</label>
                                 <div class="input-group mb-1">
                                     <span class="input-group-text" id="phn-addon">IN</span>
-                                    <input type="number" value="{{phone_no}}" name="phone_no" id="phone_no" class="form-control" placeholder="Mobile number" aria-describedby="phn-addon" required="">
+                                    <input type="number" value="{{request.user.mobile_no}}" name="phone_no" id="phone_no" class="form-control" placeholder="Mobile number" aria-describedby="phn-addon" required="">
                                 </div>
                                 <input type="hidden" id="campaign_id" name="campaign_id" value="{{campaign.id}}">
                             </div>
@@ -119,6 +119,7 @@
                         </div>
 
                         <div class="mt-3 md-btn-box p-3 text-center rounded-4 shadow bg-1">
+                            <input type="hidden" value="{{campaign.title}}" name="title">
                             {% if not price %}
                                 {% if adopt_a_cow %}
                                         <span class="text-white fw-semibold pe-md-3">

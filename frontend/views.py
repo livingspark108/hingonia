@@ -1060,7 +1060,7 @@ def payment_success(request):
     print("This")
     print(subscription_data)
     addons = subscription_data.get('notes', [])
-    product_info = addons['for']
+    product_info = addons['title']
     price =addons['amount']
     price = float(price) / 100
 
@@ -1108,8 +1108,8 @@ def payment_success(request):
         tran_obj.amount = price
         tran_obj.save()
 
-
-        login(request, user_obj)
+        if not request.user.is_authenticated:
+            login(request, user_obj)
 
         receipt_url = settings.BASE_URL + "/receipt/" + str(tran_obj.id)
         send_donation_thank_you_email(name, email, float(price), receipt_url)
@@ -1132,7 +1132,7 @@ def payment_success(request):
             "Hingonia"
         )
 
-        send_whatsapp_message(phone_no, message)
+        #send_whatsapp_message(phone_no, message)
 
         return HttpResponseRedirect(reverse('thank-you-rj', args=[tran_obj.id]))
 
@@ -1312,6 +1312,7 @@ def create_subscription(request):
         email = request.POST['email']
         phone_no = request.POST['phone_no']
         preferred_date = request.POST['preferred_date']
+        title = request.POST['title']
 
         # Convert the preferred date to a timestamp
         preferred_date_obj = datetime.strptime(preferred_date, '%Y-%m-%d')
@@ -1351,6 +1352,7 @@ def create_subscription(request):
                 "notes": {
                     "amount": amount,
                     "name": name,
+                    "title":title,
                     "for": campaign_obj.title,
                     "email": email,
                     "phone_no": phone_no,
@@ -1382,6 +1384,7 @@ def create_subscription(request):
                     "amount": amount,
                     "for": campaign_obj.title,
                     "name": name,
+                    "title": title,
                     "email": email,
                     "phone_no": phone_no,
                     "campaign_id":campaign_id
