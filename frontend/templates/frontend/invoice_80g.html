@@ -115,7 +115,11 @@
         <p>Phone : <strong class="details">M. {{transaction_obj.phone}}</strong> </p>
         <p>PAN number : <strong class="details">{{transaction_obj.pan_number}}</strong> </p>
         <p>the sum of Rupees : <strong class="details">{{transaction_obj.amount}}</strong> </p>
+        {% if all_title %}
+        <p>on Account of : <strong class="details">{{all_title}}</strong></p>
+        {% else %}
         <p>on Account of : <strong class="details">{{transaction_obj.productinfo}}</strong></p>
+        {% endif %}
         <p>Vide Cash/Cheque No. : <strong class="details">{{transaction_obj.mode}}</strong></p>
         <p>UTR No. : <strong class="details">{{transaction_obj.txnid}}</strong></p>
         <table>

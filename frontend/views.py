@@ -670,7 +670,7 @@ class FrontendRazorPayView(View):
             address = request.POST['address']
             comment = request.POST.get('comment', '')
             product_name = request.POST.get('product_name', '')
-            multiple_campaign = request.POST.get('multiple_campaign', '')
+
             product_id = request.POST.get('product_id', None)
             quantity = request.POST.get('quantity', 1)
 
@@ -704,6 +704,8 @@ class FrontendRazorPayView(View):
             )
 
             order.save()
+        else:
+            multiple_campaign = request.POST.get('multiple_campaign', '')
 
 
         campaign_id = request.POST.get('campaign_id')
@@ -1023,7 +1025,12 @@ class Download80gView(DevoteeRequiredMixin,View):
     def get(self, request,id):
         # Get the HTML template
         transaction_obj = TransactionDetails.objects.get(id=id)
-        return render(request, 'frontend/invoice_80g.html', {'transaction_obj':transaction_obj})
+        if transaction_obj.field1:
+            all_title = get_campaign_titles_by_ids(transaction_obj.field1)
+        else:
+            all_title = ""
+
+        return render(request, 'frontend/invoice_80g.html', {'all_title':all_title,'transaction_obj':transaction_obj})
 
 
 @csrf_exempt
@@ -1125,11 +1132,28 @@ def payment_success(request):
         return HttpResponseRedirect(reverse('Home'))
 
 
+def get_campaign_titles_by_ids(id_string):
+    # Convert the comma-separated string of IDs into a list of integers
+    ids = [int(id) for id in id_string.split(',')]
+
+    # Query campaigns by the list of IDs
+    campaigns = Campaign.objects.filter(id__in=ids)
+
+    # Extract the 'title' of each campaign and join them into a comma-separated string
+    campaign_titles = campaigns.values_list('title', flat=True)
+
+    return ','.join(campaign_titles)
+
 class DownloadReceiptView(View):
     def get(self, request,id):
         # Get the HTML template
         transaction_obj = TransactionDetails.objects.get(id=id)
-        return render(request, 'frontend/receipt.html', {'transaction_obj':transaction_obj})
+        if transaction_obj.field1:
+            all_title = get_campaign_titles_by_ids(transaction_obj.field1)
+        else:
+            all_title = ""
+
+        return render(request, 'frontend/receipt.html', {'all_title':all_title,'transaction_obj':transaction_obj})
 
 
 class VerifyOTPView(View):
