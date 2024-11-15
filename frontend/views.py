@@ -503,6 +503,7 @@ class FrontendLoginView(View):
             return HttpResponseRedirect(reverse('home', kwargs={}))
 # My profile page
 
+
 class FrontendProfileView(DevoteeRequiredMixin,View):
     def get(self, request):
         json_file_path = './cities_list.json'
@@ -515,16 +516,21 @@ class FrontendProfileView(DevoteeRequiredMixin,View):
 
     def post(self,request):
         address = request.POST.get('address')
-        city = request.POST.get('city')
-        pincode = request.POST.get('pincode')
+        mobile_no = request.POST.get('mobile_no')
+        profile = request.FILES.get('profile')
+        name = request.POST.get('name')
         user = User.objects.get(id=request.user.id)
         user.address = address
-        user.city = city
-        user.pincode = pincode
+        user.mobile_no = mobile_no
+        user.first_name = name
+        if profile:
+            user.profile = profile
         user.save()
+        messages.success(request, 'Profile has been updated successfully')
 
-        return HttpResponseRedirect(reverse('profile', kwargs={}))
+        return HttpResponseRedirect(reverse('my-donation', kwargs={}))
 # My donation page
+
 
 class FrontendDonationView(DevoteeRequiredMixin,View):
     def get(self, request):

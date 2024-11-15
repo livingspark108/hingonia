@@ -122,6 +122,8 @@ class User(AbstractUser):
     mobile_no = models.CharField(max_length=128, null=True,blank=True)
     is_deleted = models.BooleanField(null=False, default=False)
     city = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    profile = models.ImageField(blank=True, null=True)
     objects = SoftDeleteUserManager()
     objects_with_deleted = SoftDeleteUserManager(deleted=True)
 

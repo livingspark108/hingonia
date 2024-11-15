@@ -26,60 +26,62 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="true">Donation</button>
+                            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="true">Profile</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="donations-donation" data-bs-toggle="tab" data-bs-target="#donations-tab-pane" type="button" role="tab" aria-controls="donations-tab-pane" aria-selected="true">Donation</button>
                             <a href="{% url 'user-logout' %}" class="nav-link " i>Logout</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                            <form action="" class="mt-4">
+                        <div class="tab-pane fade active show" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                            <form action="{% url 'profile' %}" method="post" class="mt-4" enctype="multipart/form-data">
+                                {% csrf_token %}
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="">Name</label>
-                                            <input type="text" class="form-control" placeholder="Name" required="">
+                                            <input value="{{request.user.first_name}}" name="name" type="text" class="form-control" placeholder="Name" required="">
                                         </div>
                                         <div class="mb-3">
                                             <label for="">Phone</label>
-                                            <input type="number" class="form-control" placeholder="Phone" required="">
+                                            <input value="{{request.user.mobile_no}}" name="mobile_no" type="number" class="form-control" placeholder="Phone" required="">
                                         </div>
                                         <div class="mb-3">
                                             <label for="">Email</label>
-                                            <input type="email" class="form-control" placeholder="Email" required="">
+                                            <input value="{{request.user.email}}" readonly type="email" class="form-control" placeholder="Email" required="">
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="">Password</label>
-                                            <input type="password" class="form-control" placeholder="Password" required="">
-                                        </div>
+
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label for="">Full Address</label>
-                                            <input type="text" class="form-control" placeholder="Address">
+                                            <input value="{{request.user.address}}" name="address" type="text" class="form-control" placeholder="Address">
                                         </div>
                                         <div class="mb-3">
                                             <label for="">Profile Picture</label>
 
                                             <div class="tb-container position-relative">
                                                 <div class="tb-img-view">
-                                                    <img id="tb-image" class="profile_img" src="assets/images/placeholder.jpg">
+                                                    <img id="tb-image" class="profile_img" src="{{request.user.profile|handle_image_url}}">
                                                 </div>
 
                                                 <label for="tb-file-upload">
                                                     <i class="bi bi-pencil-square fs-1"></i>
                                                 </label>
-                                                <input type="file" id="tb-file-upload" accept="image/*" onchange="fileUpload(event);">
+                                                <input type="file" name="profile" class="profile" id="tb-file-upload" accept="image/*" onchange="fileUpload(event);">
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-end">
-                                        <button class="cm-btn py-2">Save</button>
+                                        <button class="cm-btn py-2" type="submit">Save</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane fade active show" id="donations-tab-pane" role="tabpanel" aria-labelledby="donations-tab" tabindex="0">
+                        <div class="tab-pane fade" id="donations-tab-pane" role="tabpanel" aria-labelledby="donations-tab" tabindex="0">
                             <h2 class="fw-bold f-18 gray my-4 text-center">Donation History | Request 80G</h2>
                             <div class="table-responsive">
                                 <table class="table align-middle my_donation_tbl">
