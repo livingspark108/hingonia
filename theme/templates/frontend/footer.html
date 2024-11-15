@@ -165,7 +165,58 @@ $(document).on("click",".check_amount",function(e) {
          nextStep(2)
     }
 })
+$(document).on("click",".cps-amount-radio input",function(e) {
+    shoppingCart.clearCart();
+    $('.show-cart').html('')
+    $('.quantityInput').val(1);
+    $('.qtyBoxCmp').hide();
+    $('.qty-box-btn').show();
+	var amt = $(this).val()
+	// Clear existing options
+    $(".support_option").empty();
+    $(".ctm_support_amt").val(0);
+    $(".ctm_support_amt").hide()
 
+    $('input[name="cps-pay"]:checked').prop('checked', false);
+
+    if (amt !== "custom") {
+        amt = parseInt(amt);
+
+        var percentages = [8, 12, 14, 16];
+
+        percentages.forEach(function(percent) {
+            var value = (amt * percent / 100).toFixed(2);
+            var optionText = percent + "% (" + value + ") ▼";
+            $(".support_option").append(
+                $("<option></option>").val(value).text(optionText)
+            );
+        });
+
+        $(".support_option").append(
+            $("<option></option>").val("other").text("Other ▼")
+        );
+    } else {
+        $(".support_option").append(
+<!--            $("<option></option>").val("other").text("Other ▼")-->
+        );
+    }
+	var support = $('.support_option').val()
+	var support_amt = 0
+	if(support == 'other'){
+		support_amt = $('.ctm_support_amt').val()
+	}else{
+		support_amt = support
+	}
+	$('.donate_amt_1').val(amt)
+	amt = parseInt(amt)+parseInt(support_amt)
+	if(amt!="custom"){
+	console.log(amt)
+
+	$('.active_amt_html').html(amt)
+	$('.active_amt').val(amt)
+	}
+
+})
 </script>
 {% include "elements/message-block.html" %}
 

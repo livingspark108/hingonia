@@ -911,15 +911,7 @@ $(document).on("click",".know_more",function() {
             }
     })
 })
-$(document).on("click",".check_amount",function() {
-  var amt = $('.active_price').val()
-  if(amt <= minimum_value || amt == 'NaN'){
-    alert("Amount should be greater than 300")
-    return false;
-  }else{
-    nextStep(2)
-  }
-})
+
 $( window ).on("load", function() {
   console.log("Clear method")
   shoppingCart.clearCart();
