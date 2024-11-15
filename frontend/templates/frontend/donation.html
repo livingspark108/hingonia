@@ -113,6 +113,12 @@
                                                 <div class="row py-3 px-2 mx-1 border rounded-4">
                                                     <div class="col-4">
                                                         <h2 class="f-16 gray mb-0">{{i.productinfo}}</h2>
+                                                        {% get_cam_product_item i.order_id as all_cam_product %}
+                                                        {% if all_cam_product %}
+                                                        {% for single in all_cam_product %}
+                                                                {{single.product.title}} * {{single.quantity}} Qty<br>
+                                                        {% endfor %}
+                                                        {% endif %}
                                                     </div>
                                                     <div class="col-4">
                                                         <h2 class="f-16 gray mb-0">{{i.created_at|date:'d-m-Y'}}</h2>

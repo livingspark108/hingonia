@@ -200,6 +200,16 @@ def get_cam_item(product_id,camp_id):
     }
     return context
 
+
+@register.simple_tag()
+def get_cam_product_item(order_id):
+
+
+    quantity_sum = ProductItemTrans.objects.filter(order_id=order_id)
+
+    return quantity_sum
+
+
 @register.simple_tag()
 def get_gallery(id,type):
     upload_obj = UploadedFile.objects.filter(uploader_id=id,file_type=type).order_by('-uploaded_at')

@@ -886,6 +886,7 @@ def payment_success_view(request):
        res_data=client.order.payments(order_id)
        write_log("Order details", res_data)
        dic_data = res_data['items'][0]
+       print(dic_data)
        if dic_data['status'] != 'failed':
            write_log("Order details single", dic_data)
            first_name = dic_data['notes']['firstname']
