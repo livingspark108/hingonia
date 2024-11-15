@@ -158,7 +158,7 @@ $(document).on("click",".check_amount",function(e) {
      var amm = $('#donationForm .active_amt').val()
      if (amm === '' || isNaN(amm) || parseFloat(amm) < minimum_value) {
         e.preventDefault();
-        var vv = parseFloat(minimum_value)+1
+        var vv = parseFloat(minimum_value)
         alert('Minimum value is ' + vv);
         return;
     }{
