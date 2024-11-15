@@ -37,21 +37,19 @@ var shoppingCart = (function() {
   var obj = {};
 
   // Add to cart
-   obj.addItemToCart = function (name, id, img, price, count = 1, maxQty = Infinity) {
-    for (let item of cart) {
-      if (item.id === id) {
-        if (item.count < maxQty) {
-          item.count++;
-        }
+  obj.addItemToCart = function(name, id,img, price, count, max_qty) {
+
+    for(var item in cart) {
+      if(cart[item].id === id) {
+        cart[item].count ++;
         saveCart();
         return;
       }
     }
-    const newItem = new Item(name, id, img, price, count, maxQty);
-    cart.push(newItem);
+    var item = new Item(name, id, img,price,count,max_qty);
+    cart.push(item);
     saveCart();
-  };
-
+  }
   // Set count from item
   obj.setCountForItem = function(id, count) {
     for(var i in cart) {
@@ -91,7 +89,6 @@ var shoppingCart = (function() {
     }
     saveCart();
   }
-
 
   // Remove all items from cart
   obj.removeItemFromCartAll = function(id) {
@@ -338,7 +335,21 @@ function displayCart() {
         var plate_select = "<select data-id='" + cartArray[i].id + "' data-price='"+cartArray[i].price+"' class='form-control plateType'><option value='flat'>Flat</option></select>"
 
     }
+//    var jain = "<div class='form-check form-check-inline py-2'><input type='checkbox' class='form-check-input' id='jain-" + cartArray[i].id + "'><label class='form-check-label' for='jain-" + cartArray[i].id + "'>Jain</label></div>"
     var jain = ''
+//    output += "<tr>"
+//      + "<td class='fw-semibold'><p class='mb-0'>" + cartArray[i].name + "</p><p class='mb-0'>Price: <i class='fas fa-rupee-sign'></i>" + cartArray[i].price + "</p></td>"
+//      //+ "<td><i class='fas fa-rupee-sign'></i>" + cartArray[i].price + "</td>"
+//      + "<td class=''>"+plate_select+jain+"</td>"
+//      + "<td><div class='input-group'><button class='minus-item input-group-addon btn btn-primary' data-name='" + cartArray[i].name + "' data-id='" + cartArray[i].id + "'>-</button>"
+//      + "<input type='number' data-maxlength="+cartArray[i].max_qty+" class='item-count' data-id='" + cartArray[i].id + "' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>"
+//      + "<button class='plus-item btn btn-primary input-group-addon' data-id='" + cartArray[i].id + "' data-name='" + cartArray[i].name + "'>+</button><button class='ml-3 delete-item btn btn-danger' data-name='" + cartArray[i].name + "' data-id='" + cartArray[i].id + "'>X</button></div></td>"
+//     // + " = "
+//
+//      //+ "<td class='text-right'>" + cartArray[i].total + "</td>"
+//      +  "</tr>";
+//      $('#totalQtyCount-' + cartArray[i].id).show(500);
+//      $('#totalQtyCount-' + cartArray[i].id).html(cartArray[i].count);
 
      output += "<div class='card card-body shadow border-0 my-3 p-3 rounded-4 campaign-cart'>" +
                   "<div class='row align-items-center g-md-3 g-2'>" +
@@ -367,7 +378,6 @@ function displayCart() {
       }
   console.log("Total amount")
   console.log(shoppingCart.totalCart())
-  console.log("HERe")
   $('.show-cart').html(output);
   if(shoppingCart.totalCart() > 0){
     $('.show-cart').show()
@@ -382,7 +392,6 @@ function displayCart() {
             tip_amt = 0
     }
     all_total = parseFloat(total) + parseFloat(tip_amt)
-
     console.log(all_total)
     console.log("All total price")
     $('.active_price').val(all_total);
@@ -405,13 +414,6 @@ function displayCart() {
     $('.show-cart').hide()
     $('.all_ctm_amount').show()
     $('.cart_item_html_tmp').hide()
-    $('.tmp_amount').val(0);
-
-
-    $('.donationAmount_html').html(0);
-    $('.all_ctm_amount').hide()
-    $('.cart_item_html_tmp').show()
-    $('.cart_item_html_tmp .ct_item_tmp').html(0)
   }
 
   $('.total-count').html(shoppingCart.totalCount());
@@ -463,7 +465,7 @@ $(document).on("click", ".delete-item", function(event) {
   displayCart();
   $('.add-to-cart[data-id="' + id + '"]').show()
   $('.qtyBoxCmp[data-id="' + id + '"]').hide();
-  $('.quantityInput[data-id="' + id + '"]').val(0);
+  $('.quantityInput[data-id="' + id + '"]').val(1);
 
 })
 
@@ -475,7 +477,6 @@ $(document).on("click", ".minus-item", function(event) {
   shoppingCart.removeItemFromCart(id);
   displayCart();
   set_multiple_campaign()
-
 })
 // +1
 $(document).on("click", ".plus-item", function(event) {

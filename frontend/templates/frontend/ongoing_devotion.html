@@ -23,9 +23,9 @@
                     <div>
                     {% if campaign_data.video_id %}
 
-                        <iframe height="315" style="width: 100%;border-radius: 20px;" src="{{campaign_data.video_id}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                        <iframe height="340" style="width: 100%;border-radius: 20px;" src="{{campaign_data.video_id}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
                      {% elif campaign.campaign_image %}
-                        <img src="{{campaign.campaign_image.url}}">
+                        <img class="img-fluid w-100 mb-3" src="{{campaign.campaign_image.url}}">
                     {% endif %}
 
                     </div>
@@ -94,9 +94,9 @@
                     <div class="mt-4 cds_social_link">
                         <h2 class="cds_sub_title">Share & Support:</h2>
                         <div>
-                            <a href="#"><img src="{% static 'frontend/assets/images/campaign/facebook.svg' %}" class="img-fluid" alt=""></a>
-                            <a href="#"><img src="{% static 'frontend/assets/images/campaign/insta.svg' %}" class="img-fluid" alt=""></a>
-                            <a href="#"><img src="{% static 'frontend/assets/images/campaign/wp.svg' %}" class="img-fluid" alt=""></a>
+
+                           {% share_icons_images single.slug "Check this out!" %}
+
                         </div>
                     </div>
 
@@ -281,9 +281,9 @@
                                     I want to receive transaction and donation updates on WhatsApp
                                 </label>
                             </div>
-                            <div class="mb-4">
-                                <img src="assets/images/campaign/payment.svg" class="img-fluid" alt="">
-                            </div>
+<!--                            <div class="mb-4">-->
+<!--                                <img src="assets/images/campaign/payment.svg" class="img-fluid" alt="">-->
+<!--                            </div>-->
                             <div class="mb-3">
                                 <button type="submit" class="cds_btn ">
                                     Donate Here

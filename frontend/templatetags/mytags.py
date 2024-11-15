@@ -2,6 +2,8 @@ import re
 from urllib.parse import urlparse, parse_qs
 
 from django.db.models import Sum
+from urllib.parse import urlencode
+from django.conf import settings
 
 from django import template
 from django.urls import reverse, NoReverseMatch
@@ -11,6 +13,7 @@ from datetime import date
 from django.utils import timezone
 import dateutil.parser
 import random
+from django.utils.html import mark_safe
 
 
 from apps.front_app.models import Campaign, Setting, UploadedFile, HomeSlider, HomePageContent
@@ -297,3 +300,89 @@ def is_image(file_url):
     """Check if a file URL is an image based on its extension."""
     valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
     return any(file_url.lower().endswith(ext) for ext in valid_extensions)
+
+
+@register.simple_tag
+def share_icons_images(slug, text=None):
+    # Construct URL to be shared
+    url = settings.BASE_URL + "/ongoing-devotion/" + slug
+
+    platforms = {
+        "whatsapp": {
+            "base_url": "https://api.whatsapp.com/send",
+            "img_src": "/static/frontend/assets/images/campaign/wp.svg",
+        },
+        "facebook": {
+            "base_url": "https://www.facebook.com/sharer/sharer.php",
+            "img_src": "/static/frontend/assets/images/campaign/facebook.svg",
+        },
+
+    }
+
+    share_html = ""
+
+    # Generate share icons for each platform
+    for platform, data in platforms.items():
+        base_url = data["base_url"]
+        img_src = data["img_src"]
+
+        if not base_url:  # Instagram doesn't support direct share link, fallback to a profile
+            share_html += f'<a href="{url}" target="_blank"><img src="{img_src}" class="img-fluid" alt="{platform}"></a>'
+        else:
+            query_params = {"url": url}
+            if text:
+                query_params["text"] = text
+
+            share_url = f"{base_url}?{urlencode(query_params)}"
+            share_html += f'<a href="{share_url}" target="_blank"><img src="{img_src}" class="img-fluid" alt="{platform}"></a>'
+
+    # Mark the generated HTML as safe for rendering
+    return mark_safe(share_html)
+
+@register.simple_tag
+def share_icons(slug, text=None):
+    # Base URL for the site
+    url = settings.BASE_URL + "/ongoing-devotion/" + slug
+
+    """
+    Generates social media share icons based on the given URL.
+
+    :param url: The URL to be shared.
+    :param text: Optional text to be included with the share link.
+    :return: HTML for social media share icons.
+    """
+    platforms = {
+        "whatsapp": {
+            "base_url": "https://api.whatsapp.com/send",
+            "icon_class": "bi bi-whatsapp wp_color",
+        },
+        "facebook": {
+            "base_url": "https://www.facebook.com/sharer/sharer.php",
+            "icon_class": "bi bi-facebook fb_color",
+        },
+        "linkedin": {
+            "base_url": "https://www.linkedin.com/shareArticle",
+            "icon_class": "bi bi-linkedin linkedin_color",
+        },
+    }
+
+    share_html = ""
+
+    # Generate share icons for each platform
+    for platform, data in platforms.items():
+        base_url = data["base_url"]
+        icon_class = data["icon_class"]
+
+        if not base_url:  # Instagram does not support direct share link
+            # Instagram sharing can be linked to a profile or a fallback option
+            share_html += f'<a href="{url}" target="_blank"><i class="{icon_class}"></i></a>'
+        else:
+            query_params = {"url": url}
+            if text:
+                query_params["text"] = text  # Add text to the share URL if provided
+
+            # Build the full share URL with query params
+            share_url = f"{base_url}?{urlencode(query_params)}"
+            share_html += f'<a href="{share_url}" target="_blank"><i class="{icon_class}"></i></a>'
+
+    return mark_safe(share_html)

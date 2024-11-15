@@ -55,7 +55,7 @@
                                     "ondismiss": function() {
                                         // This will redirect to the home page if the modal is closed
                                        if ("{{ custom_campaign_id }}" && "{{ custom_campaign_id }}" !== '') {
-                                            window.location.href = "/ongoing-devotion/" + "{{ custom_campaign_id }}";
+                                            window.location.href = "/ongoing-devotion/" + "{{ slug }}";
                                         } else {
                                             window.location.href = "/";
                                         }

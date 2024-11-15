@@ -130,10 +130,15 @@
 
                         </div>
                         <div class="col-2">
-                          <a href="#">
-                            <i class="bi bi-share text-white fs-3">
-                            </i>
-                          </a>
+                          <div class="social_share_container">
+                              <a href="javascript:void(0)" class="social_share_btn">
+                                <i class="bi bi-share text-white fs-3">
+                                </i>
+                              </a>
+                              <div class="social_share_box">
+                                  {% share_icons single.slug "Check this out!" %}
+                              </div>
+                          </div>
                         </div>
                       </div>
                       <div>
@@ -354,9 +359,9 @@
     </div>
   </section>
 
-  <section class="home_gallery-section px-lg-5 px-md-0 mx-lg-5 mx-2 mb-0 mb-md-5 py-md-5 pt-md-0 py-3">
+  <section class="home_gallery-section px-lg-5 px-md-0 mx-lg-5 mx-2 mt-5 pt-md-5">
         <div class="container-fluid">
-          <div class="row">
+          <div class="row g-4">
             <div class="col-md-5 ">
               <div class="content text-center text-md-start">
                 <h2 class="display-3 fw-bold pe-lg-40">
@@ -399,11 +404,11 @@
         <div class="col-12">
           <div class="text-center">
             <img src="assets/images/campaing/heart.svg" alt="">
-            <h2 class="display-4 ff-antom fw-semibold text-dark">Pure Dairy Cow Products</h2>
+            <h2 class="mb-4 display-4 ff-antom fw-semibold text-dark">Pure Dairy Cow Products</h2>
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row g-3">
         {% for single in product_obj %}
         <div class="col-lg-3 col-sm-6">
           <div class="productWr position-relative p-30">

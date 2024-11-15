@@ -744,3 +744,16 @@ $(document).ready(function () {
     }
   });
 });
+
+document.querySelectorAll('.social_share_btn').forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    // Get the closest container and find its .social_share div
+    const shareContainer = button.closest('.social_share_container');
+    const shareDiv = shareContainer.querySelector('.social_share_box');
+
+    // Toggle the 'active' class on this particular share div
+    shareDiv.classList.toggle('active');
+  });
+});

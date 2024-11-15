@@ -378,7 +378,8 @@ class SendCSRView(DevoteeRequiredMixin, View):
             'schedule_date': request.POST.get('schedule_date'),
         }
         setting_obj = Setting.objects.first()
-        send_email_background(request, setting_obj.admin_email, template, context, subject='CSR - Confirmation')
+        send_email_background(request, setting_obj.admin_email, template, context, subject='New Notification')
+        messages.success(request, "Thank you for submitting ")
 
         return redirect('home')
 # Request 80G
@@ -709,6 +710,10 @@ class FrontendRazorPayView(View):
 
 
         campaign_id = request.POST.get('campaign_id')
+        if campaign_id:
+            slug = Campaign.objects.get(id=campaign_id).slug
+        else:
+            slug = ""
         tip = request.POST.get('tip')
         city = request.POST.get('city')
         all_item_data = request.POST.get('all_item_data')
@@ -741,6 +746,7 @@ class FrontendRazorPayView(View):
             "phone": request.POST.get('mobile_no'),
             'custom_campaign_id': campaign_id,
             'tip': tip,
+            'slug':slug,
             'multiple_campaign':multiple_campaign,
             "productinfo": request.POST.get('title'),
             "txnid": "OR_"+str(random.random()),

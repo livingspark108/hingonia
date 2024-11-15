@@ -204,12 +204,12 @@ outline: 0 ;
                   <div class="amount_box text-white bg-white24 ff-Rubik">₹<span class="text-white">{{single.price}}</span></div>
                   <a style="border: 1px solid;" href="javascript:void(0)" data-type="seva" class="text-white btn btn-outline-secondary rounded-5 qty-box-btn add-to-cart" data-img="/media/product_image/1_-16-.png" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}">Add
 					                        </a>
-                  <div class="qtyBoxCmp text-white gap-1" style="display:none">
+                  <div data-id="{{single.id}}"  class="qtyBoxCmp text-white gap-1" style="display:none">
 
                     <span data-type="seva" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="pminus minus-item text-white bg-white24 ff-Rubik minusBtn">
                       <img src="{% static 'frontend/assets/images/minus-white.svg' %}" class="img-fluid" alt="">
                     </span>
-                      <input  style="width: 33px;" type="number" data-maxlength="100" class="item-count quantityInput text-center" data-id="{{single.id}}" data-name="{{single.title}}" value="1">
+                      <input  style="width: 33px;" readonly type="number" data-maxlength="100" class="item-count quantityInput text-center" data-id="{{single.id}}" data-name="{{single.title}}" value="1">
                     <span data-type="seva" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}" class="pplus plus-item text-white bg-white24 ff-Rubik plusBtn">
                       <img src="{% static 'frontend/assets/images/plus-white.svg' %}" class="img-fluid" alt="">
                     </span>
@@ -262,10 +262,15 @@ outline: 0 ;
 
                         </div>
                         <div class="col-2">
-                          <a href="#">
-                            <i class="bi bi-share text-white fs-3">
-                            </i>
-                          </a>
+                          <div class="social_share_container">
+                              <a href="javascript:void(0)" class="social_share_btn">
+                                <i class="bi bi-share text-white fs-3">
+                                </i>
+                              </a>
+                              <div class="social_share_box">
+                                  {% share_icons single.slug "Check this out!" %}
+                              </div>
+                          </div>
                         </div>
                       </div>
                       <div>
@@ -815,7 +820,7 @@ outline: 0 ;
                     <div class="position-relative email-container text-center">
                       <img class="img-fluid position-absolute email-cover" src="{% static 'frontend/assets/images/home/email-cover.png' %}" alt="email cover">
                       <img class="img-fluid email-body" src="{% static 'frontend/assets/images/home/email.jpg' %}" alt="email">
-                      <a href="#" class="text-decoration-underline text-dark fw-semibold f-14">Donate Now</a>
+                      <a href="{% url 'campaign' %}" class="text-decoration-underline text-dark fw-semibold f-14">Donate Now</a>
                     </div>
                   </div>
                 </div>
@@ -948,12 +953,12 @@ outline: 0 ;
                     <span style="opacity:.5" class="fw-bold">Join Our CSR Initiatives</span>
                   </div>
                   <div class="view_testimonial_btnWr text-center mt-2">
-                    <div class="btn text-white fw-semibold view_testimonialBtn btnAnimation ff-epilogue">
-                      <a class="text-white" href="{% url 'trustee' %}">
-                      View Testimonial
-                      <img class="ms-1" style="width:12px" src="{% static 'frontend/assets/images/home/arrow-45.png' %}" alt="view testimonials">
-                      </a>
-                    </div>
+<!--                    <div class="btn text-white fw-semibold view_testimonialBtn btnAnimation ff-epilogue">-->
+<!--                      <a class="text-white" href="{% url 'trustee' %}">-->
+<!--                      View Testimonial-->
+<!--                      <img class="ms-1" style="width:12px" src="{% static 'frontend/assets/images/home/arrow-45.png' %}" alt="view testimonials">-->
+<!--                      </a>-->
+<!--                    </div>-->
                   </div>
                 </div>
               </div>
@@ -1124,7 +1129,7 @@ outline: 0 ;
                                     Date</label>
                                   <input required type="date" name="schedule_date" class="form-control" placeholder="23/04/2024" id="emailInput" aria-describedby="emailHelp">
                                 </div>
-                                <div class="mb-3 position-relative">
+                                <div class="position-relative">
                                   <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">
                                     Send
                                   </button>
@@ -1134,11 +1139,6 @@ outline: 0 ;
                           </div>
                         </div>
 
-                      </div>
-                      <div class="modal-footer border-0 modelBtns_wr">
-                <!--        <button type="submit" class="btn eventModelBtn mt-2 fw-bold bg-1 ff-rubik f-28">-->
-                <!--          Send-->
-                <!--        </button>-->
                       </div>
                     </div>
                   </div>
