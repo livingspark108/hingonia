@@ -436,9 +436,17 @@ class GetCampaignProductView(View):
         return JsonResponse(payload, safe=False)
 
 
+def get_campaign(identifier):
+    campaign_obj = get_object_or_404(Campaign, Q(slug=identifier) | Q(id=identifier))
+    return campaign_obj
+
+
 class OngoingDevotionView(ListView):
     def get(self, request, id):
-        campaign_obj = get_object_or_404(Campaign, Q(slug=id) | Q(id=id))
+
+        campaign_obj = Campaign.objects.get(slug=id)
+        print("HERE")
+        print(campaign_obj)
         transaction_obj = TransactionDetails.objects.filter(Q(status='success') | Q(status='captured')).order_by('-created_at')
 
         # Pagination

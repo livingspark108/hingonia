@@ -1315,19 +1315,7 @@ $(document).on("click",".know_more",function() {
             }
     })
 })
-$(document).on("click",".check_amount",function() {
 
-  var amt = $('.active_amt').val()
-  if(amt == ''){
-    amt = 0
-  }
-  if(amt <= minimum_value || amt == 'NaN'){
-    alert("Amount should be greater than "+minimum_value)
-    return false;
-  }else{
-    nextStep(2)
-  }
-})
 
 $(document).on("click", ".check_seva_amt", function(e) {
   var amt = parseFloat($('.donationAmount_html').text());

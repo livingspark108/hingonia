@@ -93,7 +93,7 @@
 <script type="text/javascript" src="{% static 'frontend/assets/js/custom.js' %}"></script>
 <script type="text/javascript" src="{% static 'frontend/assets/js/gallery.js' %}"></script>
 <script>
-
+var minimum_value = $('.minimum_value').val()
 $(document).on("click", "#donateMOnthly", function(e) {
     var isChecked = $(this).is(':checked'); // true if checked, false if unchecked
     var value = $(this).val(); // get the value of the checkbox
@@ -153,6 +153,17 @@ $(document).on("click",".eventCheckbox",function() {
     var dd = $(this).val()
     $('.for').val(dd)
     console.log(dd)
+})
+$(document).on("click",".check_amount",function(e) {
+     var amm = $('#donationForm .active_amt').val()
+     if (amm === '' || isNaN(amm) || parseFloat(amm) < minimum_value) {
+        e.preventDefault();
+        var vv = parseFloat(minimum_value)+1
+        alert('Minimum value is ' + vv);
+        return;
+    }{
+         nextStep(2)
+    }
 })
 
 </script>
