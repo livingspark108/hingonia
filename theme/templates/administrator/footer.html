@@ -39,6 +39,20 @@
 <!--<script>window.CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/';</script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
 <script>
+        /*** Profile file upload ***/
+        const fileUpload = (event) => {
+            const files = event.target.files;
+            const filesLength = files.length;
+            if (filesLength > 0) {
+                const imageSrc = URL.createObjectURL(files[0]);
+                const imagePreviewElement = document.querySelector("#tb-image");
+                imagePreviewElement.src = imageSrc;
+                imagePreviewElement.style.display = "block";
+            }
+        };
+    </script>
+<script>
+
     $('.open_uploader').click(function(){
         var type = $(this).data('type')
         $('.file_type').val(type)
