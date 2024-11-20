@@ -28,13 +28,14 @@
                             <div class="">
                                 <div class="swiper supportSlider1 swiper-initialized swiper-horizontal swiper-backface-hidden">
                                     <div class="swiper-wrapper" id="swiper-wrapper-8ad039b1854a984a" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-534px, 0px, 0px); transition-delay: 0ms;">
-                                        <div class="swiper-slide" role="group" aria-label="1 / 4" style="width: 267px;">
-                                            <img src="{{single.photo.url}}" class="sustainable-card img-fluid" alt="sustainable-card">
-                                        </div>
-                                        <div class="swiper-slide" role="group" aria-label="1 / 4" style="width: 267px;">
-                                            <img src="{{single.photo.url}}" class="sustainable-card img-fluid" alt="sustainable-card">
-                                        </div>
-
+                                        {% get_gallery single.id 'oursupporter' as all_campaign_images %}
+                                        {% for single_image in all_campaign_images %}
+                                            {% if single_image.file %}
+                                                <div class="swiper-slide" role="group" aria-label="{{ forloop.counter }} / {{ all_campaign_images|length }}">
+                                                    <img class="img-fluid" src="{{ single_image.file.url }}" alt="">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
                                     </div>
                                     <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span><span class="swiper-pagination-bullet"></span></div>
                                 <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
@@ -47,9 +48,9 @@
                                     </div>
                                 </div>
                                 <p class="f-14 fw-medium lineHeight-18 color-black75">
-                                   {{single.description}}
+                                   {{single.short_description}}
                                 </p>
-                                <a href="" class="aw_cowfllBtn ourSupportBtn text-center" data-bs-toggle="modal" data-bs-target="#supportModel1">Know
+                                <a href="{% url 'our-supporter-detail' single.id %}" class="aw_cowfllBtn ourSupportBtn text-center" >Know
                                     More</a>
                             </div>
                         </div>

@@ -297,6 +297,14 @@ class OurSupportersView(View):
         }
         return render(request, 'frontend/our_supporters.html', context)
 
+class OurSupporterDetailView(View):
+    def get(self, request,id):
+        our_supporter_obj = OurSupporter.objects.get(id=id)
+        context = {
+            'our_supporter_obj':our_supporter_obj
+        }
+        return render(request, 'frontend/our_supporter_detail.html', context)
+
 class GalleryView(View):
     def get(self, request):
         context = {}

@@ -77,4 +77,4 @@ class CreateOurSupporterForm(forms.ModelForm):
 
     class Meta:
         model = OurSupporter
-        fields = ['title','description','photo']
+        fields = ['title','short_description','description','photo']

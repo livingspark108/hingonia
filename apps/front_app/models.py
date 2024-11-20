@@ -48,7 +48,8 @@ class Trustee(DateTimeModel):
 
 class OurSupporter(DateTimeModel):
     title = models.CharField(max_length=3000, blank=False)
-    description = models.CharField(max_length=3000, blank=False)
+    short_description = models.CharField(max_length=3000, blank=False,null=True)
+    description = RichTextField(max_length=3000, blank=False,null=True)
     photo = models.ImageField(null=True)
     def __str__(self):
         return self.title
