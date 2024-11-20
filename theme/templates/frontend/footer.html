@@ -175,7 +175,7 @@ $(document).on("click",".cps-amount-radio input",function(e) {
 	// Clear existing options
     $(".support_option").empty();
     $(".ctm_support_amt").val(0);
-    $(".ctm_support_amt").hide()
+    $(".ctm_amt").val('')
 
     $('input[name="cps-pay"]:checked').prop('checked', false);
 
@@ -217,6 +217,23 @@ $(document).on("click",".cps-amount-radio input",function(e) {
 	}
 
 })
+$(document).on("keyup",".ctm_amt",function() {
+		var amt = $(this).val()
+		var amt_1 = (8 / 100) * amt
+        var amt_2 = (12 / 100) * amt
+        var amt_3 = (14 / 100) * amt
+        var amt_4 = (16 / 100) * amt
+        console.log("HERE")
+        console.log(amt_1)
+        console.log("End")
+        make_dropdown(amt)
+		$('.active_amt_html').html(amt)
+		$('.donate_amt_1').val(amt)
+		final_amt()
+		$('.cps-amount-radio label').removeClass('cps-active')
+		$('.cps-amount-radio input').prop('checked', false);
+
+	})
 </script>
 {% include "elements/message-block.html" %}
 

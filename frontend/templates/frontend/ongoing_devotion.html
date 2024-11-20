@@ -611,21 +611,7 @@ function ctm_calculate(amt){
     $('.donate_amt_1').val(amt)
     final_amt()
 }
-$(document).on("keyup",".ctm_amt",function() {
-		var amt = $(this).val()
-		var amt_1 = (8 / 100) * amt
-        var amt_2 = (12 / 100) * amt
-        var amt_3 = (14 / 100) * amt
-        var amt_4 = (16 / 100) * amt
-        console.log("HERE")
-        console.log(amt_1)
-        console.log("End")
-        make_dropdown(amt)
-		$('.active_amt_html').html(amt)
-		$('.donate_amt_1').val(amt)
-		final_amt()
 
-	})
 
 </script>
 
