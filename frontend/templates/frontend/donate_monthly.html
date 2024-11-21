@@ -108,6 +108,12 @@
                                 </div>
                                 <input type="hidden" id="campaign_id" name="campaign_id" value="{{campaign.id}}">
                             </div>
+                            {% if adopt_a_cow %}
+                            <div class="col-md-6">
+                                <label for="">Cow Name</label>
+                                <input type="text" value="" class="form-control" name="cow_name" placeholder="Cow Name" required="">
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="mt-4">

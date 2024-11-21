@@ -1070,8 +1070,16 @@ def payment_success(request):
     addons = subscription_data.get('notes', [])
     product_info = addons['title']
     price =addons['amount']
-    price = float(price) / 100
 
+    price = float(price) / 100
+    print(addons)
+    cow_name = ""
+    try:
+        cow_name = addons['cow_name']
+
+    except:
+
+        pass
     print(params_dict_dd)
     params_dict = {
         'razorpay_payment_id': razorpay_payment_id,
@@ -1095,6 +1103,7 @@ def payment_success(request):
             user=user_obj,
             plan=plan,
             campaign=campaign,
+            cow_name=cow_name,
             price=price,
             start_date=timezone.now(),
             is_active=True,
@@ -1107,6 +1116,7 @@ def payment_success(request):
         tran_obj.order_id = razorpay_subscription_id
         tran_obj.campaign_id = campaign_id
         tran_obj.firstname = name
+        tran_obj.cow_name = cow_name
         tran_obj.productinfo = product_info
         tran_obj.email = email
         tran_obj.phone = phone_no
@@ -1316,6 +1326,7 @@ def create_subscription(request):
             amount = float(request.POST.get('custom_number')) * 100  # Convert amount to paise
 
         name = request.POST['name']
+        cow_name = request.POST['cow_name']
         campaign_id = request.POST['campaign_id']
         email = request.POST['email']
         phone_no = request.POST['phone_no']
@@ -1337,7 +1348,8 @@ def create_subscription(request):
             plan_id = 'plan_P7fZefpGT4WdAp'
         else:
             plan_id = request.POST['plan_id']
-
+        if not cow_name:
+            cow_name = ""
         if plan_id:
             print("Plan id")
             print(plan_id)
@@ -1361,6 +1373,7 @@ def create_subscription(request):
                     "amount": amount,
                     "name": name,
                     "title":title,
+                    "cow_name":cow_name,
                     "for": campaign_obj.title,
                     "email": email,
                     "phone_no": phone_no,
@@ -1392,6 +1405,7 @@ def create_subscription(request):
                     "amount": amount,
                     "for": campaign_obj.title,
                     "name": name,
+                    "cow_name":cow_name,
                     "title": title,
                     "email": email,
                     "phone_no": phone_no,
