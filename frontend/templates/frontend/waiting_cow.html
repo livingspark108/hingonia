@@ -51,8 +51,8 @@
                         <a data-title="{{single.title}}" data-type="{{single.mode}}" data-amount="{{single.price}}" data-bs-toggle="modal" data-bs-target="#{% if single.mode == 'One Time' %}donate1{% else %}donate2{% endif %}" data-id="{{single.id}}" href="#" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt
                             {{single.title}} Cow</a>
                           {% else %}
-                          <a href="{% url 'donate-monthly' single.slug %}" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-24 fw-bold mt-2 border-0">Adopt
-                            {{single.title}} Cow</a>
+                          <a href="{% url 'donate-monthly' single.slug %}" class="donate_now btn btn-primary color-10 ff-Rubik aw_cowfllBtn f-20 fw-bold mt-2 border-0">Adopt
+                            and Name a Cow</a>
                           {% endif %}
                       </div>
                     </div>
