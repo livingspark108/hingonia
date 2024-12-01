@@ -84,7 +84,8 @@ class Campaign(DateTimeModel):
     amt_2 = models.IntegerField(blank=True,null=True)
     amt_3 = models.IntegerField(blank=True,null=True)
     backgroud_type = models.CharField(choices=BG_TYPE_CHOICES,max_length=300, blank=False,null=True,default='red')
-    campaign_image = models.ImageField(upload_to='campaign_images', max_length=1000,null=True,blank=True)
+    campaign_image = models.ImageField(upload_to='campaign_images', max_length=1000,null=True,blank=False)
+    icon = models.ImageField(upload_to='icon_images', max_length=1000,null=True,blank=True)
     campaign_backgroud = models.ImageField(upload_to='campaign_backgroud',null=True,blank=True)
     product = models.ManyToManyField(CampaignProduct,blank=True)
     def save(self, *args, **kwargs):
