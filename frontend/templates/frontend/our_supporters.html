@@ -48,7 +48,9 @@
                                     </div>
                                 </div>
                                 <p class="f-14 fw-medium lineHeight-18 color-black75">
-                                   {{single.short_description}}
+                                    {% if single.short_description %}
+                                        {{single.short_description}}
+                                    {% endif %}
                                 </p>
                                 <a href="{% url 'our-supporter-detail' single.id %}" class="aw_cowfllBtn ourSupportBtn text-center" >Know
                                     More</a>
