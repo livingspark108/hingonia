@@ -31,7 +31,7 @@ class CreateCampaignForm(forms.ModelForm):
         model = Campaign
         fields = ['type','mode','is_home', 'title','slug','cow_id','place', 'short_title', 'tag', 'last_date', 'price', 'goal', 'payment_type', 'amt_1', 'amt_2',
                   'amt_3', 'youtube_link', 'short_description','updates', 'description', 'backgroud_type', 'campaign_backgroud',
-                  'campaign_image','product']
+                  'campaign_image','icon','product']
 
 
 CampaignImageFormset = inlineformset_factory(Campaign, CampaignImage,
@@ -46,7 +46,7 @@ class UpdateCampaignForm(forms.ModelForm):
         model = Campaign
         fields = ['type','mode','is_home', 'title','slug','cow_id','place', 'short_title','slug', 'tag', 'last_date', 'price', 'goal', 'payment_type', 'amt_1', 'amt_2',
                   'amt_3', 'youtube_link', 'short_description','updates', 'description', 'backgroud_type', 'campaign_backgroud',
-                  'campaign_image','product']
+                  'campaign_image','icon','product']
 
 class FileUploadForm(forms.ModelForm):
     class Meta:

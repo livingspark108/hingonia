@@ -199,7 +199,12 @@ outline: 0 ;
             {% for single in monthly_campaign_obj %}
             <div class="col-xl-3 col-lg-4 col-sm-6 mb-3">
               <div class="sevaWr text-white">
-                <h6 class="f-30 mb-1 fw-semibold ff-Rubik">{{single.title}}</h6>
+                <h6 class="f-30 mb-1 fw-semibold ff-Rubik">
+                  {% if single.icon %}
+                  <img src="{{single.icon.url}}" class="img-fluid seva_icon me-2" width="50" alt="">
+                  {% endif %}
+                  {{single.title}}
+                </h6>
                 <div class="d-flex justify-content-xxl-between justify-content-center gap-2">
                   <div class="amount_box text-white bg-white24 ff-Rubik">₹<span class="text-white">{{single.price}}</span></div>
                   <a style="border: 1px solid;" href="javascript:void(0)" data-type="seva" class="text-white btn btn-outline-secondary rounded-5 qty-box-btn add-to-cart" data-img="/media/product_image/1_-16-.png" data-price="{{single.price}}" data-id="{{single.id}}" data-name="{{single.title}}">Add
