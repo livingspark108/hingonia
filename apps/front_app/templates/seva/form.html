@@ -1,0 +1,92 @@
+{% extends "administrator/base.html" %}
+{% load widget_tweaks %}
+
+{% block body %}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <h4 class="page-title">{% if form.instance.id %}Update{% else %}Create{% endif %}
+                        Seva</h4>
+                </div>
+
+            </div> <!-- end row -->
+        </div>
+        <!-- end page-title -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+                        <!-- Modal -->
+                        {% if form.instance.id %}
+                        <div aria-hidden="true" aria-labelledby="uploadModalLabel" class="modal fade" id="uploadModal" role="dialog" tabindex="-1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="uploadModalLabel">Upload Files</h5>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{% url 'file_upload' %}" class="dropzone" enctype="multipart/form-data" id="my-dropzone" method="post">
+                                            <input class="file_type" name="file_type" type="hidden" value="">
+                                            <input class="campaign_id" name="uploader_id" type="hidden" value="{{form.instance.id}}">
+                                            {% csrf_token %}
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="open_uploader btn btn-primary" data-target="#uploadModal"
+                                data-toggle="modal"
+                                data-type="campaign"
+                                type="button">
+                            Compaign Upload Files
+                        </button>
+                        <div id="uploadStatus"></div>
+                        <div id="campaignFileList"></div>
+
+                        <button class="open_uploader btn btn-primary" data-target="#uploadModal"
+                                data-toggle="modal"
+                                data-type="gallery"
+                                type="button">
+                            Gallery Upload Files
+                        </button>
+                        <div id="uploadStatus_gallery"></div>
+                        <div id="galleryFileList"></div>
+                        <input type="hidden" value="{{form.instance.id}}" class="form_instance_id">
+                        {% endif %}
+                        <form class="form-horizontal m-t-30" enctype='multipart/form-data' method="POST">
+                            {{ form.media }}
+                            {% include "elements/form.html" with form=form %}
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <button class="btn btn-secondary" type="reset">Reset</button>
+                            <button class="btn btn-danger" type="cancel"><a class="text-white" href="{% url 'campaign-list' %}">Cancel</a></button>
+                        </form>
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+
+    </div>
+    <!-- container-fluid -->
+
+</div>
+{% endblock %}
+{% block script%}
+
+<script>
+    $("#id_product").select2()
+    $('#id_last_date').datetimepicker({
+        format: 'Y-m-d H:m'})
+</script>
+{% endblock %}

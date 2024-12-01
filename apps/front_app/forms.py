@@ -33,12 +33,18 @@ class CreateCampaignForm(forms.ModelForm):
                   'amt_3', 'youtube_link', 'short_description','updates', 'description', 'backgroud_type', 'campaign_backgroud',
                   'campaign_image','icon','product']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set default value for 'type' and make it non-editable
+        self.fields['type'].initial = 'Other'
+        self.fields['type'].widget.attrs['readonly'] = True  # Makes the field non-editable
 
 CampaignImageFormset = inlineformset_factory(Campaign, CampaignImage,
                                           form=CreateCampaignForm,
                                           fields=['image'],
                                           can_delete=True,
                                           extra=1)
+
 
 class UpdateCampaignForm(forms.ModelForm):
 
@@ -47,6 +53,79 @@ class UpdateCampaignForm(forms.ModelForm):
         fields = ['type','mode','is_home', 'title','slug','cow_id','place', 'short_title','slug', 'tag', 'last_date', 'price', 'goal', 'payment_type', 'amt_1', 'amt_2',
                   'amt_3', 'youtube_link', 'short_description','updates', 'description', 'backgroud_type', 'campaign_backgroud',
                   'campaign_image','icon','product']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set default value for 'type' and make it non-editable
+        self.fields['type'].initial = 'Other'
+        self.fields['type'].widget.attrs['readonly'] = True  # Makes the field non-editable
+
+
+class CreateSevaForm(forms.ModelForm):
+
+    class Meta:
+        model = Campaign
+        fields = ['type','mode','is_home', 'title','slug', 'short_title','slug', 'price',
+                  'icon']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set default value for 'type' and make it non-editable
+        self.fields['type'].initial = 'Seva'
+        self.fields['type'].widget.attrs['readonly'] = True  # Makes the field non-editable
+
+
+SevaImageFormset = inlineformset_factory(Campaign, CampaignImage,
+                                          form=CreateSevaForm,
+                                          fields=['image'],
+                                          can_delete=True,
+                                          extra=1)
+
+class UpdateSevaForm(forms.ModelForm):
+
+    class Meta:
+        model = Campaign
+        fields = ['type','mode','is_home', 'title','slug', 'short_title','slug', 'price',
+                  'icon']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set default value for 'type' and make it non-editable
+        self.fields['type'].initial = 'Seva'
+        self.fields['type'].widget.attrs['readonly'] = True  # Makes the field non-editable
+
+
+class CreateAdoptACawForm(forms.ModelForm):
+
+    class Meta:
+        model = Campaign
+        fields = ['type','mode','is_home', 'title','slug','cow_id','price', 'goal', 'payment_type', 'short_description', 'description',
+                  'campaign_image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set default value for 'type' and make it non-editable
+        self.fields['type'].initial = 'Adopt a cow'
+        self.fields['type'].widget.attrs['readonly'] = True  # Makes the field non-editable
+
+AdoptACawImageFormset = inlineformset_factory(Campaign, CampaignImage,
+                                          form=CreateAdoptACawForm,
+                                          fields=['image'],
+                                          can_delete=True,
+                                          extra=1)
+
+class UpdateAdoptACawForm(forms.ModelForm):
+
+    class Meta:
+        model = Campaign
+        fields =  ['type','mode','is_home', 'title','slug','cow_id','price', 'goal', 'payment_type', 'short_description', 'description',
+                  'campaign_image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set default value for 'type' and make it non-editable
+        self.fields['type'].initial = 'Adopt a cow'
+        self.fields['type'].widget.attrs['readonly'] = True  # Makes the field non-editable
 
 class FileUploadForm(forms.ModelForm):
     class Meta:

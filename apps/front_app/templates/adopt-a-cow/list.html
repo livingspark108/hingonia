@@ -13,12 +13,12 @@
                         <div class="page-title-box">
                             <div class="row align-items-center">
                                 <div class="col-sm-6">
-                                    <h4 class="page-title">Campaign List</h4>
+                                    <h4 class="page-title">Cow List</h4>
                                 </div>
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-right">
                                       <li> <button class="btn btn-primary"><a class="text-white"
-                                                                              href="{% url 'campaign-add' %}">Add Campaign
+                                                                              href="{% url 'adopt-a-cow-add' %}">Add Cow
                                                                                                           </a></button></li>
 
                                     </ol>
@@ -85,7 +85,7 @@
                           </form>
                     </div>
                     <!-- container-fluid -->
-                    <input type="hidden" name="list_page_url" id="list_page_url" value="{% url 'campaign-list-ajax' %}">
+                    <input type="hidden" name="list_page_url" id="list_page_url" value="{% url 'adopt-a-cow-list-ajax' %}">
 
                 </div>
 {% endblock %}

@@ -1,0 +1,6 @@
+{% for file in files %}
+<div class="thumbnail-container">
+    <img src="{{ file.file.url }}" class="thumbnail" alt="{{ file.file.name }}">
+    <button class="delete-button" onclick="deleteFile({{ file.id }})">X</button>
+</div>
+{% endfor %}

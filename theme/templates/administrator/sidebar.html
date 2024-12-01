@@ -39,10 +39,22 @@
                             <a href="{% url 'donation_list' %}" class="waves-effect {% active 'donation_list' %}"><i
 		                            class="fa fa-file"></i><span> Donation </span></a>
                         </li>
-	                    <li>
-                            <a href="{% url 'campaign-list' %}" class="waves-effect {% active 'campaign-list' %}"><i
-		                            class="fa fa-file"></i><span> Campaign </span></a>
+                        <li>
+                            <a href="javascript:void(0);" class="waves-effect">
+                                <i class="fa fa-file"></i>
+                                <span> Campaign </span>
+                            </a>
+                            <!-- Submenu starts here -->
+                            <ul class="submenu">
+                                <li><a href="{% url 'campaign-list' %}" class="{% url 'campaign-list' %}"><i
+                                            class="fa fa-file"></i><span style="margin-left: 10px;">Campaign</span></a></li>
+                                <li><a href="{% url 'adopt-a-cow-list' %}" class="{% url 'adopt-a-cow-list' %}"><i
+                                            class="fa fa-file"></i><span style="margin-left: 10px;">Adopt a cow</span></a></li>
+                                <li><a href="{% url 'seva-list' %}" class="{% url 'seva-list' %}"><i
+                                            class="fa fa-file"></i><span style="margin-left: 10px;">Seva</span></a></li>
+                            </ul>
                         </li>
+
                         <li>
                             <a href="{% url 'campaign-product-list' %}" class="waves-effect {% active 'campaign-product-list' %}"><i
 		                            class="fa fa-file"></i><span>Campaign Item</span></a>

@@ -18,13 +18,29 @@ from django.urls import path, include
 from apps.front_app.views import *
 
 urlpatterns = [
-#"""Campaign page"""
+    #"""Campaign page"""
     path('campaign/add', CreateCampaignView.as_view(), name='campaign-add'),
     path('campaign/', ListCampaignView.as_view(), name='campaign-list'),
     path('campaign/list/ajax', ListCampaignViewJson.as_view(), name='campaign-list-ajax'),
     path('campaign/edit/<str:pk>', UpdateCampaignView.as_view(), name='campaign-edit'),
     path('campaign/delete/<str:pk>', DeleteCampaignView.as_view(), name='campaign-delete'),
     path('campaign/clone/<str:pk>', CloneCampaignView.as_view(), name='campaign-clone'),
+
+    path('adopt-a-cow/add', CreateAdoptACawView.as_view(), name='adopt-a-cow-add'),
+    path('adopt-a-cow/', ListAdoptACawView.as_view(), name='adopt-a-cow-list'),
+    path('adopt-a-cow/list/ajax', ListAdoptACawViewJson.as_view(), name='adopt-a-cow-list-ajax'),
+    path('adopt-a-cow/edit/<str:pk>', UpdateAdoptACawView.as_view(), name='adopt-a-cow-edit'),
+    path('adopt-a-cow/delete/<str:pk>', DeleteAdoptACawView.as_view(), name='adopt-a-cow-delete'),
+    path('adopt-a-cow/clone/<str:pk>', CloneAdoptACawView.as_view(), name='adopt-a-cow-clone'),
+
+    path('seva/add', CreateSevaView.as_view(), name='seva-add'),
+    path('seva/', ListSevaView.as_view(), name='seva-list'),
+    path('seva/list/ajax', ListSevaViewJson.as_view(), name='seva-list-ajax'),
+    path('seva/edit/<str:pk>', UpdateSevaView.as_view(), name='seva-edit'),
+    path('seva/delete/<str:pk>', DeleteSevaView.as_view(), name='seva-delete'),
+    path('seva/clone/<str:pk>', CloneSevaView.as_view(), name='seva-clone'),
+
+
 
     path('testimonial/add', CreateTestimonialView.as_view(), name='testimonial-add'),
     path('testimonial/', ListTestimonialView.as_view(), name='testimonial-list'),

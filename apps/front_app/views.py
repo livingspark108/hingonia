@@ -23,7 +23,8 @@ from apps.cms.models import Page
 from application.custom_classes import AdminRequiredMixin, AjayDatatableView
 from apps.front_app.constants import SLIDER_TYPE, CAMPAIGN_TYPE, MODE_TYPE
 from apps.front_app.forms import CreateDistributionForm, CreateCampaignForm, \
-    CampaignImageFormset, HomePageCampaignForm, CreateTestimonialForm, CreateTrusteeForm, CreateOurSupporterForm
+    CampaignImageFormset, HomePageCampaignForm, CreateTestimonialForm, CreateTrusteeForm, CreateOurSupporterForm, \
+    CreateAdoptACawForm, UpdateAdoptACawForm, CreateSevaForm, UpdateSevaForm
 from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distribution, Setting, AbandonCart, Product, \
     CampaignProduct, UploadedFile, HomePageCampaign, Order, Testimonial, HomeSlider, Trustee, OurSupporter, \
     HomePageContent
@@ -82,7 +83,7 @@ class ListCampaignView(AdminRequiredMixin, TemplateView):
 
 class ListCampaignViewJson(AjayDatatableView):
     model = Campaign
-    columns = ['title','type','mode','is_home','price', 'actions']
+    columns = ['title','mode','is_home','price', 'actions']
     exclude_from_search_cloumn = ['actions']
 
     def get_initial_queryset(self):
@@ -103,7 +104,7 @@ class ListCampaignViewJson(AjayDatatableView):
                 filters_fileds.add(Q(mode=mode_type), Q.AND)
 
 
-        return self.model.objects.filter(filters_fileds).order_by('-created_at')
+        return self.model.objects.filter(filters_fileds).filter(type='Other').order_by('-created_at')
 
 
     def render_column(self, row, column):
@@ -195,6 +196,7 @@ class CloneCampaignView(AdminRequiredMixin,View):
 
         # Redirect to the detail page of the cloned object (or anywhere else)
         return redirect('campaign-edit', pk=original_object.pk)
+
 
 
 # Campaign Product
@@ -1430,3 +1432,337 @@ class ChangeTrusteeNumberView(AdminRequiredMixin, View):
 
         payload = {'save': 'ok'}
         return JsonResponse(payload)
+
+
+# Adopt A Caw
+
+class CreateAdoptACawView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
+
+    model = Campaign
+    form_class = CreateAdoptACawForm
+    template_name = 'adopt-a-cow/form.html'
+    success_message = "%(title)s has been created successfully"
+    success_url = reverse_lazy('adopt-a-cow-list')
+    object = None
+
+    def get_form_kwargs(self):
+        kwargs = super(CreateAdoptACawView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get(self, request, *args, **kwargs):
+
+        form = self.form_class()
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+            )
+        )
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            self.object = form.save()
+            messages.success(request, self.success_message)
+        else:
+            return render(request, self.template_name,
+                          {'form': form })
+
+        return HttpResponseRedirect(self.success_url)
+
+
+class ListAdoptACawView(AdminRequiredMixin, TemplateView):
+    model = Campaign
+    template_name = 'adopt-a-cow/list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListAdoptACawView, self).get_context_data(**kwargs)
+        context['campaign_type'] = CAMPAIGN_TYPE
+        context['mode_type'] = MODE_TYPE
+        return context
+
+
+class ListAdoptACawViewJson(AjayDatatableView):
+    model = Campaign
+    columns = ['title','mode','is_home','price', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def get_initial_queryset(self):
+        print(self.request.GET)
+
+        campaign_type = self.request.GET.getlist('campaign_type[]')
+        mode_type = self.request.GET.getlist('mode_type[]')
+
+        filters_fileds = Q()
+        if campaign_type:
+            campaign_type = campaign_type[0]
+            if campaign_type:
+                filters_fileds.add(Q(type=campaign_type), Q.AND)
+
+        if mode_type:
+            mode_type = mode_type[0]
+            if mode_type:
+                filters_fileds.add(Q(mode=mode_type), Q.AND)
+
+
+        return self.model.objects.filter(filters_fileds).filter(type='Adopt a cow').order_by('-created_at')
+
+
+    def render_column(self, row, column):
+        if column == 'is_home':
+            if row.is_home:
+                return "<i class='mdi mdi-star mark_fav active_fav' data-id='{}' style='text-align: center;font-size: 30px;cursor: pointer;'></i>".format(row.pk)
+            else:
+                return "<i class='mdi mdi-star mark_fav' data-id='{}' style='text-align: center;font-size: 30px;cursor: pointer;'></i>".format(row.pk)
+
+        if column == 'actions':
+            if row.type == 'Temple':
+                like_action = '<a href={} role="button" target="blank" class="btn btn-primary btn-sm mr-1">Link</a>'.format(
+                    reverse('temple_single', kwargs={'slug': row.slug}))
+            else:
+                like_action = '<a href={} role="button" target="blank" class="btn btn-primary btn-sm mr-1">Link</a>'.format(
+                    reverse('ongoing-devotion', kwargs={'id': row.slug}))
+
+            clone_action = '<a href={} role="button" class="btn btn-info btn-sm mr-1">Clone</a>'.format(
+                reverse('adopt-a-cow-clone', kwargs={'pk': row.pk}))
+
+            edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
+                reverse('adopt-a-cow-edit', kwargs={'pk': row.pk}))
+            delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
+                reverse('adopt-a-cow-delete', kwargs={'pk': row.pk}))
+            return like_action + edit_action + clone_action +  delete_action
+        else:
+            return super(ListAdoptACawViewJson, self).render_column(row, column)
+
+
+class UpdateAdoptACawView(AdminRequiredMixin, SuccessMessageMixin, UpdateView):
+
+    model = Campaign
+    form_class = UpdateAdoptACawForm
+    template_name = 'campaign/form.html'
+    success_message = "AdoptACaw updated successfully"
+    success_url = reverse_lazy('adopt-a-cow-list')
+
+    def get(self, request, pk, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(instance=self.object)
+        campaign_image_form = CampaignImageFormset(instance=self.object)
+
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  campaign_image_form=campaign_image_form,
+                                  )
+        )
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(self.request.POST, self.request.FILES, instance=self.object)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.success(self.request, self.success_message)
+        return HttpResponseRedirect(self.success_url)
+
+    def form_invalid(self, form):
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  )
+        )
+
+
+
+class DeleteAdoptACawView(AdminRequiredMixin, DeleteView):
+    model = Campaign
+
+    def delete(self, request, *args, **kwargs):
+        self.get_object().delete()
+        payload = {'delete': 'ok'}
+        return JsonResponse(payload)
+
+
+class CloneAdoptACawView(AdminRequiredMixin,View):
+    def get(self,request,pk):
+        print("HERE")
+        print(pk)
+        # Fetch the original object
+        original_object = get_object_or_404(Campaign, pk=pk)
+
+        # Clone the object by setting its primary key to None
+        original_object.pk = None
+        original_object.title = original_object.title+"-Copy"
+        original_object.slug = original_object.slug+"-Copy"
+        original_object.save()
+
+        # Redirect to the detail page of the cloned object (or anywhere else)
+        return redirect('adopt-a-cow-edit', pk=original_object.pk)
+
+
+
+# Seva
+
+class CreateSevaView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
+
+    model = Campaign
+    form_class = CreateSevaForm
+    template_name = 'seva/form.html'
+    success_message = "%(title)s has been created successfully"
+    success_url = reverse_lazy('seva-list')
+    object = None
+
+    def get_form_kwargs(self):
+        kwargs = super(CreateSevaView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def get(self, request, *args, **kwargs):
+
+        form = self.form_class()
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+            )
+        )
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            self.object = form.save()
+            messages.success(request, self.success_message)
+        else:
+            return render(request, self.template_name,
+                          {'form': form })
+
+        return HttpResponseRedirect(self.success_url)
+
+
+class ListSevaView(AdminRequiredMixin, TemplateView):
+    model = Campaign
+    template_name = 'seva/list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListSevaView, self).get_context_data(**kwargs)
+        context['campaign_type'] = CAMPAIGN_TYPE
+        context['mode_type'] = MODE_TYPE
+        return context
+
+
+class ListSevaViewJson(AjayDatatableView):
+    model = Campaign
+    columns = ['title','mode','is_home','price', 'actions']
+    exclude_from_search_cloumn = ['actions']
+
+    def get_initial_queryset(self):
+        print(self.request.GET)
+
+        campaign_type = self.request.GET.getlist('campaign_type[]')
+        mode_type = self.request.GET.getlist('mode_type[]')
+
+        filters_fileds = Q()
+        if campaign_type:
+            campaign_type = campaign_type[0]
+            if campaign_type:
+                filters_fileds.add(Q(type=campaign_type), Q.AND)
+
+        if mode_type:
+            mode_type = mode_type[0]
+            if mode_type:
+                filters_fileds.add(Q(mode=mode_type), Q.AND)
+
+
+        return self.model.objects.filter(filters_fileds).filter(type='Seva').order_by('-created_at')
+
+
+    def render_column(self, row, column):
+        if column == 'is_home':
+            if row.is_home:
+                return "<i class='mdi mdi-star mark_fav active_fav' data-id='{}' style='text-align: center;font-size: 30px;cursor: pointer;'></i>".format(row.pk)
+            else:
+                return "<i class='mdi mdi-star mark_fav' data-id='{}' style='text-align: center;font-size: 30px;cursor: pointer;'></i>".format(row.pk)
+
+        if column == 'actions':
+            if row.type == 'Temple':
+                like_action = '<a href={} role="button" target="blank" class="btn btn-primary btn-sm mr-1">Link</a>'.format(
+                    reverse('temple_single', kwargs={'slug': row.slug}))
+            else:
+                like_action = '<a href={} role="button" target="blank" class="btn btn-primary btn-sm mr-1">Link</a>'.format(
+                    reverse('ongoing-devotion', kwargs={'id': row.slug}))
+
+            clone_action = '<a href={} role="button" class="btn btn-info btn-sm mr-1">Clone</a>'.format(
+                reverse('seva-clone', kwargs={'pk': row.pk}))
+
+            edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
+                reverse('seva-edit', kwargs={'pk': row.pk}))
+            delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
+                reverse('seva-delete', kwargs={'pk': row.pk}))
+            return like_action + edit_action + clone_action +  delete_action
+        else:
+            return super(ListSevaViewJson, self).render_column(row, column)
+
+
+class UpdateSevaView(AdminRequiredMixin, SuccessMessageMixin, UpdateView):
+
+    model = Campaign
+    form_class = UpdateSevaForm
+    template_name = 'campaign/form.html'
+    success_message = "Campaign updated successfully"
+    success_url = reverse_lazy('campaign-list')
+
+    def get(self, request, pk, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(instance=self.object)
+        campaign_image_form = CampaignImageFormset(instance=self.object)
+
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  campaign_image_form=campaign_image_form,
+                                  )
+        )
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(self.request.POST, self.request.FILES, instance=self.object)
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.success(self.request, self.success_message)
+        return HttpResponseRedirect(self.success_url)
+
+    def form_invalid(self, form):
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  )
+        )
+
+class DeleteSevaView(AdminRequiredMixin, DeleteView):
+    model = Campaign
+
+    def delete(self, request, *args, **kwargs):
+        self.get_object().delete()
+        payload = {'delete': 'ok'}
+        return JsonResponse(payload)
+
+class CloneSevaView(AdminRequiredMixin,View):
+    def get(self,request,pk):
+        print("HERE")
+        print(pk)
+        # Fetch the original object
+        original_object = get_object_or_404(Campaign, pk=pk)
+
+        # Clone the object by setting its primary key to None
+        original_object.pk = None
+        original_object.title = original_object.title+"-Copy"
+        original_object.slug = original_object.slug+"-Copy"
+        original_object.save()
+
+        # Redirect to the detail page of the cloned object (or anywhere else)
+        return redirect('seva-edit', pk=original_object.pk)
