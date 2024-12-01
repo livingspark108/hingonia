@@ -117,7 +117,7 @@ class FrontendAboutUsView(View):
 class FrontendTrusteeView(View):
     def get(self, request):
 
-        trustree_obj = Trustee.objects.all()
+        trustree_obj = Trustee.objects.all().order_by('order_number')
         # if request.user.is_authenticated:
         context = {
             'trustree_obj':trustree_obj

@@ -40,6 +40,7 @@ class Trustee(DateTimeModel):
     title = models.CharField(max_length=3000, blank=False)
     designation = models.CharField(max_length=3000, blank=False)
     description = models.CharField(max_length=3000, blank=False)
+    order_number = models.IntegerField(max_length=3000, blank=True,null=True)
     type = models.CharField(choices=TRUSTEE_CHOICE,max_length=200, blank=False,default='Trustee')
     photo = models.ImageField(null=True)
     def __str__(self):

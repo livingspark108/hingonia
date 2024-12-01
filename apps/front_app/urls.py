@@ -35,6 +35,7 @@ urlpatterns = [
 
     path('trustee/add', CreateTrusteeView.as_view(), name='trustee-add'),
     path('trustee/', ListTrusteeView.as_view(), name='trustee-list'),
+    path('trustee_number/', ChangeTrusteeNumberView.as_view(), name='trustee-number'),
     path('trustee/list/ajax', ListTrusteeViewJson.as_view(), name='trustee-list-ajax'),
     path('trustee/edit/<str:pk>', UpdateTrusteeView.as_view(), name='trustee-edit'),
     path('trustee/delete/<str:pk>', DeleteTrusteeView.as_view(), name='trustee-delete'),

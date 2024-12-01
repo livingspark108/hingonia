@@ -6,11 +6,25 @@
 <section class="pt-5">
         <div class="container">
             <div class="row text-center justify-content-center">
-                <div class="col-lg-8 col-md-12">
-                    <p>
+
+                    <div class="swiper oursupportSlider1 swiper-initialized swiper-horizontal swiper-backface-hidden">
+                        <div class="swiper-wrapper" id="swiper-wrapper-8ad039b1854a984a" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-534px, 0px, 0px); transition-delay: 0ms;">
+                            {% get_gallery our_supporter_obj.id 'oursupporter' as all_campaign_images %}
+                            {% for single_image in all_campaign_images %}
+                                {% if single_image.file %}
+                                    <div class="swiper-slide" role="group" aria-label="{{ forloop.counter }} / {{ all_campaign_images|length }}">
+                                        <img class="img-fluid" src="{{ single_image.file.url }}" alt="">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="swiper-pagination swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" aria-current="true"></span><span class="swiper-pagination-bullet"></span></div>
+                                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                    </div>
+                    <p class="mt-5">
                         {{our_supporter_obj.description|safe}}
                     </p>
-                </div>
+
             </div>
         </div>
     </section>

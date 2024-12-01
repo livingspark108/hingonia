@@ -1028,17 +1028,22 @@ class ListTrusteeView(AdminRequiredMixin, TemplateView):
 
 class ListTrusteeViewJson(AjayDatatableView):
     model = Trustee
-    columns = ['title', 'actions']
+    columns = ['title','order_number', 'actions']
     exclude_from_search_cloumn = ['actions']
 
     def render_column(self, row, column):
-
+        if column == 'order_number':
+            if row.order_number:
+                input_order_by = '<input data-id="{}" value="{}" type="number" name="trustee_number" class="trustee_number form form-control" style="width: 80px;">'.format(row.pk,row.order_number)
+            else:
+                input_order_by = '<input data-id="{}" type="number" name="trustee_number" class="trustee_number form form-control" style="width: 80px;">'.format(row.pk)
+            return input_order_by
         if column == 'actions':
 
             clone_action = '<a href={} role="button" class="btn btn-info btn-sm mr-1">Clone</a>'.format(
                 reverse('trustee-clone', kwargs={'pk': row.pk}))
 
-            edit_action = '<a href={} role="button" class="confirm btn btn-warning btn-sm mr-1">Edit</a>'.format(
+            edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
                 reverse('trustee-edit', kwargs={'pk': row.pk}))
             delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
                 reverse('trustee-delete', kwargs={'pk': row.pk}))
@@ -1411,3 +1416,17 @@ class CloneSliderView(AdminRequiredMixin,View):
 
         # Redirect to the detail page of the cloned object (or anywhere else)
         return redirect('slider-edit', pk=original_object.pk)
+
+
+class ChangeTrusteeNumberView(AdminRequiredMixin, View):
+
+    def post(self, request):
+        id = request.POST.get('id')
+        order_val = request.POST.get('order_value')
+        trustee_obj = Trustee.objects.get(id=id)
+
+        trustee_obj.order_number = order_val
+        trustee_obj.save()
+
+        payload = {'save': 'ok'}
+        return JsonResponse(payload)

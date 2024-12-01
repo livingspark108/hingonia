@@ -703,6 +703,18 @@ var swiper = new Swiper(".supportSlider1", {
   },
 });
 
+var swiper = new Swiper(".oursupportSlider1", {
+  slidesPerView: 1,
+  spaceBetween: 0,
+  pagination: {
+    el: ".swiper-pagination",
+  },
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+});
+
 var campaignGallerySwiper = new Swiper(".campaignGallerySwiper", {
   slidesPerView: 2,
   spaceBetween: 10,

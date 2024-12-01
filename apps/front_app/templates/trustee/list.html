@@ -30,6 +30,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Title</th>
+                                                <th>Order</th>
                                                 <th class="no-sort"></th>
                                             </tr>
                                             </thead>
@@ -57,3 +58,21 @@
 
                 </div>
 {% endblock %}
+{% block script%}
+<script>
+	$(document).on("change",".trustee_number",function(e) {
+		var id = $(this).data('id')
+		var dd = $(this).val()
+        $.ajax({
+            url: "{% url 'trustee-number' %}",
+            method: 'POST',
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}','id':id,'order_value':dd},
+            success: function (result) {
+              console.log(result)
+            }
+        })
+	})
+
+</script>
+{% endblock %}
+
