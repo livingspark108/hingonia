@@ -363,15 +363,15 @@
                                 {% if single.type == 'CSR_MAIN' %}
                                 <div class="swiper-slide active" role="group" aria-label="1 / 5" style="width: 1306px; margin-right: 10px;">
                                     <div class="row">
-                                        <div class="col-lg-8 mb-4 mb-lg-0">
+                                        <div class="col-lg-5 mb-4 mb-lg-0">
                                             <div class="imgWr position-relative">
-                                                <img class="img-fluid" src="{{single.main_image.url}}" alt="">
-
-                                                <div class="corner-text ff-antom">₹{{single.amount}}</div>
+                                                <img class="img-fluid w-100 rounded-4" src="{{single.main_image.url}}" alt="">
+                                                <!--<div class="corner-text ff-antom">₹22,90,000/-</div>-->
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 ">
+                                        <div class="col-lg-7">
                                             <div class="contentWr">
+                                                <h2 class="text-start color-1 ff-antom">₹{{single.amount}}/-</h2>
                                                 <h5 class="f-28 text-uppercase text-start">{{single.title}}</h5>
                                                 <p class="" style="text-align:justify">
                                                     {{single.description}}
@@ -379,6 +379,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 {% endif %}
                                 {% endfor %}
