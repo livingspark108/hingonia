@@ -912,9 +912,13 @@ outline: 0 ;
                       {% for single in all_slider %}
 
                       {% if single.type == 'CSR' %}
+                      {% if single.icon %}
                       <div class="swiper-slide">
+
                         <img src="{{single.icon.url}}" alt="RSDCL">
+
                       </div>
+                      {% endif %}
                       {% endif %}
                       {% endfor %}
 
