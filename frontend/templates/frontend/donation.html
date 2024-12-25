@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="">Phone</label>
-                                            <input value="{{request.user.mobile_no}}" name="mobile_no" type="number" class="form-control" placeholder="Phone" required="">
+                                            <input value="{% if request.user.mobile_no == '' or request.user.mobile_no == '0' %}{{request.user.username}}{% else %}{{request.user.mobile_no}}{% endif %}" name="mobile_no" type="number" class="form-control" placeholder="Phone" required="">
                                         </div>
                                         <div class="mb-3">
                                             <label for="">Email</label>

@@ -37,22 +37,30 @@
                     <div class="card p-30 p-md-20 bg-5 borderR-40 ">
                       <div class="position-relative">
                       <img src="{{single.campaign.campaign_image.url}}" class="card-img-top" alt="...">
-                        <div class="adopter_img position-absolute">
-                          <img src="{{single.user.profile|handle_image_url}}" alt="" style="max-width:100px;width:100%">
-                        </div>
+
                       </div>
                       <div class="card-body pb-0 px-0">
-
-                        {% if single.cow_name %}
-                          <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">{{single.cow_name}} - Adopted by {{single.user.first_name}}</h5>
-                        {% else %}
-                        <h5 class="card-title f-20 color-10 fw-semibold ff-Rubik mb-0">{{single.campaign.title}} - Adopted by {{single.user.first_name}}</h5>
-                        {% endif %}
+                          <div class="d-flex align-items-center">
+    <div class="me-3">
+        <div class="adopter_img">
+    <img src="{{single.user.profile|handle_image_url}}" alt="" style="max-width:100px;width:100%"></div>
+    </div>
+    <div class="">
+        {% if single.cow_name %}
+            <h6 class="card-title color-10 fw-semibold ff-Rubik mb-0">{{single.cow_name}} - Adopted by {{single.user.first_name}}</h6>
+        {% else %}
+            <h6 class="card-title color-10 fw-semibold ff-Rubik mb-0">{{single.campaign.title}} - Adopted by {{single.user.first_name}}</h6>
+        {% endif %}
                           <span class="card-text color-10 ff-Rubik f-12">Id No.: {% if single.campaign.cow_id %}{{single.campaign.cow_id}}{% else %}ID not available{% endif %}</span>
 
                         <div class="donatAmountM">
-                          <span class="fw-semibold color-10 ff-Rubik cardprice_title">Donating {{single.price}}<span class="f-20 color-10 ff-Rubik">/MONTH</span></span>
+                          <h6 class="fw-semibold color-10 ff-Rubik mb-0 ">Donating {{single.price}}<span class="color-10 ff-Rubik">/MONTH</span></h6>
                         </div>
+    </div>
+
+
+                      </div>
+
                       </div>
                     </div>
                   </div>
