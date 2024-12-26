@@ -350,6 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
     freeMode: true,
     watchSlidesProgress: true,
   });
+
   var swiper2 = new Swiper(".CSRSwiper2", {
     spaceBetween: 10,
       autoplay: {
@@ -781,27 +782,3 @@ document.querySelectorAll('.social_share_btn').forEach(button => {
             waitingCowGallerySwiper.slideNext();
         });
         /**************/
-
-        var waitingCowGallerySwiper = new Swiper(".waitingCowGallerySwiper", {
-          slidesPerView: 2,
-          spaceBetween: 10,
-          loop: true,
-          autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-          },
-          breakpoints: {
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 10,
-            },
-          },
-        });

@@ -103,11 +103,11 @@
                     <div class="mt-4">
                         <h2 class="cds_sub_title">Contact Us:</h2>
                         <div>
-                            <a href="mailto:support@hingonia.com" class="gray d-block fw-semibold mb-2 color-1"><img
+                            <a href="mailto:hcrc@skbt.org" class="gray d-block fw-semibold mb-2 color-1"><img
                                     src="{% static 'frontend/assets/images/campaign/mail.svg' %}" class="img-fluid pe-2" alt="mail">
-                                    support@hingonia.com</a>
-                            <a href="tel:+12345678920" class="gray  d-block fw-semibold color-1"><img
-                                    src="{% static 'frontend/assets/images/campaign/call.svg' %}" class="img-fluid pe-2" alt="call"> +91 12345678920</a>
+                                    hcrc@skbt.org</a>
+                            <a href="tel:+91 9126612180" class="gray  d-block fw-semibold color-1"><img
+                                    src="{% static 'frontend/assets/images/campaign/call.svg' %}" class="img-fluid pe-2" alt="call"> +91 9126612180</a>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -155,8 +155,8 @@
                                                     class="bi bi-currency-rupee"></i>{{single.price}}</span>
 
                                             <div class="cds_qty">
-                                                <input data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item f-14 decrement-btn qty-minus minusBtn" >
-                                                <input type="number" class="item-count qty quantityInput" data-maxlength='1000' data-id="{{single.id}}" data-name="{{single.title}}" value="1">
+                                                <input data-id="{{single.id}}" type="button" data-price="{{single.price}}" data-name="{{single.title}}" class="minus-item f-14 decrement-btn qty-minus minusBtn" >
+                                                <input type="number" class="item-count qty quantityInput" data-maxlength='1000' data-id="{{single.id}}" data-name="{{single.title}}" value="0">
                                                 <input data-id="{{single.id}}" data-price="{{single.price}}" data-name="{{single.title}}" type="button" value="" class="plus-item f-14 increment-btn qty-plus plusBtn">
                                             </div>
                                         </div>
