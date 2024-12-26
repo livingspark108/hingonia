@@ -75,7 +75,45 @@ class FrontendHomeView(View):
             'monthly_campaign_obj':monthly_campaign_obj,
         }
         return render(request, 'frontend/home.html', context)
+class FrontendContactUsView(View):
+    def get(self, request):
+        ourteam_obj = OurTeam.objects.all()
+        about_obj = AboutUs.objects.first()
+        gallery_obj = Distribution.objects.all()
+        about_1 = HomeSlider.objects.filter(type='About 1')
+        about_2 = HomeSlider.objects.filter(type='About 2')
+        # if request.user.is_authenticated:
+        context = {
+            'about_1':about_1,
+            'about_2':about_2,
+            'gallery_obj':gallery_obj,
+            'ourteam_obj': ourteam_obj,
+            'about_obj':about_obj,
+        }
 
+        return render(request, 'frontend/contact_us.html', context)
+
+    def post(self, request):
+        first_name = request.POST.get('first_name')
+        last_name = ""
+        email = request.POST.get('email')
+        mobile_no = request.POST.get('mobile_no')
+        message = request.POST.get('message')
+        context = {
+            'first_name':first_name,
+            'last_name': last_name,
+            'email': email,
+            'mobile_no': mobile_no,
+            'message': message
+        }
+        setting_obj = Setting.objects.first()
+        print("Contact send detail")
+        print(setting_obj.admin_email)
+        send_contact_us(request, [setting_obj.admin_email],context)
+        url = reverse('contact-us', kwargs={})
+        messages.success(self.request, "Thanks you, we will get back to you")
+
+        return HttpResponseRedirect(url)
 class FrontendAboutUsView(View):
     def get(self, request):
         ourteam_obj = OurTeam.objects.all()

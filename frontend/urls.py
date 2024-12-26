@@ -22,6 +22,7 @@ urlpatterns = [
 
     path('', FrontendHomeView.as_view(), name='home'),
     path('about-us', FrontendAboutUsView.as_view(), name='about-us'),
+    path('contact-us', FrontendContactUsView.as_view(), name='contact-us'),
     path('trustees', FrontendTrusteeView.as_view(), name='trustee'),
     path('our-mothers', FrontendOurMotherView.as_view(), name='our-mothers'),
     path('campaign', FrontendCampaignView.as_view(), name='campaign'),

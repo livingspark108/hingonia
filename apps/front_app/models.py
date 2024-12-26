@@ -67,6 +67,7 @@ class Campaign(DateTimeModel):
     goal = models.FloatField(max_length=300, blank=True,null=True)
     favourite = models.BooleanField(default=False)
     is_home = models.BooleanField(default=False)
+    is_calf = models.BooleanField(default=False)
     last_date = models.DateTimeField(max_length=300, blank=True,null=True)
 
 

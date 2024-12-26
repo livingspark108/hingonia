@@ -99,7 +99,7 @@ class CreateAdoptACawForm(forms.ModelForm):
 
     class Meta:
         model = Campaign
-        fields = ['type','mode','is_home', 'title','slug','cow_id','price', 'goal', 'payment_type', 'short_description', 'description',
+        fields = ['type','mode','is_home','is_calf', 'title','slug','cow_id','price', 'goal', 'payment_type', 'short_description', 'description',
                   'campaign_image']
 
     def __init__(self, *args, **kwargs):
@@ -118,7 +118,7 @@ class UpdateAdoptACawForm(forms.ModelForm):
 
     class Meta:
         model = Campaign
-        fields =  ['type','mode','is_home', 'title','slug','cow_id','price', 'goal', 'payment_type', 'short_description', 'description',
+        fields =  ['type','mode','is_home','is_calf', 'title','slug','cow_id','price', 'goal', 'payment_type', 'short_description', 'description',
                   'campaign_image']
 
     def __init__(self, *args, **kwargs):

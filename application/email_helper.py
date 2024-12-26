@@ -27,6 +27,7 @@ def send_email(request, to, template, context={}, subject='Welcome'):
 
 
 def send_email_background(request, to, template, context={}, subject='Welcome'):
+    print(get_domain_protocol(request))
     context['domain'], context['protocol'] = get_domain_protocol(request)
     EmailThread(to, template, context, subject).start()
 

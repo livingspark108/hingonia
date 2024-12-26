@@ -126,8 +126,12 @@ def send_newsletter(request, to, context={}):
 
 def send_contact_us(request, to, context={}):
     template = 'frontend/email/contact_us_template.html'
+    print("To list")
+    print(to)
+    print(context)
     for reciepint in to:
-        send_email_background(request, reciepint, template, context, subject='Contact Us - Confirmation')
+
+        send_email_background(request, reciepint, template, context, subject='New Inquiry Received')
 
 
 

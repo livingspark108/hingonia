@@ -3,6 +3,8 @@
 {% load static %}
 {% load mytags %}
 {% block body %}
+{% get_home_setting_data as home_page_setting_data %}
+
  <!-- Section Banner -->
       <section class="about_banner mx-2 px-lg-5 position-relative">
         <div class="container-fluid">
@@ -22,67 +24,169 @@
       </section>
       <section class="about_section pt-80">
         <div class="container-fluid">
+            <div class="row align-items-center justify-content-center">
+      <div class="col-lg-8 col-md-10">
+       <iframe class="about-video" src="https://www.youtube.com/embed/W8cPIcRkgqo?si=v1fmvFb-NGtjYiEZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+     </div>
+     <div class="col-md-12 pt-3 pb-5 section-banner">
+
+         <div class="row mt-2 g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{{home_page_setting_data.first_icon|handle_image_url}}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          {{home_page_setting_data.first_number|handle_none}}
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          {{home_page_setting_data.first_title|handle_none}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{{home_page_setting_data.second_icon|handle_image_url}}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          {{home_page_setting_data.second_number|handle_none}}
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          {{home_page_setting_data.second_title|handle_none}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{{home_page_setting_data.third_icon|handle_image_url}}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          {{home_page_setting_data.third_number|handle_none}}
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10 pop_up_title">
+                          {{home_page_setting_data.third_title|handle_none}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{{home_page_setting_data.fourth_icon|handle_image_url}}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          {{home_page_setting_data.fourth_number|handle_none}}
+
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          {{home_page_setting_data.fourth_number|handle_none}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{{home_page_setting_data.five_icon|handle_image_url}}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          {{home_page_setting_data.five_number|handle_none}}
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                            {{home_page_setting_data.five_title|handle_none}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <div class="card-box">
+                    <div class="row align-items-center">
+                      <div class="col-5">
+                        <img src="{{home_page_setting_data.six_icon|handle_image_url}}" class="img-fluid" alt="">
+                      </div>
+                      <div class="col-7 ps-0 text-end">
+                        <h3 class="fw-bold color-10 mb-0">
+                          {{home_page_setting_data.six_number|handle_none}}
+                        </h3>
+                        <p class="mb-0 fw-semibold color-10">
+                          {{home_page_setting_data.six_title|handle_none}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+     </div>
+
+   </div>
             <div class="row">
-                <div class="col-12">
-                    <div class="px-lg-5 mx-2">
-                    <span class="section_subTitle pb-4 d-inline-block">About Us</span>
-                    <div class="title">
-                        <h2 class="display-5 fw-bold mb-0">Cultivating Vedic Values</h2>
-                        <h2 class="display-5 fw-bold color-18">By helping Cows</h2>
-                    </div>
-                    </div>
-                </div>
+         <div class="col-md-6 p-0">
+            <div class="desc_left h-100 ps-lg-5 py-3">
+               <p class="fw-bold px-4 text-justify">
+                   Hingonia Cow Rehabilitation Centre managed by Sri Krishna Balaram seva Trust, the largest facility dedicated to the welfare of stray and accidental cattles, enhances road safety by preventing accidents caused by stray and injured cows.</p>
+               <p class="fw-bold px-4 mb-0 text-justify">In 2016, Sri Krishna Balaram Seva Trust signed an MOU with Nagar Nigam Jaipur to manage the centre. Since then, the number of stray cows under our care has increased from 6,000 to over 16,000+. Every day, a Jaipur Municipal Corporation ambulance brings around 50 to 60 stray, accidental, old, and diseased cows to our Gaushala. Many of these cows ingest non-degradable materials such as polythene, leading to severe internal damage and leaving them in a very painful and precarious condition.</p>
+
+
             </div>
-            <div class="row">
-                <div class="col-md-6 p-0">
-                    <div class="desc_left h-100 ps-lg-5 py-3">
-                        <p class="fw-bold px-4 mb-0 text-justify">
-                         In 2016, the Government of Rajasthan and Jaipur Nagar Nigam partnered with The AkshayaPatra Foundation, Jaipur, Rajasthan to manage the Hingonia Cattle Rehabilitation Centerwhich is the largest facility dedicated to the welfare and rehabilitation of stray cattle under the animal welfare program.
-                        </p>
-                        <p class="fw-bold px-4 mb-0 text-justify">
-                        For this cause a separate trust was registered. The trust, a non-profit organization, is committed to the welfare of the stray, accidental and old cattles.
-                        </p>
-                        <p class="fw-bold px-4 mb-0 text-justify">
-                        The trust consists of 3 government officials, 3 independent trustees, and 9 missionary trustees, all devoted to serving the Hingonia Cattle Rehabilitation Center. The operations are managed by full-time missionaries from The Akshaya Patra Foundation and Hare Krishna Movement Jaipur, who have embraced the humble service to mother cows.
-                        </p>
-                        <p class="fw-bold px-4 text-justify">
-                        Since the trust took charge in 2016, the number of cattle at the centre has grown from just over 6,000 to more than 20,000 in 2024. The Jaipur Municipal Corporation ambulance brings around 100 stray cows to the centre daily. These cows are accidental and diseased. Our dedicated team of 25 doctors and 30 compounders treat them with care.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="desc_right pe-lg-5 py-3">
-                        <p class="fw-bold ps-3 mb-0 text-justify">
-                        Several initiatives have been undertaken to make the centre self-sustaining, such as solar on grid, the development of a biogas plant and the sale of dairy products to increase revenue generation.
-                        </p>
-                        <p class="fw-bold ps-3 mb-0 text-justify">
-                        Initially, the centre faced numerous challenges, including high cattle mortality rates due to rains and poor infrastructure. However, with the support of Jaipur Nagar Nigam and generous donors, the infrastructure has significantly improved, leading to better management systems and processes. Enhancements like a state-of-the-art ICU and medical care facilities have notably reduced cattle mortality rates.
-                        </p>
-                        <p class="fw-bold ps-3 text-justify pt-3">
-                        Our mission is to ensure the well-being of the cattle at Hingonia through continuous improvement and sustainable practices. We are dedicated to providing a safe and nurturing environment for the stray cattle and our centre not only play a crucial role in ensuring the wellbeing of these abandoned animals but also contributes significantly to road safety by preventing accidents caused by stray cattles.
-                        </p>
-                    </div>
-                    <div class="title">
-                        <h1 class="display-3 color-1 text-end fw-bold ff-epilogue mb-0">Hingonia</h1>
-                    </div>
-                </div>
-                <div class="about_desc px-0"></div>
+         </div>
+         <div class="col-md-6 ">
+            <div class="desc_right pe-lg-5 py-3">
+               <p class="fw-bold px-4 mb-0 text-justify">Our dedicated team of 17 doctors and 32 compounders diligently performs their duties, treating these stray and accidental cows and serving 1000+ stray cows in the ICU. Our motto is to provide protection and shelter to abandoned cows and give them a better life by making our Centre sustainable, renewable, and self-sufficient.</p>
             </div>
+            <div class="title">
+               <h1 class="display-3 color-1 text-end fw-bold ff-epilogue mb-0">Hingonia</h1>
+            </div>
+         </div>
+         <div class="about_desc px-0"></div>
+      </div>
+
         </div>
       </section>
-
-    <section class="ourMission_section px-lg-5 py-5">
+<section class="ourMission_section px-lg-5 py-5">
    <div class="container-fluid">
-      <div class="row">
-         <div class="col-12">
-            <div class=" fw-bold display-5">Our Vision</div>
-            <div class=" fw-bold ms-auto">To ensure that every stray and accidental cows is well-fed and cared for.</div>
-            <div class=" fw-bold display-5 pt-4">Our Mission</div>
-            <div class=" fw-bold">To provide nourishment and care to 30,000 stray and accidental cows by 2030.</div>
-            <div class=" fw-bold display-5 pt-4">Whom We Serve</div>
-            <div class=" fw-bold">We undertake the compassionate mission of rescuing and rehabilitating stray and accidental cows in the Jaipur metropolitan region. These gentle creatures are offered a sanctuary filled with love, care, and respect.</div>
-            <div class=" fw-bold display-5 pt-4">Our Approach</div>
-            <div class=" fw-bold">When we rescue these cows, our first priority is their well-being. We provide them with immediate medical attention and ensure they are in good health. Once they are stable, we welcome them into our sanctuary, where they are embraced with compassion and kindness.</div>
+      <div class="row align-items-center">
+         <div class="col-md-6">
+            <h3 class="fw-medium ff-epilogue display-6">Objectives of the Organization  </h3>
+            <div class=" fw-bold fs-3 pt-4">Our Vision</div>
+            <div class=" fw-bold ms-auto">To rehabilitate stray and accidentals cows, improve their health, and implement sustainable practices to ensure a better environment for cattles care.</div>
+            <div class=" fw-bold fs-3 pt-4">Our Mission</div>
+            <div class=" fw-bold">We aim to nurture and provide loving care for 30,000+ stray and accidental cows by 2030. With compassion as our cornerstone, we envision a future where every cows is safe, healthy, and valued.</div>
+            <div class=" fw-bold fs-3 pt-4">Goals</div>
+            <div class=" fw-bold">Our motto is to provide protection and shelter to abandoned cows and give them a better life by making our Centre sustainable, renewable, and self-sufficient.</div>
+         </div>
+         <div class="col-md-6">
+            <div class="swiper gallerySwiper swiper-cards swiper-3d swiper-initialized swiper-horizontal swiper-watch-progress">
+            <div class="swiper-wrapper" id="swiper-wrapper-431f4510321ff10e3d" aria-live="off" style="cursor: grab; transition-duration: 0ms; transition-delay: 0ms;">
+              {% for single in gallery_obj %}
+                                <div class="swiper-slide">
+                                  <a href="{% url 'gallery' %}"> <img class="img-fluid gallery-1" src="{{single.main_image.url}}" alt="gallery"></a>
+                                </div>
+                                {% endfor %}
+            </div>
+          <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+          <div style="opacity:.5" class="pt-1 text-center fw-bold">
+            Click to see more
+          </div>
          </div>
       </div>
    </div>
@@ -107,14 +211,15 @@
                 <p class="text-center fw-medium text-white f-14">Sri Krishna Balaram Seva Trust</p>
                 <h3 class="display-5 text-center fw-bold">Our Partners</h3>
                 <div class="payment_options flexBoxCenter">
-                    <img class="img-fluid" src="{% static 'frontend/assets/images/about/sbi.png' %}" alt="sbi">
-                    <img class="img-fluid" src="{% static 'frontend/assets/images/about/okay-plus.png' %}" alt="okay-plus">
-                    <img class="img-fluid" src="{% static 'frontend/assets/images/about/heritage.png' %}" alt="heritage">
-                    <img class="img-fluid" src="{% static 'frontend/assets/images/about/ssdcl.png' %}" alt="ssdcl">
-                    <img class="img-fluid" src="{% static 'frontend/assets/images/about/indianoil.png' %}" alt="indianoil">
-                    <img class="img-fluid" src="{% static 'frontend/assets/images/about/au.png' %}" alt="au">
-                    <img class="img-fluid" src="{% static 'frontend/assets/images/about/aavas.png' %}" alt="aavas">
-                    <img class="img-fluid" src="{% static 'frontend/assets/images/about/riico.png' %}" alt="riico">
+                    {% get_slider as all_slider %}
+                    {% for single in all_slider %}
+                    {% if single.type == 'Our partners' %}
+                    {% get_gallery single.id 'slider' as all_gallery_image %}
+                    {% for single_image in all_gallery_image %}
+                    <img class="img-fluid" src="{{single_image.file.url}}" alt="sbi">
+                    {% endfor %}
+                    {% endif %}
+                    {% endfor %}
                 </div>
                 <div class="become_csrPartner">
                     <a href="#footer" class="btn csrPartnerBtn bg-1 py-2 px-3 rounded-5 fw-bold">
@@ -126,154 +231,7 @@
                       <a class="ps-2 pe-1 fw-medium ff-epilogue text-white" href="#footer">Know More</a>
                   </div>
             </div>
-            <div class="trust_pg">
-              <div class="container-fluid">
-              <div class="row">
-                <div class="col-12">
-                    <h3 class="text-center display-5 pt-5 fw-bold color-1 ff-epilogue" >Hingonia</h3>
-                    <h4 class="text-center display-6 fw-medium ff-epilogue" >Sri Krishna Balram Seva Trust</h4>
-                </div>
-               </div>
-               <div class="row py-4">
-                    <div class="ssbts_about col-lg-5 col-md-6 offset-lg-1">
-                        <div class="desc">
-                            <p class="hs-desc text-justify pe-2 f-18" style="font-size:18px">
-                            In 2016, the Government of Rajasthan and the Jaipur Nagar Nigam decided to partner with Hare Krishna Movement Jaipur, which runs the Sri Sri Krishna Balaram Mandir at the Akshaya Patra mid day meal centralized kitchen campus at Jagatpura, Jaipur. The full time missionaries of Hare Krishna Movement accepted the humble service to mother cows at Hingonia. A special purpose vehicle, Sri Krishna Balaram Seva Trust, was set up to run the Hingonia centre with the aid of Jaipur Nagar Nigam. This trust is a non profit organization, dedicated for serving the cattle at Hingonia. The Trust consists of 3 government officials, 3 independent trustees and 9 missionary trustees. The operations are managed by the full time missionaries of the Trust.
-                                <a href="#" class="text-decoration-underline color-19">Read More</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-5 col-md-6">
-                        <div class="home_gallery-section text-center">
-                            <div class="swiper gallerySwiper">
-                              <div class="swiper-wrapper">
-                                {% for single in gallery_obj %}
-                                <div class="swiper-slide">
-                                  <a href="{% url 'gallery' %}"> <img class="img-fluid gallery-1" src="{{single.main_image.url}}" alt="gallery"></a>
-                                </div>
-                                {% endfor %}
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-lg-5 col-md-6">
-                        <div class="home_gallery-section h-100 ">
-                            <div class="h-100">
-                                <div class="gallery position-relative pb-3 h-100">
-                                    <div>
-                                        <img class="position-absolute img-fluid gallery-1" src="./assets/images/home/gallery-1.png"
-                                        alt="gallery">
-                                        <img class="position-absolute img-fluid gallery-2" src="./assets/images/home/gallery-2.png"
-                                        alt="gallery">
-                                        <img class="position-absolute img-fluid gallery-3" src="./assets/images/home/gallery-3.png"
-                                        alt="gallery">
-                                        <img class="position-absolute img-fluid gallery-4" src="./assets/images/home/gallery-4.png"
-                                        alt="gallery">
-                                        <img class="position-absolute img-fluid gallery-5" src="./assets/images/home/gallery-5.png"
-                                        alt="gallery">
-                                        <img class="position-absolute img-fluid gallery-6" src="./assets/images/home/gallery-6.png"
-                                        alt="gallery">
-                                        <img class="position-absolute img-fluid gallery-7" src="./assets/images/home/gallery-7.png"
-                                        alt="gallery">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-               </div>
-              </div>
-            </div>
-        </section>
-
-        <section class="heaven_forCow_section py-5">
-            <div class="container px-lg-5">
-                <div class="row text-center">
-                    <h2 class="display-3 ff-antom">
-                    Hingonia: <span class="textwith-bg textwith-bg-2 display-3 ff-antom text-bg">A Heaven for Cows</span>
-                </h2>
-                </div>
-                <p class="text-center desc fw-semibold mx-auto">The Hingonia Cattle Rehabilitation Centre stands as a sanctuary for abandoned and injured cows. It is the largest facility of its kind in Jaipur, Rajasthan, equipped with a state-of-the-art hospital, two ICU units, and 30 operative wards where we care for these stray cattle. Here, the Jaipur Municipal Corporation brings all accidental and diseased cattle to receive the care they need. Hingonia is truly a heaven for cows, offering them a second chance at life. Through continuous improvement and sustainable practices, we are dedicated to providing a safe and nurturing environment for all the cattle under our care.</p>
-            </div>
-           <div class="cardSlider_wr ps-lg-5">
-           <div class="container-fluid">
-                <div class="row">
-                    <div class="swiper heavenCowSwiper pt-1">
-                        <div class="swiper-wrapper">
-                            {% for single in about_1 %}
-                            <div class="swiper-slide ">
-                                <div class="heavenCow_content_wr position-relative rounded-5 overflow-hidden">
-                                <div>
-                                    <img src="{{single.main_image.url}}" class="Profil-picture img-fluid"
-                                    alt="Profil-picture">
-                                </div>
-                                <div class="card_desc position-absolute px-4 pb-2">
-                                    <h3 class=" text-white title fw-bold">
-                                    {{single.title}}
-                                    </h3>
-                                    <p class="text-white f-14 fw-semibold lineHeight-18">
-                                        {{single.description}}
-                                    </p>
-                                </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <div class="arrowsBtn_wr flexBoxCenter">
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           </div>
-        </section>
-
-        <section class="suatainable_center_section py-3">
-            <div class="container px-lg-5">
-                <div class="row text-center">
-                    <h2 class="display-3 ff-antom">
-                    Hingonia: <span class="textwith-bg textwith-bg-20 display-3 ff-antom text-bg">A Self-Suatainable Center</span>
-                </h2>
-                </div>
-                <p class="text-center desc fw-semibold mx-auto">
-                The Hingonia Cattle Rehabilitation Center, handed over to the Trust in 2016, initially housed around 6,000 cows. Today, it has grown to accommodate more than 20,000 cows. To meet the needs of our expanding cattle population, we recently constructed a shed for 3,000 cows and need to build additional shelters home for another 4,000 stray cows. To efficiently feed our large cattle population, we utilize six Total Mixed Ration (TMR) fodder feeding machines. However, as our cattle numbers continue to rise, we need three more TMR machines to ensure all stray cows receive adequate nutrition. Hingonia is a model of sustainability and innovation, providing a safe haven for thousands of stray cows. Our continuous efforts to enhance infrastructure, implement efficient feeding systems, and adopt renewable energy sources ensure that we can sustainably care for our ever-growing stray cattle population.
-                </p>
-            </div>
-            <div class="cardSlider_wr ps-lg-5">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <div class="swiper sustainableSwiper pt-1">
-                            <div class="swiper-wrapper">
-                                {% for single in about_1 %}
-                            <div class="swiper-slide ">
-                                <div class="testimonials_content_wr rounded-5 overflow-hidden">
-                                    <div>
-                                        <img src="{{single.main_image.url}}" class="sustainable-card img-fluid"
-                                        alt="sustainable-card">
-                                    </div>
-                                    <div class="card_desc px-4 py-3 pb-2">
-                                        <h3 class="title fw-bold">
-                                            {{single.title}}
-                                        </h3>
-                                        <p class="f-14 fw-bold lineHeight-18">
-                                            {{single.description}}
-                                        </p>
-                                    </div>
-                                    </div>
-                            </div>
-                            {% endfor %}
-                            </div>
-                            <div class="arrowsBtn_wr flexBoxCenter">
-                                <div class="swiper-button-prev"></div>
-                                <div class="swiper-button-next"></div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-           </div>
-        </section>
+             </section>
 
 {% endblock %}
 {% block script%}

@@ -1,0 +1,245 @@
+{% extends "frontend/base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load mytags %}
+{% block body %}
+{% get_slider as all_slider %}
+<section class="bg-light py-5 mx-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="fw-bold">Contact Us</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center g-md-5">
+            <div class="col-md-6">
+                <h2>For any inquiries or donations</h2>
+                <p class="mb-0">Fill this form</p>
+                <form action="" method="post" class="mt-3">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="f-14 fw-semibold">Name <span class="text-danger">*</span></label>
+                            <input type="text" required name="first_name" class="form-control f-14 fw-medium" placeholder="Enter your name" required="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="f-14 fw-semibold">Email <span class="text-danger">*</span></label>
+                            <input type="email" required name="email" class="form-control f-14 fw-medium" placeholder="Enter your email" required="">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="f-14 fw-semibold">Mobile Number <span class="text-danger">*</span></label>
+                            <input type="number" required name="mobile_no" class="form-control f-14 fw-medium" placeholder="Enter your mobile number" required="">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="f-14 fw-semibold">Message</label>
+                            <textarea name="message" required class="form-control f-14 fw-medium" placeholder="Your message"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="buyBtn color-5 ff-rubik border-0">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5 ">
+                <h2 class="mt-md-0 mt-5">Touch with us:</h2>
+                <div>
+                    <p><i class="bi bi-telephone"></i> <a href="tel:+919126612180">91266 12180</a></p>
+                    <p><i class="bi bi-envelope"></i> <a href="mailto:hcrc@skbt.org">hcrc@skbt.org</a></p>
+                    <p><strong>Address:</strong> Hingonia Cow Rehabilitation Centre <br>
+                        <strong>Village:</strong> Hingonia, <strong>Tehsil:</strong> Bassi <br>
+                        <strong>District:</strong> Jaipur, Rajasthan - 303012</p>
+                    <p class="mb-0 f-16 fw-bold p-2 rounded-4  text-center bg-1">We welcome your support and inquiries to help care for the 16000+ of stray and injured cows.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block script%}
+<script>
+
+var minimum_value = $('.minimum_value').val()
+ function final_amt(){
+    var donate_amt = $('.donate_amt_1').val()
+
+    var support = $('.support_option').val()
+    var support_amt = 0
+    if(support == 'other'){
+        support_amt = $('.ctm_support_amt').val()
+        if(support_amt == ''){
+            support_amt = 0
+        }
+    }else{
+        support_amt = support
+    }
+    console.log("Donate amt")
+
+    console.log(donate_amt)
+    console.log("Support")
+    $('.tip').val(support_amt)
+    console.log(support_amt)
+
+    donate_amt = parseInt(donate_amt) + parseInt(support_amt);
+    console.log("Test")
+    console.log(donate_amt)
+    $('.active_amt_html').html(donate_amt)
+	$('.active_amt').val('')
+	$('.active_amt').val(donate_amt)
+
+ }
+$(document).on("click",".campaign-btn-single",function() {
+    console.log("Open model")
+    shoppingCart.clearCart();
+    var id = $(this).data('id')
+    var amount = $(this).data('price')
+    var title = $(this).data('title')
+    $('.pop_up_title').html(title)
+    $('.single_amount').val(amount)
+    $('.actual_amount').val(amount)
+    $('.total_rs_html').html(amount)
+    $.ajax({        // initialize an AJAX request
+                        url: "{% url 'get_campaign_product' %}",
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}','id':id},
+                        method: 'POST',
+                        success: function (data) {
+                            $('.campaign_data').html(data.campaign_with_product_html)
+                        }
+              });
+})
+$(document).on("change",".support_option",function() {
+	var selected = $(this).val()
+	if(selected == 'other'){
+		$('.ctm_support_amt').show()
+		$('.ctm_support_amt').val(0)
+	}else{
+		$('.ctm_support_amt').hide()
+		final_amt()
+	}
+})
+
+$(document).on("keyup",".ctm_support_amt",function() {
+
+	final_amt()
+})
+$(document).on("keyup",".ctm_amt",function() {
+      console.log("test")
+      var amt = $(this).val()
+      var amt_1 = (8 / 100) * amt
+      var amt_2 = (12 / 100) * amt
+      var amt_3 = (14 / 100) * amt
+      var amt_4 = (16 / 100) * amt
+      console.log("HERE")
+      console.log(amt_1)
+      console.log("End")
+      make_dropdown(amt)
+      $('.active_amt_html').html(amt)
+      $('.donate_amt_1').val(amt)
+      final_amt()
+
+  })
+
+$(document).on("click",".campaign-btn",function() {
+    var amount = $('#donationAmount').html()
+    $('.amount').val(amount)
+})
+$(document).on("click",".eventCheckbox",function() {
+    var dd = $(this).val()
+    $('.for').val(dd)
+    console.log(dd)
+})
+
+$(document).on("click",".know_more",function() {
+    var id = $(this).data('id')
+    $.ajax({
+            url: "{% url 'get_campaign' pk=0 %}".replace('0', id),
+            method: 'GET',
+            data: {'id': id},
+            success: function (result) {
+              $('.description').html('')
+              $('.description').html(result.description)
+              $('.title').html(result.title)
+            }
+    })
+})
+
+$( window ).on("load", function() {
+  console.log("Clear method")
+  shoppingCart.clearCart();
+})
+</script>
+<script>
+document.getElementById('subscriptionForm').onsubmit = function(e){
+    e.preventDefault(); // Prevent the default form submission
+
+    var form = document.getElementById('subscriptionForm');
+    var formData = new FormData(form);
+
+    // Fetch call to create a subscription on the server
+    fetch('/create_subscription/', {
+        method: 'POST',
+        body: formData
+    }).then(response => response.json()).then(data => {
+        var options = {
+            "key": "{{ RAZORPAY_KEY_ID }}", // Use Django template to pass the key
+            "subscription_id": data.id, // Subscription ID returned from the server
+            "name": formData.get('name'),
+            "description": "Monthly Donation",
+            "image": "https://your-logo-url",  // Your logo
+            "handler": function (response){
+                // Handle the subscription success
+                form.action = "/payment/success/";
+                form.method = "POST";
+                form.appendChild(new Input('hidden', 'razorpay_subscription_id', response.razorpay_subscription_id));
+                form.appendChild(new Input('hidden', 'razorpay_payment_id', response.razorpay_payment_id));
+                form.appendChild(new Input('hidden', 'razorpay_signature', response.razorpay_signature));
+                form.submit();
+            },
+            "prefill": {
+                "name": formData.get('name'),
+                "email": formData.get('email'),
+                "contact": formData.get('phone_no')
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open(); // Initiate the payment immediately
+    });
+}
+
+function Input(type, name, value) {
+    var input = document.createElement("input");
+    input.type = type;
+    input.name = name;
+    input.value = value;
+    return input;
+}
+
+$(document).on("click",".campaign-btn-single",function() {
+    console.log("Open model")
+    shoppingCart.clearCart();
+    var id = $(this).data('id')
+    var amount = $(this).data('price')
+    var title = $(this).data('title')
+    $('.pop_up_title').html(title)
+    $('.single_amount').val(amount)
+    $('.actual_amount').val(amount)
+    $('.total_rs_html').html(amount)
+    $.ajax({        // initialize an AJAX request
+                        url: "{% url 'get_campaign_product' %}",
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}','id':id},
+                        method: 'POST',
+                        success: function (data) {
+                            $('.campaign_data').html(data.campaign_with_product_html)
+                            final_amt()
+                        }
+              });
+})
+</script>
+{% endblock %}

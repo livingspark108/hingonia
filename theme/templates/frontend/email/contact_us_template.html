@@ -6,25 +6,20 @@
     <title>Contact Us - Confirmation</title>
 </head>
 <body>
+<h2>New Inquiry Received</h2>
 
-    <h2>Thank you for contacting us!</h2>
+<p>Dear Admin,</p>
 
-    <p>Dear {{ user_name }},</p>
+<p>You have received a new message from a user. Below are the details:</p>
 
-    <p>We have received your message, and we appreciate you reaching out to us. Our team will review your inquiry and get back to you as soon as possible.</p>
+<p><strong>Name:</strong> {{ first_name }}</p>
+<p><strong>Email:</strong> {{ email }}</p>
+<p><strong>Mobile No:</strong> {{ mobile_no }}</p>
+<p><strong>Message:</strong> {{ message }}</p>
 
-    <p>Here are the details of your message:</p>
+<p>Please review this inquiry and respond accordingly.</p>
 
-    <strong>Name:</strong> {{ user_name }}<br>
-    <strong>Email:</strong> {{ user_email }}<br>
-    <strong>Message:</strong> {{ user_message }}
-
-    <p>If you have any further questions or concerns, please feel free to reply to this email or contact us at <strong>(Your Phone Number)</strong>.</p>
-
-    <p>Thank you for choosing us!</p>
-
-    <p>Sincerely,<br>
-    Your Company Name</p>
-
+<p>Sincerely,<br>
+Hingonia Team</p>
 </body>
 </html>
