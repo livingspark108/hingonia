@@ -25,6 +25,7 @@ SLIDER_TYPE = [
     ('Our partners','Our partners'),
     ('About 1','About 1'),
     ('About 2','About 2'),
+    ('Waiting Cow','Waiting Cow'),
 ]
 CAMPAIGN_TYPE = [
                     ('Other', 'Other'),

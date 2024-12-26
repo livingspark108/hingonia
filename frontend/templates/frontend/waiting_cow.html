@@ -31,6 +31,47 @@
                   </p>
                 </div>
             </div>
+            <div class="row justify-content-center my-3">
+              <div class="col-lg-8 col-md-12">
+                <div class="card card-body shadow border-0 rounded-4">
+                  <div class="cds_gallery">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-7">
+                            <h3 class="fw-semibold">Our recent donors</h3>
+                        </div>
+                        <div class="col-5 text-end">
+                            <a href="javascript:void(0)" id="leftCdsGalleryIcon">
+                                <img src="{% static 'frontend/assets/images/campaign/left-arrow.png' %}" alt="">
+                            </a>
+                            <a href="javascript:void(0)" class="" id="rightCdsGalleryIcon">
+                                <img src="{% static 'frontend/assets/images/campaign/right-arrow.png' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="swiper waitingCowGallerySwiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+                        <div class="swiper-wrapper gallery-grid" id="swiper-wrapper-293bfcb4ab516483" aria-live="off" style="transition-duration: 300ms; transform: translate3d(-254.25px, 0px, 0px);">
+                        {% get_slider as all_slider %}
+                        {% for single in all_slider %}
+                        {% if single.type == 'Waiting Cow' %}
+                        {% get_gallery single.id 'slider' as all_gallery_image %}
+                        {% for single_image in all_gallery_image %}
+                             <div class="swiper-slide gallery-col swiper-slide-prev" role="group" aria-label="2 / 5" data-swiper-slide-index="1" style="width: 244.25px; margin-right: 10px;">
+                                <a class="gallery-item" href="{{single_image.file.url}}">
+                                    <img src="{{single_image.file.url}}" class="img-fluid">
+                                </a>
+                             </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+
+
+                    </div>
+                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="row pt-4">
               {% for single in waiting_cow_paginated %}
               <div class="col-lg-3 col-md-6 mb-4">

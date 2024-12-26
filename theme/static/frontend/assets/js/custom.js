@@ -769,3 +769,39 @@ document.querySelectorAll('.social_share_btn').forEach(button => {
     shareDiv.classList.toggle('active');
   });
 });
+
+/****** pledgeSwiper ******/
+        document.getElementById('leftCdsGalleryIcon').addEventListener('click', function (e) {
+            e.preventDefault();
+            waitingCowGallerySwiper.slidePrev();
+        });
+
+        document.getElementById('rightCdsGalleryIcon').addEventListener('click', function (e) {
+            e.preventDefault();
+            waitingCowGallerySwiper.slideNext();
+        });
+        /**************/
+
+        var waitingCowGallerySwiper = new Swiper(".waitingCowGallerySwiper", {
+          slidesPerView: 2,
+          spaceBetween: 10,
+          loop: true,
+          autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+          },
+          breakpoints: {
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 10,
+            },
+          },
+        });
