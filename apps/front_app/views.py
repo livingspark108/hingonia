@@ -1257,7 +1257,7 @@ class ListSubscriberView(AdminRequiredMixin, TemplateView):
 
 class ListSubscriberViewJson(AjayDatatableView):
     model = Subscription
-    columns = ['name','phone_no','price','email','plan','is_active', 'actions']
+    columns = ['name','cow_name','phone_no','price','email','plan','is_active', 'actions']
     exclude_from_search_cloumn = ['actions']
 
     def get_initial_queryset(self):
