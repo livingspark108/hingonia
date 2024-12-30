@@ -931,11 +931,9 @@ outline: 0 ;
                       {% for single in all_slider %}
 
                          {% if single.type == 'CSR' %}
-                        {% get_gallery single.id 'slider' as all_gallery_image %}
-                        {% for single_image in all_gallery_image %}
                         <div class="swiper-slide">
 
-                          <img class="img-fluid" src="{{single_image.file.url}}" />
+                          <img class="img-fluid" src="{{single.main_image.url}}" />
                           <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >{{single.title}}</h4>
                           <div>
                             {% if single.description %}
@@ -943,7 +941,6 @@ outline: 0 ;
                             {% endif %}
                           </div>
                         </div>
-                        {% endfor %}
                       {% endif %}
                       {% endfor %}
 
