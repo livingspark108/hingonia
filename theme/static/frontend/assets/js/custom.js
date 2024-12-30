@@ -480,10 +480,9 @@ function updateAmount() {
 
 
 
-// rehabilitation slider New
-
-var swiper = new Swiper(".rehabilitationSlider1", {
-  slidesPerView: 1, 
+// Rehabilitation Sliders
+const rehabilitationSlider1 = new Swiper(".rehabilitationSlider1", {
+  slidesPerView: 1,
   spaceBetween: 0,
   pagination: {
     el: ".swiper-pagination",
@@ -493,8 +492,9 @@ var swiper = new Swiper(".rehabilitationSlider1", {
     disableOnInteraction: false,
   },
 });
-var swiper = new Swiper(".rehabilitationSlider2", {
-  slidesPerView: 1, 
+
+const rehabilitationSlider2 = new Swiper(".rehabilitationSlider2", {
+  slidesPerView: 1,
   spaceBetween: 0,
   pagination: {
     el: ".swiper-pagination",
@@ -505,9 +505,9 @@ var swiper = new Swiper(".rehabilitationSlider2", {
   },
 });
 
-
-var swiper = new Swiper(".campaingSwiper", {
-  slidesPerView: 1.2, 
+// Campaign Slider
+const campaignSwiper = new Swiper(".campaingSwiper", {
+  slidesPerView: 1.2,
   spaceBetween: 20,
   centeredSlides: true,
   autoplay: {
@@ -516,43 +516,41 @@ var swiper = new Swiper(".campaingSwiper", {
   },
 });
 
-
+// Progress Bar Update
 let currentStep = 1;
 
 function updateProgressBar(step) {
-    const progressBar = document.getElementById('progress-bar');
-    const progress = (step / 3) * 100;
-    progressBar.style.width = `${progress}%`;
-    progressBar.setAttribute('aria-valuenow', progress);
+  const progressBar = document.getElementById('progress-bar');
+  const progress = (step / 3) * 100;
+  progressBar.style.width = `${progress}%`;
+  progressBar.setAttribute('aria-valuenow', progress);
 
-    document.querySelectorAll('.circle').forEach((circle, index) => {
-        if (index < step) {
-            circle.classList.add('active');
-        } else {
-            circle.classList.remove('active');
-        }
-    });
+  document.querySelectorAll('.circle').forEach((circle, index) => {
+    if (index < step) {
+      circle.classList.add('active');
+    } else {
+      circle.classList.remove('active');
+    }
+  });
 }
 
 function nextStep(step) {
-    document.querySelectorAll('.step').forEach(el => el.classList.add('d-none'));
-    document.getElementById(`step-${step}`).classList.remove('d-none');
-    currentStep = step;
-    updateProgressBar(step);
+  document.querySelectorAll('.step').forEach(el => el.classList.add('d-none'));
+  document.getElementById(`step-${step}`).classList.remove('d-none');
+  currentStep = step;
+  updateProgressBar(step);
 }
 
 function prevStep(step) {
-    document.querySelectorAll('.step').forEach(el => el.classList.add('d-none'));
-    document.getElementById(`step-${step}`).classList.remove('d-none');
-    currentStep = step;
-    updateProgressBar(step);
+  document.querySelectorAll('.step').forEach(el => el.classList.add('d-none'));
+  document.getElementById(`step-${step}`).classList.remove('d-none');
+  currentStep = step;
+  updateProgressBar(step);
 }
 
-
-
-// Product Slider
-var swiper = new Swiper(".productslide1", {
-  slidesPerView: 1, 
+// Product Sliders
+const productSlider1 = new Swiper(".productslide1", {
+  slidesPerView: 1,
   spaceBetween: 0,
   pagination: {
     el: ".swiper-pagination",
@@ -563,9 +561,8 @@ var swiper = new Swiper(".productslide1", {
   },
 });
 
-
-var swiper = new Swiper(".AEForCSRSlider", {
-  slidesPerView: 3.7, 
+const AEForCSRSlider = new Swiper(".AEForCSRSlider", {
+  slidesPerView: 3.7,
   spaceBetween: 10,
   autoplay: {
     delay: 2500,
@@ -576,32 +573,17 @@ var swiper = new Swiper(".AEForCSRSlider", {
     prevEl: ".swiper-button-prev",
   },
   breakpoints: {
-    320: {
-      slidesPerView: 1,
-      spaceBetween: 10,
-    },
-    576: { 
-      slidesPerView: 1.7,
-      spaceBetween: 10,
-    },
-    768: { 
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    992: {
-      slidesPerView: 3.7,
-      spaceBetween: 20,
-    },
-    1200: {
-      slidesPerView: 5.7,
-      spaceBetween: 25,
-    },
+    320: { slidesPerView: 1, spaceBetween: 10 },
+    576: { slidesPerView: 1.7, spaceBetween: 10 },
+    768: { slidesPerView: 2, spaceBetween: 20 },
+    992: { slidesPerView: 3.7, spaceBetween: 20 },
+    1200: { slidesPerView: 5.7, spaceBetween: 25 },
   },
 });
 
-
-var swiper = new Swiper(".whyComWithHingoSlider", {
-  slidesPerView: 3.7, 
+// Other Sliders
+const whyComWithHingoSlider = new Swiper(".whyComWithHingoSlider", {
+  slidesPerView: 3.7,
   spaceBetween: 10,
   autoplay: {
     delay: 2500,
@@ -612,49 +594,20 @@ var swiper = new Swiper(".whyComWithHingoSlider", {
     prevEl: ".swiper-button-prev",
   },
   breakpoints: {
-    320: {
-      slidesPerView: 1,
-      spaceBetween: 10,
-    },
-    576: { 
-      slidesPerView: 1.7,
-      spaceBetween: 10,
-    },
-    768: { 
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    992: {
-      slidesPerView: 3.7,
-      spaceBetween: 20,
-    },
-    1200: {
-      slidesPerView: 3.7,
-      spaceBetween: 25,
-    },
+    320: { slidesPerView: 1, spaceBetween: 10 },
+    576: { slidesPerView: 1.7, spaceBetween: 10 },
+    768: { slidesPerView: 2, spaceBetween: 20 },
+    992: { slidesPerView: 3.7, spaceBetween: 20 },
+    1200: { slidesPerView: 3.7, spaceBetween: 25 },
   },
 });
 
-
-
-// function selectEvent(eventBox) {
-//   // Toggle 'active' class on the clicked event box
-//   eventBox.classList.toggle('active');
-
-//   // Toggle form visibility
-//   const donateForm = document.getElementById('donateForm');
-//   if (donateForm.style.display === 'none' || donateForm.style.display === '') {
-//       donateForm.style.display = 'block';
-//   } else {
-//       donateForm.style.display = 'none';
-//   }
-// }
-
-document.addEventListener('DOMContentLoaded', function() {
+// Tooltip Toggle
+document.addEventListener('DOMContentLoaded', () => {
   const tooltipIcons = document.querySelectorAll('.tooltipIcon');
 
   tooltipIcons.forEach(icon => {
-    icon.addEventListener('click', function() {
+    icon.addEventListener('click', function () {
       const cardDonate = this.closest('.card_donate');
       const tooltipContent = cardDonate.querySelector('.tooltipeContentWr');
       const cardBody = cardDonate.querySelector('.card-body');
@@ -667,17 +620,17 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-
-
-var swiper = new Swiper(".ONAtHwiper", {
+// ONAtH Swiper
+const ONAtHSwiper = new Swiper(".ONAtHwiper", {
   spaceBetween: 10,
   slidesPerView: 7,
   freeMode: true,
   watchSlidesProgress: true,
 });
-var swiper2 = new Swiper(".ONAtHwiper2", {
+
+const ONAtHSwiper2 = new Swiper(".ONAtHwiper2", {
   spaceBetween: 10,
-    autoplay: {
+  autoplay: {
     delay: 2500,
     disableOnInteraction: false,
   },
@@ -686,25 +639,12 @@ var swiper2 = new Swiper(".ONAtHwiper2", {
     prevEl: ".swiper-button-prev",
   },
   thumbs: {
-    swiper: swiper,
+    swiper: ONAtHSwiper,
   },
 });
 
-
-// Product Slider
-var swiper = new Swiper(".supportSlider1", {
-  slidesPerView: 1, 
-  spaceBetween: 0,
-  pagination: {
-    el: ".swiper-pagination",
-  },
-  autoplay: {
-    delay: 2500,
-    disableOnInteraction: false,
-  },
-});
-
-var swiper = new Swiper(".oursupportSlider1", {
+// Support Sliders
+const supportSlider1 = new Swiper(".supportSlider1", {
   slidesPerView: 1,
   spaceBetween: 0,
   pagination: {
@@ -716,69 +656,54 @@ var swiper = new Swiper(".oursupportSlider1", {
   },
 });
 
-var campaignGallerySwiper = new Swiper(".campaignGallerySwiper", {
-  slidesPerView: 2,
-  spaceBetween: 10,
-  breakpoints: {
-    640: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    768: {
-      slidesPerView: 3,
-      spaceBetween: 10,
-    },
-    1024: {
-      slidesPerView: 4,
-      spaceBetween: 10,
-    },
+const ourSupportSlider1 = new Swiper(".oursupportSlider1", {
+  slidesPerView: 1,
+  spaceBetween: 0,
+  pagination: {
+    el: ".swiper-pagination",
+  },
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
   },
 });
 
+// Campaign Gallery Slider
+const campaignGallerySwiper = new Swiper(".campaignGallerySwiper", {
+  slidesPerView: 2,
+  spaceBetween: 10,
+  breakpoints: {
+    640: { slidesPerView: 2, spaceBetween: 20 },
+    768: { slidesPerView: 3, spaceBetween: 10 },
+    1024: { slidesPerView: 4, spaceBetween: 10 },
+  },
+});
 
-$(document).ready(function () {
+// Quantity Input Control
+$(document).ready(() => {
   $(document).on('click', '.plusBtn', function () {
-    var input = $(this).prev(".quantityInput");
-    var currentValue = parseInt(input.val());
+    const input = $(this).prev(".quantityInput");
+    const currentValue = parseInt(input.val());
     input.val(currentValue + 1);
-    if (currentValue === 0) {
-      $(this).closest(".col-5").find(".qty-box-btn").show();
-      $(this).closest(".col-5").find(".qtyBoxCmp").hide();
-    }
   });
+
   $(document).on('click', '.minusBtn', function () {
-    var input = $(this).next(".quantityInput");
-    var currentValue = parseInt(input.val());
+    const input = $(this).next(".quantityInput");
+    const currentValue = parseInt(input.val());
     if (currentValue > 1) {
       input.val(currentValue - 1);
-    } else {
-      $(this).closest(".col-5").find(".qty-box-btn").show();
-      $(this).closest(".col-5").find(".qtyBoxCmp").hide();
     }
   });
 });
 
+// Social Share Toggle
 document.querySelectorAll('.social_share_btn').forEach(button => {
-  button.addEventListener('click', function(event) {
+  button.addEventListener('click', event => {
     event.preventDefault();
-
-    // Get the closest container and find its .social_share div
     const shareContainer = button.closest('.social_share_container');
     const shareDiv = shareContainer.querySelector('.social_share_box');
-
-    // Toggle the 'active' class on this particular share div
     shareDiv.classList.toggle('active');
   });
 });
 
-/****** pledgeSwiper ******/
-        document.getElementById('leftCdsGalleryIcon').addEventListener('click', function (e) {
-            e.preventDefault();
-            waitingCowGallerySwiper.slidePrev();
-        });
-
-        document.getElementById('rightCdsGalleryIcon').addEventListener('click', function (e) {
-            e.preventDefault();
-            waitingCowGallerySwiper.slideNext();
-        });
         /**************/
