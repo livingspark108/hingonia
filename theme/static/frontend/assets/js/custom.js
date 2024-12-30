@@ -330,15 +330,15 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Add click event listener to each Swiper slide
-  document.querySelectorAll('.swiper-slide').forEach(function(slide) {
-    slide.addEventListener('click', function() {
-      if (swiper.isEnd) {
-        swiper.slideTo(0);
-      } else {
-        swiper.slideNext();
-      }
-    });
-  });
+//  document.querySelectorAll('.swiper-slide').forEach(function(slide) {
+//    slide.addEventListener('click', function() {
+//      if (swiper.isEnd) {
+//        swiper.slideTo(0);
+//      } else {
+//        swiper.slideNext();
+//      }
+//    });
+//  });
 });
 
 
