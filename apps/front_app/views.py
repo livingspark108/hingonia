@@ -1365,6 +1365,9 @@ class ListSliderViewJson(AjayDatatableView):
         filters_fileds = Q()
         if slider_type:
             slider_type = slider_type[0]
+            if slider_type == 'Activities eligible for CSR':
+                slider_type = 'Objectives & Mission'
+            print(slider_type)
             filters_fileds.add(Q(type=slider_type), Q.AND)
 
         return self.model.objects.filter(filters_fileds).order_by('-created_at')
