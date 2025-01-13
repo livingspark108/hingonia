@@ -8,10 +8,17 @@
         display:none;
     }
 </style>
-<section class="pt-5">
+<section class="py-5 bg-light">
         <div class="container">
             <div class="row text-center justify-content-center">
                 <div class="col-lg-8 col-md-12">
+                    {% if type == 'Video' %}
+
+                        <h5 class="f-36 fw-bold">{{single_obj.title}}</h5>
+                        <h4>{{single_obj.created_at|date:'d-m-Y'}}</h4>
+                        <p class="mb-0 fw-medium"><i class="bi bi-geo-alt"></i> {{single_obj.location}}</p>
+
+                    {% else %}
                     <h5 class="f-36 fw-bold">Our {{type}}</h5>
                     <p>
                         Welcome to the heartwarming world of our Cow Rehabilitation Centre, where we invite you to
@@ -19,6 +26,7 @@
                         gallery showcases the serene and picturesque environment where rescued cows find solace and
                         healing.
                     </p>
+                    {% endif %}
                 </div>
             </div>
         </div>

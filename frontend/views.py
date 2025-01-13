@@ -226,8 +226,9 @@ class FrontendDistributionDetailView(View):
         print(distribution_detail_obj)
         type = Distribution.objects.get(id=pk).type
         main_image = Distribution.objects.get(id=pk).main_image
+        single_obj = Distribution.objects.get(id=pk)
         #if request.user.is_authenticated:
-        context = {'distribution_detail_obj':distribution_detail_obj,'type':type,'main_image':main_image}
+        context = {'single_obj':single_obj,'distribution_detail_obj':distribution_detail_obj,'type':type,'main_image':main_image}
         return render(request, 'frontend/distribution_detail.html', context)
 
 
