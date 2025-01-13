@@ -179,7 +179,7 @@
             <div class="swiper-wrapper" id="swiper-wrapper-431f4510321ff10e3d" aria-live="off" style="cursor: grab; transition-duration: 0ms; transition-delay: 0ms;">
               {% for single in gallery_obj %}
                                 <div class="swiper-slide">
-                                  <a href="{% url 'gallery' %}"> <img class="img-fluid gallery-1" src="{{single.main_image.url}}" alt="gallery"></a>
+                                  <a href="{% url 'gallery' %}"> <img class="img-fluid gallery-1" src="{{single.main_image|handle_image_url}}" alt="gallery"></a>
                                 </div>
                                 {% endfor %}
             </div>
