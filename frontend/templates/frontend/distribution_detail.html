@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row text-center justify-content-center">
                 <div class="col-lg-8 col-md-12">
-                    <h5 class="f-36 fw-bold">Our Gallery</h5>
+                    <h5 class="f-36 fw-bold">Our {{type}}</h5>
                     <p>
                         Welcome to the heartwarming world of our Cow Rehabilitation Centre, where we invite you to
                         explore and witness the incredible stories of compassion and care through our Image Gallery. Our
@@ -27,11 +27,18 @@
         <div class="container">
             <div class="row pb-4 g-4 gallery-grid">
 	            {% for single in distribution_detail_obj %}
+                {% if type == 'Gallery' %}
                 <div class="col-md-3 col-6 gallery-col">
                     <a class="gallery-item" href="{{single.file.url}}">
                         <img src="{{single.file.url}}" class="img-fluid" alt="">
                     </a>
                 </div>
+                {% elif type == 'Video' %}
+                <div class="col-md-3">
+                    <video class="gallery_video" controls="" poster="{{main_image.url}}" src="{{single.file.url}}">
+                    </video>
+                </div>
+                {% endif %}
                 {% endfor %}
             </div>
 

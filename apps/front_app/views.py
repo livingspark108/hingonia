@@ -502,7 +502,7 @@ class CreateDistributionView(AdminRequiredMixin, SuccessMessageMixin, CreateView
     form_class = CreateDistributionForm
     template_name = 'distribution/form.html'
     success_message = "%(title)s has been created successfully"
-    success_url = reverse_lazy('distribution-list')
+
     object = None
 
 
@@ -517,19 +517,26 @@ class CreateDistributionView(AdminRequiredMixin, SuccessMessageMixin, CreateView
         return self.render_to_response(
             self.get_context_data(
                 form=form,
+                type=self.kwargs.get('type')
             )
         )
 
     def post(self, request, *args, **kwargs):
+        print("This")
+        print(request.POST.get('type'))
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
+
             self.object = form.save()
+            form.type = request.POST.get('type')
+            form.save()
+
 
             messages.success(request, self.success_message)
         else:
             return render(request, self.template_name, {'form': form })
 
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(reverse_lazy('distribution-list', kwargs={'type': self.kwargs.get('type')}))
 
 
 
@@ -547,6 +554,8 @@ class UpdateDistributionView(LoginRequiredMixin, AdminRequiredMixin, SuccessMess
 
         return self.render_to_response(
             self.get_context_data(form=form,
+                                  type=self.kwargs.get('type')
+
                                   )
         )
 
@@ -562,7 +571,7 @@ class UpdateDistributionView(LoginRequiredMixin, AdminRequiredMixin, SuccessMess
     def form_valid(self, form):
         self.object = form.save()
         messages.success(self.request, self.success_message)
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(reverse_lazy('distribution-list', kwargs={'type': self.kwargs.get('type')}))
 
     def form_invalid(self, form):
         return self.render_to_response(
@@ -581,12 +590,24 @@ class ListDistributionViewJson(AjayDatatableView):
     columns = ['title', 'actions']
     exclude_from_search_cloumn = ['actions']
 
+    def get_initial_queryset(self):
+        """
+        Filter the queryset based on the 'type' parameter in the request.
+        """
+        main_type = self.kwargs.get('type', '')  # Get 'type' from URL kwargs
+        print(main_type)
+
+        if main_type in ['Gallery', 'Video', 'Magazine']:
+            return Distribution.objects.filter(type=main_type)
+        return Distribution.objects.all()
+
     def render_column(self, row, column):
+
         if column == 'actions':
             edit_action = '<a href={} role="button" class="btn btn-warning btn-sm mr-1">Edit</a>'.format(
-                reverse('distribution-edit', kwargs={'pk': row.pk}))
+                reverse('distribution-edit', kwargs={'pk': row.pk, 'type': row.type}))
             delete_action = '<a href="javascript:;" class="remove_record btn btn-danger btn-sm" data-url={} role="button">Delete</a>'.format(
-                reverse('distribution-delete', kwargs={'pk': row.pk}))
+                reverse('distribution-delete', kwargs={'pk': row.pk, 'type': row.type}))
             return edit_action + delete_action
         else:
             return super(ListDistributionViewJson, self).render_column(row, column)

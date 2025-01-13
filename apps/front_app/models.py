@@ -164,9 +164,11 @@ class AbandonCart(DateTimeModel):
 class Distribution(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
     date = models.DateField(max_length=2500, null=True, blank=True)
+    type = models.CharField(choices=GALLERY_TYPE,max_length=300, blank=True, null=True)
 
     location = models.CharField(max_length=300, blank=True,null=True)
     main_image = models.ImageField(null=True,blank=True)
+    pdf = models.FileField(null=True,blank=True)
 
     def __str__(self):
         return self.title

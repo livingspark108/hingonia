@@ -14,7 +14,8 @@ class CreateDistributionForm(forms.ModelForm):
 
     class Meta:
         model = Distribution
-        fields = ['title','location','main_image']
+        fields = ['title','location','type','pdf','main_image']
+
 
 
 

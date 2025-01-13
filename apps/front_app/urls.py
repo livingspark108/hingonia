@@ -105,11 +105,11 @@ urlpatterns = [
 
     #Distribution
 
-    path('distribution/add', CreateDistributionView.as_view(), name='distribution-add'),
-    path('distribution/', ListDistributionView.as_view(), name='distribution-list'),
-    path('distribution/list/ajax', ListDistributionViewJson.as_view(), name='distribution-list-ajax'),
-    path('distribution/edit/<str:pk>', UpdateDistributionView.as_view(), name='distribution-edit'),
-    path('distribution/delete/<str:pk>', DeleteDistributionView.as_view(), name='distribution-delete'),
+    path('distribution/add/<str:type>', CreateDistributionView.as_view(), name='distribution-add'),
+    path('distribution/<str:type>', ListDistributionView.as_view(), name='distribution-list'),
+    path('distribution/list/ajax/<str:type>', ListDistributionViewJson.as_view(), name='distribution-list-ajax'),
+    path('distribution/edit/<str:pk>/<str:type>', UpdateDistributionView.as_view(), name='distribution-edit'),
+    path('distribution/delete/<str:pk>/<str:type>', DeleteDistributionView.as_view(), name='distribution-delete'),
 
 
     #""" Update About us """

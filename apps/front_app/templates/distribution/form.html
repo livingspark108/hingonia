@@ -42,11 +42,11 @@
 
                         <button class="open_uploader btn btn-primary" data-target="#uploadModal"
                                 data-toggle="modal"
-                                data-type="gallery"
+                                data-type={{type}}
                                 type="button">
                             Gallery Upload Files
                         </button>
-                        <div id="galleryFileList"></div>
+                        <div id="{{type}}FileList"></div>
 
                         <form enctype="multipart/form-data" class="form-horizontal m-t-30" method="POST">
                             {{ form.media }}
@@ -84,6 +84,7 @@
                             </div>
                             {% endfor %}
                             <div class="row float-right mt-5">
+                                <input type="hidden" value="{{type}}" name="type">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
@@ -101,6 +102,9 @@
 {% block script %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.js"></script>
 <script>
+    $('#id_type').val('{{type}}')
+    $('#id_type').attr('readonly', true)
+
     $('.open_uploader').click(function(){
         var type = $(this).data('type')
         $('.file_type').val(type)
@@ -114,7 +118,7 @@
         };
 
         function loadFileList() {
-            var types = ['gallery'];
+            var types = ['{{type}}'];
             var id = "{{form.instance.id}}"
             types.forEach(type => {
                 fetch(`{% url 'file_list' %}?type=${type}&id=${id}`)

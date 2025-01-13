@@ -81,11 +81,11 @@
                                                      class="img-fluid gallery-img" alt="">
                                                 <div class="gallery-content">
                                                     <div class="row align-items-end h-100">
-                                                        <div class="col-12">
+                                                        <div class="col-12 text-center">
                                                             <h3>{{single.title}}</h3>
                                                             <p>{{single.date}}.</p>
                                                             <div class="row align-items-center">
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-3 ">
 	                                                                {% if single.icon %}
                                                                     <img
 		                                                                    src="{% get_media_prefix %}{{single.icon}}"
@@ -120,6 +120,7 @@
                     <div class="d-block d-md-none">
                         <div class="row g-5">
                             {% for single in distribution_obj %}
+                            {% if single.type == 'Gallery' %}
                                 <div class="col-md-3 col-6">
                                 <a href="{% url 'distribution_detail' single.id %}">
                                     <div class="gallery-box">
@@ -128,7 +129,7 @@
                                              class="img-fluid gallery-img" alt="">
                                         <div class="gallery-content">
                                             <div class="row align-items-end h-100">
-                                                <div class="col-12">
+                                                <div class="col-12 text-center">
                                                     <h3>{{single.title}}</h3>
                                                     <p>{{single.date}}.</p>
                                                     <div class="row align-items-center">
@@ -152,6 +153,8 @@
                                     </div>
                                 </a>
                             </div>
+
+                            {% endif %}
                             {% endfor %}
 
                         </div>

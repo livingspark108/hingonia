@@ -59,10 +59,24 @@
                             <a href="{% url 'campaign-product-list' %}" class="waves-effect {% active 'campaign-product-list' %}"><i
 		                            class="fa fa-file"></i><span>Campaign Item</span></a>
                         </li>
-	                    <li>
-                            <a href="{% url 'distribution-list' %}" class="waves-effect {% active 'distribution-list' %}"><i
-		                            class="fa fa-file"></i><span> Distribution </span></a>
+
+                        <li>
+                            <a href="javascript:void(0);" class="waves-effect">
+                                <i class="fa fa-file"></i>
+                                <span> Gallery </span>
+                            </a>
+                            <!-- Submenu starts here -->
+                            <ul class="submenu">
+                                <li><a href="{% url 'distribution-list' type='Gallery' %}" class="{% url 'distribution-list' type='Gallery' %}"><i
+                                            class="fa fa-file"></i><span>Gallery</span></a></li>
+                                <li><a href="{% url 'distribution-list' type='Video' %}" class="{% url 'distribution-list' type='Video' %}"><i
+                                            class="fa fa-file"></i><span>Video</span></a></li>
+                                <li><a href="{% url 'distribution-list' type='Magazine' %}" class="{% url 'distribution-list' type='Magazine' %}"><i
+                                            class="fa fa-file"></i><span>magazine</span></a></li>
+                            </ul>
                         </li>
+
+
                         <li>
                             <a href="{% url 'product-list' %}" class="waves-effect {% active 'product-list' %}"><i
 		                            class="fa fa-file"></i><span> Product </span></a>

@@ -13,7 +13,7 @@
                                 <div class="col-sm-6">
                                     <ol class="breadcrumb float-right">
                                       <li> <button class="btn btn-primary"><a class="text-white"
-                                                                              href="{% url 'distribution-add' %}">Add
+                                                                              href="{% url 'distribution-add' type=type %}">Add
                                                                                                           Distribution</a></button></li>
 
                                     </ol>
@@ -53,7 +53,7 @@
                     </div>
                     <!-- container-fluid -->
                     <input type="hidden" name="list_page_url" id="list_page_url"
-                           value="{% url 'distribution-list-ajax' %}">
+                           value="{% url 'distribution-list-ajax' type=type %}">
 
                 </div>
 {% endblock %}

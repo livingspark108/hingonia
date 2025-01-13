@@ -223,8 +223,11 @@ class FrontendDistributionView(View):
 class FrontendDistributionDetailView(View):
     def get(self, request,pk):
         distribution_detail_obj = UploadedFile.objects.filter(uploader_id=pk)
+        print(distribution_detail_obj)
+        type = Distribution.objects.get(id=pk).type
+        main_image = Distribution.objects.get(id=pk).main_image
         #if request.user.is_authenticated:
-        context = {'distribution_detail_obj':distribution_detail_obj}
+        context = {'distribution_detail_obj':distribution_detail_obj,'type':type,'main_image':main_image}
         return render(request, 'frontend/distribution_detail.html', context)
 
 

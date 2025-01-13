@@ -9,17 +9,15 @@
                 <div class="col-lg-8 col-md-12">
                     <h5 class="f-36 fw-bold">Our Gallery</h5>
                     <p>
-                        Welcome to the heartwarming world of our Cow Rehabilitation Centre, where we invite you to
-                        explore and witness the incredible stories of compassion and care through our Image Gallery. Our
-                        gallery showcases the serene and picturesque environment where rescued cows find solace and
-                        healing.
+                        Welcome to the heartwarming world of our Cow Rehabilitation Centre, where we invite you to explore and witness the incredible stories of compassion and care through our Image Gallery. Our gallery showcases the serene and picturesque environment where rescued cows find solace and healing.
+
+
                     </p>
                 </div>
             </div>
         </div>
     </section>
-<section>
-        <div class="container">
+<div class="container">
 
             <div class="row g-4">
                 <div class="col-md-6 col-6 pb-5 pb-md-2">
@@ -69,6 +67,7 @@
                                 >
                                 <div class="row g-5" style="width: 100%;">
 	                                {% for single in distribution_obj %}
+                                    {% if single.type == 'Gallery' %}
                                     <div class="col-md-3 col-6">
                                         <a href="{% url 'distribution_detail' single.id %}">
                                             <div class="gallery-box">
@@ -77,24 +76,20 @@
                                                      class="img-fluid gallery-img" alt="">
                                                 <div class="gallery-content">
                                                     <div class="row align-items-end h-100">
-                                                        <div class="col-12">
+                                                        <div class="col-12 text-center">
+
                                                             <h3>{{single.title}}</h3>
                                                             <p>{{single.created_at|date:"h:i"}}.</p>
-                                                            <div class="row align-items-center">
-
-                                                                <div class="col-md-9 text-start">
-                                                                    <h4>{{single.created_at|date:"d-m-Y"}}</h4>
-                                                                    <p class="mb-0"><img src="{% static 'frontend/assets/images/distribution/location.png' %}" class="img-fluid" alt="">
-                                                                        {{single.location}}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
+                                                            <hr class="border-light">
+                                                            <h4>{{single.created_at|date:"d-m-Y"}}</h4>
+                                                            <p class="mb-0">{{single.location}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                                    </div>
+                                            </a>
                                     </div>
+                                    {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -116,7 +111,7 @@
                                              class="img-fluid gallery-img" alt="">
                                         <div class="gallery-content">
                                             <div class="row align-items-end h-100">
-                                                <div class="col-12">
+                                                <div class="col-12 text-center">
                                                     <h3>{{single.title}}</h3>
                                                     <p>{{single.date}}.</p>
                                                     <div class="row align-items-center">
@@ -152,7 +147,71 @@
                 </div>
             </div>
         </div>
+</section>
+<!--    Video section-->
+<section class="mt-4 bg-light py-5 photo-gallery video_gallery">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-md-12 text-center">
+                    <h5 class="f-36 fw-bold">Video Gallery</h5>
+                </div>
+            </div>
+            <div class="row g-3">
+                 {% for single in distribution_obj %}
+                {% if single.type == 'Video' %}
+                <div class="col-md-4 col-lg-3">
+                        <a href="{% url 'distribution_detail' single.id %}">
+                                            <div class="gallery-box">
+                                                <img
+		                                                src="{{single.main_image.url}}"
+                                                     class="img-fluid gallery-img" alt="">
+                                                <div class="gallery-content">
+                                                    <div class="row align-items-end h-100">
+                                                        <div class="col-12 text-center">
+<i class="bi bi-play-circle text-white fs-1"></i>
+                                                            <h3>{{single.title}}</h3>
+                                                            <p>{{single.created_at|date:"h:i"}}.</p>
+                                                            <hr class="border-light">
+                                                            <h4>{{single.created_at|date:"d-m-Y"}}</h4>
+                                                            <p class="mb-0">{{single.location}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    </div>
+                                            </a>
+
+                </div>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
     </section>
+<!--    End-->
+<!--  MONTHLY MAGAZINE  -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-md-12 text-center">
+                    <h5 class="f-36 fw-bold">Monthly Magazine</h5>
+                </div>
+            </div>
+            <div class="row g-3">
+                {% for single in distribution_obj %}
+                {% if single.type == 'Magazine' %}
+                <div class="col-md-4">
+                    <div class="card card-body text-center bg-light shadow">
+                        <embed src="{{single.pdf.url}}" class="mm-pdf mb-3">
+                        <a href="{{single.pdf.url}}" target="_blank" class="fw-bold btn btn-dark btn-sm">View</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+<!--    END-->
+
 
 {% endblock %}
 {% block script%}

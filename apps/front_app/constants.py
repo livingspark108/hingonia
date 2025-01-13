@@ -13,7 +13,11 @@ MODE_TYPE = [
     ('One Time','One Time'),
     ('Both Monthly and One Time','Both Monthly and One Time'),
 ]
-
+GALLERY_TYPE = [
+    ('Gallery','Gallery'),
+    ('Video','Video'),
+    ('Magazine','Magazine'),
+]
 SLIDER_TYPE = [
     ('HomeTop','HomeTop'),
     ('HomeMid1','HomeMid1'),
