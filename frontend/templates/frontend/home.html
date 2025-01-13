@@ -499,23 +499,6 @@ outline: 0 ;
       </section>
 
 
-      <section class="mx-2 bg-6 py-5 home-section-3 position-relative">
-        <div class="container-fluid">
-        <img class="vector_left position-absolute img-fluid" src="{% static 'frontend/assets/images/about/vector-right.png' %}" alt="vector">
-                <img class="vector_right position-absolute img-fluid" src="{% static 'frontend//assets/images/about/vector-left.png' %}" alt="vector">
-                <div><img class="vector_cow position-absolute img-fluid" src="{% static 'frontend//assets/images/about/cow-1.png' %}" alt="vector"></div>
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <h2 class="fw-bold display-4 color-4">
-                World’s largest Cow Rehabilitation Centre
-              </h2>
-              <h5 class="fw-bold color-4 pt-3">
-                Sri Krishna Balaram Seva Trust
-              </h5>
-            </div>
-          </div>
-        </div>
-      </section>
       <section class="mx-2 py-3 px-lg-5 home-section-4">
         <div class="container-fluid ">
           <div class="row justify-content-between align-items-center g-3">
@@ -553,6 +536,7 @@ outline: 0 ;
           </div>
         </div>
       </section>
+
       <section class="mx-2 px-lg-5 pb-5 home-section-5">
     <div class="container-fluid">
       <div class="row g-3 align-items-end">
@@ -643,139 +627,126 @@ outline: 0 ;
       </div>
     </div>
   </section>
+<section class="px-lg-5 py-5 home-section-6 position-relative">
+    <img src="{% static 'frontend/assets/images/home/vector-1.png' %}" class="element-1">
+    <!--<img src="assets/images/home/vector-2.png" class="element-2">
+    <img src="assets/images/home/vector-3.png" class="element-3"> -->
+    <div class="container-fluid mx-lg-2  z-3 position-relative">
+      <div class="row g-4">
+        <div class="col-md-12 text-center">
+          <h2 class="color-1 ff-epilogue fw-bold display-4">
+            Hingonia
+          </h2>
+          <h3 class="fw-medium ff-epilogue display-6">
+            Sri Krishna Balram Seva Trust
+          </h3>
+        </div>
+        <div class="col-lg-12">
+          <p class="hs-desc">Hingonia Cow Rehabilitation Centre managed by Sri Krishna Balaram seva Trust, the largest facility dedicated to the welfare of stray and accidental cattles, enhances road safety by preventing accidents caused by stray and injured cows.</p>
+          <p class="hs-desc">In 2016, Sri Krishna Balaram Seva Trust signed an MOU with Nagar Nigam Jaipur to manage the centre. Since then, the number of stray cows under our care has increased from 6,000 to over 16,000+. Every day, a Jaipur Municipal Corporation ambulance brings around 50 to 60 stray, accidental, old, and diseased cows to our Gaushala. Many of these cows ingest non-degradable materials such as polythene, leading to severe internal damage and leaving them in a very painful and precarious condition.<a href="#" class="color-1">Read More</a></p>
+          <div class="row g-3 pt-3">
+            <div class="col-md-4">
+                <div class="bg-img-card rounded-5 p-4 mt-3" style="background-image: url('{% static 'frontend/assets/images/home/vision.jpg' %}');">
+                  <p class="text-white pb-5 fs-4 lh-sm">
+                    <strong class="text-white">
+                      Our Vision
+                    </strong>
+                    is To ensure that every stray and accidental cows in India is well-fed
+                    and cared for.
+                  </p>
+                  <div class="py-md-4">
+                  </div>
+                  <div class="pt-5">
+                    <a href="{% url 'campaign' %}" class="cm-btn p-0">
 
-      <section class="px-lg-5 py-5 home-section-6 position-relative">
-        <img src="{% static 'frontend/assets/images/home/vector-1.png' %}" class="element-1">
-        <img src="{% static 'frontend/assets/images/home/vector-2.png' %}" class="element-2">
-        <img src="{% static 'frontend/assets/images/home/vector-3.png' %}" class="element-3">
-        <div class="container-fluid mx-lg-2  z-3 position-relative">
-          <div class="row g-4">
-            <div class="col-md-12 text-center">
-              <h2 class="color-1 ff-epilogue fw-bold display-4">
-                Hingonia
-              </h2>
-              <h3 class="fw-medium ff-epilogue display-6">
-                Sri Krishna Balram Seva Trust
-              </h3>
+                      <img src="{% static 'frontend/assets/images/home/more-btn.png' %}" class="img-fluid" alt="">
+                    </a>
+                  </div>
+              </div>
             </div>
-            <div class="col-lg-6">
-              <p class="hs-desc">
-                In 2016, the Government of Rajasthan and the Jaipur Nagar Nigam decided
-                to partner with Hare Krishna Movement Jaipur, which runs the Sri Sri Krishna
-                Balaram Mandir at the Akshaya Patra mid day meal centralized kitchen campus
-                at Jagatpura, Jaipur. The full time missionaries of Hare Krishna Movement
-                accepted the humble service to mother cows at Hingonia. A special purpose
-                vehicle, Sri Krishna Balaram Seva Trust, was set up to run the Hingonia
-                centre with the aid of Jaipur Nagar Nigam. This trust is a non profit organization,
-                dedicated for serving the cattle at Hingonia. The Trust consists of 3 government
-                officials, 3 independent trustees and 9 missionary trustees. The operations
-                are managed by the full time missionaries of the Trust.
-                <a href="{% url 'about-us' %}" class="color-1">
-                  Read More
-                </a>
-              </p>
-              <div class="row g-3">
-                <div class="col-lg-6 col-md-6">
-                  <div class="card card-body shadow rounded-5 bg-7 text-center">
-                    <h2 class="fw-bold color-10">
-                      Join 10,000+ Helpers & Doctors
-                    </h2>
-                    <div>
+            <div class="col-md-4">
+              <div class="card card-body shadow rounded-5 bg-7 text-center h-100">
+                <h2 class="fw-bold color-10 pt-3">
+                  Join 10,000+ Helpers &amp; Doctors
+                </h2>
+                <div>
                       <img src="{% static 'frontend/assets/images/skbt-logo.webp' %}" width="80" alt="">
-                    </div>
-                    <div class="mt-3">
-                      <a href="{% url 'csr' %}" class="cm-btn border border-dark-subtle bg-7 color-10 fs-5">
-                        Become a Voluteer
-                        <i class="bi bi-arrow-right color-10">
-                        </i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="bg-img-card rounded-5 p-4 mt-3" style="background-image: url('{% static 'frontend/assets/images/home/vision.jpg' %}');">
-                    <p class="text-white pb-5 fs-4 lh-sm">
-                      <strong class="text-white">
-                        Our Vision
-                      </strong>
-                      is To ensure that every stray and accidental cows in India is well-fed
-                      and cared for.
-                    </p>
-                    <div class="py-md-4">
-                    </div>
-                    <div class="pt-5">
-                      <a href="{% url 'about-us' %}" class="cm-btn p-0">
-                        <img src="{% static 'frontend/assets/images/home/more-btn.png' %}" class="img-fluid" alt="">
-                      </a>
-                    </div>
-                  </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="bg-img-card rounded-5 p-4" style="background-image: url('{% static 'frontend/assets/images/home/mission.jpg' %}');">
-                    <p class="text-white pb-5 fs-4 lh-sm">
-                      <strong class="text-white">
-                        Our Mission
-                      </strong>
-                      is To provide nourishment and care to 30,000 stray and accidental cows
-                      by 2030.
-                    </p>
-                    <div class="py-md-4">
-                    </div>
-                    <div class="pt-5">
-                      <a href="{% url 'about-us' %}" class="cm-btn p-0">
-                        <img src="{% static 'frontend/assets/images/home/more-btn.png' %}" class="img-fluid" alt="">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="mt-lg-5 mt-4 text-center">
-                    <img src="{% static 'frontend/assets/images/skbt-logo.webp' %}" class="img-fluid" alt="">
-                  </div>
+                <div class="mt-3">
+                  <a href="campaign.php" class="cm-btn border border-dark-subtle bg-7 color-10 fs-5">
+                    Become a Voluteer
+                    <i class="bi bi-arrow-right color-10">
+                    </i>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="contribute-card rounded-5 shadow">
-                <img src="{% static 'frontend/assets/images/home/contribute.png' %}" class="img-fluid" alt="">
-                <div class="p-4">
-                  <h2 class="color-7">
-                    🌟 Join the Online Movement to Support Hingonia's Cause! 🐄💙
-                  </h2>
-                  <p class="color-7 hs-desc">
-                    At Hingonia, we believe that everyone can contribute, regardless of their
-                    financial situation. If you find yourself unable to make a monetary donation,
-                    fret not! You can still make a significant impact by sharing our cause
-                    within your circle and helping us reach more caring hearts.
-                  </p>
-                  <p class="color-7 hs-desc">
-                    How You Can Help Without Spending a Dime:
-                  </p>
-                  <ol>
-                    <li class="color-7 hs-desc">
-                      🌟 Share the Message: Post about Hingonia and our fundraiser on your social
-                      media platforms. Your personal touch can inspire others to join the cause.
-                    </li>
-                    <li class="color-7 hs-desc py-3">
-                      🗣️ Talk About It: Spread the word among your friends, family, and colleagues.
-                      A simple conversation can create ripples of awareness and support.
-                    </li>
-                    <li class="color-7 hs-desc">
-                      🌐 Digital Amplification: Share our digital assets—images, videos, and
-                      infographics—across your online networks. These visuals tell the heartfelt
-                      story of Hingonia and make a lasting impression.
-                    </li>
-                  </ol>
-                  <div class="mt-4">
-                    <a href="{% url 'csr' %}" class="cm-btn bg-7 d-block text-center color-10">
-                      <i class="bi bi-share color-10">
-                      </i>
-                      Spread the Cause
-                    </a>
-                  </div>
+            <div class="col-md-4">
+                <div class="bg-img-card rounded-5 p-4" style="background-image: url('{% static 'frontend/assets/images/home/mission.jpg' %}');">
+                <p class="text-white pb-5 fs-4 lh-sm">
+                  <strong class="text-white">
+                    Our Mission
+                  </strong>
+                  is To provide nourishment and care to 30,000 stray and accidental cows
+                  by 2030.
+                </p>
+                <div class="py-md-4">
+                </div>
+                <div class="pt-5">
+                  <a href="campaign.php" class="cm-btn p-0">
+                    <img src="{% static 'frontend/assets/images/home/more-btn.png' %}" class="img-fluid" alt="">
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      <section class="mx-2 py-5 donation_section">
+        <!-- <div class="col-lg-6">
+          <div class="contribute-card rounded-5 shadow">
+            <img src="assets/images/home/contribute.png" class="img-fluid" alt="">
+            <div class="p-4">
+              <h2 class="color-7">
+                🌟 Join the Online Movement to Support Hingonia's Cause! 🐄💙
+              </h2>
+              <p class="color-7 hs-desc">
+                At Hingonia, we believe that everyone can contribute, regardless of their
+                financial situation. If you find yourself unable to make a monetary donation,
+                fret not! You can still make a significant impact by sharing our cause
+                within your circle and helping us reach more caring hearts.
+              </p>
+              <p class="color-7 hs-desc">
+                How You Can Help Without Spending a Dime:
+              </p>
+              <ol>
+                <li class="color-7 hs-desc">
+                  🌟 Share the Message:&nbsp;Post about Hingonia and our fundraiser on your social
+                  media platforms. Your personal touch can inspire others to join the cause.
+                </li>
+                <li class="color-7 hs-desc py-3">
+                  🗣️ Talk About It:&nbsp;Spread the word among your friends, family, and colleagues.
+                  A simple conversation can create ripples of awareness and support.
+                </li>
+                <li class="color-7 hs-desc">
+                  🌐 Digital Amplification:&nbsp;Share our digital assets—images, videos, and
+                  infographics—across your online networks. These visuals tell the heartfelt
+                  story of Hingonia and make a lasting impression.
+                </li>
+              </ol>
+              <div class="mt-4">
+                <a href="#" class="cm-btn bg-7 d-block text-center color-10">
+                  <i class="bi bi-share color-10">
+                  </i>
+                  Spread the Cause
+                </a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+<section class="mx-2 py-5 donation_section">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 ">
@@ -933,7 +904,7 @@ outline: 0 ;
                          {% if single.type == 'CSR' %}
                         <div class="swiper-slide">
 
-                          <img class="img-fluid" src="{{single.main_image.url}}" />
+                          <img class="img-fluid" src="{{single.main_image|handle_image_url}}" />
                           <h4 class="text-center fw-bold f-28 mb-0 mt-4 color-10 text-uppercase" >{{single.title}}</h4>
                           <div>
                             {% if single.description %}
@@ -997,7 +968,7 @@ outline: 0 ;
               <div class="swiper-wrapper">
                 {% for single in gallery_obj %}
                 <div class="swiper-slide">
-                  <a href="{% url 'gallery' %}"> <img class="img-fluid gallery-1" src="{{single.main_image.url}}" alt="gallery"></a>
+                  <a href="{% url 'gallery' %}"> <img class="img-fluid gallery-1" src="{{single.main_image|handle_image_url}}" alt="gallery"></a>
                 </div>
                 {% endfor %}
               </div>
