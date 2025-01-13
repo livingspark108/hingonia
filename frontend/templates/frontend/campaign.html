@@ -4,73 +4,6 @@
 {% load mytags %}
 {% block body %}
 {% get_slider as all_slider %}
-
-<!-- Section Banner -->
-<!--  <section class="mx-2 section-banner py-80">-->
-<!--    <div class="container-fluid">-->
-<!--      <div class="row align-items-center">-->
-<!--        <div class="order-1">-->
-<!--          <div class="swiper campaingSwiper">-->
-<!--            <div class="swiper-wrapper">-->
-<!--              <div class="swiper-slide ">-->
-<!--                <div class="campaing_sliderWr position-relative rounded-5 overflow-hidden"-->
-<!--                  style="background-image: url('/static/frontend/assets/images/campaing/campaingslide-1.svg');">-->
-<!--                  <div class="contentWr position-absolute">-->
-<!--                    <div>-->
-<!--                      <img class="me-3" src="/static/frontend/assets/images/campaing/heart.svg" alt="">-->
-<!--                      <span class="color-11 ff-freehand f-36 slideDesc">Receive monthly gifts from your cow?</span>-->
-<!--                    </div>-->
-<!--                    <h1 class="display-2 text-white fw-bold ff-Rubik">Adopt a Cow!</h1>-->
-<!--                    <a href="" class="campaing_pledgeBtn ff-Rubik mt-3">Pledge Monthly</a>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="swiper-slide ">-->
-<!--                <div class="campaing_sliderWr position-relative rounded-5 overflow-hidden"-->
-<!--                  style="background-image: url('/static/frontend/assets/images/campaing/campaingslide-1.svg');">-->
-<!--                  <div class="contentWr position-absolute">-->
-<!--                    <div>-->
-<!--                      <img class="me-3" src="/static/frontend/assets/images/campaing/heart.svg" alt="">-->
-<!--                      <span class="color-11 ff-freehand f-36 slideDesc">Receive monthly gifts from your cow?</span>-->
-<!--                    </div>-->
-<!--                    <h1 class="display-2 text-white fw-bold ff-Rubik">Adopt a Cow!</h1>-->
-<!--                    <a href="" class="campaing_pledgeBtn ff-Rubik mt-3">Pledge Monthly</a>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="swiper-slide ">-->
-<!--                <div class="campaing_sliderWr position-relative rounded-5 overflow-hidden"-->
-<!--                  style="background-image: url('/static/frontend/assets/images/campaing/campaingslide-1.svg');">-->
-<!--                  <div class="contentWr position-absolute">-->
-<!--                    <div>-->
-<!--                      <img class="me-3" src="/static/frontend/assets/images/campaing/heart.svg" alt="">-->
-<!--                      <span class="color-11 ff-freehand f-36 slideDesc">Receive monthly gifts from your cow?</span>-->
-<!--                    </div>-->
-<!--                    <h1 class="display-2 text-white fw-bold ff-Rubik">Adopt a Cow!</h1>-->
-<!--                    <a href="" class="campaing_pledgeBtn ff-Rubik mt-3">Pledge Monthly</a>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="swiper-slide ">-->
-<!--                <div class="campaing_sliderWr position-relative rounded-5 overflow-hidden"-->
-<!--                  style="background-image: url('/static/frontend/assets/images/campaing/campaingslide-1.svg');">-->
-<!--                  <div class="contentWr position-absolute">-->
-<!--                    <div>-->
-<!--                      <img class="me-3" src="/static/frontend/assets/images/campaing/heart.svg" alt="">-->
-<!--                      <span class="color-11 ff-freehand f-36 slideDesc">Receive monthly gifts from your cow?</span>-->
-<!--                    </div>-->
-<!--                    <h1 class="display-2 text-white fw-bold ff-Rubik">Adopt a Cow!</h1>-->
-<!--                    <a href="" class="campaing_pledgeBtn ff-Rubik mt-3">Pledge Monthly</a>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </section>-->
   <section class="mx-2 pt-2 pb-80">
     <div class="container-fluid">
       <div class="row">
@@ -87,7 +20,7 @@
         <div class="col-lg-4 col-md-6 mb-lg-0 mb-4">
           <div class="campaingWr campcolor1 p-30 rounded-5" style="background-color: #C21959;">
             <div class="d-flex gap-3 align-items-center">
-              <img src="{{single.campaign_image.url}}" alt="" style="width: 140px;">
+              <img src="{{single.campaign_image|handle_image_url}}" alt="" style="width: 140px;">
               <div>
                 <div class="amountpg fw-semibold ff-rubik bg-white24 text-white d-inline-block rounded-4"
                   style="padding:4px 12px">₹{{single.price}}/MONTH</div>
@@ -386,7 +319,7 @@
               <div class="swiper-wrapper">
                 {% for single in gallery_obj %}
                 <div class="swiper-slide">
-                  <img class="img-fluid gallery-1" src="{{single.main_image.url}}" alt="gallery">
+                  <img class="img-fluid gallery-1" src="{{single.main_image|handle_image_url}}" alt="gallery">
                 </div>
                 {% endfor %}
               </div>
