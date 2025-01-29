@@ -15,7 +15,7 @@ DEBUG = True
 
 # allow all hosts during development
 ALLOWED_HOSTS = ['*']
-BASE_URL = "http://167.71.230.81:8014"
+BASE_URL = "https://hingonia.org"
 # adjust the minimal login
 # LOGIN_URL = 'core_login'
 # LOGIN_REDIRECT_URL = '/'
@@ -36,11 +36,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'hingonia_dev',
+        'NAME': 'hingonia_live_prod_2026',
 
         'USER': 'postgres',
 
-        'PASSWORD': 'postgres@123#',
+        'PASSWORD': 'athUZKBu8athUZKBu8GBdQhzgavYVGBdQhzgavYV',
 
         'HOST': 'localhost',
 
@@ -52,4 +52,3 @@ DATABASES = {
 
 # ##### APPLICATION CONFIGURATION #########################
 INSTALLED_APPS = DEFAULT_APPS
-
