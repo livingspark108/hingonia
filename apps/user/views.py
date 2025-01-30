@@ -16,6 +16,7 @@ from apps.user.forms import CreateUserForm, EditUserForm
 from apps.user.models import TransactionDetails
 
 User = get_user_model()
+from django.db.models import Q
 
 
 class CreateUserView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -60,7 +61,7 @@ class ListUserViewJson(AjayDatatableView):
             city = self.request.GET.get('city', None)
             return User.objects.filter(city__icontains=city).filter(is_superuser=False).filter(type='devotee').order_by('-id')
         else:
-            return User.objects.filter(is_superuser=False).filter(type='devotee').order_by('-id')
+            return User.objects.filter(is_superuser=False).filter(Q(type='devotee') | Q(type='Devotee')).order_by('-id')
 
 
     def render_column(self, row, column):
