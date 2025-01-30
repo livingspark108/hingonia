@@ -235,13 +235,13 @@ DJSTRIPE_WEBHOOK_SECRET = "whsec_11ov9HJBLwcI7AmXPWU5DcjljMgE6Df0"  # Get it fro
 #Email Server
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'livingsparkglobal@gmail.com'
-EMAIL_HOST_PASSWORD = 'lhdq xcpa pkln hfaq'
+EMAIL_HOST_USER = 'hcrc.skbt@gmail.com'
+EMAIL_HOST_PASSWORD = 'gbdy idof uvxj ekjm'
 EMAIL_USE_TLS = True
-admin_email = 'livingsparkglobal@gmail.com'
+admin_email = 'hcrc.skbt@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'livingsparkglobal@gmail.com'
+DEFAULT_FROM_EMAIL = 'hcrc.skbt@gmail.com'
 
 
 FILE_UPLOAD_PERMISSIONS = 0o644
