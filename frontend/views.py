@@ -895,10 +895,12 @@ def create_user(name,email,password,phone='',type='devotee',city=''):
         'city': city,
         'plain_password': password,  # Store plaintext for initial email; avoid this for security-sensitive use
     }
+    username = str(uuid.uuid4())  # Convert UUID to a string
 
     # Create or get the user with the specified parameters
     user_obj, created = User.objects.get_or_create(
         email=email,
+        username=username,
         defaults={
             **additional_data,
             'type': type,
