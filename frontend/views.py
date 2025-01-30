@@ -887,30 +887,34 @@ class PayuFailureAPiView(GenericAPIView):
         return HttpResponseRedirect(reverse('home', kwargs={}))
 
 
-def create_user(name,email,password,phone='',type='devotee',city=''):
+def create_user(name, email, password, phone='', type='devotee', city=''):
     additional_data = {
         'first_name': name,
         'last_name': '',
-        'mobile_no': phone,
-        'city': city,
-        'plain_password': password,  # Store plaintext for initial email; avoid this for security-sensitive use
+        'mobile_no': phone,  # Ensure this field exists in your User model
+        'city': city,  # Ensure this field exists in your User model
     }
-    username = str(uuid.uuid4())  # Convert UUID to a string
 
-    # Create or get the user with the specified parameters
-    user_obj, created = User.objects.get_or_create(
+    # Check if user already exists by email
+    user_obj = User.objects.filter(email=email).first()
+
+    if user_obj:
+        return user_obj  # ✅ Return existing user without modifying username
+
+    # If user does not exist, generate a unique username
+    username = str(uuid.uuid4())  # UUID ensures uniqueness
+
+    # ✅ Create new user with a unique username
+    user_obj = User.objects.create(
         email=email,
         username=username,
-        defaults={
-            **additional_data,
-            'type': type,
-        }
+        type=type,  # Ensure `type` exists in your User model
+        **additional_data
     )
 
-    # If created, set the password securely
-    if created:
-        user_obj.set_password(password)
-        user_obj.save()
+    # ✅ Set and hash password
+    user_obj.set_password(password)
+    user_obj.save()
 
     return user_obj
 
