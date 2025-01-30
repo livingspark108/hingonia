@@ -1169,7 +1169,7 @@ def payment_success(request):
         tran_obj.save()
 
         if not request.user.is_authenticated:
-            login(request, user_obj)
+            login(request, user_obj,backend='django.contrib.auth.backends.ModelBackend')
 
         receipt_url = settings.BASE_URL + "/receipt/" + str(tran_obj.id)
         send_donation_thank_you_email(name, email, float(price), receipt_url)
