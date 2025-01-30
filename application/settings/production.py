@@ -35,17 +35,7 @@ DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-<<<<<<< HEAD
-<<<<<<< HEAD
         'NAME': 'hingonia_live_prod_2026',
-=======
-        'NAME': 'hingonia_dev',
->>>>>>> 845bebf (local)
-=======
-        'NAME': 'hingonia_live_prod_2026',
->>>>>>> 6cf9cc0 (local)
-
         'USER': 'postgres',
 
         'PASSWORD': 'athUZKBu8athUZKBu8GBdQhzgavYVGBdQhzgavYV',
