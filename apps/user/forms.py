@@ -10,13 +10,13 @@ User = get_user_model()
 
 
 class CreateUserForm(UserCreationForm):
-    type = forms.CharField(widget=forms.HiddenInput(), initial='admin')
+    # type = forms.CharField(widget=forms.HiddenInput(), initial='admin')
     is_staff = forms.BooleanField(widget=forms.HiddenInput(), initial=True)
 
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'type', 'is_active','is_staff', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'type', 'is_active','is_staff','profile', 'password1', 'password2']
 
 
 class EditUserForm(UserChangeForm):
@@ -25,7 +25,7 @@ class EditUserForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'type', 'is_active', 'password']
+        fields = ['username', 'first_name', 'last_name', 'email', 'type', 'is_active','profile', 'password']
 
     def __init__(self, *args, **kwargs):
         super(EditUserForm, self).__init__(*args, **kwargs)
@@ -35,7 +35,6 @@ class EditUserForm(UserChangeForm):
 
 
 class CreateSubscriberForm(forms.ModelForm):
-
     class Meta:
         model = Subscription
-        fields = ['start_date']
+        fields = ['user', 'plan', 'campaign', 'start_date', 'cow_name', 'razorpay_subscription_id', 'price', 'razorpay_payment_id']

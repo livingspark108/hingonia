@@ -150,6 +150,7 @@ urlpatterns = [
     path('subscriber/', ListSubscriberView.as_view(), name='subscriber-list'),
     path('subscriber/list/ajax', ListSubscriberViewJson.as_view(), name='subscriber-list-ajax'),
     path('subscriber/edit/<str:pk>', UpdateSubscriberView.as_view(), name='subscriber-edit'),
+    path('subscriber/add/', CreateSubscriberView.as_view(), name='subscriber-edit'),
     path('subscriber/delete/<str:pk>', DeleteSubscriberView.as_view(), name='subscriber-delete'),
 
     #"""RazorpayPlan"""

@@ -39,3 +39,15 @@
 
                 </div>
 {% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function () {
+        $('#id_start_date').datetimepicker({
+            format: 'Y-m-d H:i:s',
+            timepicker: true,
+            datepicker: true,
+            step: 1,
+        });
+    });
+</script>
+{% endblock %}

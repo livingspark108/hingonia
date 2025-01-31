@@ -381,7 +381,7 @@ class CsrView(View):
         full_address = request.POST.get('full_address')
         email = request.POST.get('email')
         template = 'frontend/email/csr_template.html'
-
+        admin_email = Setting.objects.first().admin_email
         context = {
             'name':full_name,
             'mobile_no': mobile_no,
@@ -391,7 +391,7 @@ class CsrView(View):
             'full_address':full_address,
 
         }
-        send_email_background(request, ADMIN_EMAIL, template, context, subject='CSR Request')
+        send_email_background(request, admin_email, template, context, subject='CSR Request')
         messages.success(self.request, "Thanks you, we will get back to you")
 
         return redirect('csr')
@@ -908,12 +908,14 @@ def create_user(name, email, password, phone='', type='devotee', city=''):
     user_obj = User.objects.create(
         email=email,
         username=username,
+        mobile_no=phone,
+        password=password,
         type=type,  # Ensure `type` exists in your User model
         **additional_data
     )
 
     # ✅ Set and hash password
-    user_obj.set_password(password)
+    # user_obj.set_password(password)
     user_obj.save()
 
     return user_obj

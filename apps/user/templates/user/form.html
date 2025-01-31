@@ -18,7 +18,7 @@
                             <div class="col-12">
                                 <div class="card m-b-30">
                                     <div class="card-body">
-                                    <form class="form-horizontal m-t-30" method="POST">
+                                    <form enctype="multipart/form-data" class="form-horizontal m-t-30" method="POST">
                                         {% include "elements/form.html" with form=form %}
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="reset" class="btn btn-secondary">Reset</button>

@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.db import models
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 
 from application.custom_model import DateTimeModel
 from application.email_helper import send_welcome_user
@@ -147,19 +148,19 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         # Check if the user is new (i.e., doesn't have a primary key yet)
         is_new_user = self.pk is None
-
+        print(self)
         super().save(*args, **kwargs)  # Call the original save method to ensure the user is saved first
 
         # Only send the email if this is a new user
         if is_new_user:
             # Mock request for email context
             request = RequestFactory().get('/')
-
+            login_url = settings.BASE_URL + '/user-login'
             # Context data for the welcome email
             context = {
                 'email': self.email,
                 'password': self.email,  # Set a secure way to provide or generate this password
-                'login_url': "http://142.93.210.192:8002/sign-in"  # Update with your login URL
+                'login_url': login_url  # Update with your login URL
             }
 
             # Send the welcome email

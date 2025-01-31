@@ -1263,6 +1263,15 @@ class CloneOurSupporterView(AdminRequiredMixin,View):
 
 
 #Subscribers
+
+class CreateSubscriberView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Subscription
+    form_class = CreateSubscriberForm
+    template_name = 'subscriber/form.html'
+    success_message = "Subscriber added successfully"
+    success_url = reverse_lazy('subscriber-list')
+
+
 class UpdateSubscriberView(LoginRequiredMixin, AdminRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Subscription
     form_class = CreateSubscriberForm
