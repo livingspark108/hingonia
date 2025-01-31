@@ -16,7 +16,7 @@ class CreateUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'type', 'is_active','is_staff','profile', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email','mobile_no', 'type', 'is_active','is_staff','profile', 'password1', 'password2']
 
 
 class EditUserForm(UserChangeForm):
@@ -25,7 +25,7 @@ class EditUserForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'type', 'is_active','profile', 'password']
+        fields = ['username', 'first_name', 'last_name', 'email','mobile_no', 'type', 'is_active','profile', 'password']
 
     def __init__(self, *args, **kwargs):
         super(EditUserForm, self).__init__(*args, **kwargs)
