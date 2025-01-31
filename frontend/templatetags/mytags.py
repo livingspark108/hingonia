@@ -299,7 +299,10 @@ def indian_number_format(value):
 def is_image(file_url):
     """Check if a file URL is an image based on its extension."""
     valid_extensions = ['.jpg', '.jpeg', '.png', '.gif']
-    return any(file_url.lower().endswith(ext) for ext in valid_extensions)
+    if file_url:
+        return any(file_url.lower().endswith(ext) for ext in valid_extensions)
+    else:
+        return ""
 
 
 @register.simple_tag

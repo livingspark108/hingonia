@@ -128,6 +128,12 @@ class User(AbstractUser):
     objects = SoftDeleteUserManager()
     objects_with_deleted = SoftDeleteUserManager(deleted=True)
 
+    def __str__(self):
+        if self.mobile_no:
+            return str(self.first_name) + " (" + self.mobile_no+ ")"
+        else:
+            return str(self.first_name)
+
     class Meta:
         app_label = 'user'
 
