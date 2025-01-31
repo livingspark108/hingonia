@@ -159,12 +159,12 @@ class User(AbstractUser):
             # Context data for the welcome email
             context = {
                 'email': self.email,
-                'password': self.email,  # Set a secure way to provide or generate this password
+                'password': self.plain_password,  # Set a secure way to provide or generate this password
                 'login_url': login_url  # Update with your login URL
             }
 
             # Send the welcome email
-            #send_welcome_user(request,self.email,context)
+            send_welcome_user(request,self.email,context)
 
 
 class TransactionDetails(DateTimeModel):
