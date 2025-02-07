@@ -13,6 +13,31 @@ class Command(BaseCommand):
     help = 'Fetch and save subscription plans from Razorpay'
 
     def handle(self, *args, **kwargs):
-        user_obj = User.objects.get(username='6b9a5b72-2b4d-4b7e-aa66-1296dcc18c75')
-        user_obj.save_image_from_url('/media/uploads/campaign-bg_9RbF0TC.webp')
+        email = 'livingsparkglobal@gmail.com'
+        username = 'livingsparkglobal'
+        phone = '9876543210'
+        password = 'password'
+        plain_password = 'password'
+
+        additional_data = {
+            'first_name': 'Test',
+            'last_name': '',
+            'mobile_no': phone,  # Ensure this field exists in your User model
+            'city': '',  # Ensure this field exists in your User model
+        }
+        filtered_data = {k: v for k, v in additional_data.items() if k != "mobile_no"}
+
+        user_obj = User.objects.create(
+            email=email,
+            username=username,
+            mobile_no=phone,
+            plain_password=password,
+            type=type,  # Ensure `type` exists in your User model
+            **filtered_data  # Additional data without 'mobile_no'
+        )
+
+
+        # ✅ Set and hash password
+        user_obj.set_password(password)
+        user_obj.save()
         self.stdout.write(self.style.SUCCESS('Successfully fetched and saved plans from Razorpay'))

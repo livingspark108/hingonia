@@ -921,7 +921,7 @@ def create_user(name, email, password, phone='', type='devotee', city='',profile
         email=email,
         username=username,
         mobile_no=phone,
-        password=password,
+        plain_password=password,
         type=type,  # Ensure `type` exists in your User model
         **filtered_data  # Additional data without 'mobile_no'
     )
@@ -929,7 +929,7 @@ def create_user(name, email, password, phone='', type='devotee', city='',profile
         user_obj.save_image_from_url(profile_url)
 
     # ✅ Set and hash password
-    # user_obj.set_password(password)
+    user_obj.set_password(password)
     user_obj.save()
 
     return user_obj
