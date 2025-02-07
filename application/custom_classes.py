@@ -74,7 +74,7 @@ class DevoteeRequiredMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('user-login'))
-        elif request.user.type == 'devotee' or request.user.is_superuser:
+        elif request.user.type == 'devotee' or request.user.is_superuser or request.user.type == 'Devotee':
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404
