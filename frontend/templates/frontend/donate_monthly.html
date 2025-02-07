@@ -116,8 +116,9 @@
                             {% endif %}
                             <div class="col-md-12">
                                 <label for="">Upload Selfie</label>
-                                <input type="file" value="" class="form-control" name="profile" placeholder="profile" required="">
-                             </div>
+                                <input type="file" value="" id="fileInput" class="form-control" name="profile" placeholder="profile" required="">
+                                <input name="profile_url" type="hidden" style="display:hidden" id="uploadedFileUrl">
+                            </div>
                         </div>
 
 
@@ -147,6 +148,7 @@
                                 <i class="bi bi-currency-rupee text-white"></i><span class="html_amt text-white">{{price}}</span> / month
                             </span>
                             {% endif %}
+
                             <input type="submit" class="btn btn-light continue" id="rzp-button" value="Continue">
                         </div>
                     </div>
@@ -195,10 +197,9 @@ $(document).on("change",".plan_choice",function() {
 </script>
 <script>
 document.getElementById('subscriptionForm').onsubmit = function(e){
-    console.log("Test")
     e.preventDefault(); // Prevent the default form submission
-    console.log("Test")
     var form = document.getElementById('subscriptionForm');
+    var profile_image = document.getElementById('uploadedFileUrl').innerHTML;
     var formData = new FormData(form);
 
     // Fetch call to create a subscription on the server
@@ -211,7 +212,7 @@ document.getElementById('subscriptionForm').onsubmit = function(e){
             "subscription_id": data.id, // Subscription ID returned from the server
             "name": formData.get('name'),
             "description": "Monthly Donation",
-            "image": "https://your-logo-url",  // Your logo
+            "image": profile_image,  // Your logo
             "handler": function (response){
                 // Handle the subscription success
                 form.action = "/payment/success/";
@@ -243,5 +244,8 @@ function Input(type, name, value) {
     input.value = value;
     return input;
 }
+$("#fileInput").change(function() {
+    uploadFile();
+});
 </script>
 {% endblock %}

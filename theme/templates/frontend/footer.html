@@ -243,6 +243,32 @@ $(document).on("keyup",".ctm_amt",function() {
 		$('.cps-amount-radio input').prop('checked', false);
 
 	})
+function uploadFile() {
+    var fileInput = document.getElementById('fileInput');
+    if (fileInput.files.length === 0) {
+        alert("Please select a file first.");
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    $.ajax({
+        url: '/upload/',  // Django upload URL
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            if (response.success) {
+                $("#uploadedFileUrl").val(response.url);
+            }
+        },
+        error: function(xhr) {
+            alert("Upload failed!");
+        }
+    });
+}
 </script>
 {% include "elements/message-block.html" %}
 

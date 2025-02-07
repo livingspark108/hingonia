@@ -43,6 +43,7 @@ from apps.front_app.models import Campaign, Mother, OurTeam, AboutUs, Distributi
     HomeSlider, Order
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.files.storage import default_storage
 
 from django.core import serializers
 
@@ -617,17 +618,17 @@ class DonateMontlyView(ListView):
             adopt_a_cow = False
             plan_id = ""
 
-        order_data = {
-            "amount": 50000,  # Amount in paise
-            "currency": "INR",
-            "receipt": "receipt#1",
-            "payment_capture": 1  # Auto-capture the payment
-        }
+        # order_data = {
+        #     "amount": 50000,  # Amount in paise
+        #     "currency": "INR",
+        #     "receipt": "receipt#1",
+        #     "payment_capture": 1  # Auto-capture the payment
+        # }
+        #
+        # order = razorpay_client.order.create(data=order_data)
 
-        order = razorpay_client.order.create(data=order_data)
 
-
-        context = {'plan_id':plan_id,'adopt_a_cow':adopt_a_cow, 'razorpay_key_id': settings.RAZOR_PAY_ID,'order': order,'campaign': campaign,'subscription_plan':subscription_plan }
+        context = {'plan_id':plan_id,'adopt_a_cow':adopt_a_cow, 'razorpay_key_id': settings.RAZOR_PAY_ID,'campaign': campaign,'subscription_plan':subscription_plan }
         return render(request, 'frontend/donate_monthly.html', context)
 
 
@@ -667,6 +668,16 @@ class DonateMontlyCtmView(ListView):
         context = {'phone_no':phone_no,'first_name':first_name,'email': email,'preferred_date':preferred_date,'price':price,'plan_id':plan_id,'adopt_a_cow':adopt_a_cow, 'razorpay_key_id': settings.RAZOR_PAY_ID,'order': order,'campaign': campaign,'subscription_plan':subscription_plan }
         return render(request, 'frontend/donate_monthly.html', context)
 
+
+@csrf_exempt  # Disable CSRF for testing (use CSRF token in production)
+def upload_file(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+        file_name = default_storage.save(f'uploads/{uploaded_file.name}', uploaded_file)
+        file_url = default_storage.url(file_name)
+        return JsonResponse({'url': file_url, 'success': True})
+
+    return JsonResponse({'error': 'No file uploaded'}, status=400)
 
 # Payment gateway
 class FrontendPayView(View):
@@ -887,7 +898,7 @@ class PayuFailureAPiView(GenericAPIView):
         return HttpResponseRedirect(reverse('home', kwargs={}))
 
 
-def create_user(name, email, password, phone='', type='devotee', city=''):
+def create_user(name, email, password, phone='', type='devotee', city='',profile_url=''):
     additional_data = {
         'first_name': name,
         'last_name': '',
@@ -903,6 +914,7 @@ def create_user(name, email, password, phone='', type='devotee', city=''):
 
     # If user does not exist, generate a unique username
     username = str(uuid.uuid4())  # UUID ensures uniqueness
+    filtered_data = {k: v for k, v in additional_data.items() if k != "mobile_no"}
 
     # ✅ Create new user with a unique username
     user_obj = User.objects.create(
@@ -911,8 +923,10 @@ def create_user(name, email, password, phone='', type='devotee', city=''):
         mobile_no=phone,
         password=password,
         type=type,  # Ensure `type` exists in your User model
-        **additional_data
+        **filtered_data  # Additional data without 'mobile_no'
     )
+    if profile_url:
+        user_obj.save_image_from_url(profile_url)
 
     # ✅ Set and hash password
     # user_obj.set_password(password)
@@ -1119,6 +1133,7 @@ def payment_success(request):
     print(subscription_data)
     addons = subscription_data.get('notes', [])
     product_info = addons['title']
+    profile_url = addons['profile_url']
     price =addons['amount']
 
     price = float(price) / 100
@@ -1140,7 +1155,7 @@ def payment_success(request):
         # Verify the payment signature
         result = razorpay_client.utility.verify_subscription_payment_signature(params_dict)
         password = uuid.uuid4()
-        user_obj = create_user(name,email,password,phone_no, 'Devotee','')
+        user_obj = create_user(name,email,password,phone_no, 'Devotee','',profile_url)
 
         if plan_id:
             plan = SubscriptionPlan.objects.get(plan_id=plan_id)
@@ -1380,6 +1395,9 @@ def create_subscription(request):
         campaign_id = request.POST['campaign_id']
         email = request.POST['email']
         phone_no = request.POST['phone_no']
+        profile_url = request.POST['profile_url']
+        if not profile_url:
+            profile_url = ""
         preferred_date = request.POST['preferred_date']
         title = request.POST['title']
 
@@ -1421,6 +1439,7 @@ def create_subscription(request):
                 }],
                 "notes": {
                     "amount": amount,
+                    "profile_url": profile_url,
                     "name": name,
                     "title":title,
                     "cow_name":cow_name,
@@ -1453,6 +1472,7 @@ def create_subscription(request):
                 }],
                 "notes": {
                     "amount": amount,
+                    "profile_url": profile_url,
                     "for": campaign_obj.title,
                     "name": name,
                     "cow_name":cow_name,

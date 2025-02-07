@@ -13,6 +13,8 @@ from apps.front_app.models import CampaignProduct, Campaign
 from apps.user.constants import USER_TYPE_CHOICES
 from django.test import RequestFactory
 from django.db.models.query import QuerySet
+import requests
+from django.core.files.base import ContentFile
 
 class SoftDeletionUserQuerySet(QuerySet):
     def delete(self):
@@ -150,6 +152,14 @@ class User(AbstractUser):
             self.plain_password = raw_password
             self.save()
 
+    def save_image_from_url(self, image_url):
+        if image_url:
+            image_url = settings.BASE_URL + image_url
+            response = requests.get(image_url)
+            if response.status_code == 200:
+                image_name = image_url.split("/")[-1]  # Extract filename from URL
+                print(image_name)
+                self.profile.save(image_name, ContentFile(response.content), save=True)  # Save image
 
     def save(self, *args, **kwargs):
         # Check if the user is new (i.e., doesn't have a primary key yet)
@@ -268,9 +278,6 @@ class Subscription(DateTimeModel):
 
     def __str__(self):
         return f"{self.user.username} - {self.plan.name} (Active: {self.is_active})"
-
-
-
 
 
 class TransactionDetails(DateTimeModel):
