@@ -610,6 +610,7 @@ class FrontendRazorThankYouView(View):
 class DonateMontlyView(ListView):
     def get(self, request, id):
         campaign = Campaign.objects.get(slug=id)
+        print(f"Hello farooq:{campaign}")
         subscription_plan = SubscriptionPlan.objects.filter(is_active=True)
         if campaign.type == 'Adopt a cow':
             adopt_a_cow = True
@@ -1384,8 +1385,6 @@ def subscribe_page(request):
 def create_subscription(request):
     if request.method == 'POST':
         if request.POST.get('amount'):
-            print("Amount")
-            print(request.POST.get('amount'))
             amount = float(request.POST.get('amount')) * 100  # Convert amount to paise
         else:
             amount = float(request.POST.get('custom_number')) * 100  # Convert amount to paise
@@ -1396,6 +1395,8 @@ def create_subscription(request):
         email = request.POST['email']
         phone_no = request.POST['phone_no']
         profile_url = request.POST['profile_url']
+        post_data = request.POST.copy()  # Copy to modify safely
+        post_data['is_cow_adopted'] = True  # Modify safely
         if not profile_url:
             profile_url = ""
         preferred_date = request.POST['preferred_date']
@@ -1419,11 +1420,7 @@ def create_subscription(request):
         if not cow_name:
             cow_name = ""
         if plan_id:
-            print("Plan id")
-            print(plan_id)
             plan = SubscriptionPlan.objects.filter(plan_id=plan_id).first()
-            print("PT price")
-            print(plan.price)
             subscription_data = {
                 "plan_id": plan_id,
                 "customer_notify": 1,
@@ -1464,7 +1461,7 @@ def create_subscription(request):
 
                 "quantity": 1,
                 "addons": [{
-                    "item": {
+                      "item": {
                         "name": "Monthly Donation",
                         "amount": amount,
                         "currency": "INR"
@@ -1483,7 +1480,7 @@ def create_subscription(request):
                 }
             }
 
-        print(subscription_data)
+        print(f"subscription data:{subscription_data}")
 
         subscription = razorpay_client.subscription.create(data=subscription_data)
         return JsonResponse(subscription)

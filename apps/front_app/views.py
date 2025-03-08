@@ -1287,7 +1287,7 @@ class ListSubscriberView(AdminRequiredMixin, TemplateView):
 
 class ListSubscriberViewJson(AjayDatatableView):
     model = Subscription
-    columns = ['name','cow_name','phone_no','price','email','plan','is_active', 'actions']
+    columns = ['name','cow_name','phone_no','price','email','plan','is_active','is_cow_adopted', 'actions']
     exclude_from_search_cloumn = ['actions']
 
     def get_initial_queryset(self):
@@ -1495,6 +1495,7 @@ class CreateAdoptACawView(AdminRequiredMixin, SuccessMessageMixin, CreateView):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
+            print(f"Form Error:{form.errors}")
             self.object = form.save()
             messages.success(request, self.success_message)
         else:
@@ -1517,12 +1518,12 @@ class ListAdoptACawView(AdminRequiredMixin, TemplateView):
 
 class ListAdoptACawViewJson(AjayDatatableView):
     model = Campaign
-    columns = ['title','mode','is_home','price', 'actions']
+    columns = ['title','mode','is_home','price','is_cow_adopted','actions']
     exclude_from_search_cloumn = ['actions']
 
     def get_initial_queryset(self):
         print(self.request.GET)
-
+       
         campaign_type = self.request.GET.getlist('campaign_type[]')
         mode_type = self.request.GET.getlist('mode_type[]')
 
@@ -1536,7 +1537,6 @@ class ListAdoptACawViewJson(AjayDatatableView):
             mode_type = mode_type[0]
             if mode_type:
                 filters_fileds.add(Q(mode=mode_type), Q.AND)
-
 
         return self.model.objects.filter(filters_fileds).filter(type='Adopt a cow').order_by('-created_at')
 

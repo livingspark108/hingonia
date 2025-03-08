@@ -89,6 +89,7 @@ class Campaign(DateTimeModel):
     icon = models.ImageField(upload_to='icon_images', max_length=1000,null=True,blank=True)
     campaign_backgroud = models.ImageField(upload_to='campaign_backgroud',null=True,blank=True)
     product = models.ManyToManyField(CampaignProduct,blank=True)
+    is_cow_adopted = models.BooleanField(default=False, null=True, blank=True)
     def save(self, *args, **kwargs):
         # Generate slug from title without spaces
         if self.pk:
@@ -113,6 +114,7 @@ class AdoptedCow(DateTimeModel):
         blank=False
     )
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, related_name='adopted_campaign', null=True, blank=False)
+    cow_adopted_or_not = models.BooleanField(default=False)
 
 class Product(DateTimeModel):
     title = models.CharField(max_length=300, blank=False)
