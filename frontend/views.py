@@ -476,9 +476,11 @@ class GetCampaignProductView(View):
     def post(self, request):
         id = request.POST.get('id')
         campaign_product = Campaign.objects.get(id=id)
+        capm_title= campaign_product.title
+        print(capm_title)
         if campaign_product.product:
             campaign_with_product_html = render_to_string('frontend/campaign_with_product_html.html',
-                                                 {'campaign': campaign_product,'campaign_product': campaign_product})
+                                                 {'campaign': campaign_product,'campaign_product': campaign_product, 'capm_title':capm_title})
         else:
             campaign_with_product_html = ""
         payload = {
